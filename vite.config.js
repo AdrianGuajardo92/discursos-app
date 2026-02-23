@@ -5,6 +5,6 @@ export default defineConfig({
   plugins: [react()],
   base: '/discursos-app/',
   server: {
-    port: 6000
+    port: 6001
   }
 })
