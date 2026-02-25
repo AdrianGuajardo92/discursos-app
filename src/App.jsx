@@ -391,11 +391,18 @@ function ModoDiscurso({ discurso, onSalir }) {
   const scrollRef = useRef(null);
   const total = discurso.secciones.length;
 
-  // Timer cuenta regresiva
+  // Timer cuenta regresiva (global)
   const [timeLeft, setTimeLeft] = useState(30 * 60);
   const [timerRunning, setTimerRunning] = useState(true);
   const [timerStopped, setTimerStopped] = useState(false);
   const timerRef = useRef(null);
+
+  // Timer por sección (solo dev)
+  const isDev = import.meta.env.DEV;
+  const parseTiempo = (t) => { const m = t?.match(/(\d+)/); return m ? parseInt(m[1]) * 60 : 0; };
+  const [secTimeLeft, setSecTimeLeft] = useState(() => parseTiempo(discurso.secciones[0]?.tiempo));
+  const [secTimerRunning, setSecTimerRunning] = useState(false);
+  const secTimerRef = useRef(null);
 
   const ir = useCallback((dir) => {
     setSec(p => Math.max(0, Math.min(total - 1, p + dir)));
@@ -403,6 +410,11 @@ function ModoDiscurso({ discurso, onSalir }) {
 
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = 0;
+    // Reset section timer on section change
+    if (isDev) {
+      setSecTimeLeft(parseTiempo(discurso.secciones[sec]?.tiempo));
+      setSecTimerRunning(false);
+    }
   }, [sec]);
 
   // Swipe horizontal (ignora si es vertical para no interferir con scroll)
@@ -442,10 +454,27 @@ function ModoDiscurso({ discurso, onSalir }) {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [timerRunning, timerStopped]);
 
+  // Countdown timer por sección (solo dev)
+  useEffect(() => {
+    if (!isDev) return;
+    if (secTimerRef.current) { clearInterval(secTimerRef.current); secTimerRef.current = null; }
+    if (secTimerRunning && secTimeLeft > 0) {
+      secTimerRef.current = setInterval(() => {
+        setSecTimeLeft(prev => {
+          if (prev <= 1) { clearInterval(secTimerRef.current); secTimerRef.current = null; setSecTimerRunning(false); return 0; }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    return () => { if (secTimerRef.current) clearInterval(secTimerRef.current); };
+  }, [secTimerRunning]);
+
   const fmtTime = (s) => `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
   const timerPause = () => setTimerRunning(false);
   const timerResume = () => { if (timeLeft > 0) setTimerRunning(true); };
   const timerReset = () => { setTimeLeft(30 * 60); setTimerRunning(false); setTimerStopped(false); };
+  const secTimerToggle = () => { secTimerRunning ? setSecTimerRunning(false) : (secTimeLeft > 0 && setSecTimerRunning(true)); };
+  const secTimerReset = () => { setSecTimeLeft(parseTiempo(discurso.secciones[sec]?.tiempo)); setSecTimerRunning(false); };
 
   const s = discurso.secciones[sec];
 
@@ -484,6 +513,29 @@ function ModoDiscurso({ discurso, onSalir }) {
         <div style={{ flex: 1, textAlign: "center" }}>
           <span style={{ fontSize: 11, color: C.dim, fontWeight: 700, letterSpacing: 1.5 }}>{sec + 1} / {total}</span>
         </div>
+
+        {/* Timer por sección — solo dev */}
+        {isDev && (
+          <div style={{
+            display: "inline-flex", alignItems: "center", gap: 4, marginRight: 6,
+            padding: "3px 8px", borderRadius: 6, transition: "all 0.3s ease",
+            background: secTimeLeft === 0 ? "rgba(200,80,80,0.12)" : secTimerRunning ? "rgba(78,162,200,0.10)" : C.card2,
+            border: `1px solid ${secTimeLeft === 0 ? "rgba(200,80,80,0.25)" : secTimerRunning ? "rgba(78,162,200,0.25)" : C.border}`,
+          }}>
+            <span style={{ fontSize: 9, fontWeight: 700, color: C.dim, letterSpacing: 1 }}>SEC</span>
+            <span style={{
+              fontSize: 12, fontWeight: 700, fontFamily: font, letterSpacing: 1, minWidth: 42, transition: "color 0.5s ease",
+              color: secTimeLeft === 0 ? "#e07070" : secTimeLeft <= 30 ? "#e07070" : secTimerRunning ? "#70b8e0" : C.gray,
+            }}>
+              {fmtTime(secTimeLeft)}
+            </span>
+            <button onClick={secTimerToggle} title={secTimerRunning ? "Pausar" : "Iniciar"} style={{ background: "none", border: "none", color: secTimerRunning ? "#70b8e0" : C.accent, cursor: "pointer", padding: "2px 5px", fontSize: 11, lineHeight: 1 }}>
+              {secTimerRunning ? "⏸" : "▶"}
+            </button>
+            <button onClick={secTimerReset} title="Reiniciar sección" style={{ background: "none", border: "none", color: C.dim, cursor: "pointer", padding: "2px 5px", fontSize: 11, lineHeight: 1 }}>↺</button>
+          </div>
+        )}
+
         <span style={{ fontSize: 11, color: C.dim }}>{s.tiempo}</span>
       </div>
 
