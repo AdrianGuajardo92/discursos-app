@@ -397,8 +397,7 @@ function ModoDiscurso({ discurso, onSalir }) {
   const [timerStopped, setTimerStopped] = useState(false);
   const timerRef = useRef(null);
 
-  // Timer por sección (solo dev)
-  const isDev = import.meta.env.DEV;
+  // Timer por sección
   const parseTiempo = (t) => { const m = t?.match(/(\d+)/); return m ? parseInt(m[1]) * 60 : 0; };
   const [secTimeLeft, setSecTimeLeft] = useState(() => parseTiempo(discurso.secciones[0]?.tiempo));
   const [secTimerRunning, setSecTimerRunning] = useState(false);
@@ -411,10 +410,8 @@ function ModoDiscurso({ discurso, onSalir }) {
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = 0;
     // Reset section timer on section change
-    if (isDev) {
-      setSecTimeLeft(parseTiempo(discurso.secciones[sec]?.tiempo));
-      setSecTimerRunning(false);
-    }
+    setSecTimeLeft(parseTiempo(discurso.secciones[sec]?.tiempo));
+    setSecTimerRunning(false);
   }, [sec]);
 
   // Swipe horizontal (ignora si es vertical para no interferir con scroll)
@@ -454,9 +451,8 @@ function ModoDiscurso({ discurso, onSalir }) {
     return () => { if (timerRef.current) clearInterval(timerRef.current); };
   }, [timerRunning, timerStopped]);
 
-  // Countdown timer por sección (solo dev)
+  // Countdown timer por sección
   useEffect(() => {
-    if (!isDev) return;
     if (secTimerRef.current) { clearInterval(secTimerRef.current); secTimerRef.current = null; }
     if (secTimerRunning && secTimeLeft > 0) {
       secTimerRef.current = setInterval(() => {
@@ -514,8 +510,8 @@ function ModoDiscurso({ discurso, onSalir }) {
           <span style={{ fontSize: 11, color: C.dim, fontWeight: 700, letterSpacing: 1.5 }}>{sec + 1} / {total}</span>
         </div>
 
-        {/* Timer por sección — solo dev */}
-        {isDev && (
+        {/* Timer por sección */}
+        {(
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 4, marginRight: 6,
             padding: "3px 8px", borderRadius: 6, transition: "all 0.3s ease",
