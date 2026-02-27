@@ -50,7 +50,7 @@ const DISCURSOS = [
               }
             ]
           },
-          { tipo: "ejemplo", texto: "Es como cuando vamos al mercado a elegir fruta. No agarramos la primera que vemos, ¿verdad? La observamos, la tocamos, nos fijamos en que esté en buen estado. Con las amistades pasa algo parecido: antes de abrir nuestro corazón, vale la pena fijarnos bien en las cualidades de esa persona." },
+          { tipo: "ejemplo", texto: "Es como cuando vamos al mercado a elegir fruta. No agarramos la primera que vemos, ¿verdad? La observamos, la tocamos, nos fijamos en que esté en buen estado. Con las amistades pasa algo parecido: antes de abrir nuestro corazón, vale la pena fijarnos bien en las cualidades de esa persona.", img: "https://i.imgur.com/ahzMF4T.png" },
           { tipo: "subtitulo", texto: "Elevadas normas morales" },
           { tipo: "punto", texto: "Además de buenas cualidades, busquemos amigos que tengan las mismas normas morales que Dios. Un amigo que respeta las normas de Jehová nos ayudará a mantenernos firmes, no nos pondrá en situaciones comprometedoras." },
           { tipo: "punto", texto: "Sus amigos no siempre tienen que ser de su misma edad o tener el mismo origen que usted. ¡Algunas de las amistades más enriquecedoras nacen de la diversidad!" },
