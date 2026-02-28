@@ -51,8 +51,6 @@ const DISCURSOS = [
               }
             ]
           },
-          { tipo: "subtitulo", texto: "Elevadas normas morales" },
-          { tipo: "punto", texto: "Además de buenas cualidades, busquemos amigos que tengan las mismas normas morales que Dios. Un amigo que respeta las normas de Jehová nos ayudará a mantenernos firmes, no nos pondrá en situaciones comprometedoras." },
           { tipo: "punto", texto: "Sus amigos no siempre tienen que ser de su misma edad o tener el mismo origen que usted. ¡Algunas de las amistades más enriquecedoras nacen de la diversidad!" },
           { tipo: "video", texto: "Reproducir video", img: "https://i.imgur.com/MRLHaCN.png" },
         ]
@@ -110,7 +108,6 @@ const DISCURSOS = [
               }
             ]
           },
-          { tipo: "destacado", texto: "Rut sacrificó su comodidad, Jonatán sacrificó su posición y Pablo y Timoteo se fortalecieron mutuamente. Todos demostraron amor desinteresado. Si imitamos su ejemplo y aplicamos estos cuatro principios en nuestras amistades, estas serán cada vez más fuertes." },
         ]
       },
       {
