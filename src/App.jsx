@@ -143,20 +143,10 @@ const DISCURSOS = [
         titulo: "¿Cómo lograr que una amistad dure para siempre?",
         tiempo: "4 mins",
         contenido: [
-          { tipo: "punto", texto: "Hemos visto por qué necesitamos amigos, cómo encontrarlos, qué los mantiene unidos y quiénes son los amigos más importantes. Pero ¿cómo logramos que esas amistades duren para siempre?" },
-          { tipo: "lectura", cita: "Proverbios 27:17", texto: "El hierro se afila con hierro, y un hombre afila a otro." },
-          { tipo: "subpunto", texto: "Una amistad duradera es como dos piezas de hierro que se afilan mutuamente: ambas se hacen más fuertes con el tiempo." },
-          {
-            tipo: "pilares",
-            items: [
-              { icono: "💬", nombre: "Comunicación", detalle: "Hablar con sinceridad y escuchar con atención. No espere a que su amigo lo busque; tome la iniciativa." },
-              { icono: "🤝", nombre: "Servir juntos", detalle: "Las amistades más fuertes se forjan sirviendo a Jehová hombro a hombro." },
-              { icono: "❤️", nombre: "Perdonar", detalle: "Pasar por alto los errores y no guardar rencor. Nadie es perfecto." },
-            ]
-          },
-          { tipo: "subpunto", texto: "Para fortalecer su amistad con Jehová, órele constantemente y escuche lo que él le dice leyendo su Palabra." },
-          { tipo: "punto", texto: "Hágase amigo de los que aman a Jehová como usted. Ayúdelos a amarlo más y adoren a Jehová juntos." },
-          { tipo: "llamado_accion", texto: "Esta semana, ¿por qué no invita a un hermano de la congregación a predicar juntos o a tomar un café? Las amistades eternas empiezan con pequeños gestos de amor desinteresado." },
+          { tipo: "punto", texto: "Para que una amistad dure, es necesario fortalecerla continuamente." },
+          { tipo: "subpunto", texto: "Para fortalecer su amistad con Jehová, órele constantemente y escuche lo que él le dice leyendo su Palabra, la Biblia (Sl 1:2, 3; 1Te 5:17)." },
+          { tipo: "punto", texto: "Hágase amigo de los que aman a Jehová como usted." },
+          { tipo: "subpunto", texto: "Ayude a sus amigos a amar más a Jehová y adórenlo juntos (1Te 5:11; Heb 10:24, 25)." },
           { tipo: "cierre", texto: "Si sigue estos consejos, tendrá amigos ahora y para siempre." },
         ]
       }
