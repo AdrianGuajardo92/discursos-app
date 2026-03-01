@@ -780,24 +780,13 @@ export default function App() {
   const uploadTargetRef = useRef(null); // numero del discurso al que se sube
   const fileCacheRef = useRef({}); // cache de File objects para share instantáneo
 
-  // Cargar metadatos de playlists al inicio + pre-cargar archivos en cache para share instantáneo
+  // Cargar metadatos de playlists al inicio (solo metadata ligera, no archivos completos)
   useEffect(() => {
-    getAllPlaylistMeta().then(meta => {
-      setPlaylistMap(meta);
-      // Pre-cargar archivos completos en fileCacheRef para que Compartir funcione sin delay
-      // Pre-cargar archivos en cache para share instantáneo
-      Object.keys(meta).forEach(async (num) => {
-        try {
-          const record = await getPlaylist(Number(num));
-          if (record) {
-            fileCacheRef.current[Number(num)] = new File([record.data], record.name, { type: "application/zip" });
-          }
-        } catch (e) { /* silencioso */ }
-      });
-    }).catch(() => {});
+    getAllPlaylistMeta().then(setPlaylistMap).catch(() => {});
   }, []);
 
-  // Ref callback: adjunta onclick NATIVO directo al botón para preservar user gesture
+  // Ref callback: adjunta onclick NATIVO directo al botón para preservar user gesture.
+  // NO agregar onClick en JSX a este botón — el handler nativo es necesario para navigator.share().
   const shareRefCallback = useCallback((btnEl) => {
     if (!btnEl) return;
     const numero = parseInt(btnEl.dataset.shareNumero);
@@ -807,21 +796,23 @@ export default function App() {
       const cachedFile = fileCacheRef.current[numero];
 
       if (cachedFile && navigator.share) {
-        const shareFile = new File([cachedFile], cachedFile.name, { type: "application/zip" });
-        navigator.share({ title: shareFile.name, files: [shareFile] }).catch(err => {
-          // Si el usuario cancela (AbortError) no hacemos nada; cualquier otro error → descargar
+        navigator.share({ title: cachedFile.name, files: [cachedFile] }).catch(err => {
           if (err.name !== "AbortError") downloadBlob(cachedFile, cachedFile.name);
         });
       } else if (cachedFile) {
         downloadBlob(cachedFile, cachedFile.name);
       } else {
-        // Sin cache (raro) — cargar de IndexedDB y descargar
+        // Sin cache — cargar de IndexedDB, cachear, e intentar share (funciona en Android)
         (async () => {
           try {
             const record = await getPlaylist(numero);
             if (!record) return;
             const file = new File([record.data], record.name, { type: "application/zip" });
             fileCacheRef.current[numero] = file;
+            if (navigator.share) {
+              try { await navigator.share({ title: file.name, files: [file] }); return; }
+              catch (e) { if (e.name === "AbortError") return; }
+            }
             downloadBlob(file, file.name);
           } catch (err) { console.error(err); }
         })();
@@ -851,8 +842,6 @@ export default function App() {
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-
-
   const handlePlaylistDownload = async (numero) => {
     try {
       const cachedFile = fileCacheRef.current[numero];
@@ -862,7 +851,7 @@ export default function App() {
       }
       const record = await getPlaylist(numero);
       if (!record) return;
-      const file = new File([record.data], record.name, { type: record.type });
+      const file = new File([record.data], record.name, { type: "application/zip" });
       fileCacheRef.current[numero] = file;
       downloadBlob(file, record.name);
     } catch (err) {
@@ -933,7 +922,7 @@ export default function App() {
           </div>
 
           <div style={{ maxWidth: 720, margin: "0 auto", padding: "18px 14px" }}>
-            {DISCURSOS.sort((a, b) => a.numero - b.numero).map(d => (
+            {DISCURSOS.map(d => (
               <div key={d.numero} style={{ background: C.card, borderRadius: 10, marginBottom: 10, border: `1px solid ${C.border}`, display: "flex", alignItems: "stretch", overflow: "hidden" }}>
                 {/* Columna izquierda — info del discurso */}
                 <div
