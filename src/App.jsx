@@ -1,12 +1,89 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 // ============================================================
+// 💾 INDEXEDDB — Almacén de archivos grandes (.jwlplaylist)
+// ============================================================
+const DB_NAME = "discursos_playlists";
+const DB_VERSION = 1;
+const STORE_NAME = "playlists";
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = () => {
+      const db = req.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: "numero" });
+      }
+    };
+    req.onsuccess = () => resolve(req.result);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function savePlaylist(numero, file) {
+  const db = await openDB();
+  const arrayBuffer = await file.arrayBuffer();
+  const record = {
+    numero,
+    name: file.name,
+    size: file.size,
+    type: file.type || "application/octet-stream",
+    date: new Date().toISOString(),
+    data: arrayBuffer,
+  };
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    tx.objectStore(STORE_NAME).put(record);
+    tx.oncomplete = () => resolve(record);
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+async function getPlaylist(numero) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readonly");
+    const req = tx.objectStore(STORE_NAME).get(numero);
+    req.onsuccess = () => resolve(req.result || null);
+    req.onerror = () => reject(req.error);
+  });
+}
+
+async function deletePlaylist(numero) {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readwrite");
+    tx.objectStore(STORE_NAME).delete(numero);
+    tx.oncomplete = () => resolve();
+    tx.onerror = () => reject(tx.error);
+  });
+}
+
+async function getAllPlaylistMeta() {
+  const db = await openDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, "readonly");
+    const req = tx.objectStore(STORE_NAME).getAll();
+    req.onsuccess = () => {
+      const map = {};
+      (req.result || []).forEach(r => {
+        map[r.numero] = { name: r.name, size: r.size, date: r.date };
+      });
+      resolve(map);
+    };
+    req.onerror = () => reject(req.error);
+  });
+}
+
+// ============================================================
 // 📋 BASE DE DATOS DE DISCURSOS
 // ============================================================
 const DISCURSOS = [
   {
     numero: 100,
     titulo: "Haga amistades que duren para siempre",
+    cancion: 109,
     duracion: "30 mins",
     fechaUltimaVez: "2026-02-22",
     secciones: [
@@ -18,8 +95,7 @@ const DISCURSOS = [
           { tipo: "punto", texto: "Jehová nos creó con la necesidad de tener amigos. Cuando tenemos buenos amigos, nos sentimos más felices y nuestra vida tiene más sentido." },
           { tipo: "punto", texto: "No es saludable aislarse de los demás. Proverbios 18:1 advierte que quien se aísla busca sus propios deseos egoístas y se opone a toda sabiduría práctica." },
           { tipo: "punto", texto: "Un buen amigo se convierte en un verdadero hermano cuando más lo necesitamos, especialmente en momentos de angustia." },
-          { tipo: "lectura", cita: "Proverbios 17:17", texto: "El verdadero amigo ama en todo momento y es un hermano en tiempos de angustia." },
-          { tipo: "subpunto", texto: "Fíjese: no dice \"en algunos momentos\", dice \"en todo momento\". Eso es lo que distingue a un verdadero amigo." },
+          { tipo: "lectura", cita: "Proverbios 17:17", texto: "El verdadero amigo ama en todo momento y es un hermano en tiempos de angustia.", seg: "0:16" },
         ]
       },
       {
@@ -27,30 +103,37 @@ const DISCURSOS = [
         tiempo: "6 mins",
         contenido: [
           { tipo: "punto", texto: "Los amigos tienen un gran efecto en la clase de personas que somos y en lo que nos pasa. Por eso es tan importante saber elegir bien." },
-          { tipo: "lectura", cita: "Proverbios 13:20", texto: "El que anda con sabios se hará sabio, pero al que se junta con necios le irá mal." },
-          { tipo: "subtitulo", texto: "¿En qué debemos fijarnos cuando buscamos amigos?" },
-          { tipo: "punto", texto: "Busquemos amigos que nos hagan mejores personas y que tengan cualidades que valga la pena imitar." },
-          { tipo: "ejemplo", texto: "Es como cuando vamos al mercado a elegir fruta. No agarramos la primera que vemos, ¿verdad? La observamos, la tocamos, nos fijamos en que esté en buen estado. Con las amistades pasa algo parecido: antes de abrir nuestro corazón, vale la pena fijarnos bien en las cualidades de esa persona.", img: "https://i.imgur.com/ahzMF4T.png" },
+          { tipo: "lectura", cita: "Proverbios 13:20", texto: "El que anda con sabios se hará sabio, pero al que se junta con necios le irá mal.", seg: "0:14" },
+          { tipo: "destacado", texto: "¿En qué debemos fijarnos cuando buscamos amigos? Busquemos amigos que nos hagan mejores personas y que tengan cualidades que valga la pena imitar." },
+          {
+            tipo: "ejemplo_biblico",
+            nombre: "Ejemplo: El mercado",
+            img: "https://i.imgur.com/ahzMF4T.png",
+            claves: [
+              "Es como elegir fruta en el mercado",
+              "No agarramos la primera que vemos → la observamos, la tocamos",
+              "Con las amistades es igual → fijarnos en las cualidades de la persona",
+              "Antes de abrir nuestro corazón, vale la pena mirar bien"
+            ]
+          },
           {
             tipo: "cualidades",
             items: [
               {
                 nombre: "LEALTAD",
-                detalle: "Un amigo leal no nos abandona cuando las cosas se ponen difíciles. Nos defiende cuando no estamos presentes y cumple su palabra.",
-                reflexion: "Piense: ¿esta persona es leal a Jehová por encima de todo? Si es leal a Dios, también será leal con usted."
+                detalle: "Un amigo leal no nos abandona cuando las cosas se ponen difíciles. Nos defiende cuando no estamos presentes y cumple su palabra."
               },
               {
                 nombre: "HONESTIDAD",
-                detalle: "Un amigo honesto nos dice la verdad, aunque a veces no sea lo que queremos escuchar. No aparenta ser algo que no es.",
-                reflexion: "Proverbios 27:6 dice que \"las heridas que hace un amigo son fieles\". Un verdadero amigo nos corrige con amor."
+                detalle: "Un amigo honesto nos dice la verdad, aunque a veces no sea lo que queremos escuchar. No aparenta ser algo que no es."
               },
               {
                 nombre: "EMPATÍA Y ÁNIMO",
-                detalle: "Un buen amigo escucha de verdad, presta total atención cuando compartimos nuestros problemas y nos anima con la Biblia.",
-                reflexion: "No se trata solo de escuchar, sino de hacernos sentir que no estamos solos."
+                detalle: "Un buen amigo escucha de verdad, presta total atención cuando compartimos nuestros problemas y nos anima con la Biblia."
               }
             ]
           },
+          { tipo: "destacado", texto: "¿Y los amigos de edades diferentes?" },
           { tipo: "punto", texto: "Sus amigos no siempre tienen que ser de su misma edad o tener el mismo origen que usted. ¡Algunas de las amistades más enriquecedoras nacen de la diversidad!" },
           { tipo: "video", texto: "Reproducir video", img: "https://i.imgur.com/MRLHaCN.png" },
         ]
@@ -60,52 +143,74 @@ const DISCURSOS = [
         tiempo: "9 mins",
         contenido: [
           { tipo: "punto", texto: "Para tener amistades duraderas debemos demostrar amor desinteresado." },
-          { tipo: "definicion", termino: "Amor desinteresado", texto: "Es querer a alguien por quien es, sin esperar recibir algo a cambio. No hay un \"interés\" oculto." },
-          { tipo: "ejemplo", texto: "Imagínese esto: usted tiene que mudarse de casa. Es un día pesado, hace calor y tiene montañas de cajas por cargar. No le ha pedido ayuda a nadie. Pero de pronto, temprano por la mañana, suena el timbre. Es su amigo, que llegó con ropa cómoda, listo para trabajar. Carga cajas, sube escaleras, acomoda muebles, y cuando usted le dice \"no tenías que venir\", él le responde con una sonrisa: \"Para eso estamos\". Se queda hasta la última caja sin pedir nada a cambio. Eso es amor desinteresado. No lo hace porque le deba algo, sino porque genuinamente le importa usted.", img: "https://i.imgur.com/MANQZnA.png" },
-          { tipo: "punto", texto: "La Biblia nos da ejemplos sobresalientes de amistades que se mantuvieron fuertes gracias al amor desinteresado:" },
+          { tipo: "definicion", termino: "Amor desinteresado", texto: "Es querer a alguien por quien es, sin esperar recibir algo a cambio. No hay un \"interés\" oculto.", lsm: "amor-honestidad", img: "https://i.imgur.com/yVlXRUZ.png" },
+          {
+            tipo: "lista_enseñanza",
+            titulo: "¿Qué NO es amor desinteresado?",
+            items: [
+              { punto: "❌ \"Soy tu amigo porque tienes dinero\"", detalle: "Si solo busco a alguien por lo que tiene, no es amistad → es interés." },
+              { punto: "❌ \"Soy tu amigo porque tienes carro y me das ride\"", detalle: "Si solo lo busco cuando me conviene, lo estoy usando, no lo estoy queriendo." },
+              { punto: "❌ \"Soy tu amigo porque conoces gente importante\"", detalle: "Si me acerco por sus contactos o su posición, es conveniencia, no amor." },
+            ]
+          },
+          {
+            tipo: "ejemplo_biblico",
+            nombre: "Ejemplo: La mudanza",
+            img: "https://i.imgur.com/MANQZnA.png",
+            claves: [
+              "Usted se muda → día pesado, calor, montañas de cajas",
+              "No pidió ayuda → pero suena el timbre temprano",
+              "Su amigo llegó listo para trabajar → carga cajas, sube escaleras",
+              "\"No tenías que venir\" → \"Para eso estamos\"",
+              "Se queda hasta la última caja sin pedir nada a cambio",
+              "Eso es amor desinteresado"
+            ]
+          },
+          { tipo: "destacado", texto: "La Biblia nos da ejemplos sobresalientes de amistades que se mantuvieron fuertes gracias al amor desinteresado:" },
           {
             tipo: "ejemplo_biblico",
             nombre: "Rut y Noemí",
             img: "https://i.imgur.com/UTryqlp.png",
-            narrativa: "Rut era moabita y Noemí era israelita. Diferente edad, diferente origen, diferente cultura. Cuando el esposo de Rut murió, ella no tenía ninguna obligación de quedarse con su suegra. Noemí misma le dijo que se fuera. Pero Rut le respondió con palabras que hasta hoy nos conmueven: \"Tu pueblo será mi pueblo, y tu Dios será mi Dios\" (Rut 1:16, 17). Dejó su tierra, su familia y toda su comodidad. Sacrificó lo que conocía por alguien que amaba. Eso es amor desinteresado: dar sin esperar nada a cambio."
+            claves: [
+              "Rut era moabita → no era israelita, tenía otra religión, otra cultura",
+              "Noemí le dijo que se fuera, que no tenía obligación de quedarse",
+              "Pero Rut decidió quedarse por amor → \"Tu pueblo será mi pueblo, y tu Dios será mi Dios\" (Rut 1:16, 17)",
+              "Dejó su tierra, su familia y su comodidad por alguien que amaba",
+              "🔑 Lección: el amor verdadero da sin esperar nada a cambio"
+            ]
           },
           {
             tipo: "ejemplo_biblico",
             nombre: "Jonatán y David",
             img: "https://i.imgur.com/b3gwAUp.png",
-            narrativa: "Piense en lo que hizo Jonatán. Él era el heredero al trono de Israel. Tenía todo para ser el próximo rey. Pero cuando supo que Jehová había elegido a David, no se llenó de envidia ni lo vio como rival. Al contrario, lo protegió de su propio padre Saúl, que quería matarlo. Incluso arriesgó su vida por él (1 Samuel 18:1; 23:16-18). Jonatán sacrificó su posición, su futuro y su seguridad por un amigo. Eso es poner al otro por encima de uno mismo."
+            claves: [
+              "Jonatán era hijo de Saúl → él debía ser el próximo rey",
+              "Pero Jehová eligió a David, y Jonatán lo aceptó sin envidia",
+              "Cuando Saúl quiso matar a David, Jonatán lo protegió arriesgando su propia vida (1 Samuel 18:1; 23:16-18)",
+              "Prefirió la amistad con David antes que su propio trono",
+              "🔑 Lección: un verdadero amigo pone al otro por encima de sí mismo"
+            ]
           },
           {
             tipo: "ejemplo_biblico",
             nombre: "Pablo y Timoteo",
             img: "https://i.imgur.com/8FT1u2i.png",
-            narrativa: "Pablo era un apóstol experimentado y Timoteo un joven tímido. Pero Pablo no lo menospreció por su edad. Lo tomó bajo su cuidado, lo entrenó y le confió misiones muy difíciles porque creía en él. Y cuando Pablo estaba preso en Roma, solo y encadenado, ¿sabe quién fue a verlo? Timoteo. Pablo lo llamó \"hijo amado\" (2 Timoteo 1:2) y dijo que no tenía a nadie como él, alguien que se preocupara genuinamente por los demás (Filipenses 2:19-22). Se fortalecieron mutuamente en los momentos más difíciles."
+            claves: [
+              "Pablo era experimentado, Timoteo era joven y tímido",
+              "En vez de menospreciarlo, Pablo lo entrenó y le confió misiones importantes",
+              "Cuando Pablo estuvo preso en Roma, ¿quién fue a verlo? Timoteo → no lo abandonó",
+              "Pablo lo llamó \"hijo amado\" (2 Timoteo 1:2)",
+              "🔑 Lección: un buen amigo te ayuda a crecer y está contigo en los momentos difíciles"
+            ]
           },
-          { tipo: "subtitulo", texto: "¿Cómo fortalecer nuestras amistades?" },
-          { tipo: "punto", texto: "Si ponemos en práctica los principios bíblicos, nuestras amistades serán cada vez más fuertes. Veamos cuatro cosas prácticas que podemos hacer:" },
+          { tipo: "destacado", texto: "¿Cómo fortalecer nuestras amistades?" },
           {
-            tipo: "cualidades",
+            tipo: "lista_enseñanza",
             items: [
-              {
-                nombre: "ESCUCHAR CON ATENCIÓN",
-                detalle: "Un buen amigo no solo oye, escucha de verdad. Presta atención, no interrumpe y se interesa sinceramente por lo que el otro siente.",
-                reflexion: "Santiago 1:19 dice: \"Todos deben estar listos para escuchar, no apresurarse a hablar\". A veces lo que más necesita un amigo es que alguien lo escuche."
-              },
-              {
-                nombre: "NO ESPARCIR CHISMES",
-                detalle: "Una amistad se rompe fácilmente cuando se revelan conversaciones privadas o se habla a espaldas del otro.",
-                reflexion: "Proverbios 16:28 advierte que \"el chismoso separa a los mejores amigos\". Guardemos las confidencias de nuestros amigos."
-              },
-              {
-                nombre: "PERDONAR LOS ERRORES",
-                detalle: "Nadie es perfecto. Nuestros amigos van a cometer errores, y nosotros también. Lo importante es estar dispuestos a perdonar.",
-                reflexion: "Colosenses 3:13 nos anima a \"seguir soportándose unos a otros y perdonándose generosamente\"."
-              },
-              {
-                nombre: "RESPETAR SU PRIVACIDAD",
-                detalle: "Un buen amigo respeta los límites. No se mete donde no lo llaman ni presiona al otro a compartir lo que no quiere.",
-                reflexion: "Romanos 12:10 dice: \"Tómense la delantera en honrarse unos a otros\". Respetar la privacidad es una forma de honrar a nuestros amigos."
-              }
+              { punto: "Escuchar con atención", detalle: "No solo oír → escuchar de verdad. No interrumpir. Interesarse sinceramente. \"Todos deben estar listos para escuchar\" (Santiago 1:19)." },
+              { punto: "No esparcir chismes", detalle: "No revelar conversaciones privadas ni hablar a espaldas. \"El chismoso separa a los mejores amigos\" (Proverbios 16:28)." },
+              { punto: "Perdonar los errores", detalle: "Nadie es perfecto. Estar dispuestos a perdonar. \"Seguir soportándose unos a otros y perdonándose generosamente\" (Colosenses 3:13)." },
+              { punto: "Respetar su privacidad", detalle: "Si un hermano se ve triste → \"¿Estás bien? Aquí estoy\". Si dice que sí → no insistir, no averiguar con otros. \"Tómense la delantera en honrarse unos a otros\" (Romanos 12:10)." },
             ]
           },
         ]
@@ -116,55 +221,96 @@ const DISCURSOS = [
         contenido: [
           { tipo: "pregunta", texto: "Hemos visto que los buenos amigos nos hacen mejores personas. Pero ¿quién puede ayudarnos más que nadie a ser la mejor versión de nosotros mismos?" },
           { tipo: "punto", texto: "Los mejores amigos que podemos tener son Jehová y Jesús." },
-          { tipo: "subtitulo", texto: "Jehová: un amigo que siempre está ahí" },
-          { tipo: "punto", texto: "Piense en esto: Jehová, el Creador del universo, quiere ser nuestro amigo. Y no es un amigo distante. Santiago 4:8 nos da una promesa muy hermosa:" },
-          { tipo: "lectura", cita: "Santiago 4:8", texto: "Acérquense a Dios, y él se acercará a ustedes." },
-          { tipo: "subpunto", texto: "¿Se da cuenta? Jehová no espera a que seamos perfectos. Él nos promete que si damos un paso hacia él, él dará un paso hacia nosotros. ¿Qué amigo humano puede prometer algo así?" },
-          { tipo: "punto", texto: "¿Y cómo le demostramos que queremos ser sus amigos? Amándolo con todo nuestro corazón (Mateo 22:37). Cada vez que oramos, que leemos su Palabra o que obedecemos sus normas, le estamos diciendo a Jehová: \"Quiero ser tu amigo\". Y él lo nota." },
-          { tipo: "subtitulo", texto: "Jesús: el camino hacia Jehová" },
-          { tipo: "punto", texto: "Ahora bien, para acercarnos a Jehová necesitamos a Jesucristo. No hay otro camino." },
-          { tipo: "cita_biblica", contexto: "En Juan 14:6, Tomás le pregunta a Jesús a dónde va, y él responde:", texto: "\"Yo soy el camino, la verdad y la vida. Nadie puede llegar al Padre si no es por medio de mí.\"" },
-          { tipo: "subpunto", texto: "Querer ser amigo de Jehová sin ser un buen amigo de Jesús es como querer entrar en un edificio sin pasar por la puerta." },
+
+          { tipo: "destacado", texto: "Jehová: un amigo que siempre está ahí" },
+          { tipo: "punto", texto: "A Jehová le encanta acercarse a las personas que quieren ser sus amigos. A Abrahán se le llamó \"amigo de Jehová\" (Santiago 2:23). ¡El Creador del universo quiere tener amigos!" },
+          { tipo: "lectura", cita: "Santiago 4:8", texto: "Acérquense a Dios, y él se acercará a ustedes.", seg: "0:13" },
+
+          { tipo: "punto", texto: "Para ser amigos de Jehová tenemos que amarlo con todo nuestro corazón:" },
+          { tipo: "lectura", cita: "Mateo 22:37, 38", texto: "\"Tienes que amar a Jehová tu Dios con todo tu corazón, con toda tu alma y con toda tu mente\". Este es el mandamiento más importante y el primero." },
+
+          { tipo: "punto", texto: "Pensemos primero: cuando un amigo nuestro está enfermo o deja de ir a las reuniones, ¿qué hacemos?" },
+          {
+            tipo: "lista_enseñanza",
+            titulo: "¿Cómo le demostramos amor a un amigo?",
+            items: [
+              { punto: "Lo buscamos", detalle: "Le mandamos un WhatsApp, lo llamamos, le hacemos una videollamada. No esperamos a que él nos busque." },
+              { punto: "Nos interesamos de verdad", detalle: "No solo un \"¿cómo estás?\" por compromiso → preguntamos, escuchamos, lo visitamos si hace falta." },
+              { punto: "Estamos ahí cuando más lo necesita", detalle: "Si está enfermo, desanimado o deja de venir a las reuniones → no lo dejamos solo." },
+            ]
+          },
+          { tipo: "punto", texto: "Y ahora la pregunta importante: si así tratamos a un amigo, ¿cómo le demostramos ese mismo amor a Jehová?" },
+          {
+            tipo: "lista_enseñanza",
+            titulo: "¿Cómo le demostramos amor a Jehová?",
+            items: [
+              { punto: "Orar", detalle: "Es como llamarlo por teléfono. Le compartimos lo que sentimos y lo que nos preocupa." },
+              { punto: "Leer la Biblia", detalle: "Es escucharlo a él. La oración es hablarle, la lectura bíblica es dejarlo que nos hable." },
+              { punto: "Obedecer sus mandamientos", detalle: "Es decirle con hechos: \"Te amo\". Obedecer no es una carga, es la forma más bonita de demostrarle amor (1 Juan 5:3)." },
+            ]
+          },
+
+          { tipo: "destacado", texto: "Jesús: el camino hacia Jehová" },
+          { tipo: "punto", texto: "Para acercarnos a Jehová necesitamos a Jesucristo. Es como querer entrar en un edificio: Jesús es la puerta." },
+          { tipo: "referencia", cita: "Juan 14:6", texto: "\"Yo soy el camino, la verdad y la vida. Nadie puede llegar al Padre si no es por medio de mí.\"" },
           { tipo: "imagen", img: "https://i.imgur.com/Cbi7RyR.png", alt: "Jesús es la puerta" },
-          { tipo: "punto", texto: "¿Y cómo nos hacemos amigos de Jesús? Imitando su forma de vivir. Veamos tres aspectos clave:" },
+
+          { tipo: "punto", texto: "¿Cómo nos hacemos amigos de Jesús? Imitando su manera de pensar y actuar, y obedeciendo sus mandamientos (Juan 14:15)." },
           {
             tipo: "lista_enseñanza",
             titulo: "Cómo imitar a Jesús",
             items: [
-              { punto: "Demostrar amor con acciones", detalle: "Jesús no solo decía que amaba a las personas, lo demostraba: sanaba enfermos, alimentaba a las multitudes, dedicaba tiempo a cada persona. El amor verdadero siempre se ve en lo que hacemos." },
-              { punto: "Perdonar de corazón", detalle: "Incluso clavado en un madero, Jesús pidió a su Padre que perdonara a quienes lo maltrataban (Lucas 23:34). Si él pudo perdonar en esas circunstancias, nosotros también podemos perdonar a nuestros amigos." },
-              { punto: "Ser humildes", detalle: "A pesar de ser el Hijo de Dios, Jesús se arrodilló y lavó los pies de sus apóstoles (Juan 13:5). No se consideraba superior a nadie. Un amigo humilde nunca te hará sentir menos." },
+              { punto: "Demostrar amor con acciones", detalle: "Jesús sanaba enfermos, alimentaba a las multitudes, dedicaba tiempo a cada persona. El amor verdadero se ve en lo que hacemos." },
+              { punto: "Perdonar de corazón", detalle: "Clavado en un madero, pidió a su Padre que perdonara a quienes lo maltrataban (Lucas 23:34). Si él pudo, nosotros también." },
+              { punto: "Ser humildes", detalle: "Siendo el Hijo de Dios, se arrodilló y lavó los pies de sus apóstoles (Juan 13:5). Un amigo humilde nunca te hará sentir menos." },
             ]
           },
-          { tipo: "destacado", texto: "Jehová y Jesús son los amigos más fieles que podemos tener. Jehová promete acercarse a nosotros, y Jesús nos abrió el camino para llegar a él. Si cultivamos esas dos amistades, todas las demás se fortalecerán también." },
+          { tipo: "destacado", texto: "Jehová y Jesús son los amigos más fieles que podemos tener. Si cultivamos esas dos amistades, todas las demás se fortalecerán también." },
         ]
       },
       {
         titulo: "¿Cómo lograr que una amistad dure para siempre?",
         tiempo: "4 mins",
         contenido: [
-          { tipo: "punto", texto: "Para que una amistad dure, es necesario fortalecerla continuamente." },
-          { tipo: "subpunto", texto: "Para fortalecer su amistad con Jehová, órele constantemente y escuche lo que él le dice leyendo su Palabra, la Biblia (Sl 1:2, 3; 1Te 5:17)." },
-          { tipo: "punto", texto: "Hágase amigo de los que aman a Jehová como usted." },
-          { tipo: "subpunto", texto: "Ayude a sus amigos a amar más a Jehová y adórenlo juntos (1Te 5:11; Heb 10:24, 25)." },
-          { tipo: "cierre", texto: "Si sigue estos consejos, tendrá amigos ahora y para siempre." },
-        ]
-      }
-    ]
-  },
-  {
-    numero: 130,
-    titulo: "Ejemplo: Título del discurso 130",
-    duracion: "30 mins",
-    fechaUltimaVez: null,
-    secciones: [
-      {
-        titulo: "Primera sección de ejemplo",
-        tiempo: "5 mins",
-        contenido: [
-          { tipo: "punto", texto: "Este es un discurso de ejemplo para mostrar la estructura." },
-          { tipo: "punto", texto: "Con Claude Code puedes decir: \"Reemplaza el contenido del discurso 130 con este tema...\" y se actualizará automáticamente." },
-          { tipo: "lectura", cita: "Salmo 119:105", texto: "Tu palabra es una lámpara para mi pie y una luz para mi camino." },
+          { tipo: "punto", texto: "Para que una amistad dure, es necesario fortalecerla continuamente. Igual que una planta necesita agua y luz, nuestras amistades necesitan atención y esfuerzo constante." },
+          {
+            tipo: "lista_enseñanza",
+            titulo: "Fortalezca su amistad con Jehová",
+            items: [
+              { punto: "Ore constantemente", detalle: "No solo cuando tenga problemas, sino en todo momento. Comparta sus pensamientos con Jehová como lo haría con su mejor amigo (1 Tesalonicenses 5:17)." },
+              { punto: "Lea la Biblia", detalle: "La oración es hablar con Jehová; la lectura bíblica es escucharlo a él. Salmo 1:2, 3 compara a quien lee la Palabra con un árbol plantado junto a corrientes de agua." },
+            ]
+          },
+          {
+            tipo: "lista_enseñanza",
+            titulo: "Hágase amigo de los que aman a Jehová",
+            items: [
+              { punto: "Rodéese de personas que compartan su fe", detalle: "Busque amigos que amen a Jehová como usted. Juntos se fortalecerán espiritualmente." },
+              { punto: "Edifíquense unos a otros", detalle: "No basta con pasar tiempo juntos: ayúdense a amar más a Jehová y adórenlo juntos (1 Tesalonicenses 5:11)." },
+              { punto: "No deje de reunirse", detalle: "Hebreos 10:24, 25 nos anima a motivarnos al amor y a las buenas obras sin dejar de reunirnos." },
+            ]
+          },
+          { tipo: "destacado", texto: "¿Qué aprendimos hoy?" },
+          {
+            tipo: "lista_enseñanza",
+            items: [
+              { punto: "1. Los buenos amigos nos hacen mejores", detalle: "No cualquiera es un buen amigo → buscamos personas leales, honestas y que nos acerquen a Jehová (Proverbios 13:20)." },
+              { punto: "2. El amor desinteresado es la base", detalle: "No buscamos amigos por lo que nos dan → los queremos por quienes son. Rut, Jonatán y Pablo lo demostraron." },
+              { punto: "3. Fortalecer nuestras amistades requiere esfuerzo", detalle: "Escuchar, perdonar, no chismear, respetar la privacidad → son cosas que hay que practicar cada día." },
+              { punto: "4. Jehová y Jesús son nuestros mejores amigos", detalle: "Si fortalecemos esas dos amistades con oración, lectura bíblica y obediencia, todas las demás se fortalecerán." },
+            ]
+          },
+
+          { tipo: "destacado", texto: "¿Qué podemos hacer esta semana?" },
+          {
+            tipo: "lista_enseñanza",
+            items: [
+              { punto: "📞 Llame o escriba a un hermano", detalle: "Alguien que no ha visto en las reuniones, alguien que esté pasando por un momento difícil. Un simple mensaje puede hacer mucho." },
+              { punto: "🙏 Ore por sus amigos", detalle: "Pida a Jehová que lo ayude a ser un mejor amigo y a fortalecer las amistades que ya tiene." },
+            ]
+          },
+
+          { tipo: "cierre", texto: "Si ponemos en práctica lo que aprendimos hoy, no solo tendremos buenos amigos... tendremos amigos para siempre." },
         ]
       }
     ]
@@ -230,8 +376,22 @@ function ContentRenderer({ item }) {
       return (
         <div style={{ background: C.leaBg, borderRadius: 8, padding: "16px 18px 16px 72px", margin: "18px 0", position: "relative", border: `1px solid rgba(74,138,181,0.15)` }}>
           <div style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", background: C.lea, color: "#fff", padding: "4px 10px", borderRadius: 4, fontWeight: 800, fontSize: 10, letterSpacing: 1.5, fontFamily: font }}>LEA</div>
-          <p style={{ margin: "0 0 3px", fontWeight: 700, color: C.lea, fontSize: 13, fontFamily: font }}>{item.cita}</p>
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", margin: "0 0 3px" }}>
+            <p style={{ margin: 0, fontWeight: 700, color: C.lea, fontSize: 13, fontFamily: font }}>{item.cita}</p>
+            {item.seg && <span style={{ color: C.dim, fontSize: 12, fontFamily: font, flexShrink: 0, marginLeft: 8 }}>⏱ {item.seg}</span>}
+          </div>
           <p style={{ margin: 0, fontSize: 17, lineHeight: 1.75, color: C.leaText, fontFamily: font }}>{item.texto}</p>
+        </div>
+      );
+
+    case "referencia":
+      return (
+        <div style={{ background: "rgba(120,180,120,0.07)", borderRadius: 8, padding: "14px 18px", margin: "18px 0 18px 28px", border: `1px solid rgba(120,180,120,0.15)` }}>
+          <div style={{ display: "flex", alignItems: "baseline", gap: 8, margin: "0 0 3px" }}>
+            <span style={{ background: "rgba(120,180,120,0.25)", color: "#a8d4a8", padding: "2px 8px", borderRadius: 3, fontWeight: 800, fontSize: 9, letterSpacing: 1.2, fontFamily: font }}>PARAFRASEAR</span>
+            <p style={{ margin: 0, fontWeight: 700, color: "#a8d4a8", fontSize: 13, fontFamily: font }}>{item.cita}</p>
+          </div>
+          <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.65, color: "#c8dcc8", fontFamily: font, fontStyle: "italic" }}>{item.texto}</p>
         </div>
       );
 
@@ -270,9 +430,19 @@ function ContentRenderer({ item }) {
 
     case "definicion":
       return (
-        <div style={{ background: C.accentDim, borderRadius: 8, padding: "14px 18px", margin: "16px 0", border: `1px solid ${C.accentBorder}` }}>
-          <h4 style={{ color: C.accent, fontSize: 14, fontWeight: 700, margin: "0 0 4px", fontFamily: font }}>{item.termino}</h4>
-          <p style={txt}>{item.texto}</p>
+        <div style={{ display: "flex", gap: 14, alignItems: "stretch", background: C.accentDim, borderRadius: 8, overflow: "hidden", margin: "16px 0", border: `1px solid ${C.accentBorder}` }}>
+          {item.img && (
+            <div style={{ flexShrink: 0, width: 140 }}>
+              <img src={item.img} alt={item.termino} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+            </div>
+          )}
+          <div style={{ flex: 1, padding: "14px 18px 14px 0", display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: item.img ? 0 : 18 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", margin: "0 0 4px" }}>
+              <h4 style={{ color: C.accent, fontSize: 14, fontWeight: 700, margin: 0, fontFamily: font }}>{item.termino}</h4>
+              {item.lsm && <span style={{ background: "rgba(200,162,78,0.2)", color: C.accent, padding: "3px 10px", borderRadius: 4, fontSize: 12, fontWeight: 800, letterSpacing: 1.5, fontFamily: font }}>🤟 {item.lsm.toUpperCase()}</span>}
+            </div>
+            <p style={txt}>{item.texto}</p>
+          </div>
         </div>
       );
 
@@ -289,9 +459,21 @@ function ContentRenderer({ item }) {
       return (
         <div style={{ margin: "22px 0" }}>
           <h4 style={{ textAlign: "center", color: C.accent, fontSize: 13, fontWeight: 700, letterSpacing: 2.5, margin: "0 0 10px", fontFamily: font }}>{item.nombre.toUpperCase()}</h4>
-          {item.img && <div style={{ textAlign: "center", marginBottom: 10 }}><img src={item.img} alt={item.nombre} style={{ maxWidth: "100%", maxHeight: 200, borderRadius: 8 }} /></div>}
-          <div style={{ background: C.card2, padding: "12px 16px", borderRadius: 6, borderLeft: `2px solid ${C.accent}` }}>
-            <p style={{ ...txt, fontSize: 15.5 }}>{item.narrativa}</p>
+          <div style={{ display: "flex", gap: 14, alignItems: "stretch", background: C.card2, borderRadius: 8, overflow: "hidden", borderLeft: `2px solid ${C.accent}` }}>
+            {item.img && (
+              <div style={{ flexShrink: 0, width: 140 }}>
+                <img src={item.img} alt={item.nombre} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+              </div>
+            )}
+            <div style={{ flex: 1, padding: "12px 14px 12px 0", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              {item.narrativa && <p style={{ ...txt, fontSize: 15.5 }}>{item.narrativa}</p>}
+              {item.claves && item.claves.map((c, i) => (
+                <div key={i} style={{ display: "flex", gap: 8, alignItems: "baseline", margin: i === 0 ? 0 : "6px 0 0" }}>
+                  <span style={{ color: C.accent, fontSize: 11, flexShrink: 0 }}>▸</span>
+                  <p style={{ ...txt, fontSize: 14.5, margin: 0 }}>{c}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       );
@@ -319,12 +501,12 @@ function ContentRenderer({ item }) {
     case "lista_enseñanza":
       return (
         <div style={{ background: C.card2, borderRadius: 8, padding: "18px 18px", margin: "18px 0", border: `1px solid ${C.border}` }}>
-          <h4 style={{ color: C.accent, fontSize: 13, fontWeight: 700, textAlign: "center", margin: "0 0 14px", letterSpacing: 1, fontFamily: font }}>{item.titulo.toUpperCase()}</h4>
+          {item.titulo && <h4 style={{ color: C.accent, fontSize: 13, fontWeight: 700, textAlign: "center", margin: "0 0 14px", letterSpacing: 1, fontFamily: font }}>{item.titulo.toUpperCase()}</h4>}
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             {item.items.map((li, i) => (
               <div key={i} style={{ background: C.card, padding: "10px 14px", borderRadius: 5, borderLeft: `2px solid ${C.accentBorder}` }}>
-                <p style={{ fontWeight: 700, color: C.white, fontSize: 14.5, margin: "0 0 2px", fontFamily: font }}>{li.punto}</p>
-                <p style={{ ...sub, fontSize: 13.5 }}>{li.detalle}</p>
+                <p style={{ fontWeight: 700, color: C.accent, fontSize: 14.5, margin: "0 0 4px", fontFamily: font }}>{li.punto}</p>
+                <p style={{ ...txt, fontSize: 14, color: "#c5c1b8" }}>{li.detalle}</p>
               </div>
             ))}
           </div>
@@ -373,7 +555,10 @@ function ContentRenderer({ item }) {
 // 🎤 MODO DISCURSO — Sección por sección, swipe + botones
 // ============================================================
 function ModoDiscurso({ discurso, onSalir }) {
-  const [sec, setSec] = useState(0);
+  const [sec, setSec] = useState(() => {
+    const saved = localStorage.getItem("discurso_seccion");
+    return saved ? Number(saved) : 0;
+  });
   const touchRef = useRef({ startX: 0, startY: 0 });
   const scrollRef = useRef(null);
   const total = discurso.secciones.length;
@@ -396,22 +581,15 @@ function ModoDiscurso({ discurso, onSalir }) {
 
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = 0;
+    localStorage.setItem("discurso_seccion", sec);
     // Reset section timer on section change
     setSecTimeLeft(parseTiempo(discurso.secciones[sec]?.tiempo));
     setSecTimerRunning(false);
   }, [sec]);
 
-  // Swipe horizontal (ignora si es vertical para no interferir con scroll)
-  const onTS = (e) => {
-    touchRef.current = { startX: e.touches[0].clientX, startY: e.touches[0].clientY };
-  };
-  const onTE = (e) => {
-    const dx = touchRef.current.startX - e.changedTouches[0].clientX;
-    const dy = touchRef.current.startY - e.changedTouches[0].clientY;
-    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-      ir(dx > 0 ? 1 : -1);
-    }
-  };
+  // Swipe deshabilitado — navegación solo con botones
+  const onTS = () => {};
+  const onTE = () => {};
 
   // Teclado
   useEffect(() => {
@@ -570,25 +748,179 @@ function ModoDiscurso({ discurso, onSalir }) {
 }
 
 
-// ============================================================
+
+
 // 🏠 APP
 // ============================================================
 export default function App() {
-  const [vista, setVista] = useState("lista");
-  const [actual, setActual] = useState(null);
-  const [modo, setModo] = useState(false);
+  const [vista, setVista] = useState(() => {
+    const saved = localStorage.getItem("discurso_vista");
+    return saved || "lista";
+  });
+  const [actual, setActual] = useState(() => {
+    const savedNum = localStorage.getItem("discurso_actual");
+    if (savedNum) return DISCURSOS.find(d => d.numero === Number(savedNum)) || null;
+    return null;
+  });
+  const [modo, setModo] = useState(() => localStorage.getItem("discurso_modo") === "true");
+  const [playlistMap, setPlaylistMap] = useState({});
+  const [playlistLoading, setPlaylistLoading] = useState(null); // numero del discurso que se está cargando
+  const [deleteConfirm, setDeleteConfirm] = useState(null); // numero del discurso a confirmar eliminación
+  const fileInputRef = useRef(null);
+  const uploadTargetRef = useRef(null); // numero del discurso al que se sube
+  const fileCacheRef = useRef({}); // cache de File objects para share instantáneo
+
+  // Cargar metadatos de playlists al inicio
+  useEffect(() => {
+    getAllPlaylistMeta().then(setPlaylistMap).catch(() => {});
+  }, []);
+
+  const triggerUpload = (numero) => {
+    uploadTargetRef.current = numero;
+    fileInputRef.current?.click();
+  };
+
+  const handlePlaylistUpload = async (e) => {
+    const file = e.target.files?.[0];
+    const numero = uploadTargetRef.current;
+    if (!file || !numero) return;
+    setPlaylistLoading(numero);
+    try {
+      const record = await savePlaylist(numero, file);
+      setPlaylistMap(prev => ({ ...prev, [numero]: { name: record.name, size: record.size, date: record.date } }));
+      // Cache con tipo ZIP para que navigator.share lo acepte
+      fileCacheRef.current[numero] = new File([file], file.name, { type: "application/zip" });
+    } catch (err) {
+      alert("Error al guardar: " + err.message);
+    }
+    setPlaylistLoading(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  // Crear File con tipo ZIP para que navigator.canShare lo acepte
+  const makeShareableFile = (blobOrBuffer, name) => {
+    return new File([blobOrBuffer], name, { type: "application/zip" });
+  };
+
+  const handlePlaylistShare = (numero) => {
+    const cachedFile = fileCacheRef.current[numero];
+
+    if (cachedFile) {
+      // Cache disponible — camino 100% síncrono, user gesture válido
+      const shareFile = makeShareableFile(cachedFile, cachedFile.name);
+      if (navigator.share && navigator.canShare?.({ files: [shareFile] })) {
+        navigator.share({ title: shareFile.name, files: [shareFile] }).catch(err => {
+          if (err.name !== "AbortError") {
+            downloadBlob(cachedFile, cachedFile.name);
+          }
+        });
+      } else {
+        downloadBlob(cachedFile, cachedFile.name);
+      }
+      return;
+    }
+
+    // Sin cache (ej: tras recargar página) — cargar de IndexedDB y cachear
+    (async () => {
+      try {
+        const record = await getPlaylist(numero);
+        if (!record) return;
+        const file = new File([record.data], record.name, { type: "application/zip" });
+        fileCacheRef.current[numero] = file;
+        // Gesture ya expiró — intentar share de todos modos, si falla descargar
+        try {
+          if (navigator.share && navigator.canShare?.({ files: [file] })) {
+            await navigator.share({ title: file.name, files: [file] });
+            return;
+          }
+        } catch (e) { /* gesture expirado, fallback */ }
+        downloadBlob(file, file.name);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  };
+
+  const downloadBlob = (blobOrFile, name) => {
+    const url = URL.createObjectURL(blobOrFile);
+    const a = document.createElement("a");
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const handlePlaylistDownload = async (numero) => {
+    try {
+      const cachedFile = fileCacheRef.current[numero];
+      if (cachedFile) {
+        downloadBlob(cachedFile, cachedFile.name);
+        return;
+      }
+      const record = await getPlaylist(numero);
+      if (!record) return;
+      const file = new File([record.data], record.name, { type: record.type });
+      fileCacheRef.current[numero] = file;
+      downloadBlob(file, record.name);
+    } catch (err) {
+      alert("Error: " + err.message);
+    }
+  };
+
+  const handlePlaylistDelete = (numero) => {
+    setDeleteConfirm(numero);
+  };
+
+  const confirmPlaylistDelete = async () => {
+    const numero = deleteConfirm;
+    setDeleteConfirm(null);
+    try {
+      await deletePlaylist(numero);
+      delete fileCacheRef.current[numero];
+      setPlaylistMap(prev => {
+        const next = { ...prev };
+        delete next[numero];
+        return next;
+      });
+    } catch (err) {
+      alert("Error: " + err.message);
+    }
+  };
+
+  const fmtFileSize = (bytes) => {
+    if (bytes < 1024) return bytes + " B";
+    if (bytes < 1048576) return (bytes / 1024).toFixed(1) + " KB";
+    return (bytes / 1048576).toFixed(1) + " MB";
+  };
+
+  useEffect(() => {
+    localStorage.setItem("discurso_vista", vista);
+    localStorage.setItem("discurso_actual", actual ? actual.numero : "");
+    localStorage.setItem("discurso_modo", modo);
+  }, [vista, actual, modo]);
 
   return (
     <div style={{ minHeight: "100vh", background: C.bg, fontFamily: font }}>
       <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+      <style>{`
+        /* Scrollbar elegante para desktop */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(17,17,16,0.5); border-radius: 8px; }
+        ::-webkit-scrollbar-thumb { background: rgba(200,162,78,0.25); border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(200,162,78,0.45); border: 2px solid transparent; background-clip: padding-box; }
+        ::-webkit-scrollbar-thumb:active { background: rgba(200,162,78,0.6); border: 2px solid transparent; background-clip: padding-box; }
+        ::-webkit-scrollbar-corner { background: transparent; }
+        /* Firefox */
+        * { scrollbar-width: thin; scrollbar-color: rgba(200,162,78,0.25) rgba(17,17,16,0.5); }
+      `}</style>
 
-      {modo && actual && <ModoDiscurso discurso={actual} onSalir={() => setModo(false)} />}
+      {modo && actual && <ModoDiscurso discurso={actual} onSalir={() => { setModo(false); localStorage.removeItem("discurso_seccion"); }} />}
 
       {/* ===== LISTA ===== */}
       {vista === "lista" && (
         <>
           <div style={{ background: C.card, borderBottom: `1px solid ${C.border}`, padding: "22px 18px", position: "sticky", top: 0, zIndex: 50 }}>
-            <div style={{ maxWidth: 640, margin: "0 auto", display: "flex", alignItems: "center", gap: 12 }}>
+            <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", alignItems: "center", gap: 12 }}>
               <div style={{ width: 36, height: 36, borderRadius: 7, background: C.accentBorder, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>📖</div>
               <div>
                 <h1 style={{ fontSize: 18, fontWeight: 800, color: C.white, margin: 0, fontFamily: font }}>Mis Discursos</h1>
@@ -597,30 +929,84 @@ export default function App() {
             </div>
           </div>
 
-          <div style={{ maxWidth: 640, margin: "0 auto", padding: "18px 14px" }}>
+          <div style={{ maxWidth: 720, margin: "0 auto", padding: "18px 14px" }}>
             {DISCURSOS.sort((a, b) => a.numero - b.numero).map(d => (
-              <div
-                key={d.numero}
-                onClick={() => { setActual(d); setVista("ver"); }}
-                style={{ background: C.card, borderRadius: 10, padding: "16px 18px", marginBottom: 8, cursor: "pointer", border: `1px solid ${C.border}`, display: "flex", alignItems: "center", gap: 14 }}
-              >
-                <div style={{ width: 46, height: 46, borderRadius: 8, flexShrink: 0, background: C.accentDim, border: `1px solid ${C.accentBorder}`, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
-                  <span style={{ fontSize: 9, color: C.dim, fontWeight: 700 }}>Nº</span>
-                  <span style={{ fontSize: 18, fontWeight: 800, color: C.accent }}>{d.numero}</span>
+              <div key={d.numero} style={{ background: C.card, borderRadius: 10, marginBottom: 10, border: `1px solid ${C.border}`, display: "flex", alignItems: "stretch", overflow: "hidden" }}>
+                {/* Columna izquierda — info del discurso */}
+                <div
+                  onClick={() => { setActual(d); setVista("ver"); }}
+                  style={{ flex: 1, padding: "16px 18px", cursor: "pointer", display: "flex", alignItems: "center", gap: 14, minWidth: 0 }}
+                >
+                  <div style={{ width: 46, height: 46, borderRadius: 8, flexShrink: 0, background: C.accentDim, border: `1px solid ${C.accentBorder}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <span style={{ fontSize: 20, fontWeight: 800, color: C.accent }}>{d.numero}</span>
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <h3 style={{ fontSize: 15, fontWeight: 700, color: C.white, margin: "0 0 3px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontFamily: font }}>{d.titulo}</h3>
+                    <span style={{ fontSize: 11, color: C.dim }}>{d.secciones.length} secciones · {d.duracion}{d.cancion ? ` · 🎵 Canción ${d.cancion}` : ""}</span>
+                  </div>
+                  <span style={{ color: C.dim, fontSize: 16, flexShrink: 0 }}>›</span>
                 </div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <h3 style={{ fontSize: 15, fontWeight: 700, color: C.white, margin: "0 0 3px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontFamily: font }}>{d.titulo}</h3>
-                  <span style={{ fontSize: 11, color: C.dim }}>{d.secciones.length} secciones · {d.duracion}</span>
+
+                {/* Columna derecha — playlist */}
+                <div style={{ flexShrink: 0, borderLeft: `1px solid ${C.border}`, display: "flex", alignItems: "center", padding: "8px 10px", gap: 10 }}>
+                  {playlistMap[d.numero] ? (
+                    <>
+                      {/* Icono de archivo a la izquierda */}
+                      <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
+                        <svg width="30" height="36" viewBox="0 0 30 36" fill="none">
+                          <rect x="1" y="1" width="28" height="34" rx="3" fill="rgba(200,162,78,0.08)" stroke="rgba(200,162,78,0.25)" strokeWidth="1"/>
+                          <path d="M18 1v7a2 2 0 002 2h7" stroke="rgba(200,162,78,0.25)" strokeWidth="1" fill="none"/>
+                          <line x1="7" y1="16" x2="23" y2="16" stroke="rgba(200,162,78,0.2)" strokeWidth="1"/>
+                          <line x1="7" y1="20" x2="20" y2="20" stroke="rgba(200,162,78,0.15)" strokeWidth="1"/>
+                          <line x1="7" y1="24" x2="17" y2="24" stroke="rgba(200,162,78,0.1)" strokeWidth="1"/>
+                        </svg>
+                        <span style={{ fontSize: 8, color: C.dim, fontFamily: font }}>{fmtFileSize(playlistMap[d.numero].size)}</span>
+                      </div>
+
+                      {/* Banners de acción a la derecha — lista vertical */}
+                      <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                        {[
+                          { label: "Compartir", action: handlePlaylistShare, icon: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c8a24e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> },
+                          { label: "Descargar", action: handlePlaylistDownload, icon: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c8a24e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> },
+                          { label: "Eliminar", action: handlePlaylistDelete, icon: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c8a24e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg> },
+                        ].map((btn) => (
+                          <button
+                            key={btn.label}
+                            onClick={(e) => { e.stopPropagation(); btn.action(d.numero); }}
+                            style={{ background: "rgba(200,162,78,0.06)", border: `1px solid rgba(200,162,78,0.12)`, borderRadius: 6, padding: "5px 12px 5px 8px", cursor: "pointer", display: "flex", alignItems: "center", gap: 6, width: "100%" }}
+                          >
+                            {btn.icon}
+                            <span style={{ fontSize: 10, color: C.gray, fontWeight: 600, fontFamily: font, letterSpacing: 0.3 }}>{btn.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <button
+                      onClick={(e) => { e.stopPropagation(); triggerUpload(d.numero); }}
+                      disabled={playlistLoading === d.numero}
+                      style={{ background: "none", border: `1.5px dashed ${C.accentBorder}`, borderRadius: 8, padding: "12px 16px", cursor: playlistLoading === d.numero ? "wait" : "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}
+                    >
+                      <svg width="22" height="26" viewBox="0 0 30 36" fill="none" opacity="0.5">
+                        <rect x="1" y="1" width="28" height="34" rx="3" stroke="rgba(200,162,78,0.4)" strokeWidth="1.5" strokeDasharray="4 3" fill="none"/>
+                        <line x1="15" y1="12" x2="15" y2="24" stroke="rgba(200,162,78,0.4)" strokeWidth="1.5"/>
+                        <line x1="9" y1="18" x2="21" y2="18" stroke="rgba(200,162,78,0.4)" strokeWidth="1.5"/>
+                      </svg>
+                      <span style={{ fontSize: 10, color: C.accent, fontWeight: 700, fontFamily: font }}>{playlistLoading === d.numero ? "Guardando..." : "Adjuntar"}</span>
+                    </button>
+                  )}
                 </div>
-                <span style={{ color: C.dim, fontSize: 16 }}>›</span>
               </div>
             ))}
 
-            <div style={{ marginTop: 28, background: C.card2, borderRadius: 8, padding: "14px 16px", border: `1px dashed ${C.dim}35` }}>
-              <p style={{ fontSize: 12, color: C.gray, margin: 0, lineHeight: 1.6, fontFamily: font }}>
-                <span style={{ color: C.accent, fontWeight: 700 }}>Claude Code:</span> "Agrega el discurso #155..." o "Cambia la sección 2 del discurso #100..."
-              </p>
-            </div>
+            {/* Input oculto global para subir playlists */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".jwlplaylist"
+              onChange={handlePlaylistUpload}
+              style={{ display: "none" }}
+            />
           </div>
         </>
       )}
@@ -641,6 +1027,7 @@ export default function App() {
               <span style={{ fontSize: 11, fontWeight: 700, color: C.dim, letterSpacing: 2.5 }}>DISCURSO Nº{actual.numero}</span>
               <h1 style={{ fontSize: 23, fontWeight: 800, color: C.white, margin: "8px 0 6px", lineHeight: 1.3, fontFamily: font }}>{actual.titulo}</h1>
               <span style={{ fontSize: 12, color: C.dim }}>{actual.duracion} · {actual.secciones.length} secciones</span>
+              {actual.cancion && <div style={{ marginTop: 10 }}><span style={{ background: C.accentDim, color: C.accent, padding: "4px 12px", borderRadius: 6, fontSize: 12, fontWeight: 700, fontFamily: font }}>🎵 Canción {actual.cancion}</span></div>}
               <div style={{ height: 1, background: `linear-gradient(to right, transparent, ${C.accent}30, transparent)`, margin: "20px 0 0" }} />
             </div>
 
@@ -655,8 +1042,50 @@ export default function App() {
                 {i < actual.secciones.length - 1 && <div style={{ height: 1, background: `linear-gradient(to right, transparent, ${C.border}, transparent)`, margin: "30px 0 0" }} />}
               </div>
             ))}
+
           </div>
         </>
+      )}
+
+      {/* Modal de confirmación para eliminar playlist */}
+      {deleteConfirm !== null && (
+        <div onClick={() => setDeleteConfirm(null)} style={{
+          position: "fixed", inset: 0, background: "rgba(0,0,0,0.65)", zIndex: 9999,
+          display: "flex", alignItems: "center", justifyContent: "center", padding: 24,
+          backdropFilter: "blur(4px)", WebkitBackdropFilter: "blur(4px)",
+        }}>
+          <div onClick={e => e.stopPropagation()} style={{
+            background: C.card, border: `1px solid ${C.border}`, borderRadius: 14,
+            padding: "28px 24px 20px", maxWidth: 320, width: "100%",
+            display: "flex", flexDirection: "column", alignItems: "center", gap: 16,
+          }}>
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#e05050" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" fill="rgba(224,80,80,0.08)" />
+              <line x1="12" y1="8" x2="12" y2="13" />
+              <circle cx="12" cy="16" r="0.5" fill="#e05050" />
+            </svg>
+            <div style={{ textAlign: "center" }}>
+              <p style={{ fontSize: 15, fontWeight: 700, color: C.white, fontFamily: font, margin: "0 0 6px" }}>
+                Eliminar archivo
+              </p>
+              <p style={{ fontSize: 13, color: C.gray, fontFamily: font, margin: 0, lineHeight: 1.5 }}>
+                {playlistMap[deleteConfirm]
+                  ? <>Se eliminará <strong style={{ color: C.white }}>{playlistMap[deleteConfirm].name}</strong> de este discurso.</>
+                  : "Se eliminará el archivo de este discurso."}
+              </p>
+            </div>
+            <div style={{ display: "flex", gap: 10, width: "100%", marginTop: 4 }}>
+              <button onClick={() => setDeleteConfirm(null)} style={{
+                flex: 1, padding: "10px 0", borderRadius: 8, cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: font,
+                background: "none", border: `1px solid ${C.border}`, color: C.gray,
+              }}>Cancelar</button>
+              <button onClick={confirmPlaylistDelete} style={{
+                flex: 1, padding: "10px 0", borderRadius: 8, cursor: "pointer", fontSize: 13, fontWeight: 600, fontFamily: font,
+                background: "rgba(224,80,80,0.12)", border: "1px solid rgba(224,80,80,0.25)", color: "#e05050",
+              }}>Eliminar</button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
