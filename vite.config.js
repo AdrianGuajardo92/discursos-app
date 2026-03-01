@@ -8,9 +8,9 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       manifest: {
-        name: 'Bosquejos 30 min.',
-        short_name: 'Bosquejos',
-        description: 'Bosquejos de discursos de 30 minutos',
+        name: 'Discursos App',
+        short_name: 'Discursos',
+        description: 'Bosquejos de discursos y presentaciones',
         theme_color: '#111110',
         background_color: '#111110',
         display: 'standalone',
