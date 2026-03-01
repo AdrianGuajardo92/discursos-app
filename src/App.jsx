@@ -780,30 +780,42 @@ export default function App() {
   const uploadTargetRef = useRef(null); // numero del discurso al que se sube
   const fileCacheRef = useRef({}); // cache de File objects para share instantáneo
 
-  // Cargar metadatos de playlists al inicio
+  // Cargar metadatos de playlists al inicio + pre-cargar archivos en cache para share instantáneo
   useEffect(() => {
-    getAllPlaylistMeta().then(setPlaylistMap).catch(() => {});
+    getAllPlaylistMeta().then(meta => {
+      setPlaylistMap(meta);
+      // Pre-cargar archivos completos en fileCacheRef para que Compartir funcione sin delay
+      // Pre-cargar archivos en cache para share instantáneo
+      Object.keys(meta).forEach(async (num) => {
+        try {
+          const record = await getPlaylist(Number(num));
+          if (record) {
+            fileCacheRef.current[Number(num)] = new File([record.data], record.name, { type: "application/zip" });
+          }
+        } catch (e) { /* silencioso */ }
+      });
+    }).catch(() => {});
   }, []);
 
-  // Event listener NATIVO para botón Compartir (bypassea React para preservar user gesture)
-  useEffect(() => {
-    const handler = (e) => {
-      const btn = e.target.closest("[data-share-numero]");
-      if (!btn) return;
+  // Ref callback: adjunta onclick NATIVO directo al botón para preservar user gesture
+  const shareRefCallback = useCallback((btnEl) => {
+    if (!btnEl) return;
+    const numero = parseInt(btnEl.dataset.shareNumero);
+    btnEl.onclick = function (e) {
       e.stopPropagation();
       e.preventDefault();
-      const numero = parseInt(btn.dataset.shareNumero);
       const cachedFile = fileCacheRef.current[numero];
 
       if (cachedFile && navigator.share) {
         const shareFile = new File([cachedFile], cachedFile.name, { type: "application/zip" });
         navigator.share({ title: shareFile.name, files: [shareFile] }).catch(err => {
+          // Si el usuario cancela (AbortError) no hacemos nada; cualquier otro error → descargar
           if (err.name !== "AbortError") downloadBlob(cachedFile, cachedFile.name);
         });
       } else if (cachedFile) {
         downloadBlob(cachedFile, cachedFile.name);
       } else {
-        // Sin cache — cargar de IndexedDB (gesture expira, descarga como fallback)
+        // Sin cache (raro) — cargar de IndexedDB y descargar
         (async () => {
           try {
             const record = await getPlaylist(numero);
@@ -815,8 +827,6 @@ export default function App() {
         })();
       }
     };
-    document.addEventListener("click", handler, true); // capture phase = antes que React
-    return () => document.removeEventListener("click", handler, true);
   }, []);
 
   const triggerUpload = (numero) => {
@@ -841,7 +851,7 @@ export default function App() {
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  // handlePlaylistShare está manejado por el native click handler (useEffect con data-share-numero)
+
 
   const handlePlaylistDownload = async (numero) => {
     try {
@@ -916,7 +926,7 @@ export default function App() {
             <div style={{ maxWidth: 720, margin: "0 auto", display: "flex", alignItems: "center", gap: 12 }}>
               <div style={{ width: 36, height: 36, borderRadius: 7, background: C.accentBorder, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>📖</div>
               <div>
-                <h1 style={{ fontSize: 18, fontWeight: 800, color: C.white, margin: 0, fontFamily: font }}>Mis Discursos</h1>
+                <h1 style={{ fontSize: 18, fontWeight: 800, color: C.white, margin: 0, fontFamily: font }}>Bosquejos 30 min.</h1>
                 <p style={{ fontSize: 11, color: C.dim, margin: 0 }}>{DISCURSOS.length} guardados</p>
               </div>
             </div>
@@ -958,8 +968,9 @@ export default function App() {
 
                       {/* Banners de acción a la derecha — lista vertical */}
                       <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
-                        {/* Compartir — usa native click handler (data-share-numero) para preservar user gesture */}
+                        {/* Compartir — ref callback adjunta onclick NATIVO directo al botón */}
                         <button
+                          ref={shareRefCallback}
                           data-share-numero={d.numero}
                           style={{ background: "rgba(200,162,78,0.06)", border: `1px solid rgba(200,162,78,0.12)`, borderRadius: 6, padding: "5px 12px 5px 8px", cursor: "pointer", display: "flex", alignItems: "center", gap: 6, width: "100%" }}
                         >
