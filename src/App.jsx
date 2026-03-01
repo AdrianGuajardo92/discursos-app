@@ -318,6 +318,16 @@ const DISCURSOS = [
 ];
 
 
+// Helper para descargar blob/file
+function downloadBlob(blobOrFile, name) {
+  const url = URL.createObjectURL(blobOrFile);
+  const a = document.createElement("a");
+  a.href = url; a.download = name;
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
 // ============================================================
 // 🎨 PALETA — Solo negro + ámbar. Nada más.
 // ============================================================
@@ -775,6 +785,40 @@ export default function App() {
     getAllPlaylistMeta().then(setPlaylistMap).catch(() => {});
   }, []);
 
+  // Event listener NATIVO para botón Compartir (bypassea React para preservar user gesture)
+  useEffect(() => {
+    const handler = (e) => {
+      const btn = e.target.closest("[data-share-numero]");
+      if (!btn) return;
+      e.stopPropagation();
+      e.preventDefault();
+      const numero = parseInt(btn.dataset.shareNumero);
+      const cachedFile = fileCacheRef.current[numero];
+
+      if (cachedFile && navigator.share) {
+        const shareFile = new File([cachedFile], cachedFile.name, { type: "application/zip" });
+        navigator.share({ title: shareFile.name, files: [shareFile] }).catch(err => {
+          if (err.name !== "AbortError") downloadBlob(cachedFile, cachedFile.name);
+        });
+      } else if (cachedFile) {
+        downloadBlob(cachedFile, cachedFile.name);
+      } else {
+        // Sin cache — cargar de IndexedDB (gesture expira, descarga como fallback)
+        (async () => {
+          try {
+            const record = await getPlaylist(numero);
+            if (!record) return;
+            const file = new File([record.data], record.name, { type: "application/zip" });
+            fileCacheRef.current[numero] = file;
+            downloadBlob(file, file.name);
+          } catch (err) { console.error(err); }
+        })();
+      }
+    };
+    document.addEventListener("click", handler, true); // capture phase = antes que React
+    return () => document.removeEventListener("click", handler, true);
+  }, []);
+
   const triggerUpload = (numero) => {
     uploadTargetRef.current = numero;
     fileInputRef.current?.click();
@@ -797,58 +841,7 @@ export default function App() {
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
-  // Crear File con tipo ZIP para que navigator.canShare lo acepte
-  const makeShareableFile = (blobOrBuffer, name) => {
-    return new File([blobOrBuffer], name, { type: "application/zip" });
-  };
-
-  const handlePlaylistShare = (numero) => {
-    const cachedFile = fileCacheRef.current[numero];
-
-    if (cachedFile) {
-      // Cache disponible — camino 100% síncrono, user gesture válido
-      const shareFile = makeShareableFile(cachedFile, cachedFile.name);
-      if (navigator.share && navigator.canShare?.({ files: [shareFile] })) {
-        navigator.share({ title: shareFile.name, files: [shareFile] }).catch(err => {
-          if (err.name !== "AbortError") {
-            downloadBlob(cachedFile, cachedFile.name);
-          }
-        });
-      } else {
-        downloadBlob(cachedFile, cachedFile.name);
-      }
-      return;
-    }
-
-    // Sin cache (ej: tras recargar página) — cargar de IndexedDB y cachear
-    (async () => {
-      try {
-        const record = await getPlaylist(numero);
-        if (!record) return;
-        const file = new File([record.data], record.name, { type: "application/zip" });
-        fileCacheRef.current[numero] = file;
-        // Gesture ya expiró — intentar share de todos modos, si falla descargar
-        try {
-          if (navigator.share && navigator.canShare?.({ files: [file] })) {
-            await navigator.share({ title: file.name, files: [file] });
-            return;
-          }
-        } catch (e) { /* gesture expirado, fallback */ }
-        downloadBlob(file, file.name);
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  };
-
-  const downloadBlob = (blobOrFile, name) => {
-    const url = URL.createObjectURL(blobOrFile);
-    const a = document.createElement("a");
-    a.href = url; a.download = name;
-    document.body.appendChild(a); a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-  };
+  // handlePlaylistShare está manejado por el native click handler (useEffect con data-share-numero)
 
   const handlePlaylistDownload = async (numero) => {
     try {
@@ -965,8 +958,15 @@ export default function App() {
 
                       {/* Banners de acción a la derecha — lista vertical */}
                       <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                        {/* Compartir — usa native click handler (data-share-numero) para preservar user gesture */}
+                        <button
+                          data-share-numero={d.numero}
+                          style={{ background: "rgba(200,162,78,0.06)", border: `1px solid rgba(200,162,78,0.12)`, borderRadius: 6, padding: "5px 12px 5px 8px", cursor: "pointer", display: "flex", alignItems: "center", gap: 6, width: "100%" }}
+                        >
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c8a24e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                          <span style={{ fontSize: 10, color: C.gray, fontWeight: 600, fontFamily: font, letterSpacing: 0.3 }}>Compartir</span>
+                        </button>
                         {[
-                          { label: "Compartir", action: handlePlaylistShare, icon: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c8a24e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg> },
                           { label: "Descargar", action: handlePlaylistDownload, icon: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c8a24e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> },
                           { label: "Eliminar", action: handlePlaylistDelete, icon: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c8a24e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg> },
                         ].map((btn) => (
