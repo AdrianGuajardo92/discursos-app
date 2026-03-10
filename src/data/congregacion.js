@@ -28,15 +28,6 @@ export const CONGREGACION = [
           { tipo: "pregunta", texto: "«Busquen no solo sus propios intereses, sino también los de los demás.» ¿Quién fue el mejor ejemplo de esto? Jesús. Y fíjense en lo que hizo con una persona sorda:" },
           { tipo: "lectura", cita: "Marcos 7:32-35", texto: "Y le trajeron a un sordo que además tenía dificultades para hablar y le suplicaron que pusiera su mano sobre él. Él se lo llevó aparte, lejos de la multitud. Puso sus dedos en los oídos del hombre y, después de escupir, le tocó la lengua. Y, mirando al cielo, suspiró profundamente y le dijo «Éffatha», es decir, «Ábrete». Al instante se le abrieron los oídos y su dificultad para hablar desapareció, y empezó a hablar con normalidad." },
           { tipo: "destacado", texto: "Jesús no solo estuvo cerca del sordo. No solo lo miró con compasión. Él actuó. Lo apartó de la multitud, le puso los dedos en los oídos, le tocó la lengua. Hizo un esfuerzo activo por ayudarlo." },
-          {
-            tipo: "lista_enseñanza",
-            titulo: "Estar presente ≠ servir",
-            items: [
-              { punto: "Jesús no se quedó entre la multitud.", detalle: "Podría haber observado al sordo desde lejos, pero actuó." },
-              { punto: "Nosotros podemos caer en lo mismo.", detalle: "Venir cada semana, sentarnos, y no hacer nada por nuestros hermanos sordos." },
-              { punto: "Ya no predicamos, no comentamos, no aprendemos LSM.", detalle: "Si es así, estamos buscando nuestros propios intereses, no los de los demás." },
-            ]
-          },
           { tipo: "pregunta", texto: "Seamos honestos con nosotros mismos: ¿estamos participando de verdad?" },
         ]
       },
@@ -125,7 +116,7 @@ export const CONGREGACION = [
               { punto: "¿Puedo salir a predicar en señas este mes?", detalle: "" },
             ]
           },
-          { tipo: "cierre", texto: "Hagamos que esta congregación sea fuerte, activa, y que nuestros hermanos sordos sientan que este es su lugar, porque todos estamos participando y esforzándonos por ellos." },
+          { tipo: "cierre", texto: "Recordemos: el enemigo no está aquí en esta congregación ni en la de enfrente. El enemigo está allá afuera: es Satanás. Por eso, no podemos darnos el lujo de estar apáticos. El carro de Jehová está en marcha, y nosotros tenemos que ir con él. Sigámonos esforzando juntos: asistiendo, predicando, comentando, aprendiendo señas. Que nuestros hermanos sordos sientan el apoyo de cada uno de nosotros." },
         ]
       },
     ]

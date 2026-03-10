@@ -1,12 +1,30 @@
+import { useState } from "react";
 import { C, font } from "../theme";
 import ContentRenderer from "./ContentRenderer";
 
 export default function VistaDiscurso({ discurso, onVolver, onModoDiscurso }) {
+  const [exportando, setExportando] = useState(false);
+
+  const exportarPDF = async () => {
+    setExportando(true);
+    try {
+      const { default: generarPDF } = await import("../utils/generarPDF.js");
+      generarPDF(discurso);
+    } catch (e) {
+      console.error("Error exportando PDF:", e);
+    } finally {
+      setExportando(false);
+    }
+  };
+
   return (
     <>
       <div style={{ background: C.card, borderBottom: `1px solid ${C.border}`, padding: "8px 14px", position: "sticky", top: 0, zIndex: 50, display: "flex", alignItems: "center", gap: 8 }}>
         <button onClick={onVolver} style={{ background: "none", border: `1px solid ${C.border}`, color: C.gray, padding: "5px 10px", borderRadius: 5, cursor: "pointer", fontSize: 12, fontFamily: font }}>← Atrás</button>
         <span style={{ flex: 1, fontSize: 11, color: C.dim, textAlign: "center" }}>Nº{discurso.numero}</span>
+        <button onClick={exportarPDF} disabled={exportando} style={{ background: "none", border: `1px solid ${C.border}`, color: C.gray, padding: "5px 10px", borderRadius: 5, cursor: exportando ? "wait" : "pointer", fontSize: 12, fontFamily: font, opacity: exportando ? 0.5 : 1 }}>
+          {exportando ? "Exportando..." : "📄 PDF"}
+        </button>
         <button onClick={onModoDiscurso} style={{ background: C.accent, color: C.bg, border: "none", padding: "7px 14px", borderRadius: 6, cursor: "pointer", fontSize: 12, fontWeight: 700, fontFamily: font }}>
           ▶ Modo Discurso
         </button>
