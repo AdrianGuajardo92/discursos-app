@@ -10,8 +10,8 @@ export const C = {
   gray: "#918d84",
   dim: "#585550",
   lea: "#4a8ab5",
-  leaBg: "#141e28",
-  leaText: "#a8cfe4",
+  leaBg: "#1c2f3e",
+  leaText: "#e0ecf4",
 };
 
 export const font = "'Outfit', 'Segoe UI', system-ui, sans-serif";
