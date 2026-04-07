@@ -6,10 +6,16 @@ import ListaDiscursos from "./components/ListaDiscursos";
 import VistaDiscurso from "./components/VistaDiscurso";
 import ModoDiscurso from "./components/ModoDiscurso";
 
+const getDiscursosOcultos = () => {
+  try { return JSON.parse(localStorage.getItem("discursos_ocultos") || "[]"); }
+  catch { return []; }
+};
+
 export default function App() {
   const [categoriaId, setCategoriaId] = useState(() => {
     return localStorage.getItem("discurso_categoria") || "bosquejos30";
   });
+  const [discursosOcultos, setDiscursosOcultos] = useState(getDiscursosOcultos);
   const [vista, setVista] = useState(() => {
     return localStorage.getItem("discurso_vista") || "lista";
   });
@@ -37,6 +43,27 @@ export default function App() {
   }, [categoriaId, vista, actual, modo]);
 
   const categoriaActiva = CATEGORIAS.find(c => c.id === categoriaId) || CATEGORIAS[0];
+
+  const discursosFiltrados = categoriaActiva.discursos.filter(
+    d => !discursosOcultos.some(o => o.categoriaId === categoriaId && o.numero === d.numero)
+  );
+
+  const categoriasSidebar = CATEGORIAS.map(cat => ({
+    ...cat,
+    discursos: cat.discursos.filter(
+      d => !discursosOcultos.some(o => o.categoriaId === cat.id && o.numero === d.numero)
+    )
+  }));
+
+  const handleDeleteDiscurso = (numero) => {
+    const updated = [...discursosOcultos, { categoriaId, numero }];
+    setDiscursosOcultos(updated);
+    localStorage.setItem("discursos_ocultos", JSON.stringify(updated));
+    if (actual && actual.numero === numero) {
+      setVista("lista");
+      setActual(null);
+    }
+  };
 
   const handleCategoriaChange = (id) => {
     setCategoriaId(id);
@@ -71,7 +98,7 @@ export default function App() {
       )}
 
       <Sidebar
-        categorias={CATEGORIAS}
+        categorias={categoriasSidebar}
         categoriaActiva={categoriaId}
         onSelect={handleCategoriaChange}
         isOpen={sidebarOpen}
@@ -82,10 +109,11 @@ export default function App() {
       <div style={{ marginLeft: isMobile ? 0 : 220 }}>
         {vista === "lista" && (
           <ListaDiscursos
-            discursos={categoriaActiva.discursos}
+            discursos={discursosFiltrados}
             categoriaLabel={categoriaActiva.label}
             categoriaIcono={categoriaActiva.icono}
             onSelectDiscurso={handleSelectDiscurso}
+            onDeleteDiscurso={handleDeleteDiscurso}
             onMenuToggle={isMobile ? () => setSidebarOpen(true) : null}
           />
         )}

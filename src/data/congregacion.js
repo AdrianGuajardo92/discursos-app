@@ -121,4 +121,98 @@ export const CONGREGACION = [
       },
     ]
   },
+  {
+    numero: 2,
+    titulo: "Escuchemos al que fue instruido por Dios",
+    tema: "Jesucristo, Dios lo enseñó y él explicó, tú presta atención.",
+    duracion: "10 mins",
+    secciones: [
+      {
+        titulo: "Introducción — El GPS",
+        tiempo: "1.5 mins",
+        sinNumero: true,
+        contenido: [
+          { tipo: "ejemplo", texto: "Escena: Va manejando, sigue al GPS sin pensarlo." },
+          { tipo: "imagen", img: "https://i.imgur.com/q1ADYHn.png" },
+          { tipo: "punto", texto: "\"En 200 metros, dé vuelta a la derecha.\" → Obedece sin dudar." },
+          { tipo: "punto", texto: "Lo manda por calles raras, colonias desconocidas… y aun así le hace caso." },
+          { tipo: "punto", texto: "¿Quién es esa voz? Ni siquiera es real. Es una grabación." },
+          { tipo: "punto", texto: "Le confiamos nuestro tiempo, trayecto y seguridad." },
+          { tipo: "destacado", texto: "PREGUNTA CLAVE → Si a una voz electrónica le hacemos tanto caso… ¿cuánto más a alguien instruido por Dios mismo?" },
+          { tipo: "punto", texto: "Hoy, 3 razones de Isaías 50 para escuchar a Jesús." },
+        ]
+      },
+      {
+        titulo: "Jesús fue instruido por Jehová",
+        lsm: "Jesús venir a la tierra todavía no, mucho antes Jehová le enseñó.",
+        tiempo: "3 mins",
+        contenido: [
+          { tipo: "lectura", cita: "Isaías 50:4", texto: "\"El Soberano Señor Jehová me ha dado la lengua de los enseñados, para que yo sepa contestar al cansado con una palabra. Él despierta mañana tras mañana; despierta mi oído para que escuche como los enseñados.\"" },
+          { tipo: "subtitulo", texto: "Explicar:" },
+          { tipo: "punto", texto: "\"La lengua de los enseñados\" → Jesús no hablaba por cuenta propia. Cada palabra que dijo venía de una enseñanza directa de Jehová." },
+          { tipo: "punto", texto: "\"Para contestar al cansado\" → Jehová lo entrenó específicamente para consolar. No da respuestas vacías; sabe exactamente qué decir a quien sufre." },
+          { tipo: "punto", texto: "\"Despierta mañana tras mañana\" → No fue una sola lección. Fue un proceso constante, día tras día, durante edades enteras en el cielo junto a Jehová." },
+          { tipo: "subtitulo", texto: "Aplicar:" },
+          { tipo: "punto", texto: "Si estamos pasando por algo difícil, las palabras de Jesús no son consejos genéricos. Son palabras que vienen del mismísimo Jehová, diseñadas para levantarnos." },
+          { tipo: "punto", texto: "No aprendió solo en la Tierra → edades enteras junto a Jehová en el cielo." },
+          { tipo: "punto", texto: "¿Qué hacía Jesús durante todo ese tiempo? La Biblia lo describe así:" },
+          { tipo: "referencia", cita: "Proverbios 8:30", texto: "Jesús fue \"obrero maestro\" al lado de Jehová." },
+          { tipo: "punto", texto: "Trabajó junto a Jehová, aprendió directamente de él. No hubo mejor escuela ni mejor Instructor en todo el universo." },
+          { tipo: "destacado", texto: "VOLVER AL GPS → El GPS solo conoce mapas humanos. Jesús conoce la realidad porque la aprendió del Creador." },
+          { tipo: "subtitulo", texto: "¿Qué significa esto para nosotros?" },
+          { tipo: "punto", texto: "Confiables. No hay margen de error en lo que dice." },
+          { tipo: "punto", texto: "Sabe consolar al cansado. Fue entrenado para eso. ¿No lo necesitamos hoy?" },
+          { tipo: "punto", texto: "Cada palabra tiene propósito. Edificar, fortalecer, levantar." },
+        ]
+      },
+      {
+        titulo: "Jesús aprendió con muchas ganas",
+        tiempo: "3 mins",
+        contenido: [
+          { tipo: "lectura", cita: "Isaías 50:5", texto: "\"El Soberano Señor Jehová mismo me ha abierto el oído, y yo, por mi parte, no fui rebelde. No me volví en dirección contraria.\"" },
+          { tipo: "punto", texto: "Actitud: obediencia total + ganas de aprender." },
+          { tipo: "punto", texto: "No fue alumno reacio." },
+          { tipo: "punto", texto: "No discutió. No buscó atajos." },
+          { tipo: "punto", texto: "Abrió su oído de par en par." },
+          { tipo: "destacado", texto: "GPS AL REVÉS → \"Yo me sé otro camino mejor\" → ignoramos al GPS → nos perdemos, perdemos tiempo, tráfico. Cuando dejamos de escuchar al que sabe, nos va mal." },
+          { tipo: "punto", texto: "Jesús nunca dijo: \"Yo sé un camino mejor.\" Siempre obedeció." },
+          { tipo: "pregunta", texto: "Si Jesús, siendo perfecto, aprendió con humildad… ¿qué deberíamos hacer nosotros, imperfectos?" },
+          { tipo: "subtitulo", texto: "Pregúntese honestamente:" },
+          { tipo: "pregunta", texto: "¿Leo la Biblia con ganas reales… o por rutina?" },
+          { tipo: "pregunta", texto: "¿Abro mi \"oído\" en las reuniones… o mi mente está en otro lado?" },
+          { tipo: "pregunta", texto: "¿Acepto los consejos bíblicos… o me \"vuelvo en dirección contraria\"?" },
+          { tipo: "destacado", texto: "Modelo de Jesús: aprender con entusiasmo, sin resistencia, sin orgullo." },
+        ]
+      },
+      {
+        titulo: "Los que temen a Jehová escuchan a Jesús",
+        tiempo: "2.5 mins",
+        contenido: [
+          { tipo: "lectura", cita: "Isaías 50:10", texto: "\"¿Quién hay entre ustedes que tema a Jehová, escuchando la voz de su siervo, que ha andado en continua oscuridad y para quien no ha brillado ningún resplandor? Que confíe en el nombre de Jehová y se apoye en su Dios.\"" },
+          { tipo: "destacado", texto: "SEÑAL CLARA → Los que temen a Jehová = los que escuchan a su siervo (Jesús)." },
+          { tipo: "lectura", cita: "Juan 10:27", texto: "\"Mis ovejas escuchan mi voz, y yo las conozco, y ellas me siguen.\"" },
+          { tipo: "subtitulo", texto: "2 detalles importantes:" },
+          { tipo: "punto", texto: "\"Escuchan\" — presente continuo. No fue una sola vez en el bautismo. Es día tras día, año tras año." },
+          { tipo: "punto", texto: "\"Y me siguen.\" No basta oír → hay que obedecer. Igual que el GPS: no basta oír, hay que dar la vuelta." },
+          { tipo: "subtitulo", texto: "¿Cómo escuchamos hoy a Jesús?" },
+          { tipo: "punto", texto: "📖 Los Evangelios → sus palabras exactas." },
+          { tipo: "punto", texto: "🍞 El esclavo fiel → alimento espiritual a su tiempo." },
+          { tipo: "punto", texto: "🏛 Las reuniones → donde se explica y aplica." },
+          { tipo: "destacado", texto: "PROMESA → Aunque caminemos en \"continua oscuridad\" (pruebas duras), podemos confiar en Jehová y apoyarnos en él. Escuchar a Jesús da esa confianza." },
+        ]
+      },
+      {
+        titulo: "Conclusión",
+        tiempo: "0.5 mins",
+        sinNumero: true,
+        contenido: [
+          { tipo: "destacado", texto: "VOLVER AL GPS → La próxima vez que oiga la voz del GPS, recuerde: si a una voz electrónica le hacemos tanto caso… ¡cuánto más a Jesucristo!" },
+          { tipo: "punto", texto: "✅ Fue instruido directamente por Jehová." },
+          { tipo: "punto", texto: "✅ Aprendió con humildad y muchas ganas." },
+          { tipo: "punto", texto: "✅ Escucharlo es la marca de quienes temen a Jehová." },
+          { tipo: "cierre", texto: "Cuando escuchamos al que fue instruido por Dios, en realidad estamos escuchando a Dios mismo." },
+        ]
+      },
+    ]
+  },
 ];

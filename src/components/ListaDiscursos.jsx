@@ -4,10 +4,11 @@ import { savePlaylist, getPlaylist, deletePlaylist, getAllPlaylistMeta } from ".
 import { downloadBlob, fmtFileSize } from "../utils/download";
 import ModalConfirm from "./ModalConfirm";
 
-export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIcono, onSelectDiscurso, onMenuToggle }) {
+export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIcono, onSelectDiscurso, onDeleteDiscurso, onMenuToggle }) {
   const [playlistMap, setPlaylistMap] = useState({});
   const [playlistLoading, setPlaylistLoading] = useState(null);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
+  const [discursoDeleteConfirm, setDiscursoDeleteConfirm] = useState(null);
   const fileInputRef = useRef(null);
   const uploadTargetRef = useRef(null);
   const fileCacheRef = useRef({});
@@ -103,6 +104,21 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
     }
   };
 
+  const confirmDiscursoDelete = async () => {
+    const d = discursoDeleteConfirm;
+    setDiscursoDeleteConfirm(null);
+    if (!d) return;
+    // Si tiene playlist adjunta, eliminarla también
+    if (playlistMap[d.numero]) {
+      try {
+        await deletePlaylist(d.numero);
+        delete fileCacheRef.current[d.numero];
+        setPlaylistMap(prev => { const next = { ...prev }; delete next[d.numero]; return next; });
+      } catch {}
+    }
+    onDeleteDiscurso?.(d.numero);
+  };
+
   return (
     <>
       <div style={{ background: C.card, borderBottom: `1px solid ${C.border}`, padding: "22px 18px", position: "sticky", top: 0, zIndex: 50 }}>
@@ -126,7 +142,23 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
         )}
 
         {discursos.map(d => (
-          <div key={d.numero} style={{ background: C.card, borderRadius: 10, marginBottom: 10, border: `1px solid ${C.border}`, display: "flex", alignItems: "stretch", overflow: "hidden" }}>
+          <div key={d.numero} style={{ background: C.card, borderRadius: 10, marginBottom: 10, border: `1px solid ${C.border}`, display: "flex", alignItems: "stretch", overflow: "hidden", position: "relative" }}>
+            {onDeleteDiscurso && (
+              <button
+                onClick={(e) => { e.stopPropagation(); setDiscursoDeleteConfirm(d); }}
+                title="Eliminar discurso"
+                style={{
+                  position: "absolute", top: 4, right: 4, zIndex: 10,
+                  background: "none", border: "none", cursor: "pointer",
+                  width: 22, height: 22, borderRadius: "50%",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  color: C.dim, fontSize: 13, lineHeight: 1,
+                  transition: "background 0.15s, color 0.15s",
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = "rgba(224,80,80,0.15)"; e.currentTarget.style.color = "#e05050"; }}
+                onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.color = C.dim; }}
+              >✕</button>
+            )}
             <div
               onClick={() => onSelectDiscurso(d)}
               style={{ flex: 1, padding: "16px 18px", cursor: "pointer", display: "flex", alignItems: "center", gap: 14, minWidth: 0 }}
@@ -212,6 +244,16 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
           : "Se eliminará el archivo de este discurso."}
         onConfirmar={confirmPlaylistDelete}
         onCancelar={() => setDeleteConfirm(null)}
+      />
+
+      <ModalConfirm
+        visible={discursoDeleteConfirm !== null}
+        titulo="Eliminar discurso"
+        mensaje={discursoDeleteConfirm
+          ? <>Se eliminará <strong style={{ color: C.white }}>{discursoDeleteConfirm.titulo}</strong> de la lista.</>
+          : "Se eliminará este discurso de la lista."}
+        onConfirmar={confirmDiscursoDelete}
+        onCancelar={() => setDiscursoDeleteConfirm(null)}
       />
     </>
   );
