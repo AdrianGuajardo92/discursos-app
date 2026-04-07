@@ -194,6 +194,26 @@ export default function ContentRenderer({ item }) {
         </div>
       );
 
+    case "imagen_lista":
+      return (
+        <div style={{ display: "flex", gap: 16, alignItems: "center", background: C.card2, borderRadius: 10, overflow: "hidden", margin: "18px 0", border: `1px solid ${C.border}` }}>
+          <div style={{ flexShrink: 0, width: 160, alignSelf: "stretch" }}>
+            <img src={item.img} alt="" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+          </div>
+          <div style={{ flex: 1, padding: "14px 16px 14px 0", display: "flex", flexDirection: "column", gap: 10 }}>
+            {item.items.map((li, i) => (
+              <div key={i} style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                <span style={{ fontSize: 18, flexShrink: 0 }}>{li.icono}</span>
+                <div>
+                  <p style={{ margin: 0, fontWeight: 700, color: C.accent, fontSize: 13, fontFamily: font }}>{li.nombre}</p>
+                  <p style={{ margin: 0, fontSize: 13.5, color: C.gray, fontFamily: font }}>{li.detalle}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+
     case "imagen":
       return (
         <div style={{ textAlign: "center", margin: "16px 0" }}>

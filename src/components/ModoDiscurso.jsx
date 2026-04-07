@@ -149,9 +149,31 @@ export default function ModoDiscurso({ discurso, onSalir, duracionTotal = 30 }) 
       </div>
 
       {/* Título sección */}
-      <div style={{ padding: "14px 18px 6px", flexShrink: 0 }}>
-        <h2 style={{ fontSize: 19, fontWeight: 700, color: C.white, margin: 0, lineHeight: 1.35, fontFamily: font }}>{s.titulo}</h2>
+      <div style={{ padding: "14px 18px 6px", flexShrink: 0, display: "flex", alignItems: "center", gap: 10 }}>
+        {s.sinNumero ? (
+          <span style={{
+            width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: 13, flexShrink: 0,
+            background: `linear-gradient(135deg, ${C.accent}30, ${C.accent}12)`,
+            border: `1.5px solid ${C.accent}50`,
+            boxShadow: `0 0 8px ${C.accent}20`,
+          }}>
+            {s.titulo.toLowerCase().includes("intro") ? "🎤" : "🏁"}
+          </span>
+        ) : (
+          <span style={{ background: C.accent, color: C.bg, width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 13, flexShrink: 0, fontFamily: font }}>
+            {discurso.secciones.slice(0, sec + 1).filter(x => !x.sinNumero).length}
+          </span>
+        )}
+        <h2 style={{ fontSize: 19, fontWeight: 700, color: C.white, margin: 0, lineHeight: 1.35, flex: 1, fontFamily: font }}>{s.titulo}</h2>
       </div>
+
+      {s.lsm && (
+        <div style={{ margin: "2px 18px 8px", padding: "6px 12px", background: "linear-gradient(135deg, rgba(78,140,200,0.08), rgba(78,140,200,0.03))", border: "1px solid rgba(78,140,200,0.15)", borderRadius: 8, display: "inline-flex", alignItems: "center", gap: 8 }}>
+          <span style={{ fontSize: 11, fontWeight: 800, color: "rgba(120,170,220,0.9)", letterSpacing: 1, fontFamily: font }}>🤟 LSM</span>
+          <span style={{ fontSize: 12, color: "rgba(180,200,220,0.8)", fontStyle: "italic", fontFamily: font }}>{s.lsm}</span>
+        </div>
+      )}
 
       {/* Contenido scrolleable */}
       <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", padding: "2px 18px 100px", WebkitOverflowScrolling: "touch" }}>
@@ -164,24 +186,26 @@ export default function ModoDiscurso({ discurso, onSalir, duracionTotal = 30 }) 
           onClick={() => ir(-1)}
           disabled={sec === 0}
           style={{
-            flex: 1, padding: 13, borderRadius: 8, border: `1px solid ${C.border}`,
+            flex: 1, padding: "10px 13px", borderRadius: 8, border: `1px solid ${C.border}`,
             background: sec === 0 ? C.bg : C.card2, color: sec === 0 ? C.dim : C.gray,
             fontSize: 15, fontWeight: 600, fontFamily: font, cursor: sec === 0 ? "default" : "pointer",
-            opacity: sec === 0 ? 0.35 : 1, transition: "all 0.2s"
+            opacity: sec === 0 ? 0.35 : 1, transition: "all 0.2s", textAlign: "center"
           }}
         >
-          ← Anterior
+          <div>← Anterior</div>
+          {sec > 0 && <div style={{ fontSize: 10, color: C.dim, marginTop: 3, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{discurso.secciones[sec - 1].titulo}</div>}
         </button>
         <button
           onClick={() => sec === total - 1 ? onSalir() : ir(1)}
           style={{
-            flex: 1, padding: 13, borderRadius: 8, border: "none",
+            flex: 1, padding: "10px 13px", borderRadius: 8, border: "none",
             background: sec === total - 1 ? C.dim : C.accent,
             color: sec === total - 1 ? C.white : C.bg,
-            fontSize: 15, fontWeight: 700, fontFamily: font, cursor: "pointer", transition: "all 0.2s"
+            fontSize: 15, fontWeight: 700, fontFamily: font, cursor: "pointer", transition: "all 0.2s", textAlign: "center"
           }}
         >
-          {sec === total - 1 ? "Finalizar ✓" : "Siguiente →"}
+          <div>{sec === total - 1 ? "Finalizar ✓" : "Siguiente →"}</div>
+          {sec < total - 1 && <div style={{ fontSize: 10, opacity: 0.7, marginTop: 3, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{discurso.secciones[sec + 1].titulo}</div>}
         </button>
       </div>
     </div>
