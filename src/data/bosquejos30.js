@@ -117,8 +117,8 @@ export const BOSQUEJOS_30 = [
             claves: [
               "Pablo era experimentado, Timoteo era joven y tímido",
               "En vez de menospreciarlo, Pablo lo entrenó y le confió misiones importantes",
-              "Cuando Pablo estuvo preso en Roma, ¿quién fue a verlo? Timoteo → no lo abandonó",
-              "Pablo lo llamó \"hijo amado\" (2 Timoteo 1:2)",
+              "Cuando Pablo cayó preso en Roma, era la época de Nerón — a los cristianos los torturaban y los quemaban vivos. Visitar a Pablo podía costarle la vida a Timoteo",
+              "Y aun así, Timoteo fue a verlo (2 Timoteo 4:9, 21) → el amor desinteresado se prueba cuando la amistad ya no te conviene",
               "🔑 Lección: un buen amigo te ayuda a crecer y está contigo en los momentos difíciles"
             ]
           },
