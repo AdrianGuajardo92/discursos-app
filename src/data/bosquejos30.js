@@ -59,19 +59,10 @@ export const BOSQUEJOS_30 = [
       },
       {
         titulo: "¿Qué hace falta para tener amistades duraderas?",
-        tiempo: "9 mins",
+        tiempo: "10 mins",
         contenido: [
           { tipo: "punto", texto: "Para tener amistades duraderas debemos demostrar amor desinteresado." },
           { tipo: "definicion", termino: "Amor desinteresado", texto: "Es querer a alguien por quien es, sin esperar recibir algo a cambio. No hay un \"interés\" oculto.", lsm: "amor-honestidad", img: "https://i.imgur.com/yVlXRUZ.png" },
-          {
-            tipo: "lista_enseñanza",
-            titulo: "¿Qué NO es amor desinteresado?",
-            items: [
-              { punto: "❌ \"Soy tu amigo porque tienes dinero\"", detalle: "Si solo busco a alguien por lo que tiene, no es amistad → es interés." },
-              { punto: "❌ \"Soy tu amigo porque tienes carro y me das ride\"", detalle: "Si solo lo busco cuando me conviene, lo estoy usando, no lo estoy queriendo." },
-              { punto: "❌ \"Soy tu amigo porque conoces gente importante\"", detalle: "Si me acerco por sus contactos o su posición, es conveniencia, no amor." },
-            ]
-          },
           {
             tipo: "ejemplo_biblico",
             nombre: "Ejemplo: La mudanza",
@@ -122,21 +113,12 @@ export const BOSQUEJOS_30 = [
               "🔑 Lección: un buen amigo te ayuda a crecer y está contigo en los momentos difíciles"
             ]
           },
-          { tipo: "destacado", texto: "¿Cómo fortalecer nuestras amistades?" },
-          {
-            tipo: "lista_enseñanza",
-            items: [
-              { punto: "Escuchar con atención", detalle: "No solo oír → escuchar de verdad. No interrumpir. Interesarse sinceramente. \"Todos deben estar listos para escuchar\" (Santiago 1:19)." },
-              { punto: "No esparcir chismes", detalle: "No revelar conversaciones privadas ni hablar a espaldas. \"El chismoso separa a los mejores amigos\" (Proverbios 16:28)." },
-              { punto: "Perdonar los errores", detalle: "Nadie es perfecto. Estar dispuestos a perdonar. \"Seguir soportándose unos a otros y perdonándose generosamente\" (Colosenses 3:13)." },
-              { punto: "Respetar su privacidad", detalle: "Si un hermano se ve triste → \"¿Estás bien? Aquí estoy\". Si dice que sí → no insistir, no averiguar con otros. \"Tómense la delantera en honrarse unos a otros\" (Romanos 12:10)." },
-            ]
-          },
+          { tipo: "pregunta", texto: "¿A quién viene a tu mente ahorita? ¿Quién ha sido ese amigo para ti… o para quién lo has sido tú?" },
         ]
       },
       {
         titulo: "¿Cuáles son las amistades más importantes?",
-        tiempo: "8 mins",
+        tiempo: "7 mins",
         contenido: [
           { tipo: "pregunta", texto: "Hemos visto que los buenos amigos nos hacen mejores personas. Pero ¿quién puede ayudarnos más que nadie a ser la mejor versión de nosotros mismos?" },
           { tipo: "punto", texto: "Los mejores amigos que podemos tener son Jehová y Jesús." },
@@ -148,17 +130,7 @@ export const BOSQUEJOS_30 = [
           { tipo: "punto", texto: "Para ser amigos de Jehová tenemos que amarlo con todo nuestro corazón:" },
           { tipo: "lectura", cita: "Mateo 22:37, 38", texto: "\"Tienes que amar a Jehová tu Dios con todo tu corazón, con toda tu alma y con toda tu mente\". Este es el mandamiento más importante y el primero." },
 
-          { tipo: "punto", texto: "Pensemos primero: cuando un amigo nuestro está enfermo o deja de ir a las reuniones, ¿qué hacemos?" },
-          {
-            tipo: "lista_enseñanza",
-            titulo: "¿Cómo le demostramos amor a un amigo?",
-            items: [
-              { punto: "Lo buscamos", detalle: "Le mandamos un WhatsApp, lo llamamos, le hacemos una videollamada. No esperamos a que él nos busque." },
-              { punto: "Nos interesamos de verdad", detalle: "No solo un \"¿cómo estás?\" por compromiso → preguntamos, escuchamos, lo visitamos si hace falta." },
-              { punto: "Estamos ahí cuando más lo necesita", detalle: "Si está enfermo, desanimado o deja de venir a las reuniones → no lo dejamos solo." },
-            ]
-          },
-          { tipo: "punto", texto: "Y ahora la pregunta importante: si así tratamos a un amigo, ¿cómo le demostramos ese mismo amor a Jehová?" },
+          { tipo: "pregunta", texto: "Cuando tenemos un amigo cercano, ¿qué hacemos? Lo buscamos con un mensaje, nos interesamos de verdad cuando está mal, estamos ahí si deja de venir a las reuniones. La pregunta es: ¿tratamos a Jehová con ese mismo nivel de atención?" },
           {
             tipo: "lista_enseñanza",
             titulo: "¿Cómo le demostramos amor a Jehová?",
@@ -229,7 +201,7 @@ export const BOSQUEJOS_30 = [
             ]
           },
 
-          { tipo: "cierre", texto: "Si ponemos en práctica lo que aprendimos hoy, no solo tendremos buenos amigos... tendremos amigos para siempre." },
+          { tipo: "cierre", texto: "En el nuevo mundo tendremos la eternidad para conocer a nuestros amigos. Pero las amistades que cultivamos hoy son las que vamos a llevar con nosotros. Empecemos hoy." },
         ]
       }
     ]
