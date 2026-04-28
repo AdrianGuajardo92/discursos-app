@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { C, font } from "./theme";
+import { getTheme, font } from "./theme";
 import { CATEGORIAS } from "./data/categorias";
 import Sidebar from "./components/Sidebar";
 import ListaDiscursos from "./components/ListaDiscursos";
@@ -9,6 +9,12 @@ import ModoDiscurso from "./components/ModoDiscurso";
 const getDiscursosOcultos = () => {
   try { return JSON.parse(localStorage.getItem("discursos_ocultos") || "[]"); }
   catch { return []; }
+};
+
+const THEME_STORAGE_KEY = "discurso_tema";
+
+const getTemaGuardado = () => {
+  return localStorage.getItem(THEME_STORAGE_KEY) === "light" ? "light" : "dark";
 };
 
 export default function App() {
@@ -26,8 +32,10 @@ export default function App() {
     return cat?.discursos.find(d => d.numero === Number(savedNum)) || null;
   });
   const [modo, setModo] = useState(() => localStorage.getItem("discurso_modo") === "true");
+  const [tema, setTema] = useState(getTemaGuardado);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 769);
+  const C = getTheme(tema);
 
   useEffect(() => {
     const handler = () => setIsMobile(window.innerWidth < 769);
@@ -41,6 +49,12 @@ export default function App() {
     localStorage.setItem("discurso_actual", actual ? actual.numero : "");
     localStorage.setItem("discurso_modo", modo);
   }, [categoriaId, vista, actual, modo]);
+
+  useEffect(() => {
+    localStorage.setItem(THEME_STORAGE_KEY, tema);
+    document.documentElement.style.colorScheme = tema;
+    document.body.style.background = C.bg;
+  }, [tema, C.bg]);
 
   const categoriaActiva = CATEGORIAS.find(c => c.id === categoriaId) || CATEGORIAS[0];
 
@@ -87,6 +101,12 @@ export default function App() {
     localStorage.removeItem("discurso_seccion");
   }, []);
 
+  const handleThemeChange = useCallback((nextTema) => {
+    const safeTema = nextTema === "light" ? "light" : "dark";
+    localStorage.setItem(THEME_STORAGE_KEY, safeTema);
+    setTema(safeTema);
+  }, []);
+
   return (
     <div style={{ minHeight: "100vh", background: C.bg, fontFamily: font }}>
       {modo && actual && (
@@ -94,6 +114,9 @@ export default function App() {
           discurso={actual}
           duracionTotal={duracionTotal}
           onSalir={handleSalirModo}
+          theme={tema}
+          onThemeChange={handleThemeChange}
+          themeColors={C}
         />
       )}
 
@@ -104,6 +127,7 @@ export default function App() {
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
         isMobile={isMobile}
+        themeColors={C}
       />
 
       <div style={{ marginLeft: isMobile ? 0 : 220 }}>
@@ -115,6 +139,9 @@ export default function App() {
             onSelectDiscurso={handleSelectDiscurso}
             onDeleteDiscurso={handleDeleteDiscurso}
             onMenuToggle={isMobile ? () => setSidebarOpen(true) : null}
+            theme={tema}
+            onThemeChange={handleThemeChange}
+            themeColors={C}
           />
         )}
 
@@ -123,6 +150,9 @@ export default function App() {
             discurso={actual}
             onVolver={() => { setVista("lista"); setActual(null); }}
             onModoDiscurso={() => setModo(true)}
+            theme={tema}
+            onThemeChange={handleThemeChange}
+            themeColors={C}
           />
         )}
       </div>

@@ -1,6 +1,7 @@
-import { C, font } from "../theme";
+import { C as fallbackC, font } from "../theme";
 
-export default function ContentRenderer({ item }) {
+export default function ContentRenderer({ item, themeColors }) {
+  const C = themeColors || fallbackC;
   const txt = { fontSize: 17, lineHeight: 1.8, color: C.white, marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0, fontFamily: font };
   const sub = { ...txt, color: C.gray, fontSize: 15.5 };
 
@@ -30,7 +31,7 @@ export default function ContentRenderer({ item }) {
 
     case "lectura":
       return (
-        <div style={{ background: C.leaBg, borderRadius: 8, padding: "16px 18px 16px 72px", margin: "18px 0", position: "relative", border: `1px solid rgba(74,138,181,0.15)` }}>
+        <div style={{ background: C.leaBg, borderRadius: 8, padding: "16px 18px 16px 72px", margin: "18px 0", position: "relative", border: `1px solid ${C.leaBorder}` }}>
           <div style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)", background: C.lea, color: "#fff", padding: "4px 10px", borderRadius: 4, fontWeight: 800, fontSize: 10, letterSpacing: 1.5, fontFamily: font }}>LEA</div>
           <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", margin: "0 0 3px" }}>
             <p style={{ margin: 0, fontWeight: 700, color: C.lea, fontSize: 13, fontFamily: font }}>{item.cita}</p>
@@ -42,12 +43,12 @@ export default function ContentRenderer({ item }) {
 
     case "referencia":
       return (
-        <div style={{ background: "rgba(120,180,120,0.07)", borderRadius: 8, padding: "14px 18px", margin: "18px 0 18px 28px", border: `1px solid rgba(120,180,120,0.15)` }}>
+        <div style={{ background: C.referenceBg, borderRadius: 8, padding: "14px 18px", margin: "18px 0 18px 28px", border: `1px solid ${C.referenceBorder}` }}>
           <div style={{ display: "flex", alignItems: "baseline", gap: 8, margin: "0 0 3px" }}>
-            <span style={{ background: "rgba(120,180,120,0.25)", color: "#a8d4a8", padding: "2px 8px", borderRadius: 3, fontWeight: 800, fontSize: 9, letterSpacing: 1.2, fontFamily: font }}>PARAFRASEAR</span>
-            <p style={{ margin: 0, fontWeight: 700, color: "#a8d4a8", fontSize: 13, fontFamily: font }}>{item.cita}</p>
+            <span style={{ background: C.referenceTagBg, color: C.referenceAccent, padding: "2px 8px", borderRadius: 3, fontWeight: 800, fontSize: 9, letterSpacing: 1.2, fontFamily: font }}>PARAFRASEAR</span>
+            <p style={{ margin: 0, fontWeight: 700, color: C.referenceAccent, fontSize: 13, fontFamily: font }}>{item.cita}</p>
           </div>
-          <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.65, color: "#c8dcc8", fontFamily: font, fontStyle: "italic" }}>{item.texto}</p>
+          <p style={{ margin: 0, fontSize: 15.5, lineHeight: 1.65, color: C.referenceText, fontFamily: font, fontStyle: "italic" }}>{item.texto}</p>
         </div>
       );
 
@@ -95,7 +96,7 @@ export default function ContentRenderer({ item }) {
           <div style={{ flex: 1, padding: "14px 18px 14px 0", display: "flex", flexDirection: "column", justifyContent: "center", paddingLeft: item.img ? 0 : 18 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", margin: "0 0 4px" }}>
               <h4 style={{ color: C.accent, fontSize: 14, fontWeight: 700, margin: 0, fontFamily: font }}>{item.termino}</h4>
-              {item.lsm && <span style={{ background: "rgba(200,162,78,0.2)", color: C.accent, padding: "3px 10px", borderRadius: 4, fontSize: 12, fontWeight: 800, letterSpacing: 1.5, fontFamily: font }}>🤟 {item.lsm.toUpperCase()}</span>}
+              {item.lsm && <span style={{ background: C.accentDim, color: C.accent, padding: "3px 10px", borderRadius: 4, fontSize: 12, fontWeight: 800, letterSpacing: 1.5, fontFamily: font }}>🤟 {item.lsm.toUpperCase()}</span>}
             </div>
             <p style={txt}>{item.texto}</p>
           </div>
@@ -162,7 +163,7 @@ export default function ContentRenderer({ item }) {
             {item.items.map((li, i) => (
               <div key={i} style={{ background: C.card, padding: "10px 14px", borderRadius: 5, borderLeft: `2px solid ${C.accentBorder}` }}>
                 <p style={{ fontWeight: 700, color: C.accent, fontSize: 14.5, margin: "0 0 4px", fontFamily: font }}>{li.punto}</p>
-                <p style={{ ...txt, fontSize: 14, color: "#c5c1b8" }}>{li.detalle}</p>
+                <p style={{ ...txt, fontSize: 14, color: C.gray }}>{li.detalle}</p>
               </div>
             ))}
           </div>
@@ -189,7 +190,7 @@ export default function ContentRenderer({ item }) {
         <div style={{ textAlign: "center", margin: "16px 0" }}>
           <div style={{ display: "inline-block", position: "relative" }}>
             <img src={item.img} alt="" style={{ maxWidth: "100%", maxHeight: 200, borderRadius: 8 }} />
-            <span style={{ position: "absolute", top: 8, left: 8, background: "#b33", color: "#fff", padding: "3px 10px", borderRadius: 12, fontWeight: 700, fontSize: 11, fontFamily: font }}>▶ Video</span>
+            <span style={{ position: "absolute", top: 8, left: 8, background: C.danger, color: "#fff", padding: "3px 10px", borderRadius: 12, fontWeight: 700, fontSize: 11, fontFamily: font }}>▶ Video</span>
           </div>
         </div>
       );
@@ -215,9 +216,22 @@ export default function ContentRenderer({ item }) {
       );
 
     case "imagen":
+      const isLargeImage = item.tamano === "grande";
       return (
-        <div style={{ textAlign: "center", margin: "16px 0" }}>
-          <img src={item.img} alt={item.alt || ""} style={{ maxWidth: "100%", maxHeight: 220, borderRadius: 8 }} />
+        <div style={{ textAlign: "center", margin: isLargeImage ? "22px auto" : "16px 0", width: "100%" }}>
+          <img
+            src={item.img}
+            alt={item.alt || ""}
+            style={{
+              width: isLargeImage ? "100%" : "auto",
+              maxWidth: isLargeImage ? 760 : "100%",
+              maxHeight: isLargeImage ? 430 : 220,
+              height: "auto",
+              borderRadius: 8,
+              objectFit: "contain",
+              display: "inline-block",
+            }}
+          />
         </div>
       );
 

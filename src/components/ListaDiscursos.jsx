@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from "react";
-import { C, font } from "../theme";
+import { C as fallbackC, font } from "../theme";
 import { savePlaylist, getPlaylist, deletePlaylist, getAllPlaylistMeta } from "../db/indexedDB";
 import { downloadBlob, fmtFileSize } from "../utils/download";
 import ModalConfirm from "./ModalConfirm";
+import ThemeToggle from "./ThemeToggle";
 
-export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIcono, onSelectDiscurso, onDeleteDiscurso, onMenuToggle }) {
+export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIcono, onSelectDiscurso, onDeleteDiscurso, onMenuToggle, theme, onThemeChange, themeColors }) {
+  const C = themeColors || fallbackC;
   const [playlistMap, setPlaylistMap] = useState({});
   const [playlistLoading, setPlaylistLoading] = useState(null);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
@@ -131,6 +133,9 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
             <h1 style={{ fontSize: 18, fontWeight: 800, color: C.white, margin: 0, fontFamily: font }}>{categoriaLabel}</h1>
             <p style={{ fontSize: 11, color: C.dim, margin: 0 }}>{discursos.length} guardados</p>
           </div>
+          <div style={{ marginLeft: "auto" }}>
+            <ThemeToggle theme={theme} onChange={onThemeChange} themeColors={C} />
+          </div>
         </div>
       </div>
 
@@ -155,7 +160,7 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
                   color: C.dim, fontSize: 13, lineHeight: 1,
                   transition: "background 0.15s, color 0.15s",
                 }}
-                onMouseEnter={e => { e.currentTarget.style.background = "rgba(224,80,80,0.15)"; e.currentTarget.style.color = "#e05050"; }}
+                onMouseEnter={e => { e.currentTarget.style.background = C.dangerBg; e.currentTarget.style.color = C.danger; }}
                 onMouseLeave={e => { e.currentTarget.style.background = "none"; e.currentTarget.style.color = C.dim; }}
               >✕</button>
             )}
@@ -178,30 +183,30 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
                 <>
                   <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
                     <svg width="30" height="36" viewBox="0 0 30 36" fill="none">
-                      <rect x="1" y="1" width="28" height="34" rx="3" fill="rgba(200,162,78,0.08)" stroke="rgba(200,162,78,0.25)" strokeWidth="1"/>
-                      <path d="M18 1v7a2 2 0 002 2h7" stroke="rgba(200,162,78,0.25)" strokeWidth="1" fill="none"/>
-                      <line x1="7" y1="16" x2="23" y2="16" stroke="rgba(200,162,78,0.2)" strokeWidth="1"/>
-                      <line x1="7" y1="20" x2="20" y2="20" stroke="rgba(200,162,78,0.15)" strokeWidth="1"/>
-                      <line x1="7" y1="24" x2="17" y2="24" stroke="rgba(200,162,78,0.1)" strokeWidth="1"/>
+                      <rect x="1" y="1" width="28" height="34" rx="3" fill={C.accentDim} stroke={C.accentBorder} strokeWidth="1"/>
+                      <path d="M18 1v7a2 2 0 002 2h7" stroke={C.accentBorder} strokeWidth="1" fill="none"/>
+                      <line x1="7" y1="16" x2="23" y2="16" stroke={C.accentBorder} strokeWidth="1"/>
+                      <line x1="7" y1="20" x2="20" y2="20" stroke={C.accentBorder} strokeWidth="1"/>
+                      <line x1="7" y1="24" x2="17" y2="24" stroke={C.accentBorder} strokeWidth="1"/>
                     </svg>
                     <span style={{ fontSize: 8, color: C.dim, fontFamily: font }}>{fmtFileSize(playlistMap[d.numero].size)}</span>
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
                     <button
                       ref={(el) => attachShareHandler(el, d.numero)}
-                      style={{ background: "rgba(200,162,78,0.06)", border: `1px solid rgba(200,162,78,0.12)`, borderRadius: 6, padding: "5px 12px 5px 8px", cursor: "pointer", display: "flex", alignItems: "center", gap: 6, width: "100%" }}
+                      style={{ background: C.accentDim, border: `1px solid ${C.accentBorder}`, borderRadius: 6, padding: "5px 12px 5px 8px", cursor: "pointer", display: "flex", alignItems: "center", gap: 6, width: "100%" }}
                     >
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c8a24e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={C.accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
                       <span style={{ fontSize: 10, color: C.gray, fontWeight: 600, fontFamily: font, letterSpacing: 0.3 }}>Compartir</span>
                     </button>
                     {[
-                      { label: "Descargar", action: handlePlaylistDownload, icon: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c8a24e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> },
-                      { label: "Eliminar", action: handlePlaylistDelete, icon: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#c8a24e" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg> },
+                      { label: "Descargar", action: handlePlaylistDownload, icon: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={C.accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> },
+                      { label: "Eliminar", action: handlePlaylistDelete, icon: <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke={C.accent} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg> },
                     ].map((btn) => (
                       <button
                         key={btn.label}
                         onClick={(e) => { e.stopPropagation(); btn.action(d.numero); }}
-                        style={{ background: "rgba(200,162,78,0.06)", border: `1px solid rgba(200,162,78,0.12)`, borderRadius: 6, padding: "5px 12px 5px 8px", cursor: "pointer", display: "flex", alignItems: "center", gap: 6, width: "100%" }}
+                        style={{ background: C.accentDim, border: `1px solid ${C.accentBorder}`, borderRadius: 6, padding: "5px 12px 5px 8px", cursor: "pointer", display: "flex", alignItems: "center", gap: 6, width: "100%" }}
                       >
                         {btn.icon}
                         <span style={{ fontSize: 10, color: C.gray, fontWeight: 600, fontFamily: font, letterSpacing: 0.3 }}>{btn.label}</span>
@@ -216,9 +221,9 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
                   style={{ background: "none", border: `1.5px dashed ${C.accentBorder}`, borderRadius: 8, padding: "12px 16px", cursor: playlistLoading === d.numero ? "wait" : "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: 4 }}
                 >
                   <svg width="22" height="26" viewBox="0 0 30 36" fill="none" opacity="0.5">
-                    <rect x="1" y="1" width="28" height="34" rx="3" stroke="rgba(200,162,78,0.4)" strokeWidth="1.5" strokeDasharray="4 3" fill="none"/>
-                    <line x1="15" y1="12" x2="15" y2="24" stroke="rgba(200,162,78,0.4)" strokeWidth="1.5"/>
-                    <line x1="9" y1="18" x2="21" y2="18" stroke="rgba(200,162,78,0.4)" strokeWidth="1.5"/>
+                    <rect x="1" y="1" width="28" height="34" rx="3" stroke={C.accent} strokeWidth="1.5" strokeDasharray="4 3" fill="none"/>
+                    <line x1="15" y1="12" x2="15" y2="24" stroke={C.accent} strokeWidth="1.5"/>
+                    <line x1="9" y1="18" x2="21" y2="18" stroke={C.accent} strokeWidth="1.5"/>
                   </svg>
                   <span style={{ fontSize: 10, color: C.accent, fontWeight: 700, fontFamily: font }}>{playlistLoading === d.numero ? "Guardando..." : "Adjuntar"}</span>
                 </button>
@@ -244,6 +249,7 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
           : "Se eliminará el archivo de este discurso."}
         onConfirmar={confirmPlaylistDelete}
         onCancelar={() => setDeleteConfirm(null)}
+        themeColors={C}
       />
 
       <ModalConfirm
@@ -254,6 +260,7 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
           : "Se eliminará este discurso de la lista."}
         onConfirmar={confirmDiscursoDelete}
         onCancelar={() => setDiscursoDeleteConfirm(null)}
+        themeColors={C}
       />
     </>
   );

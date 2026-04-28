@@ -1,6 +1,7 @@
-import { C, font } from "../theme";
+import { C as fallbackC, font } from "../theme";
 
-export default function Sidebar({ categorias, categoriaActiva, onSelect, isOpen, onClose, isMobile }) {
+export default function Sidebar({ categorias, categoriaActiva, onSelect, isOpen, onClose, isMobile, themeColors }) {
+  const C = themeColors || fallbackC;
   const sidebarStyle = {
     width: isMobile ? 260 : 220,
     background: C.card,
@@ -22,7 +23,7 @@ export default function Sidebar({ categorias, categoriaActiva, onSelect, isOpen,
         <div
           onClick={onClose}
           style={{
-            position: "fixed", inset: 0, background: "rgba(0,0,0,0.5)",
+            position: "fixed", inset: 0, background: C.overlay,
             zIndex: 199, backdropFilter: "blur(2px)", WebkitBackdropFilter: "blur(2px)",
           }}
         />

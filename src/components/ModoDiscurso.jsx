@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { C, font } from "../theme";
+import { C as fallbackC, font } from "../theme";
 import ContentRenderer from "./ContentRenderer";
+import ThemeToggle from "./ThemeToggle";
 
-export default function ModoDiscurso({ discurso, onSalir, duracionTotal = 30 }) {
+export default function ModoDiscurso({ discurso, onSalir, duracionTotal = 30, theme, onThemeChange, themeColors }) {
+  const C = themeColors || fallbackC;
   const [sec, setSec] = useState(() => {
     const saved = localStorage.getItem("discurso_seccion");
     return saved ? Number(saved) : 0;
@@ -88,19 +90,19 @@ export default function ModoDiscurso({ discurso, onSalir, duracionTotal = 30 }) 
       style={{ position: "fixed", inset: 0, background: C.bg, zIndex: 1000, display: "flex", flexDirection: "column", fontFamily: font }}
     >
       {/* Barra superior */}
-      <div style={{ display: "flex", alignItems: "center", padding: "8px 14px", borderBottom: `1px solid ${C.border}`, flexShrink: 0 }}>
+      <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: 6, padding: "8px 14px", borderBottom: `1px solid ${C.border}`, flexShrink: 0 }}>
         <button onClick={onSalir} style={{ background: "none", border: "none", color: C.gray, padding: "6px 10px", cursor: "pointer", fontSize: 13, fontFamily: font }}>✕</button>
 
         {/* Timer siempre visible */}
         <div style={{
           display: "inline-flex", alignItems: "center", gap: 4, marginLeft: 6,
           padding: "3px 8px", borderRadius: 6, transition: "all 0.3s ease",
-          background: timerStopped ? C.card2 : timeLeft <= 120 ? "rgba(200,80,80,0.12)" : C.accentDim,
-          border: `1px solid ${timerStopped ? C.border : timeLeft <= 120 ? "rgba(200,80,80,0.25)" : C.accentBorder}`,
+          background: timerStopped ? C.card2 : timeLeft <= 120 ? C.dangerBg : C.accentDim,
+          border: `1px solid ${timerStopped ? C.border : timeLeft <= 120 ? C.dangerBorder : C.accentBorder}`,
         }}>
           <span style={{
             fontSize: 12, fontWeight: 700, fontFamily: font, letterSpacing: 1, transition: "color 0.5s ease", minWidth: 42,
-            color: timerStopped ? C.dim : timeLeft <= 120 ? "#e07070" : timeLeft <= 300 ? C.accent : C.gray,
+            color: timerStopped ? C.dim : timeLeft <= 120 ? C.dangerText : timeLeft <= 300 ? C.accent : C.gray,
           }}>
             {fmtTime(timeLeft)}
           </span>
@@ -112,8 +114,9 @@ export default function ModoDiscurso({ discurso, onSalir, duracionTotal = 30 }) 
           <button onClick={timerReset} title="Reiniciar" style={{ background: "none", border: "none", color: C.dim, cursor: "pointer", padding: "2px 5px", fontSize: 11, lineHeight: 1 }}>↺</button>
         </div>
 
-        <div style={{ flex: 1, textAlign: "center" }}>
+        <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, minWidth: 0 }}>
           <span style={{ fontSize: 11, color: C.dim, fontWeight: 700, letterSpacing: 1.5 }}>{sec + 1} / {total}</span>
+          <ThemeToggle theme={theme} onChange={onThemeChange} themeColors={C} compact />
         </div>
 
         {/* Timer por sección */}
@@ -121,17 +124,17 @@ export default function ModoDiscurso({ discurso, onSalir, duracionTotal = 30 }) 
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 4, marginRight: 6,
             padding: "3px 8px", borderRadius: 6, transition: "all 0.3s ease",
-            background: secTimeLeft === 0 ? "rgba(200,80,80,0.12)" : secTimerRunning ? "rgba(78,162,200,0.10)" : C.card2,
-            border: `1px solid ${secTimeLeft === 0 ? "rgba(200,80,80,0.25)" : secTimerRunning ? "rgba(78,162,200,0.25)" : C.border}`,
+            background: secTimeLeft === 0 ? C.dangerBg : secTimerRunning ? C.leaBg : C.card2,
+            border: `1px solid ${secTimeLeft === 0 ? C.dangerBorder : secTimerRunning ? C.leaBorder : C.border}`,
           }}>
             <span style={{ fontSize: 9, fontWeight: 700, color: C.dim, letterSpacing: 1 }}>SEC</span>
             <span style={{
               fontSize: 12, fontWeight: 700, fontFamily: font, letterSpacing: 1, minWidth: 42, transition: "color 0.5s ease",
-              color: secTimeLeft === 0 ? "#e07070" : secTimeLeft <= 30 ? "#e07070" : secTimerRunning ? "#70b8e0" : C.gray,
+              color: secTimeLeft === 0 ? C.dangerText : secTimeLeft <= 30 ? C.dangerText : secTimerRunning ? C.lea : C.gray,
             }}>
               {fmtTime(secTimeLeft)}
             </span>
-            <button onClick={secTimerToggle} title={secTimerRunning ? "Pausar" : "Iniciar"} style={{ background: "none", border: "none", color: secTimerRunning ? "#70b8e0" : C.accent, cursor: "pointer", padding: "2px 5px", fontSize: 11, lineHeight: 1 }}>
+            <button onClick={secTimerToggle} title={secTimerRunning ? "Pausar" : "Iniciar"} style={{ background: "none", border: "none", color: secTimerRunning ? C.lea : C.accent, cursor: "pointer", padding: "2px 5px", fontSize: 11, lineHeight: 1 }}>
               {secTimerRunning ? "⏸" : "▶"}
             </button>
             <button onClick={secTimerReset} title="Reiniciar sección" style={{ background: "none", border: "none", color: C.dim, cursor: "pointer", padding: "2px 5px", fontSize: 11, lineHeight: 1 }}>↺</button>
@@ -161,7 +164,7 @@ export default function ModoDiscurso({ discurso, onSalir, duracionTotal = 30 }) 
             {s.titulo.toLowerCase().includes("intro") ? "🎤" : "🏁"}
           </span>
         ) : (
-          <span style={{ background: C.accent, color: C.bg, width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 13, flexShrink: 0, fontFamily: font }}>
+          <span style={{ background: C.accent, color: C.onAccent, width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 13, flexShrink: 0, fontFamily: font }}>
             {discurso.secciones.slice(0, sec + 1).filter(x => !x.sinNumero).length}
           </span>
         )}
@@ -169,15 +172,15 @@ export default function ModoDiscurso({ discurso, onSalir, duracionTotal = 30 }) 
       </div>
 
       {s.lsm && (
-        <div style={{ margin: "2px 18px 8px", padding: "6px 12px", background: "linear-gradient(135deg, rgba(78,140,200,0.08), rgba(78,140,200,0.03))", border: "1px solid rgba(78,140,200,0.15)", borderRadius: 8, display: "inline-flex", alignItems: "center", gap: 8 }}>
-          <span style={{ fontSize: 11, fontWeight: 800, color: "rgba(120,170,220,0.9)", letterSpacing: 1, fontFamily: font }}>🤟 LSM</span>
-          <span style={{ fontSize: 12, color: "rgba(180,200,220,0.8)", fontStyle: "italic", fontFamily: font }}>{s.lsm}</span>
+        <div style={{ margin: "2px 18px 8px", padding: "6px 12px", background: C.infoBg, border: `1px solid ${C.infoBorder}`, borderRadius: 8, display: "inline-flex", alignItems: "center", gap: 8 }}>
+          <span style={{ fontSize: 11, fontWeight: 800, color: C.infoAccent, letterSpacing: 1, fontFamily: font }}>🤟 LSM</span>
+          <span style={{ fontSize: 12, color: C.infoText, fontStyle: "italic", fontFamily: font }}>{s.lsm}</span>
         </div>
       )}
 
       {/* Contenido scrolleable */}
       <div ref={scrollRef} style={{ flex: 1, overflowY: "auto", padding: "2px 18px 100px", WebkitOverflowScrolling: "touch" }}>
-        {s.contenido.map((item, i) => <ContentRenderer key={i} item={item} />)}
+        {s.contenido.map((item, i) => <ContentRenderer key={i} item={item} themeColors={C} />)}
       </div>
 
       {/* Navegación inferior */}
@@ -200,7 +203,7 @@ export default function ModoDiscurso({ discurso, onSalir, duracionTotal = 30 }) 
           style={{
             flex: 1, padding: "10px 13px", borderRadius: 8, border: "none",
             background: sec === total - 1 ? C.dim : C.accent,
-            color: sec === total - 1 ? C.white : C.bg,
+            color: sec === total - 1 ? C.white : C.onAccent,
             fontSize: 15, fontWeight: 700, fontFamily: font, cursor: "pointer", transition: "all 0.2s", textAlign: "center"
           }}
         >

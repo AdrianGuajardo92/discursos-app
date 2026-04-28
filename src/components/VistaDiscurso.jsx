@@ -1,8 +1,10 @@
 import { useState } from "react";
-import { C, font } from "../theme";
+import { C as fallbackC, font } from "../theme";
 import ContentRenderer from "./ContentRenderer";
+import ThemeToggle from "./ThemeToggle";
 
-export default function VistaDiscurso({ discurso, onVolver, onModoDiscurso }) {
+export default function VistaDiscurso({ discurso, onVolver, onModoDiscurso, theme, onThemeChange, themeColors }) {
+  const C = themeColors || fallbackC;
   const [exportando, setExportando] = useState(false);
 
   const exportarPDF = async () => {
@@ -22,10 +24,11 @@ export default function VistaDiscurso({ discurso, onVolver, onModoDiscurso }) {
       <div style={{ background: C.card, borderBottom: `1px solid ${C.border}`, padding: "8px 14px", position: "sticky", top: 0, zIndex: 50, display: "flex", alignItems: "center", gap: 8 }}>
         <button onClick={onVolver} style={{ background: "none", border: `1px solid ${C.border}`, color: C.gray, padding: "5px 10px", borderRadius: 5, cursor: "pointer", fontSize: 12, fontFamily: font }}>← Atrás</button>
         <span style={{ flex: 1, fontSize: 11, color: C.dim, textAlign: "center" }}>Nº{discurso.numero}</span>
+        <ThemeToggle theme={theme} onChange={onThemeChange} themeColors={C} compact />
         <button onClick={exportarPDF} disabled={exportando} style={{ background: "none", border: `1px solid ${C.border}`, color: C.gray, padding: "5px 10px", borderRadius: 5, cursor: exportando ? "wait" : "pointer", fontSize: 12, fontFamily: font, opacity: exportando ? 0.5 : 1 }}>
           {exportando ? "Exportando..." : "📄 PDF"}
         </button>
-        <button onClick={onModoDiscurso} style={{ background: C.accent, color: C.bg, border: "none", padding: "7px 14px", borderRadius: 6, cursor: "pointer", fontSize: 12, fontWeight: 700, fontFamily: font }}>
+        <button onClick={onModoDiscurso} style={{ background: C.accent, color: C.onAccent, border: "none", padding: "7px 14px", borderRadius: 6, cursor: "pointer", fontSize: 12, fontWeight: 700, fontFamily: font }}>
           ▶ Modo Discurso
         </button>
       </div>
@@ -53,7 +56,7 @@ export default function VistaDiscurso({ discurso, onVolver, onModoDiscurso }) {
           <div key={i} style={{ marginBottom: 38 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
               {num ? (
-                <span style={{ background: C.accent, color: C.bg, width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 13, flexShrink: 0, fontFamily: font }}>{num}</span>
+                <span style={{ background: C.accent, color: C.onAccent, width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 13, flexShrink: 0, fontFamily: font }}>{num}</span>
               ) : (
                 <span style={{
                   width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center",
@@ -69,12 +72,12 @@ export default function VistaDiscurso({ discurso, onVolver, onModoDiscurso }) {
               <span style={{ background: C.accentDim, color: C.accent, padding: "2px 8px", borderRadius: 10, fontSize: 11, fontWeight: 600, flexShrink: 0 }}>{sec.tiempo}</span>
             </div>
             {sec.lsm && (
-              <div style={{ margin: "-8px 0 14px 38px", padding: "6px 12px", background: `linear-gradient(135deg, rgba(78,140,200,0.08), rgba(78,140,200,0.03))`, border: "1px solid rgba(78,140,200,0.15)", borderRadius: 8, display: "inline-flex", alignItems: "center", gap: 8 }}>
-                <span style={{ fontSize: 11, fontWeight: 800, color: "rgba(120,170,220,0.9)", letterSpacing: 1, fontFamily: font }}>🤟 LSM</span>
-                <span style={{ fontSize: 12, color: "rgba(180,200,220,0.8)", fontStyle: "italic", fontFamily: font }}>{sec.lsm}</span>
+              <div style={{ margin: "-8px 0 14px 38px", padding: "6px 12px", background: C.infoBg, border: `1px solid ${C.infoBorder}`, borderRadius: 8, display: "inline-flex", alignItems: "center", gap: 8 }}>
+                <span style={{ fontSize: 11, fontWeight: 800, color: C.infoAccent, letterSpacing: 1, fontFamily: font }}>🤟 LSM</span>
+                <span style={{ fontSize: 12, color: C.infoText, fontStyle: "italic", fontFamily: font }}>{sec.lsm}</span>
               </div>
             )}
-            {sec.contenido.map((item, j) => <ContentRenderer key={j} item={item} />)}
+            {sec.contenido.map((item, j) => <ContentRenderer key={j} item={item} themeColors={C} />)}
             {i < discurso.secciones.length - 1 && <div style={{ height: 1, background: `linear-gradient(to right, transparent, ${C.border}, transparent)`, margin: "30px 0 0" }} />}
           </div>
         ))}
