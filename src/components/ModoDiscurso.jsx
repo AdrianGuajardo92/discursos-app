@@ -161,7 +161,7 @@ export default function ModoDiscurso({ discurso, onSalir, duracionTotal = 30, th
             border: `1.5px solid ${C.accent}50`,
             boxShadow: `0 0 8px ${C.accent}20`,
           }}>
-            {s.titulo.toLowerCase().includes("intro") ? "🎤" : "🏁"}
+            {s.titulo.toLowerCase().includes("intro") || s.titulo.toLowerCase().includes("apertura") ? "🎤" : "🏁"}
           </span>
         ) : (
           <span style={{ background: C.accent, color: C.onAccent, width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: 13, flexShrink: 0, fontFamily: font }}>

@@ -2,10 +2,24 @@ import { useState } from "react";
 import { C as fallbackC, font } from "../theme";
 import ContentRenderer from "./ContentRenderer";
 import ThemeToggle from "./ThemeToggle";
+import VistaReunion from "./VistaReunion";
 
 export default function VistaDiscurso({ discurso, onVolver, onModoDiscurso, theme, onThemeChange, themeColors }) {
   const C = themeColors || fallbackC;
   const [exportando, setExportando] = useState(false);
+
+  if (discurso.tipo === "reunion") {
+    return (
+      <VistaReunion
+        reunion={discurso}
+        onVolver={onVolver}
+        onModoDiscurso={onModoDiscurso}
+        theme={theme}
+        onThemeChange={onThemeChange}
+        themeColors={C}
+      />
+    );
+  }
 
   const exportarPDF = async () => {
     setExportando(true);

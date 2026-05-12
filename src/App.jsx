@@ -136,6 +136,8 @@ export default function App() {
             discursos={discursosFiltrados}
             categoriaLabel={categoriaActiva.label}
             categoriaIcono={categoriaActiva.icono}
+            categoriaItemLabelSingular={categoriaActiva.itemLabelSingular || "discurso"}
+            categoriaItemLabelPlural={categoriaActiva.itemLabelPlural || "discursos"}
             onSelectDiscurso={handleSelectDiscurso}
             onDeleteDiscurso={handleDeleteDiscurso}
             onMenuToggle={isMobile ? () => setSidebarOpen(true) : null}

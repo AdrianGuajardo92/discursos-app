@@ -1,9 +1,52 @@
+import { useState } from "react";
 import { C as fallbackC, font } from "../theme";
+import { esAsignacionDePersona } from "../utils/misAsignaciones";
 
-export default function ContentRenderer({ item, themeColors }) {
+const getChecklistInicial = (key) => {
+  if (!key) return [];
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : [];
+  } catch {
+    return [];
+  }
+};
+
+const checklistPresidencia = [
+  "Programa revisado",
+  "Transiciones listas",
+  "Conclusión lista",
+  "Asignaciones de la próxima semana revisadas",
+];
+
+const checklistAsignacion = [
+  "Material revisado",
+  "Puntos clave listos",
+  "Ensayado",
+  "Listo para presentar",
+];
+
+export default function ContentRenderer({ item, reunion, seccion, themeColors }) {
   const C = themeColors || fallbackC;
+  const [detalleAbierto, setDetalleAbierto] = useState(false);
+  const checklistKey = reunion?.numero && item?.tipo === "asignacion"
+    ? `mis_asignaciones_checklist:${reunion.numero}:${seccion?.titulo || "sin-seccion"}:${item.numero || item.etiqueta || item.titulo}`
+    : null;
+  const [checklist, setChecklist] = useState(() => getChecklistInicial(checklistKey));
   const txt = { fontSize: 17, lineHeight: 1.8, color: C.white, marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0, fontFamily: font };
   const sub = { ...txt, color: C.gray, fontSize: 15.5 };
+  const chip = { border: `1px solid ${C.accentBorder}`, background: C.accentDim, color: C.accent, borderRadius: 999, padding: "3px 9px", fontSize: 11, fontWeight: 800, fontFamily: font };
+  const esPropia = item?.tipo === "asignacion" && esAsignacionDePersona(item);
+  const checklistItems = item?.checklist || (item?.etiqueta === "Presidente" ? checklistPresidencia : checklistAsignacion);
+  const toggleChecklist = (label) => {
+    setChecklist(prev => {
+      const next = prev.includes(label)
+        ? prev.filter(item => item !== label)
+        : [...prev, label];
+      if (checklistKey) localStorage.setItem(checklistKey, JSON.stringify(next));
+      return next;
+    });
+  };
 
   switch (item.tipo) {
     case "punto":
@@ -182,6 +225,189 @@ export default function ContentRenderer({ item, themeColors }) {
       return (
         <div style={{ textAlign: "center", margin: "32px 0 8px" }}>
           <p style={{ fontSize: 20, fontWeight: 700, color: C.accent, fontFamily: font }}>{item.texto}</p>
+        </div>
+      );
+
+    case "asignacion":
+      return (
+        <div style={{ background: C.card2, borderRadius: 8, padding: "15px 16px", margin: "12px 0", border: `1px solid ${C.border}`, display: "flex", gap: 14, alignItems: "flex-start" }}>
+          <div style={{ width: 38, minHeight: 38, borderRadius: 8, flexShrink: 0, background: C.accentDim, border: `1px solid ${C.accentBorder}`, color: C.accent, display: "flex", alignItems: "center", justifyContent: "center", fontSize: item.numero ? 16 : 10, fontWeight: 900, fontFamily: font, textAlign: "center", lineHeight: 1.1, padding: item.numero ? 0 : "0 4px" }}>
+            {item.numero || item.etiqueta}
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: "flex", gap: 8, alignItems: "baseline", justifyContent: "space-between", flexWrap: "wrap" }}>
+              <h4 style={{ color: C.white, fontSize: 16, lineHeight: 1.35, fontWeight: 800, margin: 0, fontFamily: font }}>{item.titulo}</h4>
+              {item.tiempo && <span style={{ ...chip, flexShrink: 0 }}>{item.tiempo}</span>}
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 9 }}>
+              <span style={{ color: C.gray, fontSize: 13, fontWeight: 700, fontFamily: font }}>Encargado: <strong style={{ color: C.white }}>{item.encargado}</strong></span>
+              {item.ayudante && <span style={{ color: C.gray, fontSize: 13, fontWeight: 700, fontFamily: font }}>Ayudante: <strong style={{ color: C.white }}>{item.ayudante}</strong></span>}
+            </div>
+            {item.contexto && <p style={{ ...sub, fontSize: 13.5, lineHeight: 1.55, marginTop: 8 }}>{item.contexto}</p>}
+            {item.nota && <p style={{ ...sub, fontSize: 13.5, lineHeight: 1.55, marginTop: 8 }}>{item.nota}</p>}
+            {esPropia && (
+              <div style={{ marginTop: 12, background: C.accentDim, border: `1px solid ${C.accentBorder}`, borderRadius: 8, padding: "10px 11px" }}>
+                <p style={{ margin: "0 0 8px", color: C.accent, fontSize: 10, fontWeight: 900, letterSpacing: 1.2, fontFamily: font }}>MI CHECKLIST</p>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(155px, 1fr))", gap: 7 }}>
+                  {checklistItems.map((label) => {
+                    const checked = checklist.includes(label);
+                    return (
+                      <label
+                        key={label}
+                        style={{ display: "flex", alignItems: "center", gap: 8, background: C.card, border: `1px solid ${checked ? C.accentBorder : C.border}`, borderRadius: 7, padding: "8px 9px", cursor: "pointer" }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => toggleChecklist(label)}
+                          style={{ accentColor: C.accent, width: 14, height: 14, flexShrink: 0 }}
+                        />
+                        <span style={{ color: checked ? C.white : C.gray, fontSize: 12.5, lineHeight: 1.25, fontWeight: checked ? 800 : 650, fontFamily: font }}>{label}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+            {item.preparacion && (
+              <div style={{ marginTop: 12 }}>
+                <button
+                  onClick={() => setDetalleAbierto(prev => !prev)}
+                  aria-expanded={detalleAbierto}
+                  style={{
+                    width: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: 10,
+                    background: C.card,
+                    border: `1px solid ${C.accentBorder}`,
+                    borderRadius: 7,
+                    padding: "9px 11px",
+                    color: C.accent,
+                    cursor: "pointer",
+                    fontSize: 12,
+                    fontWeight: 800,
+                    fontFamily: font,
+                    textAlign: "left",
+                  }}
+                >
+                  <span>Punto y explicación para presentar</span>
+                  <span style={{ color: C.gray, fontSize: 14 }}>{detalleAbierto ? "−" : "+"}</span>
+                </button>
+
+                {detalleAbierto && (
+                  <div style={{ background: C.card, border: `1px solid ${C.border}`, borderTop: "none", borderRadius: "0 0 7px 7px", padding: "12px 13px", display: "flex", flexDirection: "column", gap: 10 }}>
+                    <div>
+                      <p style={{ margin: "0 0 4px", color: C.dim, fontSize: 10, fontWeight: 900, letterSpacing: 1.3, fontFamily: font }}>PUNTO EXACTO</p>
+                      <p style={{ margin: 0, color: C.white, fontSize: 14, lineHeight: 1.45, fontWeight: 800, fontFamily: font }}>
+                        {item.preparacion.punto}
+                      </p>
+                      <p style={{ margin: "3px 0 0", color: C.accent, fontSize: 12, fontWeight: 700, fontFamily: font }}>{item.preparacion.referencia}</p>
+                    </div>
+                    <div>
+                      <p style={{ margin: "0 0 4px", color: C.dim, fontSize: 10, fontWeight: 900, letterSpacing: 1.3, fontFamily: font }}>IDEA</p>
+                      <p style={{ margin: 0, color: C.gray, fontSize: 13.5, lineHeight: 1.5, fontFamily: font }}>{item.preparacion.idea}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+
+    case "cancion":
+      return (
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 8, margin: "10px 0", padding: "8px 12px", borderRadius: 8, background: C.accentDim, border: `1px solid ${C.accentBorder}` }}>
+          <span style={{ fontSize: 15 }}>🎵</span>
+          <span style={{ color: C.accent, fontSize: 13, fontWeight: 800, fontFamily: font }}>Canción {item.numero}</span>
+        </div>
+      );
+
+    case "oracion":
+      return (
+        <div style={{ background: C.card2, borderRadius: 8, padding: "14px 16px", margin: "12px 0", borderLeft: `2px solid ${C.accent}` }}>
+          <p style={{ margin: 0, color: C.gray, fontSize: 14, fontWeight: 700, fontFamily: font }}>Oración: <strong style={{ color: C.white }}>{item.encargado}</strong></p>
+        </div>
+      );
+
+    case "palabras_conclusion":
+      return (
+        <div style={{ background: C.card2, border: `1px solid ${C.border}`, borderLeft: `3px solid ${C.accent}`, borderRadius: "0 8px 8px 0", padding: "15px 17px", margin: "14px 0" }}>
+          <p style={{ margin: "0 0 7px", color: C.accent, fontSize: 11, fontWeight: 900, letterSpacing: 1.4, fontFamily: font }}>{item.titulo.toUpperCase()}</p>
+          <p style={{ margin: 0, color: C.white, fontSize: 15.5, lineHeight: 1.65, fontFamily: font }}>{item.texto}</p>
+          {item.claves && (
+            <div style={{ marginTop: 15, paddingTop: 14, borderTop: `1px solid ${C.border}` }}>
+              <p style={{ margin: "0 0 10px", color: C.accent, fontSize: 11, fontWeight: 900, letterSpacing: 1.4, fontFamily: font }}>{item.clavesTitulo?.toUpperCase() || "ORACIONES CLAVE"}</p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                {item.claves.map((grupo) => (
+                  <div key={grupo.titulo} style={{ background: C.card, border: `1px solid ${C.border}`, borderRadius: 7, padding: "11px 12px" }}>
+                    <p style={{ margin: "0 0 7px", color: C.white, fontSize: 13.5, lineHeight: 1.35, fontWeight: 900, fontFamily: font }}>{grupo.titulo}</p>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                      {grupo.frases.map((frase) => (
+                        <div key={frase} style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
+                          <span style={{ color: C.accent, fontSize: 12, flexShrink: 0 }}>▸</span>
+                          <p style={{ margin: 0, color: C.gray, fontSize: 13.5, lineHeight: 1.45, fontFamily: font }}>{frase}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+
+    case "tarjeta_asignaciones":
+      return (
+        <div style={{ margin: "16px 0 22px" }}>
+          <div
+            style={{
+              background: C.id === "light"
+                ? "linear-gradient(135deg, #ffffff 0%, #f2f5f9 100%)"
+                : "linear-gradient(135deg, #171713 0%, #242017 100%)",
+              border: `1px solid ${C.accentBorder}`,
+              borderRadius: 8,
+              padding: 18,
+              boxShadow: C.id === "light" ? "0 12px 30px rgba(31,37,48,0.12)" : "0 12px 30px rgba(0,0,0,0.28)",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "stretch", justifyContent: "space-between", gap: 12, borderBottom: `1px solid ${C.accentBorder}`, paddingBottom: 14, marginBottom: 15, flexWrap: "wrap" }}>
+              <div>
+                <p style={{ margin: "0 0 4px", color: C.accent, fontSize: 11, fontWeight: 900, letterSpacing: 1.5, fontFamily: font }}>{item.titulo.toUpperCase()}</p>
+                <h3 style={{ margin: 0, color: C.white, fontSize: 22, lineHeight: 1.2, fontWeight: 900, fontFamily: font }}>{item.subtitulo}</h3>
+              </div>
+              <div style={{ minWidth: 180, background: C.accentDim, border: `1px solid ${C.accentBorder}`, borderRadius: 8, padding: "10px 12px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                <p style={{ margin: "0 0 4px", color: C.accent, fontSize: 10, fontWeight: 900, letterSpacing: 1.2, fontFamily: font }}>PRESIDE</p>
+                <p style={{ margin: 0, color: C.white, fontSize: 18, lineHeight: 1.25, fontWeight: 900, fontFamily: font }}>{item.presidente}</p>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              {item.grupos.map((grupo) => (
+                <div key={grupo.titulo}>
+                  <p style={{ margin: "0 0 6px", color: C.accent, fontSize: 12, fontWeight: 900, letterSpacing: 1, fontFamily: font }}>{grupo.titulo.toUpperCase()}</p>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                    {grupo.items.map((asig) => (
+                      <div key={`${grupo.titulo}-${asig.numero}`} style={{ display: "grid", gridTemplateColumns: "30px minmax(0, 1fr)", gap: 9, alignItems: "start", background: C.card, border: `1px solid ${C.border}`, borderRadius: 7, padding: "9px 10px" }}>
+                        <span style={{ width: 28, height: 28, borderRadius: 6, background: C.accentDim, border: `1px solid ${C.accentBorder}`, color: C.accent, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 900, fontFamily: font }}>{asig.numero}</span>
+                        <div style={{ minWidth: 0 }}>
+                          <p style={{ margin: "0 0 3px", color: C.white, fontSize: 13.5, lineHeight: 1.35, fontWeight: 850, fontFamily: font }}>{asig.titulo}</p>
+                          <p style={{ margin: 0, color: C.gray, fontSize: 12.5, lineHeight: 1.35, fontFamily: font }}>
+                            <strong style={{ color: C.white }}>{asig.encargado}</strong>
+                            {asig.ayudante ? ` · Ayudante: ${asig.ayudante}` : ""}
+                            {asig.tiempo ? ` · ${asig.tiempo}` : ""}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       );
 

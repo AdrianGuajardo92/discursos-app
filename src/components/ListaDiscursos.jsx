@@ -2,10 +2,36 @@ import { useState, useEffect, useRef } from "react";
 import { C as fallbackC, font } from "../theme";
 import { savePlaylist, getPlaylist, deletePlaylist, getAllPlaylistMeta } from "../db/indexedDB";
 import { downloadBlob, fmtFileSize } from "../utils/download";
+import { obtenerAsignacionesPersona, resumirAsignacionesPersona } from "../utils/misAsignaciones";
 import ModalConfirm from "./ModalConfirm";
 import ThemeToggle from "./ThemeToggle";
 
-export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIcono, onSelectDiscurso, onDeleteDiscurso, onMenuToggle, theme, onThemeChange, themeColors }) {
+const fechaHoyMX = () => {
+  try {
+    return new Intl.DateTimeFormat("en-CA", {
+      timeZone: "America/Mexico_City",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(new Date());
+  } catch {
+    return new Date().toISOString().slice(0, 10);
+  }
+};
+
+export default function ListaDiscursos({
+  discursos,
+  categoriaLabel,
+  categoriaIcono,
+  categoriaItemLabelSingular = "discurso",
+  categoriaItemLabelPlural = "discursos",
+  onSelectDiscurso,
+  onDeleteDiscurso,
+  onMenuToggle,
+  theme,
+  onThemeChange,
+  themeColors
+}) {
   const C = themeColors || fallbackC;
   const [playlistMap, setPlaylistMap] = useState({});
   const [playlistLoading, setPlaylistLoading] = useState(null);
@@ -14,6 +40,14 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
   const fileInputRef = useRef(null);
   const uploadTargetRef = useRef(null);
   const fileCacheRef = useRef({});
+  const hoy = fechaHoyMX();
+  const esCategoriaReuniones = discursos.some(d => d.tipo === "reunion");
+  const misAsignaciones = esCategoriaReuniones
+    ? discursos
+        .flatMap(reunion => obtenerAsignacionesPersona(reunion))
+        .filter(asig => !asig.fecha || asig.fecha >= hoy)
+        .sort((a, b) => String(a.fecha).localeCompare(String(b.fecha)))
+    : [];
 
   // Cargar metadatos de playlists al inicio
   useEffect(() => {
@@ -131,7 +165,7 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
           <div style={{ width: 36, height: 36, borderRadius: 7, background: C.accentBorder, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>{categoriaIcono}</div>
           <div>
             <h1 style={{ fontSize: 18, fontWeight: 800, color: C.white, margin: 0, fontFamily: font }}>{categoriaLabel}</h1>
-            <p style={{ fontSize: 11, color: C.dim, margin: 0 }}>{discursos.length} guardados</p>
+            <p style={{ fontSize: 11, color: C.dim, margin: 0 }}>{discursos.length} {categoriaItemLabelPlural} guardados</p>
           </div>
           <div style={{ marginLeft: "auto" }}>
             <ThemeToggle theme={theme} onChange={onThemeChange} themeColors={C} />
@@ -140,18 +174,59 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
       </div>
 
       <div style={{ maxWidth: 720, margin: "0 auto", padding: "18px 14px" }}>
-        {discursos.length === 0 && (
-          <div style={{ textAlign: "center", padding: "60px 20px", color: C.dim }}>
-            <p style={{ fontSize: 14, fontFamily: font }}>No hay discursos en esta categoría todavía.</p>
+        {misAsignaciones.length > 0 && (
+          <div style={{ background: C.card, border: `1px solid ${C.accentBorder}`, borderRadius: 10, padding: "15px 16px", marginBottom: 14 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, marginBottom: 11 }}>
+              <div>
+                <p style={{ margin: "0 0 3px", color: C.accent, fontSize: 11, fontWeight: 900, letterSpacing: 1.2, fontFamily: font }}>MIS PRÓXIMAS ASIGNACIONES</p>
+                <p style={{ margin: 0, color: C.dim, fontSize: 12, fontFamily: font }}>{misAsignaciones.length} pendientes desde hoy</p>
+              </div>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+              {misAsignaciones.slice(0, 4).map((asig, idx) => {
+                const fechaCorta = asig.fecha === hoy ? "Hoy" : asig.fechaLabel?.replace(/^Martes\s+/i, "") || asig.semana;
+                return (
+                  <button
+                    key={`${asig.reunionNumero}-${asig.tipo}-${idx}`}
+                    onClick={() => {
+                      const reunion = discursos.find(d => d.numero === asig.reunionNumero);
+                      if (reunion) onSelectDiscurso(reunion);
+                    }}
+                    style={{ display: "grid", gridTemplateColumns: "auto minmax(0, 1fr)", gap: 10, alignItems: "center", width: "100%", background: C.card2, border: `1px solid ${C.border}`, borderRadius: 8, padding: "10px 11px", textAlign: "left", cursor: "pointer" }}
+                  >
+                    <span style={{ background: asig.fecha === hoy ? C.accent : C.accentDim, color: asig.fecha === hoy ? C.onAccent : C.accent, border: `1px solid ${C.accentBorder}`, borderRadius: 7, minWidth: 48, padding: "6px 8px", textAlign: "center", fontSize: 11, fontWeight: 900, fontFamily: font }}>{fechaCorta}</span>
+                    <span style={{ minWidth: 0 }}>
+                      <span style={{ display: "block", color: C.white, fontSize: 14, fontWeight: 850, fontFamily: font, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{asig.tipo}</span>
+                      <span style={{ display: "block", color: C.gray, fontSize: 12, fontFamily: font, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{asig.detalle}{asig.tiempo ? ` · ${asig.tiempo}` : ""}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         )}
 
-        {discursos.map(d => (
-          <div key={d.numero} style={{ background: C.card, borderRadius: 10, marginBottom: 10, border: `1px solid ${C.border}`, display: "flex", alignItems: "stretch", overflow: "hidden", position: "relative" }}>
+        {discursos.length === 0 && (
+          <div style={{ textAlign: "center", padding: "60px 20px", color: C.dim }}>
+            <p style={{ fontSize: 14, fontFamily: font }}>No hay {categoriaItemLabelPlural} en esta categoría todavía.</p>
+          </div>
+        )}
+
+        {discursos.map(d => {
+          const esReunion = d.tipo === "reunion";
+          const esHoy = esReunion && d.fecha === fechaHoyMX();
+          const badgeText = esReunion ? (d.fecha?.slice(8) || d.numero) : d.numero;
+          const miResumen = esReunion ? resumirAsignacionesPersona(d) : null;
+          const detalle = esReunion
+            ? `${d.fechaLabel || d.semana} · ${d.lectura}`
+            : `${d.secciones.length} secciones · ${d.duracion}${d.cancion ? ` · 🎵 Canción ${d.cancion}` : ""}`;
+
+          return (
+          <div key={d.numero} style={{ background: C.card, borderRadius: 10, marginBottom: 10, border: `1px solid ${esHoy ? C.accentBorder : C.border}`, display: "flex", alignItems: "stretch", overflow: "hidden", position: "relative", boxShadow: esHoy ? `0 0 0 1px ${C.accentBorder}` : "none" }}>
             {onDeleteDiscurso && (
               <button
                 onClick={(e) => { e.stopPropagation(); setDiscursoDeleteConfirm(d); }}
-                title="Eliminar discurso"
+                title={`Eliminar ${categoriaItemLabelSingular}`}
                 style={{
                   position: "absolute", top: 4, right: 4, zIndex: 10,
                   background: "none", border: "none", cursor: "pointer",
@@ -169,17 +244,30 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
               style={{ flex: 1, padding: "16px 18px", cursor: "pointer", display: "flex", alignItems: "center", gap: 14, minWidth: 0 }}
             >
               <div style={{ width: 46, height: 46, borderRadius: 8, flexShrink: 0, background: C.accentDim, border: `1px solid ${C.accentBorder}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <span style={{ fontSize: 20, fontWeight: 800, color: C.accent }}>{d.numero}</span>
+                <span style={{ fontSize: esReunion ? 18 : 20, fontWeight: 800, color: C.accent }}>{badgeText}</span>
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
-                <h3 style={{ fontSize: 15, fontWeight: 700, color: C.white, margin: "0 0 3px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontFamily: font }}>{d.titulo}</h3>
-                <span style={{ fontSize: 11, color: C.dim }}>{d.secciones.length} secciones · {d.duracion}{d.cancion ? ` · 🎵 Canción ${d.cancion}` : ""}</span>
+                <div style={{ display: "flex", alignItems: "center", gap: 7, minWidth: 0 }}>
+                  <h3 style={{ fontSize: 15, fontWeight: 700, color: C.white, margin: "0 0 3px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontFamily: font }}>{d.titulo}</h3>
+                  {esHoy && <span style={{ background: C.accent, color: C.onAccent, borderRadius: 999, padding: "2px 7px", fontSize: 9, fontWeight: 900, fontFamily: font, flexShrink: 0 }}>HOY</span>}
+                  {miResumen && <span style={{ background: C.accentDim, color: C.accent, border: `1px solid ${C.accentBorder}`, borderRadius: 999, padding: "2px 7px", fontSize: 9, fontWeight: 900, fontFamily: font, flexShrink: 0 }}>TE TOCA</span>}
+                </div>
+                <span style={{ fontSize: 11, color: C.dim, display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{detalle}</span>
+                {miResumen && (
+                  <span style={{ fontSize: 11, color: C.accent, display: "block", marginTop: 3, fontWeight: 800, fontFamily: font, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>Te toca: {miResumen}</span>
+                )}
               </div>
               <span style={{ color: C.dim, fontSize: 16, flexShrink: 0 }}>›</span>
             </div>
 
             <div style={{ flexShrink: 0, borderLeft: `1px solid ${C.border}`, display: "flex", alignItems: "center", padding: "8px 10px", gap: 10 }}>
-              {playlistMap[d.numero] ? (
+              {esReunion ? (
+                <div style={{ minWidth: 108, maxWidth: 130, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4, textAlign: "center" }}>
+                  <span style={{ fontSize: 9, color: C.dim, fontWeight: 900, letterSpacing: 1, fontFamily: font }}>PRESIDE</span>
+                  <strong style={{ color: C.white, fontSize: 12, lineHeight: 1.25, fontFamily: font, maxWidth: "100%", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{d.presidente}</strong>
+                  <span style={{ color: C.accent, fontSize: 11, fontWeight: 800, fontFamily: font }}>{d.totalAsignaciones} asignaciones</span>
+                </div>
+              ) : playlistMap[d.numero] ? (
                 <>
                   <div style={{ flexShrink: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
                     <svg width="30" height="36" viewBox="0 0 30 36" fill="none">
@@ -230,7 +318,8 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
               )}
             </div>
           </div>
-        ))}
+          );
+        })}
 
         <input
           ref={fileInputRef}
@@ -254,10 +343,10 @@ export default function ListaDiscursos({ discursos, categoriaLabel, categoriaIco
 
       <ModalConfirm
         visible={discursoDeleteConfirm !== null}
-        titulo="Eliminar discurso"
+        titulo={`Eliminar ${categoriaItemLabelSingular}`}
         mensaje={discursoDeleteConfirm
           ? <>Se eliminará <strong style={{ color: C.white }}>{discursoDeleteConfirm.titulo}</strong> de la lista.</>
-          : "Se eliminará este discurso de la lista."}
+          : `Se eliminará este ${categoriaItemLabelSingular} de la lista.`}
         onConfirmar={confirmDiscursoDelete}
         onCancelar={() => setDiscursoDeleteConfirm(null)}
         themeColors={C}
