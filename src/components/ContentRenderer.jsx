@@ -26,7 +26,7 @@ const checklistAsignacion = [
   "Listo para presentar",
 ];
 
-export default function ContentRenderer({ item, reunion, seccion, themeColors }) {
+export default function ContentRenderer({ item, reunion, seccion, themeColors, onAbrirDiscurso }) {
   const C = themeColors || fallbackC;
   const [detalleAbierto, setDetalleAbierto] = useState(false);
   const checklistKey = reunion?.numero && item?.tipo === "asignacion"
@@ -37,6 +37,7 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors })
   const sub = { ...txt, color: C.gray, fontSize: 15.5 };
   const chip = { border: `1px solid ${C.accentBorder}`, background: C.accentDim, color: C.accent, borderRadius: 999, padding: "3px 9px", fontSize: 11, fontWeight: 800, fontFamily: font };
   const esPropia = item?.tipo === "asignacion" && esAsignacionDePersona(item);
+  const ocultarChecklist = item?.etiqueta === "Presidente";
   const checklistItems = item?.checklist || (item?.etiqueta === "Presidente" ? checklistPresidencia : checklistAsignacion);
   const toggleChecklist = (label) => {
     setChecklist(prev => {
@@ -229,8 +230,23 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors })
       );
 
     case "asignacion":
+      const abrirBosquejo = () => {
+        if (item.bosquejo && onAbrirDiscurso) onAbrirDiscurso(item.bosquejo);
+      };
+      const esBosquejoAbrible = Boolean(item.bosquejo && onAbrirDiscurso);
       return (
-        <div style={{ background: C.card2, borderRadius: 8, padding: "15px 16px", margin: "12px 0", border: `1px solid ${C.border}`, display: "flex", gap: 14, alignItems: "flex-start" }}>
+        <div
+          onClick={esBosquejoAbrible ? abrirBosquejo : undefined}
+          onKeyDown={esBosquejoAbrible ? (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              abrirBosquejo();
+            }
+          } : undefined}
+          role={esBosquejoAbrible ? "button" : undefined}
+          tabIndex={esBosquejoAbrible ? 0 : undefined}
+          style={{ background: C.card2, borderRadius: 8, padding: "15px 16px", margin: "12px 0", border: `1px solid ${esBosquejoAbrible ? C.accentBorder : C.border}`, display: "flex", gap: 14, alignItems: "flex-start", cursor: esBosquejoAbrible ? "pointer" : "default", boxShadow: esBosquejoAbrible ? `0 0 0 1px ${C.accentBorder}` : "none" }}
+        >
           <div style={{ width: 38, minHeight: 38, borderRadius: 8, flexShrink: 0, background: C.accentDim, border: `1px solid ${C.accentBorder}`, color: C.accent, display: "flex", alignItems: "center", justifyContent: "center", fontSize: item.numero ? 16 : 10, fontWeight: 900, fontFamily: font, textAlign: "center", lineHeight: 1.1, padding: item.numero ? 0 : "0 4px" }}>
             {item.numero || item.etiqueta}
           </div>
@@ -239,13 +255,27 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors })
               <h4 style={{ color: C.white, fontSize: 16, lineHeight: 1.35, fontWeight: 800, margin: 0, fontFamily: font }}>{item.titulo}</h4>
               {item.tiempo && <span style={{ ...chip, flexShrink: 0 }}>{item.tiempo}</span>}
             </div>
+            {item.senas && (
+              <div style={{ marginTop: 7, display: "inline-flex", alignItems: "baseline", gap: 7, background: C.infoBg, border: `1px solid ${C.infoBorder}`, borderRadius: 7, padding: "6px 9px", maxWidth: "100%" }}>
+                <span style={{ color: C.infoAccent, fontSize: 10, fontWeight: 900, letterSpacing: 1.1, fontFamily: font, flexShrink: 0 }}>LSM</span>
+                <span style={{ color: C.infoText, fontSize: 13, lineHeight: 1.35, fontWeight: 700, fontFamily: font }}>{item.senas}</span>
+              </div>
+            )}
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 9 }}>
               <span style={{ color: C.gray, fontSize: 13, fontWeight: 700, fontFamily: font }}>Encargado: <strong style={{ color: C.white }}>{item.encargado}</strong></span>
               {item.ayudante && <span style={{ color: C.gray, fontSize: 13, fontWeight: 700, fontFamily: font }}>Ayudante: <strong style={{ color: C.white }}>{item.ayudante}</strong></span>}
             </div>
+            {item.bosquejo && (
+              <div
+                style={{ marginTop: 10, display: "inline-flex", alignItems: "center", gap: 6, background: C.accent, color: C.onAccent, borderRadius: 7, padding: "7px 10px", fontSize: 12, fontWeight: 900, fontFamily: font }}
+              >
+                Abrir bosquejo de respaldo
+                <span aria-hidden="true">›</span>
+              </div>
+            )}
             {item.contexto && <p style={{ ...sub, fontSize: 13.5, lineHeight: 1.55, marginTop: 8 }}>{item.contexto}</p>}
             {item.nota && <p style={{ ...sub, fontSize: 13.5, lineHeight: 1.55, marginTop: 8 }}>{item.nota}</p>}
-            {esPropia && (
+            {esPropia && !ocultarChecklist && (
               <div style={{ marginTop: 12, background: C.accentDim, border: `1px solid ${C.accentBorder}`, borderRadius: 8, padding: "10px 11px" }}>
                 <p style={{ margin: "0 0 8px", color: C.accent, fontSize: 10, fontWeight: 900, letterSpacing: 1.2, fontFamily: font }}>MI CHECKLIST</p>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(155px, 1fr))", gap: 7 }}>
@@ -272,7 +302,10 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors })
             {item.preparacion && (
               <div style={{ marginTop: 12 }}>
                 <button
-                  onClick={() => setDetalleAbierto(prev => !prev)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setDetalleAbierto(prev => !prev);
+                  }}
                   aria-expanded={detalleAbierto}
                   style={{
                     width: "100%",
@@ -395,6 +428,12 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors })
                         <span style={{ width: 28, height: 28, borderRadius: 6, background: C.accentDim, border: `1px solid ${C.accentBorder}`, color: C.accent, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 900, fontFamily: font }}>{asig.numero}</span>
                         <div style={{ minWidth: 0 }}>
                           <p style={{ margin: "0 0 3px", color: C.white, fontSize: 13.5, lineHeight: 1.35, fontWeight: 850, fontFamily: font }}>{asig.titulo}</p>
+                          {asig.senas && (
+                            <p style={{ margin: "0 0 4px", color: C.infoText, fontSize: 12.5, lineHeight: 1.35, fontWeight: 700, fontFamily: font }}>
+                              <span style={{ color: C.infoAccent, fontSize: 10, fontWeight: 900, letterSpacing: 1, marginRight: 6 }}>LSM</span>
+                              {asig.senas}
+                            </p>
+                          )}
                           <p style={{ margin: 0, color: C.gray, fontSize: 12.5, lineHeight: 1.35, fontFamily: font }}>
                             <strong style={{ color: C.white }}>{asig.encargado}</strong>
                             {asig.ayudante ? ` · Ayudante: ${asig.ayudante}` : ""}

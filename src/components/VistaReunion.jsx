@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { C as fallbackC, font } from "../theme";
 import ContentRenderer from "./ContentRenderer";
 import ThemeToggle from "./ThemeToggle";
+import VistaBosquejo from "./VistaBosquejo";
 
 const fechaHoyMX = () => {
   try {
@@ -28,10 +30,24 @@ function InfoCard({ label, value, detail, themeColors }) {
 
 export default function VistaReunion({ reunion, onVolver, onModoDiscurso, theme, onThemeChange, themeColors }) {
   const C = themeColors || fallbackC;
+  const [bosquejoAbierto, setBosquejoAbierto] = useState(null);
   const esHoy = reunion.fecha === fechaHoyMX();
   const canciones = reunion.canciones
     ? [reunion.canciones.inicial, reunion.canciones.intermedia, reunion.canciones.final].filter(Boolean).join(", ")
     : "";
+
+  if (bosquejoAbierto) {
+    return (
+      <VistaBosquejo
+        discurso={bosquejoAbierto}
+        onVolver={() => setBosquejoAbierto(null)}
+        theme={theme}
+        onThemeChange={onThemeChange}
+        themeColors={C}
+        topLabel="Bosquejo de respaldo"
+      />
+    );
+  }
 
   return (
     <>
@@ -81,6 +97,7 @@ export default function VistaReunion({ reunion, onVolver, onModoDiscurso, theme,
                 reunion={reunion}
                 seccion={sec}
                 themeColors={C}
+                onAbrirDiscurso={setBosquejoAbierto}
               />
             ))}
             {i < reunion.secciones.length - 1 && <div style={{ height: 1, background: `linear-gradient(to right, transparent, ${C.border}, transparent)`, margin: "26px 0 0" }} />}

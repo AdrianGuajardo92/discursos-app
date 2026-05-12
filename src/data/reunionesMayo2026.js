@@ -1,3 +1,5 @@
+import { TESOROS_ISAIAS_60_LUZ } from "./tesorosDiscursos";
+
 const asignacion = (numero, titulo, tiempo, encargado, ayudante = null, opciones = {}) => ({
   tipo: "asignacion",
   numero,
@@ -140,7 +142,10 @@ export const REUNIONES_MAYO_2026 = [
     cancionFinal: "119",
     oracion: "Martín Martínez",
     tesoros: [
-      asignacion(1, "“Levántate, oh, mujer, despide luz”", "10 mins", "Miguel Silva"),
+      asignacion(1, "“Levántate, oh, mujer, despide luz”", "10 mins", "Miguel Silva", null, {
+        senas: "Discurso, tema, Jehová, mujer, ven, levántate, tú, luz resplandeciente.",
+        bosquejo: TESOROS_ISAIAS_60_LUZ,
+      }),
       asignacion(2, "Busquemos Perlas Escondidas", "10 mins", "Jose Armando"),
       asignacion(3, "Lectura de la Biblia", "4 mins", "Antonio Isas", null, {
         contexto: "Isaías 61:1-9.",
@@ -153,14 +158,16 @@ export const REUNIONES_MAYO_2026 = [
     ],
     maestros: [
       asignacion(4, "Empiece conversaciones", "3 mins", "Marisela Murillo", "Nahomy Estrada", {
+        senas: "Trabajo, escuela, lugares diferentes, empezar a platicar.",
         contexto: "Predicación informal. Enséñele a la persona el nombre de Dios.",
         preparacion: {
           referencia: "lmd lección 4 punto 3",
           punto: "No dé la impresión de sentirse superior.",
-          idea: "La meta es hablar con respeto y humildad, sin hacer sentir a la persona que no sabe nada. Al explicar el nombre de Dios, conviene que el tono sea amable y natural, para que la persona se sienta valorada y no corregida.",
+          idea: "La meta es empezar una plática natural en lugares cotidianos, como el trabajo, la escuela u otros espacios donde surge una conversación. Al explicar el nombre de Dios, conviene hablar con respeto y humildad, sin hacer sentir a la persona que no sabe nada.",
         },
       }),
       asignacion(5, "Haga revisitas", "4 mins", "Carolina Segura", "Gloria Romero", {
+        senas: "Trabajo, escuela, lugares diferentes, revisita.",
         contexto: "Predicación informal. La vez pasada la persona mencionó que hacía poco se le había muerto un ser querido.",
         preparacion: {
           referencia: "lmd lección 4 punto 4",
@@ -169,6 +176,7 @@ export const REUNIONES_MAYO_2026 = [
         },
       }),
       asignacion(6, "Haga discípulos", "5 mins", "Greta Hernández", "Cristina Ávila", {
+        senas: "Estudio, sentados. Libro LFF, enseñar.",
         contexto: "lff lección 19 punto 5.",
         preparacion: {
           referencia: "lmd lección 11 punto 4",
@@ -233,7 +241,7 @@ export const REUNIONES_MAYO_2026 = [
           {
             titulo: "Tesoros de la Biblia",
             items: [
-              { numero: 1, titulo: "El Alfarero nos moldea con amor y compasión", tiempo: "10 mins", encargado: "Omar Gallardo" },
+              { numero: 1, titulo: "El Alfarero nos moldea con amor y compasión", tiempo: "10 mins", encargado: "Omar Gallardo", senas: "Alfarero, Jehová, amor. Quiere ayudar a moldearte." },
               { numero: 2, titulo: "Busquemos Perlas Escondidas", tiempo: "10 mins", encargado: "Antonio Isas" },
               { numero: 3, titulo: "Lectura de la Biblia", tiempo: "4 mins", encargado: "Jose Alberto" },
             ],
@@ -249,8 +257,8 @@ export const REUNIONES_MAYO_2026 = [
           {
             titulo: "Nuestra vida cristiana",
             items: [
-              { numero: 7, titulo: "Preparados para las situaciones de emergencia: Esté listo para lo imprevisto", tiempo: "15 mins", encargado: "Miguel Silva" },
-              { numero: 9, titulo: "Estudio Bíblico de la Congregación", tiempo: "30 mins", encargado: "Adrián Guajardo" },
+              { numero: 7, titulo: "Preparados para las situaciones de emergencia: Esté listo para lo imprevisto", tiempo: "15 mins", encargado: "Miguel Silva", senas: "Discurso, preguntas. Emergencia antes prepararse." },
+              { numero: 9, titulo: "Estudio Bíblico de la Congregación", tiempo: "30 mins", encargado: "Adrián Guajardo", senas: "Libro LFB." },
             ],
           },
         ],
@@ -269,7 +277,9 @@ export const REUNIONES_MAYO_2026 = [
     cancionFinal: "151",
     oracion: "Joshua García",
     tesoros: [
-      asignacion(1, "El Alfarero nos moldea con amor y compasión", "10 mins", "Omar Gallardo"),
+      asignacion(1, "El Alfarero nos moldea con amor y compasión", "10 mins", "Omar Gallardo", null, {
+        senas: "Alfarero, Jehová, amor. Quiere ayudar a moldearte.",
+      }),
       asignacion(2, "Busquemos Perlas Escondidas", "10 mins", "Antonio Isas"),
       asignacion(3, "Lectura de la Biblia", "4 mins", "Jose Alberto"),
     ],
@@ -279,8 +289,12 @@ export const REUNIONES_MAYO_2026 = [
       asignacion(6, "Haga discípulos", "5 mins", "Andrea Alcázar", "Omega Gallardo"),
     ],
     vida: [
-      asignacion(7, "Preparados para las situaciones de emergencia: Esté listo para lo imprevisto", "15 mins", "Miguel Silva"),
-      asignacion(9, "Estudio Bíblico de la Congregación", "30 mins", "Adrián Guajardo"),
+      asignacion(7, "Preparados para las situaciones de emergencia: Esté listo para lo imprevisto", "15 mins", "Miguel Silva", null, {
+        senas: "Discurso, preguntas. Emergencia antes prepararse.",
+      }),
+      asignacion(9, "Estudio Bíblico de la Congregación", "30 mins", "Adrián Guajardo", null, {
+        senas: "Libro LFB.",
+      }),
     ],
   }),
   crearReunion({
