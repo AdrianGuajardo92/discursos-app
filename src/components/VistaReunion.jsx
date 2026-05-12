@@ -44,7 +44,7 @@ export default function VistaReunion({ reunion, onVolver, onModoDiscurso, theme,
         theme={theme}
         onThemeChange={onThemeChange}
         themeColors={C}
-        topLabel="Bosquejo de respaldo"
+        topLabel={bosquejoAbierto.tipo === "perlas" ? "Perlas escondidas" : "Bosquejo de respaldo"}
       />
     );
   }

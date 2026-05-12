@@ -168,3 +168,132 @@ export const TESOROS_ISAIAS_60_LUZ = {
     },
   ],
 };
+
+export const PERLAS_ISAIAS_60_61 = {
+  numero: 2026051202,
+  tipo: "perlas",
+  titulo: "Perlas escondidas de Isaías 60, 61",
+  tema: "Jehová, luz, justicia. Nosotros, ánimo. Servicio, ayudar personas.",
+  duracion: "10 mins",
+  fuentes: [
+    "Isaías 60",
+    "Isaías 61",
+  ],
+  secciones: [
+    {
+      titulo: "Cómo usar estas perlas",
+      tiempo: "1 min",
+      sinNumero: true,
+      lsm: "Tres grupos: Jehová, nosotros, predicación.",
+      contenido: [
+        {
+          tipo: "punto",
+          texto: "Estas perlas están organizadas en tres grupos para que sea fácil escoger una: primero vemos qué aprendemos de Jehová, luego cómo nos ayuda personalmente y finalmente cómo usarlo en el servicio del campo.",
+        },
+        {
+          tipo: "destacado",
+          texto: "La idea no es leer muchas notas, sino tener una perla clara, un versículo base y una aplicación sencilla.",
+        },
+      ],
+    },
+    {
+      titulo: "3 perlas sobre cualidades de Jehová",
+      tiempo: "3 mins",
+      lsm: "Jehová luz. Jehová mejora. Jehová justicia y consuelo.",
+      contenido: [
+        {
+          tipo: "lista_enseñanza",
+          titulo: "Cualidades de Jehová",
+          items: [
+            {
+              punto: "Jehová da luz cuando hay oscuridad",
+              detalle: "Isaías 60:1-3 muestra que, aunque las naciones están en oscuridad, Jehová hace brillar su gloria sobre su pueblo. Eso enseña que Jehová no abandona a las personas sinceras en la confusión espiritual.",
+            },
+            {
+              punto: "Jehová transforma y mejora lo que está en sus manos",
+              detalle: "Isaías 60:17 habla de reemplazar materiales comunes por otros mejores, y de poner la paz y la justicia como guía. Jehová siempre eleva, limpia y mejora a quienes se dejan moldear por él.",
+            },
+            {
+              punto: "Jehová ama la justicia y consuela al que sufre",
+              detalle: "Isaías 61:1-3 y 61:8 presentan a Jehová como alguien que atiende al quebrantado de corazón y que ama la justicia. Él no solo ve el dolor; actúa para sanar y corregir lo que está mal.",
+            },
+          ],
+        },
+        {
+          tipo: "pregunta",
+          texto: "¿Qué cualidad de Jehová necesito recordar más esta semana: su luz, su capacidad de mejorarme o su manera justa y tierna de tratar a los que sufren?",
+        },
+      ],
+    },
+    {
+      titulo: "3 perlas para beneficio nuestro",
+      tiempo: "3 mins",
+      lsm: "Yo brillar, aceptar cambios, cambiar tristeza por alabanza.",
+      contenido: [
+        {
+          tipo: "lista_enseñanza",
+          titulo: "Aplicación personal",
+          items: [
+            {
+              punto: "No tenemos que esperar a que el mundo mejore para brillar",
+              detalle: "Isaías 60:2 enseña que la luz de Jehová se ve precisamente cuando alrededor hay oscuridad. Aunque el ambiente sea difícil, nuestra conducta puede mostrar que Jehová nos guía.",
+            },
+            {
+              punto: "Aceptar los cambios de Jehová siempre nos beneficia",
+              detalle: "Isaías 60:17 nos recuerda que Jehová reemplaza lo inferior por algo mejor. Cuando él nos ayuda a cambiar un hábito, una actitud o una prioridad, no nos está quitando algo; nos está dando algo mejor.",
+            },
+            {
+              punto: "Jehová puede cambiar el desánimo en alabanza",
+              detalle: "Isaías 61:3 muestra que Jehová puede levantar a quienes están tristes o desanimados. La oración, la reunión y el servicio pueden ayudarnos a recuperar alegría espiritual poco a poco.",
+            },
+          ],
+        },
+        {
+          tipo: "ejemplo",
+          texto: "Es como entrar a un cuarto oscuro y abrir una ventana. Tal vez la casa sigue necesitando limpieza, pero la luz ya permite ver por dónde empezar. Jehová hace eso con nosotros: primero nos da luz, y luego nos ayuda a avanzar.",
+        },
+      ],
+    },
+    {
+      titulo: "3 perlas para el servicio del campo",
+      tiempo: "3 mins",
+      lsm: "Persona confundida, persona triste, persona quiere justicia.",
+      contenido: [
+        {
+          tipo: "lista_enseñanza",
+          titulo: "Para ayudar a otras personas",
+          items: [
+            {
+              punto: "Para alguien confundido por tanta oscuridad espiritual",
+              detalle: "Con Isaías 60:2, 3 podemos mostrar que la Biblia reconoce que el mundo está en oscuridad, pero también enseña que Jehová da una luz confiable para encontrar dirección.",
+            },
+            {
+              punto: "Para alguien que está triste o con el corazón herido",
+              detalle: "Isaías 61:1, 2 puede ayudar a explicar que Jehová se interesa por quienes tienen el corazón destrozado y ofrece verdadero consuelo mediante las buenas noticias.",
+            },
+            {
+              punto: "Para alguien que se indigna por la injusticia",
+              detalle: "Isaías 61:8 permite mostrar que Jehová ama la justicia y odia el abuso. Eso puede abrir la puerta para hablar del Reino y de cómo Dios corregirá por completo lo que hoy está mal.",
+            },
+          ],
+        },
+        {
+          tipo: "destacado",
+          texto: "Una buena perla para el campo no solo explica un texto; conecta el texto con una necesidad real de la persona.",
+        },
+      ],
+    },
+    {
+      titulo: "Cierre",
+      tiempo: "1 min",
+      sinNumero: true,
+      lsm: "Perlas, guardar, usar, ayudar.",
+      contenido: [
+        {
+          tipo: "cierre",
+          texto: "Isaías 60 y 61 nos ayudan a ver a Jehová como fuente de luz, consuelo y justicia. Si guardamos estas perlas, nos fortalecen a nosotros y también pueden ayudar a otros en la predicación.",
+        },
+      ],
+    },
+  ],
+};

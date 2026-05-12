@@ -234,6 +234,7 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors, o
         if (item.bosquejo && onAbrirDiscurso) onAbrirDiscurso(item.bosquejo);
       };
       const esBosquejoAbrible = Boolean(item.bosquejo && onAbrirDiscurso);
+      const bosquejoLabel = item.bosquejoLabel || "Abrir bosquejo de respaldo";
       return (
         <div
           onClick={esBosquejoAbrible ? abrirBosquejo : undefined}
@@ -269,7 +270,7 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors, o
               <div
                 style={{ marginTop: 10, display: "inline-flex", alignItems: "center", gap: 6, background: C.accent, color: C.onAccent, borderRadius: 7, padding: "7px 10px", fontSize: 12, fontWeight: 900, fontFamily: font }}
               >
-                Abrir bosquejo de respaldo
+                {bosquejoLabel}
                 <span aria-hidden="true">›</span>
               </div>
             )}

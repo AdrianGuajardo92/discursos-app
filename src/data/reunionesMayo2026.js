@@ -1,4 +1,4 @@
-import { TESOROS_ISAIAS_60_LUZ } from "./tesorosDiscursos";
+import { PERLAS_ISAIAS_60_61, TESOROS_ISAIAS_60_LUZ } from "./tesorosDiscursos";
 
 const asignacion = (numero, titulo, tiempo, encargado, ayudante = null, opciones = {}) => ({
   tipo: "asignacion",
@@ -146,7 +146,10 @@ export const REUNIONES_MAYO_2026 = [
         senas: "Discurso, tema, Jehová, mujer, ven, levántate, tú, luz resplandeciente.",
         bosquejo: TESOROS_ISAIAS_60_LUZ,
       }),
-      asignacion(2, "Busquemos Perlas Escondidas", "10 mins", "Jose Armando"),
+      asignacion(2, "Busquemos Perlas Escondidas", "10 mins", "Jose Armando", null, {
+        bosquejo: PERLAS_ISAIAS_60_61,
+        bosquejoLabel: "Abrir perlas escondidas",
+      }),
       asignacion(3, "Lectura de la Biblia", "4 mins", "Antonio Isas", null, {
         contexto: "Isaías 61:1-9.",
         preparacion: {

@@ -15,6 +15,11 @@ export default function VistaBosquejo({
 }) {
   const C = themeColors || fallbackC;
   const [exportando, setExportando] = useState(false);
+  const etiqueta = discurso.tipo === "tesoros"
+    ? "TESOROS DE LA BIBLIA"
+    : discurso.tipo === "perlas"
+      ? "PERLAS ESCONDIDAS"
+      : `DISCURSO Nº${discurso.numero}`;
 
   const exportarPDF = async () => {
     setExportando(true);
@@ -46,7 +51,7 @@ export default function VistaBosquejo({
 
       <div style={{ maxWidth: 660, margin: "0 auto", padding: "24px 18px 80px" }}>
         <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: C.dim, letterSpacing: 2.5 }}>{discurso.tipo === "tesoros" ? "TESOROS DE LA BIBLIA" : `DISCURSO Nº${discurso.numero}`}</span>
+          <span style={{ fontSize: 11, fontWeight: 700, color: C.dim, letterSpacing: 2.5 }}>{etiqueta}</span>
           <h1 style={{ fontSize: 23, fontWeight: 800, color: C.white, margin: "8px 0 6px", lineHeight: 1.3, fontFamily: font }}>{discurso.titulo}</h1>
           <span style={{ fontSize: 12, color: C.dim }}>{discurso.duracion} · {discurso.secciones.length} secciones</span>
           {discurso.tema && (
