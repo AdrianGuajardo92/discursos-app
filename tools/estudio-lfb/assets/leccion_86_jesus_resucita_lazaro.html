@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 86 · Jesús resucita a Lázaro</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..800,70,1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#f4ede0;
+      --paper-2:#fbf6ec;
+      --ink:#2a241c;
+      --muted:#6c6257;
+      --forest:#2f4a3a;
+      --forest-2:#21372b;
+      --gold:#b08442;
+      --gold-2:#dfc28a;
+      --gold-soft:#efe0bd;
+      --burgundy:#6b2f2a;
+      --shadow: 0 22px 55px rgba(42,36,28,.12);
+      --radius: 26px;
+      --line: rgba(176,132,66,.35);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(176,132,66,.15), transparent 28rem),
+        radial-gradient(circle at 90% 12%, rgba(47,74,58,.14), transparent 30rem),
+        linear-gradient(180deg, #efe2cf 0%, var(--paper) 42%, #efe5d4 100%);
+      line-height:1.75;
+      overflow-x:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(42,36,28,.027) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42,36,28,.018) 1px, transparent 1px);
+      background-size:38px 38px;
+      mix-blend-mode:multiply;
+      opacity:.45;
+      z-index:-1;
+    }
+    #progressBar{
+      position:fixed;
+      top:0;
+      left:0;
+      height:4px;
+      width:0%;
+      background:linear-gradient(90deg, var(--gold), #e8d19d, var(--burgundy));
+      z-index:50;
+      box-shadow:0 0 18px rgba(176,132,66,.65);
+    }
+    .wrap{width:min(1120px, calc(100% - 32px)); margin:0 auto;}
+    .hero{
+      min-height:72vh;
+      display:grid;
+      place-items:center;
+      padding:92px 0 64px;
+      position:relative;
+    }
+    .hero-card{
+      width:100%;
+      border:1px solid rgba(176,132,66,.42);
+      background:linear-gradient(135deg, rgba(251,246,236,.91), rgba(244,237,224,.84));
+      border-radius:38px;
+      padding:clamp(28px, 6vw, 72px);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card:before, .hero-card:after{
+      content:"✦";
+      position:absolute;
+      color:rgba(176,132,66,.28);
+      font-family:Fraunces, serif;
+      font-size:11rem;
+      line-height:1;
+    }
+    .hero-card:before{top:-34px; right:24px; transform:rotate(12deg)}
+    .hero-card:after{bottom:-58px; left:28px; transform:rotate(-10deg)}
+    .eyebrow{
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--forest);
+      font-weight:800;
+      font-size:.78rem;
+      margin-bottom:20px;
+      position:relative;
+      z-index:1;
+    }
+    .roman{
+      font-family:Fraunces, serif;
+      font-style:italic;
+      font-size:clamp(4rem, 14vw, 10.5rem);
+      color:var(--burgundy);
+      line-height:.82;
+      margin:0 0 18px;
+      letter-spacing:-.06em;
+      position:relative;
+      z-index:1;
+    }
+    h1{
+      font-family:Fraunces, serif;
+      font-size:clamp(2.5rem, 7vw, 5.7rem);
+      line-height:.95;
+      margin:0;
+      letter-spacing:-.055em;
+      color:var(--ink);
+      position:relative;
+      z-index:1;
+    }
+    .subtitle{
+      margin:24px 0 0;
+      max-width:780px;
+      color:var(--muted);
+      font-size:clamp(1rem, 2.3vw, 1.25rem);
+      position:relative;
+      z-index:1;
+    }
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:32px;
+      position:relative;
+      z-index:1;
+    }
+    .pill{
+      border:1px solid rgba(47,74,58,.2);
+      background:rgba(255,255,255,.34);
+      color:var(--forest-2);
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:.87rem;
+      font-weight:700;
+    }
+    main{padding:14px 0 88px;}
+    section{
+      scroll-margin-top:84px;
+      margin:44px 0;
+      border-radius:var(--radius);
+      background:rgba(251,246,236,.72);
+      border:1px solid rgba(176,132,66,.3);
+      box-shadow:0 14px 38px rgba(42,36,28,.075);
+      padding:clamp(22px, 4vw, 42px);
+      position:relative;
+    }
+    .section-title{margin-bottom:26px;}
+    .section-title .topline{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--burgundy);
+      font-weight:800;
+      letter-spacing:.04em;
+      margin-bottom:8px;
+    }
+    .section-title em{
+      font-family:Fraunces, serif;
+      font-style:italic;
+      font-size:1.58rem;
+      color:var(--burgundy);
+    }
+    h2{
+      margin:0;
+      font-family:Fraunces, serif;
+      color:var(--forest);
+      font-size:clamp(1.75rem, 4vw, 3rem);
+      line-height:1.03;
+      letter-spacing:-.035em;
+    }
+    .gold-line{
+      width:100%;
+      height:2px;
+      margin-top:16px;
+      background:linear-gradient(90deg, var(--gold), rgba(176,132,66,.12));
+      border-radius:999px;
+    }
+    h3{
+      font-family:Fraunces, serif;
+      font-size:1.42rem;
+      color:var(--burgundy);
+      margin:28px 0 10px;
+      letter-spacing:-.02em;
+    }
+    p{margin:0 0 1rem;}
+    .lead{font-size:1.08rem;color:#443a30;}
+    .grid{display:grid; gap:16px;}
+    .cards{grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.52), rgba(244,237,224,.52));
+      border:1px solid rgba(47,74,58,.15);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 8px 22px rgba(42,36,28,.055);
+    }
+    .card strong{display:block;color:var(--forest);font-size:1.03rem;}
+    .card em{display:block;color:var(--muted);font-size:.92rem;margin-top:2px;}
+    details{
+      border-radius:18px;
+      border:1px solid rgba(176,132,66,.42);
+      background:linear-gradient(135deg, rgba(239,224,189,.58), rgba(251,246,236,.7));
+      padding:0;
+      margin:14px 0;
+      overflow:hidden;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      padding:15px 18px;
+      font-weight:800;
+      color:var(--forest-2);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"＋"; color:var(--gold); font-weight:900; font-size:1.1rem;}
+    details[open] summary:after{content:"−";}
+    .detail-body{padding:0 18px 18px;color:#4a4035;}
+    .timeline{position:relative; padding-left:14px; counter-reset:step;}
+    .timeline:before{
+      content:"";
+      position:absolute;
+      left:27px;
+      top:8px;
+      bottom:8px;
+      width:2px;
+      background:linear-gradient(var(--gold), rgba(176,132,66,.08));
+    }
+    .moment{
+      counter-increment:step;
+      display:grid;
+      grid-template-columns:54px 1fr;
+      gap:16px;
+      margin:0 0 20px;
+      position:relative;
+    }
+    .moment:before{
+      content:counter(step);
+      width:34px;height:34px;border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--forest);
+      color:#fff;
+      font-weight:900;
+      box-shadow:0 0 0 6px rgba(47,74,58,.12);
+      margin-left:-3px;
+      z-index:1;
+    }
+    .label{
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:var(--gold);
+      font-size:.76rem;
+      font-weight:900;
+      margin-bottom:4px;
+    }
+    .story{
+      border:1px solid rgba(176,132,66,.5);
+      border-radius:28px;
+      background:
+        linear-gradient(90deg, rgba(176,132,66,.06), transparent 18%, transparent 82%, rgba(176,132,66,.06)),
+        rgba(255,250,241,.78);
+      padding:clamp(22px, 4vw, 42px);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.42);
+    }
+    .ornament{
+      text-align:center;
+      color:var(--gold);
+      font-family:Fraunces, serif;
+      font-size:1.65rem;
+      margin:0 0 20px;
+    }
+    .story p:first-of-type:first-letter{
+      float:left;
+      font-family:Fraunces, serif;
+      font-size:5.2rem;
+      line-height:.75;
+      color:var(--burgundy);
+      padding:10px 12px 2px 0;
+      font-weight:800;
+    }
+    .quote{
+      border-left:5px solid var(--gold);
+      padding:12px 18px;
+      margin:18px 0;
+      background:rgba(239,224,189,.35);
+      border-radius:0 16px 16px 0;
+      font-family:Fraunces, serif;
+      font-size:1.28rem;
+      color:var(--burgundy);
+      line-height:1.45;
+    }
+    .closing{
+      color:var(--burgundy);
+      font-style:italic;
+      font-family:Fraunces, serif;
+      font-size:1.25rem;
+      margin-top:18px;
+    }
+    .qa{display:grid; gap:18px;}
+    .question-card{
+      border:1.5px solid rgba(107,47,42,.55);
+      background:rgba(255,255,255,.36);
+      border-radius:22px;
+      padding:20px;
+    }
+    .tag{
+      display:inline-block;
+      background:rgba(107,47,42,.11);
+      color:var(--burgundy);
+      font-size:.76rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      padding:5px 9px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+    .meditate details{border-left:5px solid var(--forest); background:rgba(255,255,255,.36); border-color:rgba(47,74,58,.20);}
+    .scripture{
+      position:relative;
+      border-radius:28px;
+      padding:30px;
+      background:linear-gradient(135deg, rgba(47,74,58,.08), rgba(239,224,189,.5));
+      border:1px solid rgba(176,132,66,.45);
+      margin:20px 0;
+    }
+    .scripture:before{
+      content:"“";
+      position:absolute;
+      top:-14px;left:18px;
+      font-family:Fraunces, serif;
+      font-size:6rem;
+      color:rgba(176,132,66,.42);
+      line-height:1;
+    }
+    .scripture blockquote{
+      margin:0;
+      font-family:Fraunces, serif;
+      font-size:clamp(1.35rem, 3vw, 2.05rem);
+      line-height:1.35;
+      color:var(--burgundy);
+      position:relative;
+      z-index:1;
+    }
+    .scripture cite{display:block;margin-top:14px;color:var(--forest);font-weight:900;font-style:normal;letter-spacing:.08em;text-transform:uppercase;}
+    .three{display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px;margin-top:18px;}
+    .note{border-left:5px solid var(--forest); background:rgba(255,255,255,.42); border-radius:0 18px 18px 0; padding:16px 18px;}
+    .note b{color:var(--forest);}
+    .compare{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+    .compare .card{border-top:5px solid var(--gold);}
+    .lesson-list{counter-reset:item; list-style:none; padding:0; margin:0; display:grid; gap:16px;}
+    .lesson-list li{
+      counter-increment:item;
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:14px;
+      align-items:start;
+      background:rgba(255,255,255,.35);
+      border:1px solid rgba(47,74,58,.14);
+      border-radius:20px;
+      padding:16px;
+    }
+    .lesson-list li:before{
+      content:counter(item);
+      width:34px;height:34px;border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--forest);color:#fff;font-weight:900;
+    }
+    .lesson-list b{color:var(--forest);}
+    .application{
+      border-radius:28px;
+      padding:26px;
+      background:linear-gradient(135deg, rgba(176,132,66,.34), rgba(239,224,189,.9));
+      border:1px solid rgba(176,132,66,.55);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);
+    }
+    .application h3{margin-top:0;text-transform:uppercase;letter-spacing:.12em;font-size:1rem;font-family:Inter, sans-serif;color:var(--forest)}
+    .heart-list{list-style:none; padding:0; margin:0; display:grid; gap:12px;}
+    .heart-list li{padding-left:28px; position:relative;}
+    .heart-list li:before{content:"❦"; position:absolute; left:0; color:var(--burgundy);}
+    .quality{display:grid; gap:14px;}
+    .quality .card{border-left:5px solid var(--gold);}
+    .quality .card strong{font-family:Fraunces, serif; font-style:italic; font-size:1.32rem;}
+    .connections{grid-template-columns:repeat(auto-fit,minmax(245px,1fr));}
+    .lesson-badge{display:inline-block;color:var(--forest);font-weight:900;text-transform:uppercase;letter-spacing:.13em;font-size:.76rem;margin-bottom:8px;}
+    .final-texts{display:grid; gap:16px;}
+    .final-block{
+      border-radius:20px;
+      padding:18px;
+      background:rgba(255,255,255,.4);
+      border:1px solid rgba(176,132,66,.32);
+      display:grid;
+      grid-template-columns:36px 1fr;
+      gap:12px;
+    }
+    .final-block:before{content:"§"; color:var(--gold); font-family:Fraunces, serif; font-size:2.1rem; line-height:1;}
+    .ref{display:block;color:var(--burgundy);font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-size:.82rem;margin-bottom:4px;}
+    footer{
+      text-align:center;
+      color:var(--burgundy);
+      font-family:Fraunces, serif;
+      font-style:italic;
+      font-size:1.25rem;
+      padding:38px 20px 70px;
+    }
+    .nav-toggle, .top-btn{
+      position:fixed;
+      border:0;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      cursor:pointer;
+      z-index:44;
+      box-shadow:0 12px 28px rgba(42,36,28,.22);
+      color:#fff;
+      transition:transform .2s ease, opacity .2s ease;
+    }
+    .nav-toggle:hover, .top-btn:hover{transform:translateY(-2px)}
+    .nav-toggle{right:18px; top:18px; width:54px; height:54px; background:var(--forest); font-size:1.4rem;}
+    .top-btn{right:18px; bottom:20px; width:52px; height:52px; background:var(--gold); font-size:1.45rem; opacity:0; pointer-events:none;}
+    .top-btn.show{opacity:1; pointer-events:auto;}
+    .overlay{
+      position:fixed; inset:0; background:rgba(42,36,28,.28); backdrop-filter:blur(3px); z-index:41; opacity:0; pointer-events:none; transition:opacity .2s ease;
+    }
+    .overlay.show{opacity:1; pointer-events:auto;}
+    .side-nav{
+      position:fixed; top:0; right:0; width:min(410px, 90vw); height:100vh;
+      background:linear-gradient(180deg, #fbf6ec, #f3e6d3);
+      border-left:1px solid rgba(176,132,66,.45);
+      box-shadow:-18px 0 50px rgba(42,36,28,.22);
+      z-index:42; transform:translateX(110%); transition:transform .25s ease;
+      padding:28px 22px;
+      overflow:auto;
+    }
+    .side-nav.open{transform:translateX(0)}
+    .side-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;}
+    .side-head h3{margin:0;color:var(--forest);}
+    .close{border:0;background:var(--burgundy);color:#fff;border-radius:50%;width:38px;height:38px;font-weight:900;cursor:pointer}
+    .side-nav a{
+      display:block;
+      padding:12px 14px;
+      margin:8px 0;
+      border-radius:16px;
+      color:var(--ink);
+      text-decoration:none;
+      border:1px solid rgba(176,132,66,.24);
+      background:rgba(255,255,255,.38);
+      font-weight:700;
+    }
+    .side-nav a em{font-family:Fraunces, serif;color:var(--burgundy);margin-right:8px;}
+    .source-note{font-size:.86rem;color:var(--muted);margin-top:26px;border-top:1px solid rgba(176,132,66,.3);padding-top:16px;}
+    @media (max-width:650px){
+      .wrap{width:min(100% - 22px, 1120px)}
+      .hero{padding:72px 0 34px; min-height:auto;}
+      .hero-card{border-radius:26px; padding:28px 20px;}
+      section{padding:22px 16px;margin:28px 0;border-radius:22px;}
+      .moment{grid-template-columns:46px 1fr; gap:10px;}
+      .timeline:before{left:23px;}
+      .story{padding:22px 16px;}
+      .scripture{padding:26px 18px;}
+      .final-block{grid-template-columns:30px 1fr;}
+      .nav-toggle{width:48px;height:48px;right:12px;top:12px;}
+      .top-btn{right:12px;bottom:16px;}
+    }
+  </style>
+</head>
+<body>
+  <div id="progressBar"></div>
+  <button class="nav-toggle" aria-label="Abrir índice" id="openNav">☰</button>
+  <div class="overlay" id="overlay"></div>
+  <aside class="side-nav" id="sideNav" aria-label="Índice de secciones">
+    <div class="side-head"><h3>Índice</h3><button class="close" id="closeNav" aria-label="Cerrar índice">×</button></div>
+    <a href="#situarte"><em>i</em> 📍 Para situarte</a>
+    <a href="#secuencia"><em>ii</em> 🕰️ La secuencia de los hechos</a>
+    <a href="#historia"><em>iii</em> 📖 La historia relatada</a>
+    <a href="#preguntas"><em>iv</em> ❓ Preguntas del libro</a>
+    <a href="#meditar"><em>v</em> ✍️ Preguntas para meditar</a>
+    <a href="#texto"><em>vi</em> 🕊️ El texto clave</a>
+    <a href="#principio"><em>vii</em> 💎 El principio que ilumina la escena</a>
+    <a href="#entonces"><em>viii</em> ⚖️ Entonces y ahora</a>
+    <a href="#lecciones"><em>ix</em> 🔑 Lecciones que se desprenden del texto</a>
+    <a href="#aplicacion"><em>x</em> 💡 Aplicación personal</a>
+    <a href="#jehova"><em>xi</em> ☁️ Lo que aprendemos de Jehová</a>
+    <a href="#conexion"><em>xii</em> 🔗 Conexión con lecciones anteriores</a>
+    <a href="#textos"><em>xiii</em> 🔍 Explicación de los textos bíblicos finales</a>
+    <p class="source-note">Estudio elaborado sobre la lección 86 de <em>Lecciones que aprendo de la Biblia</em> y los textos bíblicos indicados en la publicación.</p>
+  </aside>
+  <button class="top-btn" id="topBtn" aria-label="Volver arriba">↑</button>
+
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-card">
+        <div class="eyebrow">Lecciones que aprendo de la Biblia</div>
+        <div class="roman">lxxxvi</div>
+        <h1>Jesús resucita a Lázaro</h1>
+        <p class="subtitle">Cuando el dolor parece haber cerrado la puerta, Jehová muestra mediante Jesús que la muerte no tiene la última palabra.</p>
+        <div class="hero-meta">
+          <span class="pill">Juan 11:1-53</span>
+          <span class="pill">Betania</span>
+          <span class="pill">Esperanza de la resurrección</span>
+          <span class="pill">Salmo 68:20</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="situarte">
+      <div class="section-title"><div class="topline"><em>i</em> · 📍</div><h2>Para situarte</h2><div class="gold-line"></div></div>
+      <h3>Cuándo</h3>
+      <p class="lead">Esta escena sucede hacia la parte final del ministerio terrestre de Jesús, poco antes de su última Pascua en Jerusalén. En las lecciones previas ya vimos su poder sobre la enfermedad, las tormentas y la necesidad humana. Ahora la escena toca una herida más profunda: la muerte de un amigo amado.</p>
+      <p>Jesús se encontraba al otro lado del Jordán cuando recibió el mensaje urgente de Marta y María. Betania estaba muy cerca de Jerusalén, donde la oposición religiosa contra Jesús ya era fuerte. Por eso, volver a Judea no era un simple viaje de consuelo; también implicaba peligro.</p>
+
+      <h3>Personajes principales</h3>
+      <div class="grid cards">
+        <div class="card"><strong>Jesús</strong><em>El Hijo de Dios y amigo fiel</em><p>Muestra compasión real y, con el poder que Jehová le da, resucita a Lázaro.</p></div>
+        <div class="card"><strong>Lázaro</strong><em>Amigo de Jesús</em><p>Su muerte abre una escena que revela la esperanza de la resurrección de manera inolvidable.</p></div>
+        <div class="card"><strong>Marta</strong><em>Mujer de fe activa</em><p>Corre al encuentro de Jesús y expresa confianza en la resurrección.</p></div>
+        <div class="card"><strong>María</strong><em>Hermana de Lázaro</em><p>Llega llorando a los pies de Jesús; su dolor conmueve profundamente al Maestro.</p></div>
+        <div class="card"><strong>Los discípulos</strong><em>Testigos del poder de Jesús</em><p>Acompañan a Jesús aunque el viaje a Judea puede ser peligroso.</p></div>
+        <div class="card"><strong>Los fariseos</strong><em>Opositores endurecidos</em><p>Al enterarse del milagro, no todos reaccionan con fe; algunos buscan matar a Jesús.</p></div>
+      </div>
+
+      <h3>El escenario</h3>
+      <p>La historia se mueve entre dos lugares: la región al otro lado del Jordán, donde Jesús recibe la noticia, y Betania, un pueblo cercano a Jerusalén. La escena culmina ante una tumba en forma de cueva, cerrada con una piedra, rodeada de familiares, vecinos y amigos que lloran.</p>
+      <details>
+        <summary>✦ Betania: un pueblo cercano a Jerusalén</summary>
+        <div class="detail-body"><p>Betania estaba a poca distancia de Jerusalén. Eso explica por qué muchas personas fueron a consolar a Marta y María, y también por qué la noticia del milagro llegó rápidamente a los líderes religiosos.</p><p>La cercanía con Jerusalén le da tensión al relato: Jesús no solo se acerca a una familia en duelo, también se acerca al centro donde sus enemigos ya estaban tramando contra él.</p></div>
+      </details>
+      <details>
+        <summary>✦ El duelo en tiempos bíblicos</summary>
+        <div class="detail-body"><p>Cuando alguien moría, era común que familiares y conocidos acompañaran a la familia por varios días. El llanto, las visitas y las palabras de consuelo formaban parte de ese ambiente de pérdida.</p><p>Por eso, cuando Jesús llega, no encuentra una casa silenciosa sino una comunidad dolida. Su reacción —llorar— muestra que él no trata el dolor humano con frialdad.</p></div>
+      </details>
+      <details>
+        <summary>✦ Una tumba cerrada con piedra</summary>
+        <div class="detail-body"><p>Muchas tumbas eran cuevas o espacios excavados en la roca. Se cerraban con una piedra grande para proteger el cuerpo. Cuando Jesús dice “Quiten la piedra”, está pidiendo que se abra lo que para todos parecía definitivo.</p><p>Ese detalle prepara el momento central: la voz de Jesús llega hasta donde ningún ser humano podía entrar por sus propias fuerzas.</p></div>
+      </details>
+    </section>
+
+    <section id="secuencia">
+      <div class="section-title"><div class="topline"><em>ii</em> · 🕰️</div><h2>La secuencia de los hechos</h2><div class="gold-line"></div></div>
+      <div class="timeline">
+        <div class="moment"><div><div class="label">Mensaje urgente</div><p>María y Marta avisan a Jesús que Lázaro está muy enfermo.</p></div></div>
+        <div class="moment"><div><div class="label">Espera intencional</div><p>Jesús no sale de inmediato; espera dos días y luego anuncia que Lázaro ha muerto.</p></div></div>
+        <div class="moment"><div><div class="label">Viaje a Betania</div><p>Jesús decide ir a Judea, aunque sus discípulos saben que allí hay peligro.</p></div></div>
+        <div class="moment"><div><div class="label">Marta sale al encuentro</div><p>Marta expresa dolor, pero también fe: cree que su hermano se levantará en la resurrección.</p></div></div>
+        <div class="moment"><div><div class="label">María llora ante Jesús</div><p>María cae a sus pies; Jesús se conmueve y también llora.</p></div></div>
+        <div class="moment"><div><div class="label">La piedra se quita</div><p>Jesús ora a Jehová delante de todos y llama a Lázaro con voz fuerte.</p></div></div>
+        <div class="moment"><div><div class="label">Vida desde la tumba</div><p>Lázaro sale vivo; muchos creen, pero otros informan a los fariseos, que se endurecen.</p></div></div>
+      </div>
+    </section>
+
+    <section id="historia">
+      <div class="section-title"><div class="topline"><em>iii</em> · 📖</div><h2>La historia relatada</h2><div class="gold-line"></div></div>
+      <div class="story">
+        <div class="ornament">❦</div>
+        <p>Betania era un lugar donde Jesús se sentía recibido con cariño. Allí vivían tres hermanos que lo amaban: Lázaro, Marta y María. Pero un día la alegría de esa casa empezó a apagarse. Lázaro enfermó gravemente, y sus hermanas hicieron lo que nace del corazón cuando uno sabe que alguien puede ayudar: enviaron un mensaje a Jesús.</p>
+        <div class="quote">“Señor, tu amigo querido está enfermo”.</div>
+        <p>El mensaje llevaba dolor, urgencia y esperanza. Sin embargo, Jesús no salió de inmediato. Esperó dos días. Para quienes miraban solo la superficie, aquello podía parecer una demora difícil de entender. Pero Jesús sabía que Jehová permitiría que esta situación revelara algo mucho más grande: la gloria de Dios y el poder de la resurrección.</p>
+        <details>
+          <summary>✦ ¿Por qué Jesús esperó?</summary>
+          <div class="detail-body"><p>Jesús no esperó por indiferencia. Él amaba a Lázaro y a sus hermanas. Su espera permitió que la muerte de Lázaro fuera innegable y que el milagro fortaleciera la fe de muchos.</p><p>A veces, desde nuestro punto de vista, la ayuda parece tardar. Pero este relato enseña que Jehová y Jesús pueden estar preparando una respuesta más profunda de lo que imaginamos.</p></div>
+        </details>
+        <p>Cuando Jesús por fin dijo que irían a Betania, sus discípulos entendieron el peligro. Judea no era un lugar seguro para él. Pero Jesús caminó hacia el dolor de sus amigos y hacia la amenaza de sus enemigos con plena confianza en Jehová.</p>
+        <p>Al acercarse a Betania, Marta salió corriendo. Su frase tenía una mezcla de tristeza y fe: si Jesús hubiera estado allí, su hermano no habría muerto. Jesús no la reprendió por llorar ni por expresar su dolor. Más bien, le dio una promesa que atravesaba la pena como un rayo de luz.</p>
+        <div class="quote">“Tu hermano se levantará”.</div>
+        <p>Marta sabía que habría una resurrección en el futuro, pero Jesús la llevó a mirar más de cerca. Él mismo era la persona mediante la cual Jehová daría vida. Marta respondió con fe: reconoció que Jesús era el Cristo, el Hijo de Dios.</p>
+        <details>
+          <summary>✦ Marta: una fe que habla en medio del dolor</summary>
+          <div class="detail-body"><p>Marta no negó su tristeza, pero tampoco soltó su esperanza. Su fe no era fría ni teórica; estaba dentro de una conversación llena de lágrimas.</p><p>Eso nos ayuda a entender que tener fe no significa no llorar. Significa seguir acercándonos a Jehová y a Jesús incluso cuando el corazón está herido.</p></div>
+        </details>
+        <p>Luego llegó María. Cayó a los pies de Jesús, llorando. Los que la acompañaban también lloraban. En ese ambiente, Jesús se conmovió profundamente. No actuó como alguien distante, sino como alguien que sentía el peso del sufrimiento humano. Y entonces ocurrió una de las escenas más tiernas de los Evangelios: Jesús lloró.</p>
+        <p>Quienes estaban allí lo notaron: Jesús amaba a Lázaro. Pero algunos se preguntaron por qué no había impedido su muerte. Jesús no respondió con una explicación larga. Caminó hacia la tumba.</p>
+        <p>La tumba era una cueva, y una piedra cerraba la entrada. Jesús ordenó que la quitaran. Marta pensó en lo natural: Lázaro llevaba cuatro días muerto. Pero Jesús la invitó a mirar más allá de lo natural, a ver la gloria de Dios.</p>
+        <details>
+          <summary>✦ Cuatro días en la tumba</summary>
+          <div class="detail-body"><p>El relato subraya que Lázaro llevaba cuatro días muerto. Eso hace claro que no se trataba de una recuperación ni de una confusión. La muerte era real.</p><p>Por eso el milagro tenía tanta fuerza: Jehová, mediante Jesús, estaba mostrando que puede liberar incluso de la muerte.</p></div>
+        </details>
+        <p>Jesús elevó una oración. No hizo el milagro para llamar la atención sobre sí mismo, sino para que la gente entendiera que Jehová lo había enviado. Después, frente a la tumba abierta, alzó la voz.</p>
+        <div class="quote">“¡Lázaro, sal!”.</div>
+        <p>Y Lázaro salió. El hombre que había estado muerto volvió a estar de pie. Aún llevaba las vendas funerarias, como si el sepulcro todavía quisiera retenerlo, pero la voz de Jesús había sido más fuerte que la muerte. Jesús dijo que lo soltaran y lo dejaran ir.</p>
+        <p>Muchos pusieron fe en él. Pero otros fueron a contar lo sucedido a los fariseos. En vez de alegrarse por una vida devuelta, los opositores comenzaron a planear cómo matar a Jesús. Más tarde, incluso quisieron matar a Lázaro. La misma escena que abrió el corazón de algunos endureció el corazón de otros.</p>
+        <p class="closing">En Betania se oyó una verdad que todavía consuela: para Jehová, ninguna tumba está demasiado cerrada y ninguna pérdida está fuera de su alcance.</p>
+        <div class="ornament">❦</div>
+      </div>
+    </section>
+
+    <section id="preguntas">
+      <div class="section-title"><div class="topline"><em>iv</em> · ❓</div><h2>Preguntas del libro</h2><div class="gold-line"></div></div>
+      <div class="qa">
+        <div class="question-card">
+          <span class="tag">Pregunta 1</span>
+          <h3>Cuenta la historia de cómo resucitó Jesús a Lázaro.</h3>
+          <p>Lázaro, amigo de Jesús, se enfermó y murió. Jesús llegó a Betania cuando Lázaro llevaba cuatro días en la tumba. Primero consoló a Marta y a María, y lloró al ver el dolor de todos. Luego fue a la tumba, pidió que quitaran la piedra, oró a Jehová y llamó a Lázaro con voz fuerte. Entonces Lázaro salió vivo, todavía envuelto con vendas.</p>
+        </div>
+        <div class="question-card">
+          <span class="tag">Pregunta 2</span>
+          <h3>¿Qué querían hacer los fariseos cuando se enteraron de la resurrección de Lázaro?</h3>
+          <p>En vez de alegrarse o aceptar que Jesús venía de Dios, se endurecieron. Empezaron a hacer planes para matar a Jesús. Más tarde, también quisieron matar a Lázaro porque muchas personas creían en Jesús al verlo vivo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="meditar" class="meditate">
+      <div class="section-title"><div class="topline"><em>v</em> · ✍️</div><h2>Preguntas para meditar</h2><div class="gold-line"></div></div>
+      <details><summary>¿Qué me enseña la demora de Jesús?</summary><div class="detail-body"><p>Me enseña que una respuesta que parece tardar no significa falta de amor. Jesús amaba a esa familia, pero permitió que la situación revelara algo más grande. Cuando Jehová permite que esperemos, puede estar fortaleciendo nuestra fe y preparando una salida que aún no vemos.</p></div></details>
+      <details><summary>¿Por qué es tan consolador saber que Jesús lloró?</summary><div class="detail-body"><p>Porque muestra que Jesús no mira el dolor humano con distancia. Él sabe lo que sentimos cuando perdemos a alguien. Su poder no lo hizo frío; su amor lo hizo cercano.</p></div></details>
+      <details><summary>¿Qué diferencia hay entre creer en la resurrección y vivir con esa esperanza?</summary><div class="detail-body"><p>Creer en la resurrección es aceptar una enseñanza bíblica. Vivir con esa esperanza es dejar que influya en nuestra manera de enfrentar la muerte, el duelo y el temor. Nos ayuda a llorar con esperanza y a seguir confiando en Jehová.</p></div></details>
+      <details><summary>¿Qué revela la reacción de los fariseos?</summary><div class="detail-body"><p>Revela que un corazón orgulloso puede rechazar incluso una prueba poderosa. No basta con ver hechos; hay que tener humildad para dejarse enseñar por Jehová.</p></div></details>
+      <details><summary>¿Cómo puedo imitar a Marta y María cuando sufro?</summary><div class="detail-body"><p>Puedo acercarme a Jesús con sinceridad, decir lo que siento y seguir escuchando sus palabras. Ellas no escondieron su dolor, pero tampoco se alejaron de la fuente del consuelo.</p></div></details>
+      <details><summary>¿Qué me ayuda a esperar el día en que Jehová resucite a los muertos?</summary><div class="detail-body"><p>Meditar en relatos como este, orar con frecuencia y recordar que Jehová ya demostró que tiene poder sobre la muerte. Cada resurrección registrada en la Biblia es una garantía de que su promesa no es un sueño, sino una realidad futura.</p></div></details>
+    </section>
+
+    <section id="texto">
+      <div class="section-title"><div class="topline"><em>vi</em> · 🕊️</div><h2>El texto clave</h2><div class="gold-line"></div></div>
+      <div class="scripture"><blockquote>El Dios verdadero es para nosotros un Dios que salva; Jehová, el Señor Soberano, libra de la muerte.</blockquote><cite>Salmo 68:20</cite></div>
+      <h3>¿Qué aprendemos de este texto?</h3>
+      <p>Este texto nos recuerda que Jehová no solo puede ayudar en problemas pequeños o temporales. Él tiene poder para salvar incluso de la muerte. La resurrección de Lázaro es una muestra concreta de esa verdad: Jehová le dio a Jesús el poder para llamar a un muerto y devolverlo a la vida.</p>
+      <p>También aprendemos que Jehová no ve la muerte como un muro imposible de cruzar. Para nosotros, la muerte parece final; para él, es una situación de la que puede liberar. Por eso la esperanza de la resurrección no es una simple idea bonita, sino una promesa basada en su poder y en su amor.</p>
+      <p>Cuando sufrimos una pérdida, este texto puede ayudarnos a mirar hacia adelante. Jehová no olvida a quienes han muerto, y mediante su Reino volverá a dar vida a los que están en las tumbas conmemorativas.</p>
+      <h3>Tres detalles para fijarse</h3>
+      <div class="three">
+        <div class="note"><p><b>“El Dios verdadero”.</b> La esperanza no se basa en una emoción humana, sino en Jehová, el único que tiene poder real sobre la vida y la muerte.</p></div>
+        <div class="note"><p><b>“Un Dios que salva”.</b> Jehová actúa para rescatar, no solo para observar. Su personalidad está llena de compasión activa.</p></div>
+        <div class="note"><p><b>“Libra de la muerte”.</b> Esta frase conecta directamente con la resurrección. Jehová puede deshacer el daño más profundo que sufrimos.</p></div>
+      </div>
+    </section>
+
+    <section id="principio">
+      <div class="section-title"><div class="topline"><em>vii</em> · 💎</div><h2>El principio que ilumina la escena</h2><div class="gold-line"></div></div>
+      <div class="note">
+        <p><b>Juan 11:25, 26</b> presenta a Jesús como “la resurrección y la vida” y dice que quien demuestra fe en él puede llegar a vivir aunque muera. Ese texto ilumina toda la escena: Jesús no solo consuela hablando de la resurrección; Jehová lo usa como el medio para hacerla posible.</p>
+        <p>Cuando Jesús le pregunta a Marta “¿Crees tú esto?”, la lección se vuelve personal. La esperanza de la resurrección no es solo información para saber; es una verdad para abrazar con fe.</p>
+      </div>
+    </section>
+
+    <section id="entonces">
+      <div class="section-title"><div class="topline"><em>viii</em> · ⚖️</div><h2>Entonces y ahora</h2><div class="gold-line"></div></div>
+      <div class="grid compare">
+        <div class="card"><h3>En Betania</h3><p>Marta y María estaban rodeadas de gente que lloraba, pero ninguna persona podía devolverle la vida a Lázaro. La tumba parecía el final de la historia.</p><p>Jesús llegó con ternura y poder. Primero consoló, luego actuó. Su voz transformó el duelo en asombro.</p></div>
+        <div class="card"><h3>En la vida del cristiano hoy</h3><p>También enfrentamos pérdidas que nos hacen llorar. No podemos evitar todo sufrimiento, pero sí podemos acercarnos a Jehová con la seguridad de que él recuerda a los que han muerto.</p><p>La esperanza de la resurrección nos ayuda a no desesperarnos. Nos permite llorar, pero con la mirada puesta en el día en que Jehová libere de la muerte.</p></div>
+      </div>
+    </section>
+
+    <section id="lecciones">
+      <div class="section-title"><div class="topline"><em>ix</em> · 🔑</div><h2>Lecciones que se desprenden del texto</h2><div class="gold-line"></div></div>
+      <ol class="lesson-list">
+        <li><p><b>Jehová no se olvida de los que han muerto.</b> Lázaro no estaba fuera del alcance de Dios. Su vida podía ser restaurada porque Jehová recuerda y tiene poder para actuar.</p></li>
+        <li><p><b>Jesús entiende el dolor humano.</b> Su llanto demuestra compasión. No se limitó a dar una enseñanza; acompañó el sufrimiento de sus amigos.</p></li>
+        <li><p><b>La fe puede convivir con las lágrimas.</b> Marta y María estaban destrozadas, pero se acercaron a Jesús. El dolor no anuló su fe.</p></li>
+        <li><p><b>La espera no significa abandono.</b> Jesús llegó cuando todos pensaban que era demasiado tarde, pero para Jehová no era tarde.</p></li>
+        <li><p><b>El orgullo puede cerrar los ojos ante la evidencia.</b> Algunos vieron el milagro y creyeron; otros lo usaron como motivo para perseguir a Jesús.</p></li>
+        <li><p><b>La resurrección fortalece nuestra esperanza en el Reino.</b> Este milagro muestra en pequeño lo que Jehová hará en grande cuando elimine la muerte.</p></li>
+      </ol>
+    </section>
+
+    <section id="aplicacion">
+      <div class="section-title"><div class="topline"><em>x</em> · 💡</div><h2>Aplicación personal</h2><div class="gold-line"></div></div>
+      <div class="application">
+        <h3>Preguntas al corazón</h3>
+        <ul class="heart-list">
+          <li>Cuando Jehová parece tardar, ¿sigo confiando en su amor?</li>
+          <li>¿Le hablo a Jehová con sinceridad cuando estoy triste?</li>
+          <li>¿La esperanza de la resurrección influye en mi manera de ver la muerte?</li>
+          <li>¿Consuelo a otros con ternura, como lo hizo Jesús?</li>
+          <li>¿Permito que las pruebas fortalezcan mi fe en vez de apagarla?</li>
+          <li>¿Qué persona deseo ver de nuevo cuando Jehová resucite a los muertos?</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="jehova">
+      <div class="section-title"><div class="topline"><em>xi</em> · ☁️</div><h2>Lo que aprendemos de Jehová</h2><div class="gold-line"></div></div>
+      <p class="lead">Aunque Jesús es quien llama a Lázaro, el relato dirige nuestra atención a Jehová, la Fuente de la vida y del poder que vence la muerte.</p>
+      <div class="quality">
+        <div class="card"><strong>Jehová es compasivo</strong><p>No minimiza el dolor de Marta y María. Al permitir que Jesús exprese ternura y llore, nos muestra que comprende profundamente el sufrimiento humano.</p></div>
+        <div class="card"><strong>Jehová es poderoso</strong><p>La muerte no limita su capacidad de actuar. Si pudo devolverle la vida a Lázaro, también puede cumplir su promesa de una resurrección futura.</p></div>
+        <div class="card"><strong>Jehová es confiable</strong><p>Jesús ora con plena seguridad de que su Padre lo escucha. Eso nos enseña que las promesas de Jehová descansan sobre una base firme.</p></div>
+        <div class="card"><strong>Jehová fortalece la fe</strong><p>Este milagro ayudó a muchos a creer. Jehová puede usar una situación dolorosa para revelar una esperanza más grande.</p></div>
+        <div class="card"><strong>Jehová valora la vida</strong><p>Para él, una vida perdida no queda en el olvido. Su propósito es rescatar, sanar y devolver vida.</p></div>
+      </div>
+    </section>
+
+    <section id="conexion">
+      <div class="section-title"><div class="topline"><em>xii</em> · 🔗</div><h2>Conexión con lecciones anteriores</h2><div class="gold-line"></div></div>
+      <div class="grid connections">
+        <div class="card"><span class="lesson-badge">Lección 48</span><strong>El hijo de una viuda vuelve a vivir</strong><p>Jehová ya había demostrado mediante Elías que podía devolver la vida. La resurrección de Lázaro confirma esa misma verdad con el ministerio de Jesús.</p></div>
+        <div class="card"><span class="lesson-badge">Lección 79</span><strong>Jesús hace muchos milagros</strong><p>Las curaciones de Jesús mostraban lo que el Reino hará por la humanidad. Con Lázaro vemos que ese Reino también vencerá la muerte.</p></div>
+        <div class="card"><span class="lesson-badge">Lección 83</span><strong>Jesús alimenta a miles de personas</strong><p>Allí Jesús atendió una necesidad física con cariño. En Betania atiende una necesidad más profunda: consuelo ante la muerte.</p></div>
+        <div class="card"><span class="lesson-badge">Lección 84</span><strong>Jesús camina sobre el agua</strong><p>Jesús mostró autoridad sobre la naturaleza. En esta lección, muestra que Jehová también le da poder sobre la muerte.</p></div>
+        <div class="card"><span class="lesson-badge">Lección 85</span><strong>Jesús cura en sábado</strong><p>Algunos fariseos rechazaron una curación evidente. En la lección 86 se ve un rechazo aún más grave: se oponen incluso después de una resurrección.</p></div>
+      </div>
+    </section>
+
+    <section id="textos">
+      <div class="section-title"><div class="topline"><em>xiii</em> · 🔍</div><h2>Explicación de los textos bíblicos finales</h2><div class="gold-line"></div></div>
+      <div class="final-texts">
+        <div class="final-block"><div><span class="ref">Juan 11:1-53</span><p>Es el relato principal. Presenta la enfermedad de Lázaro, la espera de Jesús, el encuentro con Marta y María, las lágrimas de Jesús, la oración a Jehová y el milagro de la resurrección. También muestra la reacción dividida: muchos creen, pero los líderes religiosos empiezan a planear la muerte de Jesús.</p></div></div>
+        <div class="final-block"><div><span class="ref">Juan 12:10</span><p>Este texto muestra hasta dónde llegó la dureza de los sacerdotes principales: querían matar también a Lázaro. En vez de aceptar la evidencia, trataron de eliminar al testigo vivo del poder de Dios.</p></div></div>
+        <div class="final-block"><div><span class="ref">Mateo 26:14-16</span><p>Estos versículos muestran cómo Judas Iscariote fue a los sacerdotes principales y aceptó entregar a Jesús por dinero. Se conectan con la lección porque, después del milagro de Lázaro, la oposición contra Jesús avanza hacia su arresto y muerte.</p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    Jehová no solo ve nuestras lágrimas; también tiene poder para secarlas.<br />
+    La resurrección de Lázaro nos recuerda que, para el Dios verdadero, la muerte no es el final.
+  </footer>
+
+  <script>
+    const progressBar = document.getElementById('progressBar');
+    const topBtn = document.getElementById('topBtn');
+    const sideNav = document.getElementById('sideNav');
+    const overlay = document.getElementById('overlay');
+    const openNav = document.getElementById('openNav');
+    const closeNav = document.getElementById('closeNav');
+
+    function updateProgress(){
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      topBtn.classList.toggle('show', scrollTop > 400);
+    }
+    function openIndex(){ sideNav.classList.add('open'); overlay.classList.add('show'); }
+    function closeIndex(){ sideNav.classList.remove('open'); overlay.classList.remove('show'); }
+    window.addEventListener('scroll', updateProgress, {passive:true});
+    openNav.addEventListener('click', openIndex);
+    closeNav.addEventListener('click', closeIndex);
+    overlay.addEventListener('click', closeIndex);
+    topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeIndex(); });
+    sideNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeIndex));
+    updateProgress();
+  </script>
+</body>
+</html>

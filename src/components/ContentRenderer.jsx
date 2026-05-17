@@ -37,7 +37,7 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors, o
   const sub = { ...txt, color: C.gray, fontSize: 15.5 };
   const chip = { border: `1px solid ${C.accentBorder}`, background: C.accentDim, color: C.accent, borderRadius: 999, padding: "3px 9px", fontSize: 11, fontWeight: 800, fontFamily: font };
   const esPropia = item?.tipo === "asignacion" && esAsignacionDePersona(item);
-  const ocultarChecklist = item?.etiqueta === "Presidente";
+  const ocultarChecklist = item?.etiqueta === "Presidente" || item?.ocultarChecklist;
   const checklistItems = item?.checklist || (item?.etiqueta === "Presidente" ? checklistPresidencia : checklistAsignacion);
   const toggleChecklist = (label) => {
     setChecklist(prev => {
@@ -272,6 +272,55 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors, o
               >
                 {bosquejoLabel}
                 <span aria-hidden="true">›</span>
+              </div>
+            )}
+            {item.estudioHtml && (
+              <a
+                href={item.estudioHtml}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                style={{ marginTop: 10, display: "inline-flex", alignItems: "center", gap: 6, background: C.accent, color: C.onAccent, borderRadius: 7, padding: "7px 10px", fontSize: 12, fontWeight: 900, fontFamily: font, textDecoration: "none" }}
+              >
+                {item.estudioHtmlLabel || "Abrir estudio completo"}
+                <span aria-hidden="true">›</span>
+              </a>
+            )}
+            {item.materiales?.length > 0 && (
+              <div style={{ marginTop: 14, background: C.accentDim, border: `1px solid ${C.accentBorder}`, borderRadius: 8, padding: "12px" }}>
+                <p style={{ margin: "0 0 10px", color: C.accent, fontSize: 11, fontWeight: 900, letterSpacing: 1.2, fontFamily: font }}>MATERIAL SEPARADO</p>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(190px, 1fr))", gap: 10 }}>
+                  {item.materiales.map((material, index) => {
+                    const Tag = material.href ? "a" : "div";
+                    const esSeccion = material.titulo?.toLowerCase().includes("sección") || material.titulo?.toLowerCase().includes("seccion");
+                    const numeroLeccion = material.titulo?.match(/\d+/)?.[0];
+                    const etiquetaMaterial = esSeccion ? "SECCION" : (numeroLeccion ? `LECCION ${numeroLeccion}` : "LECCION");
+                    return (
+                      <Tag
+                        key={`${material.titulo}-${index}`}
+                        {...(material.href ? {
+                          href: material.href,
+                          target: "_blank",
+                          rel: "noreferrer",
+                          onClick: (e) => e.stopPropagation(),
+                        } : {})}
+                        style={{
+                          display: "block",
+                          background: C.card2,
+                          border: `1px solid ${C.accentBorder}`,
+                          borderLeft: `5px solid ${esSeccion ? C.white : C.accent}`,
+                          borderRadius: 7,
+                          padding: "11px 12px",
+                          textDecoration: "none",
+                        }}
+                      >
+                        <span style={{ display: "inline-flex", marginBottom: 7, color: esSeccion ? C.white : C.onAccent, background: esSeccion ? C.card : C.accent, border: `1px solid ${C.accentBorder}`, borderRadius: 999, padding: "2px 8px", fontSize: 9.5, lineHeight: 1.2, fontWeight: 900, letterSpacing: 1.1, fontFamily: font }}>{etiquetaMaterial}</span>
+                        <span style={{ display: "block", color: C.accent, fontSize: 14, lineHeight: 1.25, fontWeight: 900, fontFamily: font }}>{material.titulo}</span>
+                        {material.descripcion && <span style={{ display: "block", color: C.gray, fontSize: 12.5, lineHeight: 1.35, fontWeight: 650, fontFamily: font, marginTop: 3 }}>{material.descripcion}</span>}
+                      </Tag>
+                    );
+                  })}
+                </div>
               </div>
             )}
             {item.contexto && <p style={{ ...sub, fontSize: 13.5, lineHeight: 1.55, marginTop: 8 }}>{item.contexto}</p>}

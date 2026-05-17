@@ -296,7 +296,25 @@ export const REUNIONES_MAYO_2026 = [
         senas: "Discurso, preguntas. Emergencia antes prepararse.",
       }),
       asignacion(9, "Estudio Bíblico de la Congregación", "30 mins", "Adrián Guajardo", null, {
-        senas: "Libro LFB.",
+        senas: "Libro LFB. Lázaro, resurrección, Cena del Señor, amor.",
+        materiales: [
+          {
+            titulo: "Lección 86",
+            descripcion: "Jesús resucita a Lázaro",
+            href: "/estudios-lfb/lfb-leccion-86.html?v=20260517-3#leccion-86",
+          },
+          {
+            titulo: "Introducción a la sección 13",
+            descripcion: "Últimos días, muerte y resurrección de Jesús",
+            href: "/estudios-lfb/lfb-seccion-13.html?v=20260517-3#introduccion-seccion-13",
+          },
+          {
+            titulo: "Lección 87",
+            descripcion: "La última cena de Jesús",
+            href: "/estudios-lfb/lfb-leccion-87.html?v=20260517-3#leccion-87",
+          },
+        ],
+        ocultarChecklist: true,
       }),
     ],
   }),
