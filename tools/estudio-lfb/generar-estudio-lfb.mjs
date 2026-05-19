@@ -273,9 +273,9 @@ const lessonStudies = [
       },
     ],
     meditate: [
-      ["¿Qué me enseña que Jesús llorara?", "Me enseña que Jesús entiende el dolor humano. Su poder no lo hizo distante; su amor lo hizo cercano."],
-      ["¿Qué me enseña la espera de Jesús antes de ir a Betania?", "Que una respuesta que parece tardar no significa abandono. Jehová puede estar preparando algo que fortalezca más la fe."],
-      ["¿Qué me enseña la reacción de los fariseos?", "Que el orgullo puede cerrar los ojos ante pruebas claras. Por eso necesito mantener un corazón enseñable."],
+      ["¿Qué revela de Jesús que primero llorara con sus amigos antes de resolver el problema?", "Revela que Jesús no consuela desde lejos. Aunque sabía que iba a resucitar a Lázaro, se detuvo a sentir el dolor de sus amigos. Eso me ayuda a consolar con ternura antes de tratar de explicar o resolver."],
+      ["Cuando Jehová parece tardar, ¿qué sale a la luz sobre mi confianza en él?", "Sale a la luz si confío solo cuando la respuesta llega rápido o si sigo creyendo que Jehová ve más que yo. La espera puede revelar y fortalecer mi fe."],
+      ["¿Qué me enseña la actitud de los fariseos sobre el peligro de tener el corazón cerrado aun viendo pruebas?", "Que ver pruebas no basta si el orgullo domina el corazón. Necesito mantenerme humilde, dispuesto a dejarme corregir y a alegrarme cuando Jehová actúa."],
     ],
     keyText: {
       quote: "El Dios verdadero es para nosotros un Dios que salva; Jehová, el Señor Soberano, libra de la muerte.",
@@ -752,9 +752,9 @@ const renderSections = () => `
 <section id="meditar" class="meditate">
   ${sectionTitle("meditar")}
   ${[
-    ["¿Qué me enseña que Jesús llorara?", "Me enseña que Jesús entiende el dolor humano. Su poder no lo hizo distante; su amor lo hizo cercano."],
-    ["¿Qué me enseña la espera de Jesús antes de ir a Betania?", "Que una respuesta que parece tardar no significa abandono. Jehová puede estar preparando algo que fortalezca más la fe."],
-    ["¿Qué me enseña la reacción de los fariseos?", "Que el orgullo puede cerrar los ojos ante pruebas claras. Por eso necesito mantener un corazón enseñable."],
+    ["¿Qué revela de Jesús que primero llorara con sus amigos antes de resolver el problema?", "Revela que Jesús no consuela desde lejos. Aunque sabía que iba a resucitar a Lázaro, se detuvo a sentir el dolor de sus amigos. Eso me ayuda a consolar con ternura antes de tratar de explicar o resolver."],
+    ["Cuando Jehová parece tardar, ¿qué sale a la luz sobre mi confianza en él?", "Sale a la luz si confío solo cuando la respuesta llega rápido o si sigo creyendo que Jehová ve más que yo. La espera puede revelar y fortalecer mi fe."],
+    ["¿Qué me enseña la actitud de los fariseos sobre el peligro de tener el corazón cerrado aun viendo pruebas?", "Que ver pruebas no basta si el orgullo domina el corazón. Necesito mantenerme humilde, dispuesto a dejarme corregir y a alegrarme cuando Jehová actúa."],
     ["¿Qué idea de la sección 13 necesito recordar más?", "Que ningún problema es demasiado difícil para Jehová. Si él pudo devolver la vida a Lázaro y resucitar a Jesús, también puede ayudarnos en problemas que parecen imposibles."],
     ["¿Qué me enseña Jesús al servir hasta el final?", "Que el servicio cristiano no depende de que las circunstancias sean fáciles. Jesús siguió ayudando, enseñando y perdonando aun bajo presión."],
     ["¿Cómo puedo imitar a Jesús en la congregación?", "Puedo servir sin buscar atención, escuchar con cariño, perdonar y tratar a los hermanos con amor sincero."],
