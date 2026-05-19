@@ -38,6 +38,8 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
+        ignoreURLParametersMatching: [/^utm_/, /^fbclid$/, /^v$/],
+        navigateFallbackDenylist: [/^\/estudios-lfb\//],
         runtimeCaching: [{
           urlPattern: /^https:\/\/i\.imgur\.com\/.*/i,
           handler: 'CacheFirst',
