@@ -38,6 +38,30 @@ const study = {
 };
 
 const extraStyle = `
+    .app-back{
+      position:fixed;
+      top:18px;
+      left:18px;
+      z-index:80;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:44px;
+      padding:9px 14px;
+      border:1px solid rgba(176,132,66,.45);
+      border-radius:999px;
+      background:rgba(251,246,236,.94);
+      color:var(--forest);
+      box-shadow:0 12px 30px rgba(42,36,28,.14);
+      text-decoration:none;
+      font-family:Inter, system-ui, sans-serif;
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.04em;
+      backdrop-filter:blur(10px);
+    }
+    .app-back:hover{transform:translateY(-2px);}
+    .app-back span{font-size:1.15rem; line-height:1;}
     .lesson-block{
       margin:30px 0;
       padding:24px;
@@ -157,6 +181,13 @@ const extraStyle = `
       font-weight:inherit;
     }
     @media (max-width:700px){
+      .app-back{
+        top:12px;
+        left:12px;
+        min-height:40px;
+        padding:8px 11px;
+        font-size:.74rem;
+      }
       .lesson-block{
         padding:18px 15px;
         margin:24px 0;
@@ -589,7 +620,8 @@ const renderShell = ({ style, script, page = study, content = renderSections(), 
 </head>
 <body>
   <div id="progressBar"></div>
-  <button class="menu-btn" id="openNav" aria-label="Abrir índice">☰</button>
+  <a class="app-back" href="/" aria-label="Volver a la aplicación"><span>←</span> App</a>
+  <button class="nav-toggle" id="openNav" aria-label="Abrir índice">☰</button>
   <div class="overlay" id="overlay"></div>
   <nav class="side-nav" id="sideNav" aria-label="Índice del estudio">
     <div class="side-head"><h3>Índice</h3><button class="close" id="closeNav" aria-label="Cerrar índice">×</button></div>

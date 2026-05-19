@@ -277,8 +277,6 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors, o
             {item.estudioHtml && (
               <a
                 href={item.estudioHtml}
-                target="_blank"
-                rel="noreferrer"
                 onClick={(e) => e.stopPropagation()}
                 style={{ marginTop: 10, display: "inline-flex", alignItems: "center", gap: 6, background: C.accent, color: C.onAccent, borderRadius: 7, padding: "7px 10px", fontSize: 12, fontWeight: 900, fontFamily: font, textDecoration: "none" }}
               >
@@ -300,8 +298,6 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors, o
                         key={`${material.titulo}-${index}`}
                         {...(material.href ? {
                           href: material.href,
-                          target: "_blank",
-                          rel: "noreferrer",
                           onClick: (e) => e.stopPropagation(),
                         } : {})}
                         style={{
