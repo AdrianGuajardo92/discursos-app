@@ -297,3 +297,123 @@ export const PERLAS_ISAIAS_60_61 = {
     },
   ],
 };
+
+export const PERLAS_ISAIAS_65_66 = {
+  numero: 2026052602,
+  tipo: "perlas",
+  titulo: "Perlas escondidas de Isaías 65, 66",
+  tema: "Jehová, paraíso espiritual, nuevo mundo, oración, Gehena.",
+  duracion: "10 mins",
+  fuentes: [
+    "Isaías 65, 66 (Traducción del Nuevo Mundo 2019)",
+    "Isaías 66:24",
+    "Marcos 9:47, 48",
+    "it “Gehena” párrs. 6, 7",
+  ],
+  secciones: [
+    {
+      titulo: "Pregunta marcada en la guía",
+      tiempo: "3 mins",
+      sinNumero: true,
+      lsm: "Isaías 66:24. Gehena. No tortura, destrucción completa.",
+      contenido: [
+        {
+          tipo: "lectura",
+          cita: "Isaías 66:24",
+          texto: "“Y saldrán y mirarán los cadáveres de los hombres que se rebelaron contra mí; porque los gusanos que hay en ellos no morirán y el fuego que los consume no se extinguirá, y serán algo repulsivo para toda la gente”.",
+          seg: "0:30",
+        },
+        {
+          tipo: "pregunta",
+          texto: "¿Cómo ayuda Isaías 66:24 a entender lo que Jesús dijo en Marcos 9:47, 48 sobre la Gehena?",
+        },
+        {
+          tipo: "punto",
+          texto: "Isaías no describe un infierno donde la gente sufre para siempre; habla de una destrucción completa. Por eso, cuando Jesús mencionó la Gehena, estaba enseñando que Jehová puede eliminar definitivamente la maldad.",
+        },
+        {
+          tipo: "referencia",
+          cita: "it “Gehena” párrs. 6, 7",
+          texto: "Idea fácil de explicar: Gehena no significa tormento eterno; representa que Jehová puede eliminar por completo la maldad.",
+        },
+      ],
+    },
+    {
+      titulo: "Textos y comentarios",
+      tiempo: "5 mins",
+      lsm: "Texto, comentario claro, aplicación.",
+      contenido: [
+        {
+          tipo: "lectura",
+          cita: "Isaías 65:13, 14",
+          texto: "Por lo tanto, esto es lo que dice el Señor Soberano Jehová: “¡Miren! Mis siervos comerán, pero ustedes pasarán hambre. ¡Miren! Mis siervos beberán, pero ustedes pasarán sed. ¡Miren! Mis siervos se alegrarán, pero ustedes pasarán vergüenza. ¡Miren! Mis siervos gritarán de alegría por lo bien que se siente su corazón, pero ustedes gritarán por el dolor de su corazón y llorarán por tener destrozado el espíritu.",
+        },
+        {
+          tipo: "punto",
+          texto: "Jehová alimenta espiritualmente a sus siervos mediante la Biblia, las reuniones y la congregación. Por eso, cuando nos acercamos a él, recuperamos el ánimo y sentimos que no estamos solos.",
+        },
+        {
+          tipo: "lectura",
+          cita: "Isaías 65:17",
+          texto: "Porque, ¡miren!, voy a crear unos nuevos cielos y una nueva tierra; y las cosas del pasado no serán recordadas ni vendrán al corazón.",
+        },
+        {
+          tipo: "punto",
+          texto: "Jehová no solo promete arreglar las condiciones del mundo; también promete sanar los recuerdos y dolores que hoy pesan en el corazón. Eso nos ayuda a mirar el futuro con esperanza real.",
+        },
+        {
+          tipo: "lectura",
+          cita: "Isaías 65:24",
+          texto: "Incluso antes de que ellos llamen, yo responderé; mientras todavía estén hablando, yo los escucharé.",
+        },
+        {
+          tipo: "punto",
+          texto: "Jehová conoce nuestras necesidades antes de que terminemos de expresarlas. Esto nos anima a orarle con confianza, aunque no encontremos las palabras perfectas.",
+        },
+        {
+          tipo: "lectura",
+          cita: "Isaías 65:25",
+          texto: "El lobo y el cordero comerán juntos, el león comerá paja igual que el toro, y la serpiente se alimentará de polvo. No harán ningún daño ni destruirán nada en toda mi santa montaña”, dice Jehová.",
+        },
+        {
+          tipo: "punto",
+          texto: "Jehová promete un mundo donde la paz será completa y nadie hará daño. Esta promesa nos recuerda que su Reino no solo quitará los problemas, sino también el miedo y la inseguridad.",
+        },
+        {
+          tipo: "lectura",
+          cita: "Isaías 66:2",
+          texto: "“Mi propia mano hizo todas estas cosas y así fue como todas llegaron a existir”, afirma Jehová. “Así que me fijaré en este: en el que es humilde y tiene el espíritu destrozado, y que tiembla ante mi palabra.",
+        },
+        {
+          tipo: "punto",
+          texto: "Jehová no se fija en la importancia que alguien tenga ante los demás, sino en su humildad y respeto por su Palabra. Eso nos tranquiliza, porque lo que él valora es un corazón dispuesto a obedecer.",
+        },
+        {
+          tipo: "lectura",
+          cita: "Isaías 66:5",
+          texto: "Oigan las palabras de Jehová, ustedes, los que tiemblan ante su palabra: “Sus hermanos, que los odian y los excluyen por causa de mi nombre, dijeron: ‘¡Que Jehová sea glorificado!’. Pero él aparecerá y les traerá alegría a ustedes, y ellos serán los que queden en vergüenza”.",
+        },
+        {
+          tipo: "punto",
+          texto: "Si alguien nos rechaza por servir a Jehová, él lo ve y no nos deja solos. Saber eso nos ayuda a aguantar con dignidad y a esperar con confianza la alegría que Jehová promete dar a sus siervos.",
+        },
+      ],
+    },
+    {
+      titulo: "Cómo usarlo en 10 minutos",
+      tiempo: "2 mins",
+      sinNumero: true,
+      lsm: "Primero pregunta oficial. Luego comentarios breves.",
+      contenido: [
+        {
+          tipo: "punto",
+          texto: "Primero se responde la pregunta oficial de Isaías 66:24. Después se pueden escoger dos o tres textos de la lista y pedir comentarios breves al auditorio.",
+        },
+        {
+          tipo: "destacado",
+          texto: "Fórmula fácil: leer el texto, decir qué enseña de Jehová y cerrar con una aplicación de una sola frase.",
+        },
+      ],
+    },
+  ],
+};

@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { C as fallbackC, font } from "../theme";
 import { savePlaylist, getPlaylist, deletePlaylist, getAllPlaylistMeta } from "../db/indexedDB";
 import { downloadBlob, fmtFileSize } from "../utils/download";
-import { obtenerAsignacionesPersona, resumirAsignacionesPersona } from "../utils/misAsignaciones";
+import { resumirAsignacionesPersona } from "../utils/misAsignaciones";
 import ModalConfirm from "./ModalConfirm";
 import ThemeToggle from "./ThemeToggle";
 
@@ -41,13 +41,6 @@ export default function ListaDiscursos({
   const uploadTargetRef = useRef(null);
   const fileCacheRef = useRef({});
   const hoy = fechaHoyMX();
-  const esCategoriaReuniones = discursos.some(d => d.tipo === "reunion");
-  const misAsignaciones = esCategoriaReuniones
-    ? discursos
-        .flatMap(reunion => obtenerAsignacionesPersona(reunion))
-        .filter(asig => !asig.fecha || asig.fecha >= hoy)
-        .sort((a, b) => String(a.fecha).localeCompare(String(b.fecha)))
-    : [];
 
   // Cargar metadatos de playlists al inicio
   useEffect(() => {
@@ -174,38 +167,6 @@ export default function ListaDiscursos({
       </div>
 
       <div style={{ maxWidth: 720, margin: "0 auto", padding: "18px 14px" }}>
-        {misAsignaciones.length > 0 && (
-          <div style={{ background: C.card, border: `1px solid ${C.accentBorder}`, borderRadius: 10, padding: "15px 16px", marginBottom: 14 }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, marginBottom: 11 }}>
-              <div>
-                <p style={{ margin: "0 0 3px", color: C.accent, fontSize: 11, fontWeight: 900, letterSpacing: 1.2, fontFamily: font }}>MIS PRÓXIMAS ASIGNACIONES</p>
-                <p style={{ margin: 0, color: C.dim, fontSize: 12, fontFamily: font }}>{misAsignaciones.length} pendientes desde hoy</p>
-              </div>
-            </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-              {misAsignaciones.slice(0, 4).map((asig, idx) => {
-                const fechaCorta = asig.fecha === hoy ? "Hoy" : asig.fechaLabel?.replace(/^Martes\s+/i, "") || asig.semana;
-                return (
-                  <button
-                    key={`${asig.reunionNumero}-${asig.tipo}-${idx}`}
-                    onClick={() => {
-                      const reunion = discursos.find(d => d.numero === asig.reunionNumero);
-                      if (reunion) onSelectDiscurso(reunion);
-                    }}
-                    style={{ display: "grid", gridTemplateColumns: "auto minmax(0, 1fr)", gap: 10, alignItems: "center", width: "100%", background: C.card2, border: `1px solid ${C.border}`, borderRadius: 8, padding: "10px 11px", textAlign: "left", cursor: "pointer" }}
-                  >
-                    <span style={{ background: asig.fecha === hoy ? C.accent : C.accentDim, color: asig.fecha === hoy ? C.onAccent : C.accent, border: `1px solid ${C.accentBorder}`, borderRadius: 7, minWidth: 48, padding: "6px 8px", textAlign: "center", fontSize: 11, fontWeight: 900, fontFamily: font }}>{fechaCorta}</span>
-                    <span style={{ minWidth: 0 }}>
-                      <span style={{ display: "block", color: C.white, fontSize: 14, fontWeight: 850, fontFamily: font, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{asig.tipo}</span>
-                      <span style={{ display: "block", color: C.gray, fontSize: 12, fontFamily: font, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{asig.detalle}{asig.tiempo ? ` · ${asig.tiempo}` : ""}</span>
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
         {discursos.length === 0 && (
           <div style={{ textAlign: "center", padding: "60px 20px", color: C.dim }}>
             <p style={{ fontSize: 14, fontFamily: font }}>No hay {categoriaItemLabelPlural} en esta categoría todavía.</p>
@@ -214,15 +175,21 @@ export default function ListaDiscursos({
 
         {discursos.map(d => {
           const esReunion = d.tipo === "reunion";
-          const esHoy = esReunion && d.fecha === fechaHoyMX();
+          const esHoy = esReunion && d.fecha === hoy;
           const badgeText = esReunion ? (d.fecha?.slice(8) || d.numero) : d.numero;
           const miResumen = esReunion ? resumirAsignacionesPersona(d) : null;
           const detalle = esReunion
             ? `${d.fechaLabel || d.semana} · ${d.lectura}`
             : `${d.secciones.length} secciones · ${d.duracion}${d.cancion ? ` · 🎵 Canción ${d.cancion}` : ""}`;
+          const tarjetaBg = esHoy
+            ? `linear-gradient(135deg, ${C.accentDim} 0%, ${C.card} 42%, ${C.card} 100%)`
+            : C.card;
 
           return (
-          <div key={d.numero} style={{ background: C.card, borderRadius: 10, marginBottom: 10, border: `1px solid ${esHoy ? C.accentBorder : C.border}`, display: "flex", alignItems: "stretch", overflow: "hidden", position: "relative", boxShadow: esHoy ? `0 0 0 1px ${C.accentBorder}` : "none" }}>
+          <div key={d.numero} style={{ background: tarjetaBg, borderRadius: 10, marginBottom: 10, border: `${esHoy ? 2 : 1}px solid ${esHoy ? C.accent : C.border}`, display: "flex", alignItems: "stretch", overflow: "hidden", position: "relative", boxShadow: esHoy ? `0 0 0 1px ${C.accentBorder}, 0 14px 28px rgba(0,0,0,0.22)` : "none" }}>
+            {esHoy && (
+              <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 5, background: C.accent }} />
+            )}
             {onDeleteDiscurso && (
               <button
                 onClick={(e) => { e.stopPropagation(); setDiscursoDeleteConfirm(d); }}
@@ -241,26 +208,25 @@ export default function ListaDiscursos({
             )}
             <div
               onClick={() => onSelectDiscurso(d)}
-              style={{ flex: 1, padding: "16px 18px", cursor: "pointer", display: "flex", alignItems: "center", gap: 14, minWidth: 0 }}
+              style={{ flex: 1, padding: esHoy ? "17px 18px 17px 22px" : "16px 18px", cursor: "pointer", display: "flex", alignItems: "center", gap: 14, minWidth: 0 }}
             >
-              <div style={{ width: 46, height: 46, borderRadius: 8, flexShrink: 0, background: C.accentDim, border: `1px solid ${C.accentBorder}`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <span style={{ fontSize: esReunion ? 18 : 20, fontWeight: 800, color: C.accent }}>{badgeText}</span>
+              <div style={{ width: 46, height: 46, borderRadius: 8, flexShrink: 0, background: esHoy ? C.accent : C.accentDim, border: `1px solid ${esHoy ? C.accent : C.accentBorder}`, display: "flex", alignItems: "center", justifyContent: "center", boxShadow: esHoy ? `0 0 0 4px ${C.accentDim}` : "none" }}>
+                <span style={{ fontSize: esReunion ? 18 : 20, fontWeight: 800, color: esHoy ? C.onAccent : C.accent }}>{badgeText}</span>
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 7, minWidth: 0 }}>
                   <h3 style={{ fontSize: 15, fontWeight: 700, color: C.white, margin: "0 0 3px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontFamily: font }}>{d.titulo}</h3>
-                  {esHoy && <span style={{ background: C.accent, color: C.onAccent, borderRadius: 999, padding: "2px 7px", fontSize: 9, fontWeight: 900, fontFamily: font, flexShrink: 0 }}>HOY</span>}
-                  {miResumen && <span style={{ background: C.accentDim, color: C.accent, border: `1px solid ${C.accentBorder}`, borderRadius: 999, padding: "2px 7px", fontSize: 9, fontWeight: 900, fontFamily: font, flexShrink: 0 }}>TE TOCA</span>}
+                  {miResumen && <span style={{ background: C.accentDim, color: C.accent, border: `1px solid ${C.accentBorder}`, borderRadius: 999, padding: "2px 7px", fontSize: 9, fontWeight: 900, fontFamily: font, flexShrink: 0 }}>ASIGNADO</span>}
                 </div>
                 <span style={{ fontSize: 11, color: C.dim, display: "block", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{detalle}</span>
                 {miResumen && (
-                  <span style={{ fontSize: 11, color: C.accent, display: "block", marginTop: 3, fontWeight: 800, fontFamily: font, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>Te toca: {miResumen}</span>
+                  <span style={{ fontSize: 11, color: C.accent, display: "block", marginTop: 3, fontWeight: 800, fontFamily: font, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>Asignación: {miResumen}</span>
                 )}
               </div>
               <span style={{ color: C.dim, fontSize: 16, flexShrink: 0 }}>›</span>
             </div>
 
-            <div style={{ flexShrink: 0, borderLeft: `1px solid ${C.border}`, display: "flex", alignItems: "center", padding: "8px 10px", gap: 10 }}>
+            <div style={{ flexShrink: 0, borderLeft: `1px solid ${esHoy ? C.accentBorder : C.border}`, background: esHoy ? C.accentDim : "transparent", display: "flex", alignItems: "center", padding: "8px 10px", gap: 10 }}>
               {esReunion ? (
                 <div style={{ minWidth: 108, maxWidth: 130, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 4, textAlign: "center" }}>
                   <span style={{ fontSize: 9, color: C.dim, fontWeight: 900, letterSpacing: 1, fontFamily: font }}>PRESIDE</span>

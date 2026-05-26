@@ -172,6 +172,78 @@ const extraStyle = `
     .lesson-qa p{
       margin:0;
     }
+    .lesson-jump{
+      margin-top:24px;
+      padding:18px;
+      border-color:rgba(176,132,66,.36);
+      background:linear-gradient(135deg, rgba(255,250,241,.82), rgba(239,224,189,.38));
+    }
+    .lesson-jump-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:12px;
+    }
+    .lesson-jump-link{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      min-height:92px;
+      padding:16px 18px;
+      border:1px solid rgba(47,74,58,.18);
+      border-radius:18px;
+      background:rgba(255,255,255,.58);
+      box-shadow:0 12px 26px rgba(42,36,28,.08);
+      color:var(--forest);
+      text-decoration:none;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .lesson-jump-link:hover{
+      transform:translateY(-2px);
+      border-color:rgba(176,132,66,.55);
+      box-shadow:0 16px 32px rgba(42,36,28,.12);
+    }
+    .lesson-jump-copy{
+      min-width:0;
+    }
+    .lesson-jump-copy small{
+      display:block;
+      margin-bottom:5px;
+      color:var(--gold);
+      font-family:Inter, system-ui, sans-serif;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .lesson-jump-copy strong{
+      display:block;
+      overflow-wrap:anywhere;
+      color:var(--forest);
+      font-family:Fraunces, serif;
+      font-size:1.28rem;
+      line-height:1.05;
+    }
+    .lesson-jump-copy span{
+      display:block;
+      margin-top:4px;
+      color:var(--muted);
+      font-size:.9rem;
+      font-weight:800;
+    }
+    .lesson-jump-arrow{
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:var(--forest);
+      color:#fff;
+      font-family:Inter, system-ui, sans-serif;
+      font-size:1.3rem;
+      font-weight:900;
+    }
     .lesson-block p:first-of-type:first-letter{
       float:none;
       font-size:inherit;
@@ -192,6 +264,13 @@ const extraStyle = `
         padding:18px 15px;
         margin:24px 0;
         border-radius:18px;
+      }
+      .lesson-jump{
+        padding:14px;
+      }
+      .lesson-jump-link{
+        min-height:84px;
+        padding:14px;
       }
     }
 `;
@@ -501,6 +580,19 @@ const may26LessonStudies = [
     roman: "lxxxviii",
     title: "Arrestan a Jesús",
     meta: ["Mateo 26:36-57; Marcos 14:32-50", "Lucas 22:39-54; Juan 18:1-14, 19-24", "PDF págs. 206-207"],
+    indexLinks: [
+      { id: "leccion-88", icon: "📖", title: "Lección 88", href: "#leccion-88" },
+      { id: "leccion-89", icon: "📖", title: "Lección 89", href: "/estudios-lfb/lfb-leccion-89.html?v=20260526-1#leccion-89" },
+    ],
+    jumpLinks: [
+      {
+        label: "Siguiente",
+        title: "Lección 89",
+        body: "Pedro niega a Jesús",
+        href: "/estudios-lfb/lfb-leccion-89.html?v=20260526-1#leccion-89",
+        arrow: "→",
+      },
+    ],
     situarte: {
       when: "Jardín de Getsemaní, después de la última cena, ya entrada la noche.",
       intro: [
@@ -619,6 +711,19 @@ const may26LessonStudies = [
     roman: "lxxxix",
     title: "Pedro niega a Jesús",
     meta: ["Mateo 26:31-35, 57-27:2", "Lucas 22:55-71; Juan 18:15-18, 25-28", "PDF págs. 208-209"],
+    indexLinks: [
+      { id: "leccion-88", icon: "📖", title: "Lección 88", href: "/estudios-lfb/lfb-leccion-88.html?v=20260526-1#leccion-88" },
+      { id: "leccion-89", icon: "📖", title: "Lección 89", href: "#leccion-89" },
+    ],
+    jumpLinks: [
+      {
+        label: "Anterior",
+        title: "Lección 88",
+        body: "Arrestan a Jesús",
+        href: "/estudios-lfb/lfb-leccion-88.html?v=20260526-1#leccion-88",
+        arrow: "←",
+      },
+    ],
     situarte: {
       when: "Casa de Caifás, durante la noche y la madrugada después del arresto de Jesús.",
       intro: [
@@ -649,27 +754,34 @@ const may26LessonStudies = [
       ["Juicio contra Jesús", "El Sanedrín acusa a Jesús de blasfemia porque él afirma ser el Hijo de Dios."],
     ],
     story: [
-      "Antes de aquella noche, Pedro estaba seguro de que nunca abandonaría a Jesús. Pero Jesús conocía mejor la situación y le dijo que lo negaría tres veces. Después del arresto, Pedro sigue a Jesús de lejos y entra al patio de la casa de Caifás.",
-      "Allí, cerca del fuego, varias personas reconocen a Pedro. La presión aumenta poco a poco. En vez de identificarse como discípulo, Pedro niega conocer a Jesús. Cuando lo hace por tercera vez, canta el gallo y Pedro recuerda las palabras de su Maestro. Sale y llora amargamente.",
-      "Dentro de la casa, la escena es muy diferente. Jesús está frente al tribunal religioso. Los líderes ya quieren matarlo y buscan una acusación. Caifás le pregunta si es el Hijo de Dios. Jesús no niega la verdad. Por eso lo acusan de blasfemia y deciden que debe morir.",
-      "La lección ayuda a ver dos cosas: Pedro cayó por miedo, pero no se quedó endurecido; Jesús, en cambio, se mantuvo firme aunque sabía que eso lo llevaría a sufrir más.",
+      "Todo empezó unas horas antes, en la habitación donde Jesús había comido la última cena con sus apóstoles. El ambiente era serio. Jesús les dijo que aquella noche todos lo abandonarían. Pedro no podía imaginarse haciendo eso. Con seguridad le dijo que, aunque otros lo dejaran, él nunca lo haría. Pero Jesús conocía el corazón de Pedro y también la presión que venía. Le advirtió que, antes de que cantara un gallo, diría tres veces que no lo conocía.",
+      "Después del arresto, llevaron a Jesús a la casa de Caifás. La mayoría de los apóstoles ya había huido, pero Pedro y otro discípulo siguieron de lejos. Pedro logró entrar al patio y se acercó a un fuego para calentarse. La noche era fría, y la luz de las llamas le iluminó el rostro. Entonces una sirvienta lo miró y lo reconoció: él había estado con Jesús.",
+      "La presión cayó sobre Pedro de golpe. En vez de decir que era discípulo de Jesús, lo negó. Se movió hacia la entrada, quizá tratando de pasar desapercibido, pero otra sirvienta lo señaló delante de los demás. Pedro volvió a negarlo. Luego otra persona insistió en que él era de los discípulos; hasta su manera de hablar lo delataba como galileo. Atrapado por el miedo, Pedro negó por tercera vez conocer a Jesús.",
+      "En ese instante cantó un gallo. Y entonces pasó algo que debió atravesarle el corazón: Pedro vio que Jesús lo miraba. No fue necesario decir nada más. Pedro recordó la advertencia de su Maestro y entendió lo que acababa de hacer. Salió de allí y lloró profundamente. Su dolor mostraba que no quería alejarse de Jesús, pero esa noche el miedo lo había vencido.",
+      "Mientras Pedro lloraba afuera, dentro de la casa los líderes religiosos buscaban cómo condenar a Jesús. Ya querían matarlo, pero necesitaban una acusación. Caifás le preguntó directamente si era el Hijo de Dios. Jesús no escondió la verdad ni trató de salvarse con una mentira. Respondió con dignidad, y ellos usaron sus palabras para acusarlo de blasfemia.",
+      "Después lo trataron con crueldad: lo insultaron, lo golpearon y se burlaron de él. Al amanecer volvieron a interrogarlo, y otra vez Jesús se mantuvo firme. Finalmente lo llevaron al palacio del gobernador romano Poncio Pilato. La escena deja dos imágenes muy fuertes: Pedro llorando por su caída, y Jesús permaneciendo fiel aunque todos lo estaban presionando para condenarlo.",
     ],
     quote: "No es cierto.",
     questions: [
       {
         question: "¿Qué pasó en el patio de la casa de Caifás?",
+        senas: "Hombre, Caifás, casa, ¿qué pasó?",
         answer: "Pedro estaba calentándose cerca del fuego cuando varias personas lo reconocieron como discípulo de Jesús. Por miedo, negó tres veces conocerlo. Entonces cantó el gallo, Pedro recordó lo que Jesús le había dicho y salió llorando amargamente.",
       },
       {
         question: "El tribunal condenó a muerte a Jesús, ¿por qué razón?",
+        senas: "Ellos, sumo sacerdote, autoridad, tú, Jesucristo, castigo, morir. ¿Por qué?",
         answer: "Porque Jesús reconoció que era el Hijo de Dios. Los líderes religiosos lo acusaron de blasfemia, aunque en realidad ya estaban decididos a matarlo y solo buscaban una razón para condenarlo.",
       },
     ],
     meditate: [
-      ["¿Por qué es peligroso confiar demasiado en mí mismo?", "Pedro estaba seguro de que no fallaría, pero la presión lo venció. Eso me recuerda que necesito orar, ser humilde y no pensar que soy fuerte por mí mismo."],
-      ["¿Qué diferencia hubo entre Pedro y los líderes religiosos?", "Pedro falló, pero se quebró por dentro y lloró. Los líderes, en cambio, se endurecieron y condenaron a Jesús a pesar de las pruebas."],
-      ["¿Qué me enseña Jesús cuando no niega quién es?", "Me enseña a defender la verdad con dignidad. No necesito ser agresivo, pero sí debo ser fiel y claro cuando mi lealtad a Jehová esté en juego."],
+      ["¿Qué nos enseña que Pedro estuviera tan seguro de que no iba a fallar?", "Nos enseña que las buenas intenciones no bastan. Pedro amaba a Jesús, pero necesitaba humildad, oración y reconocer que bajo presión cualquiera puede debilitarse."],
+      ["¿Por qué creen que Pedro negó conocer a Jesús si en realidad lo amaba?", "Porque el miedo y la presión del momento lo dominaron. Esta pregunta ayuda al auditorio a ver que una persona fiel puede fallar si se confía demasiado o si intenta enfrentar la presión con sus propias fuerzas."],
+      ["¿Qué diferencia vemos entre el corazón de Pedro y el de los líderes religiosos?", "Pedro cayó, pero reaccionó con dolor sincero. Los líderes religiosos, en cambio, estaban decididos a condenar a Jesús aunque no encontraban una acusación justa. Uno se quebró y podía recuperarse; los otros se endurecieron."],
+      ["¿Qué nos enseña Jesús al decir la verdad aunque sabía que eso lo iba a poner en más peligro?", "Nos enseña fidelidad y dignidad. Jesús no negó quién era ni trató de salvarse con una mentira. Se mantuvo leal a Jehová aun cuando decir la verdad le costaría sufrir más."],
+      ["¿Cómo puede ayudar esta historia a alguien que cometió un error y se siente muy mal?", "Le recuerda que fallar no tiene que ser el final. Pedro lloró porque su corazón seguía sensible. Si una persona se arrepiente de verdad y vuelve a Jehová, puede recibir ayuda y recuperarse."],
     ],
+    meditateTitle: "Preguntas para el auditorio",
     keyText: {
       quote: "Aunque no estoy solo, porque el Padre está conmigo.",
       cite: "Juan 16:32",
@@ -727,6 +839,24 @@ const may26LessonStudies = [
 ];
 
 const list = (items) => `<ul class="study-list">${items.map((item) => `<li>${e(item)}</li>`).join("\n")}</ul>`;
+
+const lessonJumpLinks = (lesson) => {
+  if (!lesson.jumpLinks?.length) return "";
+
+  return `
+    <div class="study-part lesson-jump">
+      <h4>Continuar el estudio</h4>
+      <div class="lesson-jump-grid">
+${lesson.jumpLinks.map(({ label, title, body, href, arrow }) => `        <a class="lesson-jump-link" href="${e(href)}">
+          <div class="lesson-jump-copy">
+            <small>${e(label)}</small>
+            <strong>${e(title)}</strong>
+${body ? `            <span>${e(body)}</span>\n` : ""}          </div>
+          <span class="lesson-jump-arrow" aria-hidden="true">${e(arrow || "→")}</span>
+        </a>`).join("\n")}
+      </div>
+    </div>`;
+};
 
 const lessonStudyBlock = (lesson) => `
     <div class="lesson-block" id="${e(lesson.id)}">
@@ -845,7 +975,7 @@ const lessonPage = (lesson) => ({
   roman: lesson.roman || (lesson.label.includes("86") ? "lxxxvi" : "lxxxvii"),
   subtitle: `Estudio completo de ${lesson.label.toLowerCase()}, con el mismo formato de preparación para dirigir y repasar.`,
   meta: lesson.meta,
-  nav: [[lesson.id, "i", "📖", lesson.label]],
+  nav: lesson.indexLinks?.map(({ id, icon, title, href }) => [id, "", icon, title, href]) || [[lesson.id, "i", "📖", lesson.label]],
 });
 
 const sectionPage = (section) => ({
@@ -861,7 +991,7 @@ const standaloneLessonContent = (lesson) => `
 <section>
   <div class="story">
     <div class="ornament">❦</div>
-    ${lessonStudyBlock(lesson)}
+    ${lessonStudyBlock(lesson)}${lessonJumpLinks(lesson)}
     <div class="ornament">❦</div>
   </div>
 </section>`;
@@ -909,7 +1039,7 @@ const renderShell = ({ style, script, page = study, content = renderSections(), 
   <div class="overlay" id="overlay"></div>
   <nav class="side-nav" id="sideNav" aria-label="Índice del estudio">
     <div class="side-head"><h3>Índice</h3><button class="close" id="closeNav" aria-label="Cerrar índice">×</button></div>
-    ${pageNav.map(([id, roman, icon, title]) => `<a href="#${id}"><em>${roman}</em> ${icon} ${e(title)}</a>`).join("\n    ")}
+    ${pageNav.map(([id, , icon, title, href]) => `<a href="${e(href || `#${id}`)}">${e(icon)} ${e(title)}</a>`).join("\n    ")}
   </nav>
   <button class="top-btn" id="topBtn" aria-label="Volver arriba">↑</button>
 
@@ -917,7 +1047,6 @@ const renderShell = ({ style, script, page = study, content = renderSections(), 
     <div class="wrap">
       <div class="hero-card">
         <div class="eyebrow">${e(page.eyebrow)}</div>
-        <div class="roman">${e(page.roman)}</div>
         <h1>${e(page.title)}</h1>
         <p class="subtitle">${e(page.subtitle)}</p>
         <div class="hero-meta">

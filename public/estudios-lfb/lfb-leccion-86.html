@@ -611,6 +611,78 @@
     .lesson-qa p{
       margin:0;
     }
+    .lesson-jump{
+      margin-top:24px;
+      padding:18px;
+      border-color:rgba(176,132,66,.36);
+      background:linear-gradient(135deg, rgba(255,250,241,.82), rgba(239,224,189,.38));
+    }
+    .lesson-jump-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:12px;
+    }
+    .lesson-jump-link{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      min-height:92px;
+      padding:16px 18px;
+      border:1px solid rgba(47,74,58,.18);
+      border-radius:18px;
+      background:rgba(255,255,255,.58);
+      box-shadow:0 12px 26px rgba(42,36,28,.08);
+      color:var(--forest);
+      text-decoration:none;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .lesson-jump-link:hover{
+      transform:translateY(-2px);
+      border-color:rgba(176,132,66,.55);
+      box-shadow:0 16px 32px rgba(42,36,28,.12);
+    }
+    .lesson-jump-copy{
+      min-width:0;
+    }
+    .lesson-jump-copy small{
+      display:block;
+      margin-bottom:5px;
+      color:var(--gold);
+      font-family:Inter, system-ui, sans-serif;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .lesson-jump-copy strong{
+      display:block;
+      overflow-wrap:anywhere;
+      color:var(--forest);
+      font-family:Fraunces, serif;
+      font-size:1.28rem;
+      line-height:1.05;
+    }
+    .lesson-jump-copy span{
+      display:block;
+      margin-top:4px;
+      color:var(--muted);
+      font-size:.9rem;
+      font-weight:800;
+    }
+    .lesson-jump-arrow{
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:var(--forest);
+      color:#fff;
+      font-family:Inter, system-ui, sans-serif;
+      font-size:1.3rem;
+      font-weight:900;
+    }
     .lesson-block p:first-of-type:first-letter{
       float:none;
       font-size:inherit;
@@ -632,6 +704,13 @@
         margin:24px 0;
         border-radius:18px;
       }
+      .lesson-jump{
+        padding:14px;
+      }
+      .lesson-jump-link{
+        min-height:84px;
+        padding:14px;
+      }
     }
 </style>
 </head>
@@ -642,7 +721,7 @@
   <div class="overlay" id="overlay"></div>
   <nav class="side-nav" id="sideNav" aria-label="Índice del estudio">
     <div class="side-head"><h3>Índice</h3><button class="close" id="closeNav" aria-label="Cerrar índice">×</button></div>
-    <a href="#leccion-86"><em>i</em> 📖 Lección 86</a>
+    <a href="#leccion-86">📖 Lección 86</a>
   </nav>
   <button class="top-btn" id="topBtn" aria-label="Volver arriba">↑</button>
 
@@ -650,7 +729,6 @@
     <div class="wrap">
       <div class="hero-card">
         <div class="eyebrow">Lecciones que aprendo de la Biblia</div>
-        <div class="roman">lxxxvi</div>
         <h1>Lección 86: Jesús resucita a Lázaro</h1>
         <p class="subtitle">Estudio completo de lección 86, con el mismo formato de preparación para dirigir y repasar.</p>
         <div class="hero-meta">

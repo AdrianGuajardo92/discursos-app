@@ -2,52 +2,13 @@ import { useState } from "react";
 import { C as fallbackC, font } from "../theme";
 import { esAsignacionDePersona } from "../utils/misAsignaciones";
 
-const getChecklistInicial = (key) => {
-  if (!key) return [];
-  try {
-    const value = localStorage.getItem(key);
-    return value ? JSON.parse(value) : [];
-  } catch {
-    return [];
-  }
-};
-
-const checklistPresidencia = [
-  "Programa revisado",
-  "Transiciones listas",
-  "Conclusión lista",
-  "Asignaciones de la próxima semana revisadas",
-];
-
-const checklistAsignacion = [
-  "Material revisado",
-  "Puntos clave listos",
-  "Ensayado",
-  "Listo para presentar",
-];
-
 export default function ContentRenderer({ item, reunion, seccion, themeColors, onAbrirDiscurso }) {
   const C = themeColors || fallbackC;
   const [detalleAbierto, setDetalleAbierto] = useState(false);
-  const checklistKey = reunion?.numero && item?.tipo === "asignacion"
-    ? `mis_asignaciones_checklist:${reunion.numero}:${seccion?.titulo || "sin-seccion"}:${item.numero || item.etiqueta || item.titulo}`
-    : null;
-  const [checklist, setChecklist] = useState(() => getChecklistInicial(checklistKey));
   const txt = { fontSize: 17, lineHeight: 1.8, color: C.white, marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0, fontFamily: font };
   const sub = { ...txt, color: C.gray, fontSize: 15.5 };
   const chip = { border: `1px solid ${C.accentBorder}`, background: C.accentDim, color: C.accent, borderRadius: 999, padding: "3px 9px", fontSize: 11, fontWeight: 800, fontFamily: font };
   const esPropia = item?.tipo === "asignacion" && esAsignacionDePersona(item);
-  const ocultarChecklist = item?.etiqueta === "Presidente" || item?.ocultarChecklist;
-  const checklistItems = item?.checklist || (item?.etiqueta === "Presidente" ? checklistPresidencia : checklistAsignacion);
-  const toggleChecklist = (label) => {
-    setChecklist(prev => {
-      const next = prev.includes(label)
-        ? prev.filter(item => item !== label)
-        : [...prev, label];
-      if (checklistKey) localStorage.setItem(checklistKey, JSON.stringify(next));
-      return next;
-    });
-  };
 
   switch (item.tipo) {
     case "punto":
@@ -246,9 +207,12 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors, o
           } : undefined}
           role={esBosquejoAbrible ? "button" : undefined}
           tabIndex={esBosquejoAbrible ? 0 : undefined}
-          style={{ background: C.card2, borderRadius: 8, padding: "15px 16px", margin: "12px 0", border: `1px solid ${esBosquejoAbrible ? C.accentBorder : C.border}`, display: "flex", gap: 14, alignItems: "flex-start", cursor: esBosquejoAbrible ? "pointer" : "default", boxShadow: esBosquejoAbrible ? `0 0 0 1px ${C.accentBorder}` : "none" }}
+          style={{ background: esPropia ? `linear-gradient(135deg, ${C.accentDim} 0%, ${C.card2} 42%, ${C.card2} 100%)` : C.card2, borderRadius: 8, padding: esPropia ? "15px 16px 15px 20px" : "15px 16px", margin: "12px 0", border: `${esPropia ? 2 : 1}px solid ${esPropia ? C.accent : (esBosquejoAbrible ? C.accentBorder : C.border)}`, display: "flex", gap: 14, alignItems: "flex-start", cursor: esBosquejoAbrible ? "pointer" : "default", boxShadow: esPropia ? `0 0 0 1px ${C.accentBorder}, 0 14px 28px rgba(0,0,0,0.22)` : (esBosquejoAbrible ? `0 0 0 1px ${C.accentBorder}` : "none"), position: "relative", overflow: "hidden" }}
         >
-          <div style={{ width: 38, minHeight: 38, borderRadius: 8, flexShrink: 0, background: C.accentDim, border: `1px solid ${C.accentBorder}`, color: C.accent, display: "flex", alignItems: "center", justifyContent: "center", fontSize: item.numero ? 16 : 10, fontWeight: 900, fontFamily: font, textAlign: "center", lineHeight: 1.1, padding: item.numero ? 0 : "0 4px" }}>
+          {esPropia && (
+            <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 5, background: C.accent }} />
+          )}
+          <div style={{ width: 38, minHeight: 38, borderRadius: 8, flexShrink: 0, background: esPropia ? C.accent : C.accentDim, border: `1px solid ${esPropia ? C.accent : C.accentBorder}`, color: esPropia ? C.onAccent : C.accent, display: "flex", alignItems: "center", justifyContent: "center", fontSize: item.numero ? 16 : 10, fontWeight: 900, fontFamily: font, textAlign: "center", lineHeight: 1.1, padding: item.numero ? 0 : "0 4px", boxShadow: esPropia ? `0 0 0 4px ${C.accentDim}` : "none" }}>
             {item.numero || item.etiqueta}
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
@@ -321,30 +285,6 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors, o
             )}
             {item.contexto && <p style={{ ...sub, fontSize: 13.5, lineHeight: 1.55, marginTop: 8 }}>{item.contexto}</p>}
             {item.nota && <p style={{ ...sub, fontSize: 13.5, lineHeight: 1.55, marginTop: 8 }}>{item.nota}</p>}
-            {esPropia && !ocultarChecklist && (
-              <div style={{ marginTop: 12, background: C.accentDim, border: `1px solid ${C.accentBorder}`, borderRadius: 8, padding: "10px 11px" }}>
-                <p style={{ margin: "0 0 8px", color: C.accent, fontSize: 10, fontWeight: 900, letterSpacing: 1.2, fontFamily: font }}>MI CHECKLIST</p>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(155px, 1fr))", gap: 7 }}>
-                  {checklistItems.map((label) => {
-                    const checked = checklist.includes(label);
-                    return (
-                      <label
-                        key={label}
-                        style={{ display: "flex", alignItems: "center", gap: 8, background: C.card, border: `1px solid ${checked ? C.accentBorder : C.border}`, borderRadius: 7, padding: "8px 9px", cursor: "pointer" }}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          onChange={() => toggleChecklist(label)}
-                          style={{ accentColor: C.accent, width: 14, height: 14, flexShrink: 0 }}
-                        />
-                        <span style={{ color: checked ? C.white : C.gray, fontSize: 12.5, lineHeight: 1.25, fontWeight: checked ? 800 : 650, fontFamily: font }}>{label}</span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
             {item.preparacion && (
               <div style={{ marginTop: 12 }}>
                 <button

@@ -4,19 +4,6 @@ import ContentRenderer from "./ContentRenderer";
 import ThemeToggle from "./ThemeToggle";
 import VistaBosquejo from "./VistaBosquejo";
 
-const fechaHoyMX = () => {
-  try {
-    return new Intl.DateTimeFormat("en-CA", {
-      timeZone: "America/Mexico_City",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }).format(new Date());
-  } catch {
-    return new Date().toISOString().slice(0, 10);
-  }
-};
-
 function InfoCard({ label, value, detail, themeColors }) {
   const C = themeColors || fallbackC;
   return (
@@ -31,7 +18,6 @@ function InfoCard({ label, value, detail, themeColors }) {
 export default function VistaReunion({ reunion, onVolver, onModoDiscurso, theme, onThemeChange, themeColors }) {
   const C = themeColors || fallbackC;
   const [bosquejoAbierto, setBosquejoAbierto] = useState(null);
-  const esHoy = reunion.fecha === fechaHoyMX();
   const canciones = reunion.canciones
     ? [reunion.canciones.inicial, reunion.canciones.intermedia, reunion.canciones.final].filter(Boolean).join(", ")
     : "";
@@ -62,11 +48,6 @@ export default function VistaReunion({ reunion, onVolver, onModoDiscurso, theme,
 
       <div style={{ maxWidth: 760, margin: "0 auto", padding: "24px 18px 80px" }}>
         <div style={{ textAlign: "center", marginBottom: 24 }}>
-          {esHoy && (
-            <span style={{ display: "inline-flex", marginBottom: 9, background: C.accent, color: C.onAccent, borderRadius: 999, padding: "4px 11px", fontSize: 11, fontWeight: 900, letterSpacing: 1.2, fontFamily: font }}>
-              HOY
-            </span>
-          )}
           <span style={{ display: "block", fontSize: 11, fontWeight: 800, color: C.dim, letterSpacing: 2.2, fontFamily: font }}>{reunion.fechaLabel}</span>
           <h1 style={{ fontSize: 24, fontWeight: 900, color: C.white, margin: "8px 0 6px", lineHeight: 1.25, fontFamily: font }}>{reunion.titulo}</h1>
           <p style={{ fontSize: 13, color: C.gray, margin: 0, lineHeight: 1.45, fontFamily: font }}>

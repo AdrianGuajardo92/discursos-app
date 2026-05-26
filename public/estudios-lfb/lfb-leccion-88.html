@@ -611,6 +611,78 @@
     .lesson-qa p{
       margin:0;
     }
+    .lesson-jump{
+      margin-top:24px;
+      padding:18px;
+      border-color:rgba(176,132,66,.36);
+      background:linear-gradient(135deg, rgba(255,250,241,.82), rgba(239,224,189,.38));
+    }
+    .lesson-jump-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:12px;
+    }
+    .lesson-jump-link{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      min-height:92px;
+      padding:16px 18px;
+      border:1px solid rgba(47,74,58,.18);
+      border-radius:18px;
+      background:rgba(255,255,255,.58);
+      box-shadow:0 12px 26px rgba(42,36,28,.08);
+      color:var(--forest);
+      text-decoration:none;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .lesson-jump-link:hover{
+      transform:translateY(-2px);
+      border-color:rgba(176,132,66,.55);
+      box-shadow:0 16px 32px rgba(42,36,28,.12);
+    }
+    .lesson-jump-copy{
+      min-width:0;
+    }
+    .lesson-jump-copy small{
+      display:block;
+      margin-bottom:5px;
+      color:var(--gold);
+      font-family:Inter, system-ui, sans-serif;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .lesson-jump-copy strong{
+      display:block;
+      overflow-wrap:anywhere;
+      color:var(--forest);
+      font-family:Fraunces, serif;
+      font-size:1.28rem;
+      line-height:1.05;
+    }
+    .lesson-jump-copy span{
+      display:block;
+      margin-top:4px;
+      color:var(--muted);
+      font-size:.9rem;
+      font-weight:800;
+    }
+    .lesson-jump-arrow{
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:var(--forest);
+      color:#fff;
+      font-family:Inter, system-ui, sans-serif;
+      font-size:1.3rem;
+      font-weight:900;
+    }
     .lesson-block p:first-of-type:first-letter{
       float:none;
       font-size:inherit;
@@ -631,6 +703,13 @@
         padding:18px 15px;
         margin:24px 0;
         border-radius:18px;
+      }
+      .lesson-jump{
+        padding:14px;
+      }
+      .lesson-jump-link{
+        min-height:84px;
+        padding:14px;
       }
     }
 
@@ -663,7 +742,8 @@
   <div class="overlay" id="overlay"></div>
   <nav class="side-nav" id="sideNav" aria-label="Índice del estudio">
     <div class="side-head"><h3>Índice</h3><button class="close" id="closeNav" aria-label="Cerrar índice">×</button></div>
-    <a href="#leccion-88"><em>i</em> 📖 Lección 88</a>
+    <a href="#leccion-88">📖 Lección 88</a>
+    <a href="/estudios-lfb/lfb-leccion-89.html?v=20260526-1#leccion-89">📖 Lección 89</a>
   </nav>
   <button class="top-btn" id="topBtn" aria-label="Volver arriba">↑</button>
 
@@ -671,7 +751,6 @@
     <div class="wrap">
       <div class="hero-card">
         <div class="eyebrow">Lecciones que aprendo de la Biblia</div>
-        <div class="roman">lxxxviii</div>
         <h1>Lección 88: Arrestan a Jesús</h1>
         <p class="subtitle">Estudio completo de lección 88, con el mismo formato de preparación para dirigir y repasar.</p>
         <div class="hero-meta">
@@ -880,6 +959,19 @@
 <div class="final-block"><div><span class="ref">Lucas 22:39-54</span><p>Muestra la oración de Jesús, el fortalecimiento que recibió y la curación de Malco.</p></div></div>
 <div class="final-block"><div><span class="ref">Juan 18:1-14, 19-24</span><p>Presenta a Jesús enfrentando el arresto con calma y siendo llevado ante las autoridades religiosas.</p></div></div>
         </div>
+      </div>
+    </div>
+    <div class="study-part lesson-jump">
+      <h4>Continuar el estudio</h4>
+      <div class="lesson-jump-grid">
+        <a class="lesson-jump-link" href="/estudios-lfb/lfb-leccion-89.html?v=20260526-1#leccion-89">
+          <div class="lesson-jump-copy">
+            <small>Siguiente</small>
+            <strong>Lección 89</strong>
+            <span>Pedro niega a Jesús</span>
+          </div>
+          <span class="lesson-jump-arrow" aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
     <div class="ornament">❦</div>
