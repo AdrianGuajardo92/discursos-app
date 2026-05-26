@@ -342,7 +342,22 @@ export const REUNIONES_MAYO_2026 = [
     ],
     vida: [
       asignacion(8, "¿Tendrás tú una vida llena de cosas buenas?", "15 mins", "Mauricio Chávez"),
-      asignacion(9, "Estudio Bíblico de la Congregación", "30 mins", "Carlos Ramos"),
+      asignacion(9, "Estudio Bíblico de la Congregación", "30 mins", "Adrián Guajardo", null, {
+        senas: "Libro LFB. Getsemaní, arresto, Pedro, Caifás, juicio.",
+        materiales: [
+          {
+            titulo: "Lección 88",
+            descripcion: "Arrestan a Jesús",
+            href: "/estudios-lfb/lfb-leccion-88.html?v=20260526-1#leccion-88",
+          },
+          {
+            titulo: "Lección 89",
+            descripcion: "Pedro niega a Jesús",
+            href: "/estudios-lfb/lfb-leccion-89.html?v=20260526-1#leccion-89",
+          },
+        ],
+        ocultarChecklist: true,
+      }),
     ],
   }),
 ];

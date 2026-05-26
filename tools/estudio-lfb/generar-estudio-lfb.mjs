@@ -453,6 +453,250 @@ const sectionStudy = {
   ],
 };
 
+const studyMay26 = {
+  slug: "lfb-lecciones-88-89",
+  title: "Lecciones 88 y 89",
+  eyebrow: "Lecciones que aprendo de la Biblia",
+  roman: "lxxxviii · lxxxix",
+  subtitle: "Estudio completo de las lecciones 88 y 89, preparado para dirigir el Estudio Bíblico de la Congregación.",
+  meta: [
+    "Mateo 26:36-57",
+    "Lucas 22:39-71",
+    "Juan 18:1-28",
+    "PDF págs. 206-209",
+    "30 minutos",
+  ],
+  nav: [
+    ["leccion-88", "lxxxviii", "📖", "Lección 88"],
+    ["leccion-89", "lxxxix", "📖", "Lección 89"],
+  ],
+};
+
+const may26LessonStudies = [
+  {
+    id: "leccion-88",
+    label: "Lección 88",
+    roman: "lxxxviii",
+    title: "Arrestan a Jesús",
+    meta: ["Mateo 26:36-57; Marcos 14:32-50", "Lucas 22:39-54; Juan 18:1-14, 19-24", "PDF págs. 206-207"],
+    situarte: {
+      when: "Jardín de Getsemaní, después de la última cena, ya entrada la noche.",
+      intro: [
+        "La lección muestra a Jesús en una noche de mucha presión. Sabe que Judas lo va a entregar y que sus enemigos vienen por él, pero no pierde el equilibrio ni deja de confiar en Jehová.",
+        "Sirve para ayudar a la congregación a ver cómo se ve la valentía verdadera: orar, aceptar la voluntad de Jehová, actuar con calma y no responder con violencia.",
+      ],
+      characters: [
+        { title: "Jesús", subtitle: "El Hijo obediente", body: "Ora con intensidad, acepta la voluntad de Jehová, protege a sus discípulos y se entrega sin perder la calma." },
+        { title: "Jehová", subtitle: "El Padre que fortalece", body: "Sostiene a Jesús en una hora angustiosa y le da la fuerza que necesita para seguir fiel." },
+        { title: "Pedro, Santiago y Juan", subtitle: "Discípulos cansados", body: "Acompañan a Jesús, pero se quedan dormidos en un momento muy serio." },
+        { title: "Judas Iscariote", subtitle: "El traidor", body: "Llega al jardín con un grupo armado porque conoce el lugar donde Jesús se reunía con sus apóstoles." },
+        { title: "Pedro", subtitle: "Impulsivo pero leal", body: "Trata de defender a Jesús con una espada, pero Jesús le enseña que sus discípulos no luchan de esa manera." },
+        { title: "Malco", subtitle: "Esclavo del sumo sacerdote", body: "Resulta herido por Pedro y Jesús lo cura, mostrando compasión incluso en medio del arresto." },
+      ],
+      scenario: [
+        "Jesús y los apóstoles cruzan el valle de Cedrón y llegan a Getsemaní.",
+        "Jesús se aparta para orar, mientras tres discípulos deben mantenerse despiertos.",
+        "Judas llega con un grupo armado; Jesús no huye ni responde con violencia.",
+      ],
+    },
+    sequence: [
+      ["Llegan a Getsemaní", "Jesús pide a sus discípulos que se queden allí y se mantengan despiertos."],
+      ["Jesús ora", "Se siente muy angustiado, se arrodilla y pide que se haga la voluntad de Jehová."],
+      ["Los discípulos duermen", "Jesús vuelve y encuentra dormidos a Pedro, Santiago y Juan."],
+      ["Judas llega", "Trae a un grupo armado porque sabe dónde encontrar a Jesús."],
+      ["Pedro usa la espada", "Pedro hiere a Malco, pero Jesús lo detiene y cura al hombre herido."],
+      ["Jesús es arrestado", "Los soldados atan a Jesús y los apóstoles huyen."],
+      ["Lo llevan a Anás y Caifás", "El interrogatorio empieza, y la presión contra Jesús aumenta."],
+    ],
+    story: [
+      "Después de la última cena, Jesús sale con sus apóstoles hacia el monte de los Olivos. Cruzan el valle de Cedrón y llegan al jardín de Getsemaní. Jesús sabe que se acerca una hora muy difícil. Por eso pide a sus discípulos que se mantengan despiertos, y se aparta para orar a Jehová.",
+      "La angustia de Jesús es real, pero también lo es su confianza. No intenta cambiar el propósito de Jehová ni escapar de su responsabilidad. Ora con humildad y acepta la voluntad de su Padre. Esa oración muestra que, cuando la presión es enorme, lo primero es acercarse a Jehová.",
+      "Mientras Jesús ora, los discípulos se quedan dormidos. Luego llega Judas con un grupo armado. Pedro reacciona con una espada y hiere a Malco, pero Jesús lo corrige y cura al hombre. Incluso cuando lo tratan injustamente, Jesús sigue mostrando dominio propio, compasión y obediencia.",
+      "Finalmente arrestan a Jesús, le atan las manos y los apóstoles huyen. La lección termina dejando una pregunta abierta: ¿qué pasó con los apóstoles? Eso conecta directamente con la lección 89.",
+    ],
+    quote: "Que se haga tu voluntad.",
+    questions: [
+      {
+        question: "¿Qué pasó en el jardín de Getsemaní?",
+        answer: "Jesús oró a Jehová en medio de una gran angustia. Sus discípulos se quedaron dormidos. Luego Judas llegó con un grupo armado para entregar a Jesús. Pedro trató de defenderlo con una espada, pero Jesús lo detuvo, curó a Malco y permitió que lo arrestaran.",
+      },
+      {
+        question: "¿Qué aprendemos de lo que Jesús hizo esa noche?",
+        answer: "Aprendemos a orar cuando sentimos presión, a aceptar la voluntad de Jehová, a mantener la calma cuando nos tratan mal y a no usar métodos violentos. Jesús fue valiente porque siguió obedeciendo aunque sabía que iba a sufrir.",
+      },
+    ],
+    meditate: [
+      ["¿Qué hago primero cuando me siento bajo presión?", "Jesús no empezó peleando ni quejándose; empezó orando. Eso me enseña a buscar a Jehová antes de reaccionar."],
+      ["¿Qué revela Jesús al curar a Malco?", "Revela dominio propio y compasión. Aunque Malco venía con el grupo que iba a arrestarlo, Jesús no dejó que la injusticia le quitara la bondad."],
+      ["¿Cómo puedo copiar la valentía de Jesús?", "Puedo obedecer a Jehová aunque tenga miedo, hablar con calma, evitar respuestas impulsivas y confiar en que Jehová ve toda la situación."],
+    ],
+    keyText: {
+      quote: "En el mundo van a tener sufrimientos. Pero sean valientes.",
+      cite: "Juan 16:33",
+      explanation: [
+        "Este texto encaja con Getsemaní porque Jesús no negó que vendrían sufrimientos. Él mismo estaba entrando en una noche durísima.",
+        "La valentía cristiana no es ausencia de miedo. Es seguir confiando en Jehová y hacer lo correcto aunque la situación sea difícil.",
+      ],
+      support: {
+        quote: "Guarda tu espada.",
+        cite: "Mateo 26:52",
+        explanation: "Este texto ayuda a destacar que Jesús no quería que sus discípulos defendieran el Reino con violencia.",
+      },
+    },
+    principle: "Cuando la presión aumenta, la fidelidad se protege con oración, calma, obediencia y confianza en Jehová.",
+    thenNow: [
+      { title: "En Getsemaní", body: ["Jesús fue arrestado injustamente, pero no perdió la calma ni dejó de hacer la voluntad de Jehová.", "Oró, protegió a sus discípulos y mostró compasión aun con sus enemigos."] },
+      { title: "Hoy", body: ["Podemos enfrentar presión, injusticias o miedo.", "Imitamos a Jesús cuando oramos primero, evitamos reaccionar mal y dejamos que Jehová nos guíe."] },
+    ],
+    lessons: [
+      "La oración nos ayuda a aguantar cuando la presión es muy fuerte.",
+      "Aceptar la voluntad de Jehová requiere humildad y confianza.",
+      "Jesús no respondió con violencia, aunque lo trataron injustamente.",
+      "La compasión de Jesús no desapareció ni en su peor noche.",
+      "Un discípulo puede amar a Jesús y aun así necesitar corrección, como Pedro.",
+    ],
+    texts: [
+      "Mateo 26:36-46 muestra la oración intensa de Jesús y la debilidad de los discípulos.",
+      "Lucas 22:43 ayuda a ver que Jehová fortaleció a Jesús en un momento de angustia.",
+      "Juan 18:4-9 muestra que Jesús protegió a sus discípulos durante el arresto.",
+      "Mateo 26:52 enseña que los discípulos de Jesús no defienden la verdad con violencia.",
+    ],
+    guide: [
+      "Empieza resaltando la presión emocional de Jesús, no solo el arresto.",
+      "Haz que la congregación vea el contraste entre la reacción impulsiva de Pedro y la calma de Jesús.",
+      "Cierra con la idea práctica: cuando llega la presión, primero oramos y después actuamos con calma.",
+    ],
+    application: [
+      "Puedo orar antes de reaccionar.",
+      "Puedo aceptar la voluntad de Jehová aunque no sea lo más fácil.",
+      "Puedo mantener la calma cuando alguien me trata mal.",
+      "Puedo demostrar compasión incluso en momentos de tensión.",
+    ],
+    jehova: [
+      { title: "Jehová fortalece", body: "No quitó la prueba de inmediato, pero sostuvo a Jesús para que permaneciera fiel." },
+      { title: "Jehová escucha", body: "Jesús pudo derramar su corazón ante su Padre en el momento más angustioso." },
+      { title: "Jehová valora la obediencia", body: "La fidelidad de Jesús en Getsemaní demuestra obediencia completa y amor profundo." },
+    ],
+    finalTexts: [
+      ["Mateo 26:36-57", "Relata la oración en Getsemaní, la llegada de Judas, la reacción de Pedro y el arresto."],
+      ["Marcos 14:32-50", "Destaca la tristeza de Jesús, el sueño de los discípulos y la huida de los apóstoles."],
+      ["Lucas 22:39-54", "Muestra la oración de Jesús, el fortalecimiento que recibió y la curación de Malco."],
+      ["Juan 18:1-14, 19-24", "Presenta a Jesús enfrentando el arresto con calma y siendo llevado ante las autoridades religiosas."],
+    ],
+  },
+  {
+    id: "leccion-89",
+    label: "Lección 89",
+    roman: "lxxxix",
+    title: "Pedro niega a Jesús",
+    meta: ["Mateo 26:31-35, 57-27:2", "Lucas 22:55-71; Juan 18:15-18, 25-28", "PDF págs. 208-209"],
+    situarte: {
+      when: "Casa de Caifás, durante la noche y la madrugada después del arresto de Jesús.",
+      intro: [
+        "La lección pone dos escenas una junto a la otra: afuera, Pedro tiene miedo y niega conocer a Jesús; adentro, Jesús enfrenta un juicio injusto con dignidad.",
+        "Sirve para dirigir una conversación equilibrada: no para aplastar a Pedro, sino para aprender del peligro del miedo y del valor de arrepentirse.",
+      ],
+      characters: [
+        { title: "Pedro", subtitle: "Apóstol que falla y llora", body: "Ama a Jesús, pero el miedo lo vence. Después recuerda las palabras de Jesús y llora amargamente." },
+        { title: "Jesús", subtitle: "Fiel bajo juicio injusto", body: "No niega quién es y mantiene su dignidad aunque lo insultan y golpean." },
+        { title: "Caifás", subtitle: "Sumo sacerdote", body: "Busca una razón para condenar a Jesús y usa el juicio para justificar una decisión ya tomada." },
+        { title: "El Sanedrín", subtitle: "Tribunal religioso", body: "Ya quiere matar a Jesús y busca acusaciones contra él." },
+        { title: "Sirvientas y presentes", subtitle: "Personas del patio", body: "Reconocen a Pedro como alguien relacionado con Jesús y aumentan la presión sobre él." },
+        { title: "Jehová", subtitle: "Padre que no abandona", body: "Jesús puede decir que no está solo porque su Padre está con él." },
+      ],
+      scenario: [
+        "Jesús ya fue arrestado y llevado a la casa de Caifás.",
+        "Pedro entra al patio y se acerca al fuego para calentarse.",
+        "Varias personas lo identifican como discípulo de Jesús, y Pedro lo niega tres veces.",
+      ],
+    },
+    sequence: [
+      ["Jesús advierte a Pedro", "Antes del arresto, Jesús le dice que lo negará tres veces antes de que cante un gallo."],
+      ["Pedro entra al patio", "Sigue de lejos y se calienta junto al fuego en la casa de Caifás."],
+      ["Primera negación", "Una sirvienta lo reconoce, pero Pedro niega conocer a Jesús."],
+      ["Más presión", "Otras personas vuelven a relacionarlo con Jesús."],
+      ["Tercera negación", "Pedro insiste en que no conoce a Jesús. Entonces canta el gallo."],
+      ["Pedro llora", "Recuerda la advertencia de Jesús y sale profundamente dolido."],
+      ["Juicio contra Jesús", "El Sanedrín acusa a Jesús de blasfemia porque él afirma ser el Hijo de Dios."],
+    ],
+    story: [
+      "Antes de aquella noche, Pedro estaba seguro de que nunca abandonaría a Jesús. Pero Jesús conocía mejor la situación y le dijo que lo negaría tres veces. Después del arresto, Pedro sigue a Jesús de lejos y entra al patio de la casa de Caifás.",
+      "Allí, cerca del fuego, varias personas reconocen a Pedro. La presión aumenta poco a poco. En vez de identificarse como discípulo, Pedro niega conocer a Jesús. Cuando lo hace por tercera vez, canta el gallo y Pedro recuerda las palabras de su Maestro. Sale y llora amargamente.",
+      "Dentro de la casa, la escena es muy diferente. Jesús está frente al tribunal religioso. Los líderes ya quieren matarlo y buscan una acusación. Caifás le pregunta si es el Hijo de Dios. Jesús no niega la verdad. Por eso lo acusan de blasfemia y deciden que debe morir.",
+      "La lección ayuda a ver dos cosas: Pedro cayó por miedo, pero no se quedó endurecido; Jesús, en cambio, se mantuvo firme aunque sabía que eso lo llevaría a sufrir más.",
+    ],
+    quote: "No es cierto.",
+    questions: [
+      {
+        question: "¿Qué pasó en el patio de la casa de Caifás?",
+        answer: "Pedro estaba calentándose cerca del fuego cuando varias personas lo reconocieron como discípulo de Jesús. Por miedo, negó tres veces conocerlo. Entonces cantó el gallo, Pedro recordó lo que Jesús le había dicho y salió llorando amargamente.",
+      },
+      {
+        question: "El tribunal condenó a muerte a Jesús, ¿por qué razón?",
+        answer: "Porque Jesús reconoció que era el Hijo de Dios. Los líderes religiosos lo acusaron de blasfemia, aunque en realidad ya estaban decididos a matarlo y solo buscaban una razón para condenarlo.",
+      },
+    ],
+    meditate: [
+      ["¿Por qué es peligroso confiar demasiado en mí mismo?", "Pedro estaba seguro de que no fallaría, pero la presión lo venció. Eso me recuerda que necesito orar, ser humilde y no pensar que soy fuerte por mí mismo."],
+      ["¿Qué diferencia hubo entre Pedro y los líderes religiosos?", "Pedro falló, pero se quebró por dentro y lloró. Los líderes, en cambio, se endurecieron y condenaron a Jesús a pesar de las pruebas."],
+      ["¿Qué me enseña Jesús cuando no niega quién es?", "Me enseña a defender la verdad con dignidad. No necesito ser agresivo, pero sí debo ser fiel y claro cuando mi lealtad a Jehová esté en juego."],
+    ],
+    keyText: {
+      quote: "Aunque no estoy solo, porque el Padre está conmigo.",
+      cite: "Juan 16:32",
+      explanation: [
+        "Este texto ayuda a ver qué sostenía a Jesús cuando todos lo abandonaron. No dependía de la aprobación humana para permanecer fiel.",
+        "También consuela: aun si nos sentimos solos por hacer lo correcto, Jehová puede estar con nosotros.",
+      ],
+      support: {
+        quote: "Antes de que un gallo cante, me negarás tres veces.",
+        cite: "Mateo 26:34",
+        explanation: "Este texto muestra que Jesús conocía la debilidad de Pedro. La caída no sorprendió a Jesús, y después Pedro pudo recuperarse.",
+      },
+    },
+    principle: "La confianza en uno mismo puede fallar; la confianza humilde en Jehová nos ayuda a mantenernos fieles y a levantarnos si caemos.",
+    thenNow: [
+      { title: "En el patio", body: ["Pedro sintió miedo y negó a Jesús, aunque lo amaba.", "Cuando entendió lo que había hecho, no se justificó; lloró y mostró dolor sincero."] },
+      { title: "Hoy", body: ["Podemos sentir presión para esconder que somos siervos de Jehová.", "La humildad nos ayuda a pedir fuerzas antes de fallar y a volver a Jehová si cometemos un error."] },
+    ],
+    lessons: [
+      "El exceso de confianza puede ponernos en peligro.",
+      "El miedo puede hacer que una persona fiel actúe mal si no busca ayuda de Jehová.",
+      "El arrepentimiento sincero empieza cuando dejamos de justificarnos.",
+      "Jesús fue fiel aunque lo acusaron injustamente.",
+      "Jehová no abandona a sus siervos fieles cuando enfrentan presión.",
+    ],
+    texts: [
+      "Mateo 26:31-35 muestra la advertencia de Jesús y la seguridad excesiva de Pedro.",
+      "Lucas 22:61, 62 muestra el momento en que Pedro recuerda las palabras de Jesús y llora.",
+      "Mateo 26:63-66 ayuda a explicar por qué el tribunal condenó a muerte a Jesús.",
+      "Juan 16:32 destaca que Jesús podía sentirse abandonado por otros, pero no por Jehová.",
+    ],
+    guide: [
+      "No presentes a Pedro como alguien malo. Presenta a un discípulo que amaba a Jesús, pero subestimó la presión.",
+      "Marca el contraste entre el miedo de Pedro y la firmeza tranquila de Jesús.",
+      "Cierra con esperanza: un error grave no tiene que ser el final si hay arrepentimiento sincero.",
+    ],
+    application: [
+      "Puedo evitar confiar demasiado en mis propias fuerzas.",
+      "Puedo pedirle a Jehová valor para identificarme como su siervo.",
+      "Puedo arrepentirme rápido si fallo y no endurecerme.",
+      "Puedo recordar que Jehová no me deja solo cuando hago lo correcto.",
+    ],
+    jehova: [
+      { title: "Jehová no abandona", body: "Jesús podía decir que el Padre estaba con él aun cuando otros lo dejaron solo." },
+      { title: "Jehová ve el corazón", body: "Pedro falló, pero su dolor mostró que no quería abandonar a Jesús de verdad." },
+      { title: "Jehová permite recuperación", body: "La historia de Pedro prepara el camino para ver cómo Jesús restaura y usa a sus discípulos imperfectos." },
+    ],
+    finalTexts: [
+      ["Mateo 26:31-35, 57-27:2", "Incluye la advertencia a Pedro, el juicio religioso y la entrega de Jesús a Pilato."],
+      ["Marcos 14:27-31, 53-15:1", "Muestra la seguridad de Pedro, sus negaciones y la condena contra Jesús."],
+      ["Lucas 22:55-71", "Relata el patio, el canto del gallo, el llanto de Pedro y el interrogatorio ante el tribunal."],
+      ["Juan 13:36-38; 18:15-18, 25-28", "Conecta la advertencia de Jesús con las negaciones de Pedro y el traslado de Jesús."],
+    ],
+  },
+];
+
 const list = (items) => `<ul class="study-list">${items.map((item) => `<li>${e(item)}</li>`).join("\n")}</ul>`;
 
 const lessonStudyBlock = (lesson) => `
@@ -569,7 +813,7 @@ const questionCards = lessonStudies.flatMap((lesson) =>
 const lessonPage = (lesson) => ({
   title: `${lesson.label}: ${lesson.title}`,
   eyebrow: "Lecciones que aprendo de la Biblia",
-  roman: lesson.label.includes("86") ? "lxxxvi" : "lxxxvii",
+  roman: lesson.roman || (lesson.label.includes("86") ? "lxxxvi" : "lxxxvii"),
   subtitle: `Estudio completo de ${lesson.label.toLowerCase()}, con el mismo formato de preparación para dirigir y repasar.`,
   meta: lesson.meta,
   nav: [[lesson.id, "i", "📖", lesson.label]],
@@ -598,6 +842,16 @@ const standaloneSectionContent = (section) => `
   <div class="story">
     <div class="ornament">❦</div>
     ${sectionStudyBlock(section)}
+    <div class="ornament">❦</div>
+  </div>
+</section>`;
+
+const combinedLessonsContent = (lessons) => `
+<section>
+  <div class="story">
+    <div class="ornament">❦</div>
+    ${lessons.map(lessonStudyBlock).join("\n")}
+    <p class="closing">Estas dos lecciones ayudan a dirigir el estudio con un hilo claro: Jesús ora y permanece fiel bajo presión, Pedro cae por miedo, y Jehová sigue sosteniendo a los que confían humildemente en él.</p>
     <div class="ornament">❦</div>
   </div>
 </section>`;
@@ -928,6 +1182,27 @@ const main = async () => {
       page: lessonPage(lessonStudies[1]),
       content: standaloneLessonContent(lessonStudies[1]),
       footerText: "Guía preparada para estudiar y dirigir la Lección 87.",
+    })],
+    [`${studyMay26.slug}.html`, renderShell({
+      style,
+      script,
+      page: studyMay26,
+      content: combinedLessonsContent(may26LessonStudies),
+      footerText: "Guía preparada para dirigir el Estudio Bíblico de la Congregación de las lecciones 88 y 89.",
+    })],
+    ["lfb-leccion-88.html", renderShell({
+      style,
+      script,
+      page: lessonPage(may26LessonStudies[0]),
+      content: standaloneLessonContent(may26LessonStudies[0]),
+      footerText: "Guía preparada para estudiar y dirigir la Lección 88.",
+    })],
+    ["lfb-leccion-89.html", renderShell({
+      style,
+      script,
+      page: lessonPage(may26LessonStudies[1]),
+      content: standaloneLessonContent(may26LessonStudies[1]),
+      footerText: "Guía preparada para estudiar y dirigir la Lección 89.",
     })],
   ];
 

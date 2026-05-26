@@ -1,0 +1,1074 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Lecciones 88 y 89</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..800,70,1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#f4ede0;
+      --paper-2:#fbf6ec;
+      --ink:#2a241c;
+      --muted:#6c6257;
+      --forest:#2f4a3a;
+      --forest-2:#21372b;
+      --gold:#b08442;
+      --gold-2:#dfc28a;
+      --gold-soft:#efe0bd;
+      --burgundy:#6b2f2a;
+      --shadow: 0 22px 55px rgba(42,36,28,.12);
+      --radius: 26px;
+      --line: rgba(176,132,66,.35);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(176,132,66,.15), transparent 28rem),
+        radial-gradient(circle at 90% 12%, rgba(47,74,58,.14), transparent 30rem),
+        linear-gradient(180deg, #efe2cf 0%, var(--paper) 42%, #efe5d4 100%);
+      line-height:1.75;
+      overflow-x:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(42,36,28,.027) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42,36,28,.018) 1px, transparent 1px);
+      background-size:38px 38px;
+      mix-blend-mode:multiply;
+      opacity:.45;
+      z-index:-1;
+    }
+    #progressBar{
+      position:fixed;
+      top:0;
+      left:0;
+      height:4px;
+      width:0%;
+      background:linear-gradient(90deg, var(--gold), #e8d19d, var(--burgundy));
+      z-index:50;
+      box-shadow:0 0 18px rgba(176,132,66,.65);
+    }
+    .wrap{width:min(1120px, calc(100% - 32px)); margin:0 auto;}
+    .hero{
+      min-height:72vh;
+      display:grid;
+      place-items:center;
+      padding:92px 0 64px;
+      position:relative;
+    }
+    .hero-card{
+      width:100%;
+      border:1px solid rgba(176,132,66,.42);
+      background:linear-gradient(135deg, rgba(251,246,236,.91), rgba(244,237,224,.84));
+      border-radius:38px;
+      padding:clamp(28px, 6vw, 72px);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card:before, .hero-card:after{
+      content:"✦";
+      position:absolute;
+      color:rgba(176,132,66,.28);
+      font-family:Fraunces, serif;
+      font-size:11rem;
+      line-height:1;
+    }
+    .hero-card:before{top:-34px; right:24px; transform:rotate(12deg)}
+    .hero-card:after{bottom:-58px; left:28px; transform:rotate(-10deg)}
+    .eyebrow{
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--forest);
+      font-weight:800;
+      font-size:.78rem;
+      margin-bottom:20px;
+      position:relative;
+      z-index:1;
+    }
+    .roman{
+      font-family:Fraunces, serif;
+      font-style:italic;
+      font-size:clamp(4rem, 14vw, 10.5rem);
+      color:var(--burgundy);
+      line-height:.82;
+      margin:0 0 18px;
+      letter-spacing:-.06em;
+      position:relative;
+      z-index:1;
+    }
+    h1{
+      font-family:Fraunces, serif;
+      font-size:clamp(2.5rem, 7vw, 5.7rem);
+      line-height:.95;
+      margin:0;
+      letter-spacing:-.055em;
+      color:var(--ink);
+      position:relative;
+      z-index:1;
+    }
+    .subtitle{
+      margin:24px 0 0;
+      max-width:780px;
+      color:var(--muted);
+      font-size:clamp(1rem, 2.3vw, 1.25rem);
+      position:relative;
+      z-index:1;
+    }
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:32px;
+      position:relative;
+      z-index:1;
+    }
+    .pill{
+      border:1px solid rgba(47,74,58,.2);
+      background:rgba(255,255,255,.34);
+      color:var(--forest-2);
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:.87rem;
+      font-weight:700;
+    }
+    main{padding:14px 0 88px;}
+    section{
+      scroll-margin-top:84px;
+      margin:44px 0;
+      border-radius:var(--radius);
+      background:rgba(251,246,236,.72);
+      border:1px solid rgba(176,132,66,.3);
+      box-shadow:0 14px 38px rgba(42,36,28,.075);
+      padding:clamp(22px, 4vw, 42px);
+      position:relative;
+    }
+    .section-title{margin-bottom:26px;}
+    .section-title .topline{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--burgundy);
+      font-weight:800;
+      letter-spacing:.04em;
+      margin-bottom:8px;
+    }
+    .section-title em{
+      font-family:Fraunces, serif;
+      font-style:italic;
+      font-size:1.58rem;
+      color:var(--burgundy);
+    }
+    h2{
+      margin:0;
+      font-family:Fraunces, serif;
+      color:var(--forest);
+      font-size:clamp(1.75rem, 4vw, 3rem);
+      line-height:1.03;
+      letter-spacing:-.035em;
+    }
+    .gold-line{
+      width:100%;
+      height:2px;
+      margin-top:16px;
+      background:linear-gradient(90deg, var(--gold), rgba(176,132,66,.12));
+      border-radius:999px;
+    }
+    h3{
+      font-family:Fraunces, serif;
+      font-size:1.42rem;
+      color:var(--burgundy);
+      margin:28px 0 10px;
+      letter-spacing:-.02em;
+    }
+    p{margin:0 0 1rem;}
+    .lead{font-size:1.08rem;color:#443a30;}
+    .grid{display:grid; gap:16px;}
+    .cards{grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.52), rgba(244,237,224,.52));
+      border:1px solid rgba(47,74,58,.15);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 8px 22px rgba(42,36,28,.055);
+    }
+    .card strong{display:block;color:var(--forest);font-size:1.03rem;}
+    .card em{display:block;color:var(--muted);font-size:.92rem;margin-top:2px;}
+    details{
+      border-radius:18px;
+      border:1px solid rgba(176,132,66,.42);
+      background:linear-gradient(135deg, rgba(239,224,189,.58), rgba(251,246,236,.7));
+      padding:0;
+      margin:14px 0;
+      overflow:hidden;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      padding:15px 18px;
+      font-weight:800;
+      color:var(--forest-2);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"＋"; color:var(--gold); font-weight:900; font-size:1.1rem;}
+    details[open] summary:after{content:"−";}
+    .detail-body{padding:0 18px 18px;color:#4a4035;}
+    .timeline{position:relative; padding-left:14px; counter-reset:step;}
+    .timeline:before{
+      content:"";
+      position:absolute;
+      left:27px;
+      top:8px;
+      bottom:8px;
+      width:2px;
+      background:linear-gradient(var(--gold), rgba(176,132,66,.08));
+    }
+    .moment{
+      counter-increment:step;
+      display:grid;
+      grid-template-columns:54px 1fr;
+      gap:16px;
+      margin:0 0 20px;
+      position:relative;
+    }
+    .moment:before{
+      content:counter(step);
+      width:34px;height:34px;border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--forest);
+      color:#fff;
+      font-weight:900;
+      box-shadow:0 0 0 6px rgba(47,74,58,.12);
+      margin-left:-3px;
+      z-index:1;
+    }
+    .label{
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:var(--gold);
+      font-size:.76rem;
+      font-weight:900;
+      margin-bottom:4px;
+    }
+    .story{
+      border:1px solid rgba(176,132,66,.5);
+      border-radius:28px;
+      background:
+        linear-gradient(90deg, rgba(176,132,66,.06), transparent 18%, transparent 82%, rgba(176,132,66,.06)),
+        rgba(255,250,241,.78);
+      padding:clamp(22px, 4vw, 42px);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.42);
+    }
+    .ornament{
+      text-align:center;
+      color:var(--gold);
+      font-family:Fraunces, serif;
+      font-size:1.65rem;
+      margin:0 0 20px;
+    }
+    .story p:first-of-type:first-letter{
+      float:left;
+      font-family:Fraunces, serif;
+      font-size:5.2rem;
+      line-height:.75;
+      color:var(--burgundy);
+      padding:10px 12px 2px 0;
+      font-weight:800;
+    }
+    .quote{
+      border-left:5px solid var(--gold);
+      padding:12px 18px;
+      margin:18px 0;
+      background:rgba(239,224,189,.35);
+      border-radius:0 16px 16px 0;
+      font-family:Fraunces, serif;
+      font-size:1.28rem;
+      color:var(--burgundy);
+      line-height:1.45;
+    }
+    .closing{
+      color:var(--burgundy);
+      font-style:italic;
+      font-family:Fraunces, serif;
+      font-size:1.25rem;
+      margin-top:18px;
+    }
+    .qa{display:grid; gap:18px;}
+    .question-card{
+      border:1.5px solid rgba(107,47,42,.55);
+      background:rgba(255,255,255,.36);
+      border-radius:22px;
+      padding:20px;
+    }
+    .tag{
+      display:inline-block;
+      background:rgba(107,47,42,.11);
+      color:var(--burgundy);
+      font-size:.76rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      padding:5px 9px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+    .meditate details{border-left:5px solid var(--forest); background:rgba(255,255,255,.36); border-color:rgba(47,74,58,.20);}
+    .scripture{
+      position:relative;
+      border-radius:28px;
+      padding:30px;
+      background:linear-gradient(135deg, rgba(47,74,58,.08), rgba(239,224,189,.5));
+      border:1px solid rgba(176,132,66,.45);
+      margin:20px 0;
+    }
+    .scripture:before{
+      content:"“";
+      position:absolute;
+      top:-14px;left:18px;
+      font-family:Fraunces, serif;
+      font-size:6rem;
+      color:rgba(176,132,66,.42);
+      line-height:1;
+    }
+    .scripture blockquote{
+      margin:0;
+      font-family:Fraunces, serif;
+      font-size:clamp(1.35rem, 3vw, 2.05rem);
+      line-height:1.35;
+      color:var(--burgundy);
+      position:relative;
+      z-index:1;
+    }
+    .scripture cite{display:block;margin-top:14px;color:var(--forest);font-weight:900;font-style:normal;letter-spacing:.08em;text-transform:uppercase;}
+    .three{display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px;margin-top:18px;}
+    .note{border-left:5px solid var(--forest); background:rgba(255,255,255,.42); border-radius:0 18px 18px 0; padding:16px 18px;}
+    .note b{color:var(--forest);}
+    .compare{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+    .compare .card{border-top:5px solid var(--gold);}
+    .lesson-list{counter-reset:item; list-style:none; padding:0; margin:0; display:grid; gap:16px;}
+    .lesson-list li{
+      counter-increment:item;
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:14px;
+      align-items:start;
+      background:rgba(255,255,255,.35);
+      border:1px solid rgba(47,74,58,.14);
+      border-radius:20px;
+      padding:16px;
+    }
+    .lesson-list li:before{
+      content:counter(item);
+      width:34px;height:34px;border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--forest);color:#fff;font-weight:900;
+    }
+    .lesson-list b{color:var(--forest);}
+    .application{
+      border-radius:28px;
+      padding:26px;
+      background:linear-gradient(135deg, rgba(176,132,66,.34), rgba(239,224,189,.9));
+      border:1px solid rgba(176,132,66,.55);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);
+    }
+    .application h3{margin-top:0;text-transform:uppercase;letter-spacing:.12em;font-size:1rem;font-family:Inter, sans-serif;color:var(--forest)}
+    .heart-list{list-style:none; padding:0; margin:0; display:grid; gap:12px;}
+    .heart-list li{padding-left:28px; position:relative;}
+    .heart-list li:before{content:"❦"; position:absolute; left:0; color:var(--burgundy);}
+    .quality{display:grid; gap:14px;}
+    .quality .card{border-left:5px solid var(--gold);}
+    .quality .card strong{font-family:Fraunces, serif; font-style:italic; font-size:1.32rem;}
+    .connections{grid-template-columns:repeat(auto-fit,minmax(245px,1fr));}
+    .lesson-badge{display:inline-block;color:var(--forest);font-weight:900;text-transform:uppercase;letter-spacing:.13em;font-size:.76rem;margin-bottom:8px;}
+    .final-texts{display:grid; gap:16px;}
+    .final-block{
+      border-radius:20px;
+      padding:18px;
+      background:rgba(255,255,255,.4);
+      border:1px solid rgba(176,132,66,.32);
+      display:grid;
+      grid-template-columns:36px 1fr;
+      gap:12px;
+    }
+    .final-block:before{content:"§"; color:var(--gold); font-family:Fraunces, serif; font-size:2.1rem; line-height:1;}
+    .ref{display:block;color:var(--burgundy);font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-size:.82rem;margin-bottom:4px;}
+    footer{
+      text-align:center;
+      color:var(--burgundy);
+      font-family:Fraunces, serif;
+      font-style:italic;
+      font-size:1.25rem;
+      padding:38px 20px 70px;
+    }
+    .nav-toggle, .top-btn{
+      position:fixed;
+      border:0;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      cursor:pointer;
+      z-index:44;
+      box-shadow:0 12px 28px rgba(42,36,28,.22);
+      color:#fff;
+      transition:transform .2s ease, opacity .2s ease;
+    }
+    .nav-toggle:hover, .top-btn:hover{transform:translateY(-2px)}
+    .nav-toggle{right:18px; top:18px; width:54px; height:54px; background:var(--forest); font-size:1.4rem;}
+    .top-btn{right:18px; bottom:20px; width:52px; height:52px; background:var(--gold); font-size:1.45rem; opacity:0; pointer-events:none;}
+    .top-btn.show{opacity:1; pointer-events:auto;}
+    .overlay{
+      position:fixed; inset:0; background:rgba(42,36,28,.28); backdrop-filter:blur(3px); z-index:41; opacity:0; pointer-events:none; transition:opacity .2s ease;
+    }
+    .overlay.show{opacity:1; pointer-events:auto;}
+    .side-nav{
+      position:fixed; top:0; right:0; width:min(410px, 90vw); height:100vh;
+      background:linear-gradient(180deg, #fbf6ec, #f3e6d3);
+      border-left:1px solid rgba(176,132,66,.45);
+      box-shadow:-18px 0 50px rgba(42,36,28,.22);
+      z-index:42; transform:translateX(110%); transition:transform .25s ease;
+      padding:28px 22px;
+      overflow:auto;
+    }
+    .side-nav.open{transform:translateX(0)}
+    .side-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;}
+    .side-head h3{margin:0;color:var(--forest);}
+    .close{border:0;background:var(--burgundy);color:#fff;border-radius:50%;width:38px;height:38px;font-weight:900;cursor:pointer}
+    .side-nav a{
+      display:block;
+      padding:12px 14px;
+      margin:8px 0;
+      border-radius:16px;
+      color:var(--ink);
+      text-decoration:none;
+      border:1px solid rgba(176,132,66,.24);
+      background:rgba(255,255,255,.38);
+      font-weight:700;
+    }
+    .side-nav a em{font-family:Fraunces, serif;color:var(--burgundy);margin-right:8px;}
+    .source-note{font-size:.86rem;color:var(--muted);margin-top:26px;border-top:1px solid rgba(176,132,66,.3);padding-top:16px;}
+    @media (max-width:650px){
+      .wrap{width:min(100% - 22px, 1120px)}
+      .hero{padding:72px 0 34px; min-height:auto;}
+      .hero-card{border-radius:26px; padding:28px 20px;}
+      section{padding:22px 16px;margin:28px 0;border-radius:22px;}
+      .moment{grid-template-columns:46px 1fr; gap:10px;}
+      .timeline:before{left:23px;}
+      .story{padding:22px 16px;}
+      .scripture{padding:26px 18px;}
+      .final-block{grid-template-columns:30px 1fr;}
+      .nav-toggle{width:48px;height:48px;right:12px;top:12px;}
+      .top-btn{right:12px;bottom:16px;}
+    }
+  
+
+    .app-back{
+      position:fixed;
+      top:18px;
+      left:18px;
+      z-index:80;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:44px;
+      padding:9px 14px;
+      border:1px solid rgba(176,132,66,.45);
+      border-radius:999px;
+      background:rgba(251,246,236,.94);
+      color:var(--forest);
+      box-shadow:0 12px 30px rgba(42,36,28,.14);
+      text-decoration:none;
+      font-family:Inter, system-ui, sans-serif;
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.04em;
+      backdrop-filter:blur(10px);
+    }
+    .app-back:hover{transform:translateY(-2px);}
+    .app-back span{font-size:1.15rem; line-height:1;}
+    .lesson-block{
+      margin:30px 0;
+      padding:24px;
+      border-radius:24px;
+      border:1px solid rgba(176,132,66,.55);
+      border-top:8px solid var(--gold);
+      background:linear-gradient(180deg, rgba(255,255,255,.62), rgba(244,237,224,.74));
+      box-shadow:0 18px 38px rgba(42,36,28,.08);
+    }
+    .lesson-block:first-of-type{margin-top:0;}
+    .lesson-block.lesson-section{
+      border-top-color:var(--forest);
+      background:linear-gradient(180deg, rgba(239,224,189,.58), rgba(251,246,236,.82));
+    }
+    .lesson-kicker{
+      display:inline-flex;
+      align-items:center;
+      margin-bottom:12px;
+      border-radius:999px;
+      padding:5px 12px;
+      background:var(--forest);
+      color:#fff;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .lesson-section .lesson-kicker{background:var(--burgundy);}
+    .lesson-block h3{
+      margin-top:0;
+      padding-bottom:10px;
+      border-bottom:1px solid rgba(176,132,66,.42);
+    }
+    .lesson-meta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:0 0 18px;
+    }
+    .lesson-meta-row span{
+      border:1px solid rgba(176,132,66,.38);
+      border-radius:999px;
+      padding:4px 10px;
+      background:rgba(255,255,255,.45);
+      color:var(--muted);
+      font-size:.8rem;
+      font-weight:800;
+    }
+    .study-part{
+      margin:18px 0 0;
+      padding:16px;
+      border:1px solid rgba(47,74,58,.14);
+      border-radius:18px;
+      background:rgba(255,250,241,.58);
+    }
+    .study-part h4{
+      margin:0 0 9px;
+      color:var(--forest);
+      font-family:Inter, sans-serif;
+      font-size:.84rem;
+      font-weight:900;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+    .study-part h5{
+      margin:18px 0 8px;
+      color:var(--burgundy);
+      font-family:Fraunces, serif;
+      font-size:1.16rem;
+    }
+    .study-list{
+      display:grid;
+      gap:8px;
+      padding:0;
+      margin:0;
+      list-style:none;
+    }
+    .study-list li{
+      position:relative;
+      padding-left:18px;
+      color:#4a4035;
+    }
+    .study-list li:before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:.72em;
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--gold);
+    }
+    .lesson-qa{
+      display:grid;
+      gap:10px;
+    }
+    .lesson-qa article{
+      padding:12px;
+      border-left:4px solid var(--gold);
+      border-radius:0 14px 14px 0;
+      background:rgba(239,224,189,.32);
+    }
+    .lesson-qa strong{
+      display:block;
+      color:var(--burgundy);
+      margin-bottom:4px;
+    }
+    .lesson-qa p{
+      margin:0;
+    }
+    .lesson-block p:first-of-type:first-letter{
+      float:none;
+      font-size:inherit;
+      line-height:inherit;
+      padding:0;
+      color:inherit;
+      font-weight:inherit;
+    }
+    @media (max-width:700px){
+      .app-back{
+        top:12px;
+        left:12px;
+        min-height:40px;
+        padding:8px 11px;
+        font-size:.74rem;
+      }
+      .lesson-block{
+        padding:18px 15px;
+        margin:24px 0;
+        border-radius:18px;
+      }
+    }
+</style>
+</head>
+<body>
+  <div id="progressBar"></div>
+  <a class="app-back" href="/" aria-label="Volver a la aplicación"><span>←</span> App</a>
+  <button class="nav-toggle" id="openNav" aria-label="Abrir índice">☰</button>
+  <div class="overlay" id="overlay"></div>
+  <nav class="side-nav" id="sideNav" aria-label="Índice del estudio">
+    <div class="side-head"><h3>Índice</h3><button class="close" id="closeNav" aria-label="Cerrar índice">×</button></div>
+    <a href="#leccion-88"><em>lxxxviii</em> 📖 Lección 88</a>
+    <a href="#leccion-89"><em>lxxxix</em> 📖 Lección 89</a>
+  </nav>
+  <button class="top-btn" id="topBtn" aria-label="Volver arriba">↑</button>
+
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-card">
+        <div class="eyebrow">Lecciones que aprendo de la Biblia</div>
+        <div class="roman">lxxxviii · lxxxix</div>
+        <h1>Lecciones 88 y 89</h1>
+        <p class="subtitle">Estudio completo de las lecciones 88 y 89, preparado para dirigir el Estudio Bíblico de la Congregación.</p>
+        <div class="hero-meta">
+          <span class="pill">Mateo 26:36-57</span>
+          <span class="pill">Lucas 22:39-71</span>
+          <span class="pill">Juan 18:1-28</span>
+          <span class="pill">PDF págs. 206-209</span>
+          <span class="pill">30 minutos</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    
+<section>
+  <div class="story">
+    <div class="ornament">❦</div>
+    
+    <div class="lesson-block" id="leccion-88">
+      <div class="lesson-kicker">Lección 88</div>
+      <h3>Arrestan a Jesús</h3>
+      <div class="lesson-meta-row"><span>Mateo 26:36-57; Marcos 14:32-50</span>
+<span>Lucas 22:39-54; Juan 18:1-14, 19-24</span>
+<span>PDF págs. 206-207</span></div>
+      <div class="study-part">
+        <h4>1. Para situarte</h4>
+        <h5>Cuándo</h5>
+        <p>Jardín de Getsemaní, después de la última cena, ya entrada la noche.</p>
+        <p>La lección muestra a Jesús en una noche de mucha presión. Sabe que Judas lo va a entregar y que sus enemigos vienen por él, pero no pierde el equilibrio ni deja de confiar en Jehová.</p>
+<p>Sirve para ayudar a la congregación a ver cómo se ve la valentía verdadera: orar, aceptar la voluntad de Jehová, actuar con calma y no responder con violencia.</p>
+        <h5>Personajes principales</h5>
+        <div class="grid cards">
+          
+  <div class="card">
+    <strong>Jesús</strong>
+    <em>El Hijo obediente</em>
+    <p>Ora con intensidad, acepta la voluntad de Jehová, protege a sus discípulos y se entrega sin perder la calma.</p>
+  </div>
+
+  <div class="card">
+    <strong>Jehová</strong>
+    <em>El Padre que fortalece</em>
+    <p>Sostiene a Jesús en una hora angustiosa y le da la fuerza que necesita para seguir fiel.</p>
+  </div>
+
+  <div class="card">
+    <strong>Pedro, Santiago y Juan</strong>
+    <em>Discípulos cansados</em>
+    <p>Acompañan a Jesús, pero se quedan dormidos en un momento muy serio.</p>
+  </div>
+
+  <div class="card">
+    <strong>Judas Iscariote</strong>
+    <em>El traidor</em>
+    <p>Llega al jardín con un grupo armado porque conoce el lugar donde Jesús se reunía con sus apóstoles.</p>
+  </div>
+
+  <div class="card">
+    <strong>Pedro</strong>
+    <em>Impulsivo pero leal</em>
+    <p>Trata de defender a Jesús con una espada, pero Jesús le enseña que sus discípulos no luchan de esa manera.</p>
+  </div>
+
+  <div class="card">
+    <strong>Malco</strong>
+    <em>Esclavo del sumo sacerdote</em>
+    <p>Resulta herido por Pedro y Jesús lo cura, mostrando compasión incluso en medio del arresto.</p>
+  </div>
+        </div>
+        <h5>El escenario</h5>
+        <ul class="study-list"><li>Jesús y los apóstoles cruzan el valle de Cedrón y llegan a Getsemaní.</li>
+<li>Jesús se aparta para orar, mientras tres discípulos deben mantenerse despiertos.</li>
+<li>Judas llega con un grupo armado; Jesús no huye ni responde con violencia.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>2. La secuencia de los hechos</h4>
+        <div class="timeline">
+          <div class="moment"><div><div class="label">Llegan a Getsemaní</div><p>Jesús pide a sus discípulos que se queden allí y se mantengan despiertos.</p></div></div>
+<div class="moment"><div><div class="label">Jesús ora</div><p>Se siente muy angustiado, se arrodilla y pide que se haga la voluntad de Jehová.</p></div></div>
+<div class="moment"><div><div class="label">Los discípulos duermen</div><p>Jesús vuelve y encuentra dormidos a Pedro, Santiago y Juan.</p></div></div>
+<div class="moment"><div><div class="label">Judas llega</div><p>Trae a un grupo armado porque sabe dónde encontrar a Jesús.</p></div></div>
+<div class="moment"><div><div class="label">Pedro usa la espada</div><p>Pedro hiere a Malco, pero Jesús lo detiene y cura al hombre herido.</p></div></div>
+<div class="moment"><div><div class="label">Jesús es arrestado</div><p>Los soldados atan a Jesús y los apóstoles huyen.</p></div></div>
+<div class="moment"><div><div class="label">Lo llevan a Anás y Caifás</div><p>El interrogatorio empieza, y la presión contra Jesús aumenta.</p></div></div>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>3. La historia relatada</h4>
+        <p>Después de la última cena, Jesús sale con sus apóstoles hacia el monte de los Olivos. Cruzan el valle de Cedrón y llegan al jardín de Getsemaní. Jesús sabe que se acerca una hora muy difícil. Por eso pide a sus discípulos que se mantengan despiertos, y se aparta para orar a Jehová.</p>
+<p>La angustia de Jesús es real, pero también lo es su confianza. No intenta cambiar el propósito de Jehová ni escapar de su responsabilidad. Ora con humildad y acepta la voluntad de su Padre. Esa oración muestra que, cuando la presión es enorme, lo primero es acercarse a Jehová.</p>
+<p>Mientras Jesús ora, los discípulos se quedan dormidos. Luego llega Judas con un grupo armado. Pedro reacciona con una espada y hiere a Malco, pero Jesús lo corrige y cura al hombre. Incluso cuando lo tratan injustamente, Jesús sigue mostrando dominio propio, compasión y obediencia.</p>
+<p>Finalmente arrestan a Jesús, le atan las manos y los apóstoles huyen. La lección termina dejando una pregunta abierta: ¿qué pasó con los apóstoles? Eso conecta directamente con la lección 89.</p>
+        <div class="quote">Que se haga tu voluntad.</div>
+      </div>
+      <div class="study-part">
+        <h4>4. Preguntas del libro</h4>
+        <div class="lesson-qa">
+          <article><strong>¿Qué pasó en el jardín de Getsemaní?</strong><p>Jesús oró a Jehová en medio de una gran angustia. Sus discípulos se quedaron dormidos. Luego Judas llegó con un grupo armado para entregar a Jesús. Pedro trató de defenderlo con una espada, pero Jesús lo detuvo, curó a Malco y permitió que lo arrestaran.</p></article>
+<article><strong>¿Qué aprendemos de lo que Jesús hizo esa noche?</strong><p>Aprendemos a orar cuando sentimos presión, a aceptar la voluntad de Jehová, a mantener la calma cuando nos tratan mal y a no usar métodos violentos. Jesús fue valiente porque siguió obedeciendo aunque sabía que iba a sufrir.</p></article>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>5. Preguntas para meditar</h4>
+        
+  <details>
+    <summary>✦ ¿Qué hago primero cuando me siento bajo presión?</summary>
+    <div class="detail-body"><p>Jesús no empezó peleando ni quejándose; empezó orando. Eso me enseña a buscar a Jehová antes de reaccionar.</p></div>
+  </details>
+
+  <details>
+    <summary>✦ ¿Qué revela Jesús al curar a Malco?</summary>
+    <div class="detail-body"><p>Revela dominio propio y compasión. Aunque Malco venía con el grupo que iba a arrestarlo, Jesús no dejó que la injusticia le quitara la bondad.</p></div>
+  </details>
+
+  <details>
+    <summary>✦ ¿Cómo puedo copiar la valentía de Jesús?</summary>
+    <div class="detail-body"><p>Puedo obedecer a Jehová aunque tenga miedo, hablar con calma, evitar respuestas impulsivas y confiar en que Jehová ve toda la situación.</p></div>
+  </details>
+      </div>
+      <div class="study-part">
+        <h4>6. Texto clave</h4>
+        <div class="scripture"><blockquote>En el mundo van a tener sufrimientos. Pero sean valientes.</blockquote><cite>Juan 16:33</cite></div>
+        <p>Este texto encaja con Getsemaní porque Jesús no negó que vendrían sufrimientos. Él mismo estaba entrando en una noche durísima.</p>
+<p>La valentía cristiana no es ausencia de miedo. Es seguir confiando en Jehová y hacer lo correcto aunque la situación sea difícil.</p>
+        <h5>Texto de apoyo</h5>
+        <div class="scripture"><blockquote>Guarda tu espada.</blockquote><cite>Mateo 26:52</cite></div>
+        <p>Este texto ayuda a destacar que Jesús no quería que sus discípulos defendieran el Reino con violencia.</p>
+      </div>
+      <div class="study-part">
+        <h4>7. El principio que ilumina la escena</h4>
+        <div class="note"><p><b>Principio central:</b> Cuando la presión aumenta, la fidelidad se protege con oración, calma, obediencia y confianza en Jehová.</p></div>
+      </div>
+      <div class="study-part">
+        <h4>8. Entonces y ahora</h4>
+        <div class="grid compare">
+          
+  <div class="card">
+    <strong>En Getsemaní</strong>
+    
+    <p>Jesús fue arrestado injustamente, pero no perdió la calma ni dejó de hacer la voluntad de Jehová.</p>
+<p>Oró, protegió a sus discípulos y mostró compasión aun con sus enemigos.</p>
+  </div>
+
+  <div class="card">
+    <strong>Hoy</strong>
+    
+    <p>Podemos enfrentar presión, injusticias o miedo.</p>
+<p>Imitamos a Jesús cuando oramos primero, evitamos reaccionar mal y dejamos que Jehová nos guíe.</p>
+  </div>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>9. Lecciones que se desprenden del texto</h4>
+        <ol class="lesson-list">
+          <li><p>La oración nos ayuda a aguantar cuando la presión es muy fuerte.</p></li>
+<li><p>Aceptar la voluntad de Jehová requiere humildad y confianza.</p></li>
+<li><p>Jesús no respondió con violencia, aunque lo trataron injustamente.</p></li>
+<li><p>La compasión de Jesús no desapareció ni en su peor noche.</p></li>
+<li><p>Un discípulo puede amar a Jesús y aun así necesitar corrección, como Pedro.</p></li>
+        </ol>
+      </div>
+      <div class="study-part">
+        <h4>10. Textos clave</h4>
+        <ul class="study-list"><li>Mateo 26:36-46 muestra la oración intensa de Jesús y la debilidad de los discípulos.</li>
+<li>Lucas 22:43 ayuda a ver que Jehová fortaleció a Jesús en un momento de angustia.</li>
+<li>Juan 18:4-9 muestra que Jesús protegió a sus discípulos durante el arresto.</li>
+<li>Mateo 26:52 enseña que los discípulos de Jesús no defienden la verdad con violencia.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>11. Cómo dirigirla</h4>
+        <ul class="study-list"><li>Empieza resaltando la presión emocional de Jesús, no solo el arresto.</li>
+<li>Haz que la congregación vea el contraste entre la reacción impulsiva de Pedro y la calma de Jesús.</li>
+<li>Cierra con la idea práctica: cuando llega la presión, primero oramos y después actuamos con calma.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>12. Aplicación personal</h4>
+        <ul class="study-list"><li>Puedo orar antes de reaccionar.</li>
+<li>Puedo aceptar la voluntad de Jehová aunque no sea lo más fácil.</li>
+<li>Puedo mantener la calma cuando alguien me trata mal.</li>
+<li>Puedo demostrar compasión incluso en momentos de tensión.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>13. Lo que aprendemos de Jehová</h4>
+        <div class="quality">
+          <div class="card"><strong>Jehová fortalece</strong><p>No quitó la prueba de inmediato, pero sostuvo a Jesús para que permaneciera fiel.</p></div>
+<div class="card"><strong>Jehová escucha</strong><p>Jesús pudo derramar su corazón ante su Padre en el momento más angustioso.</p></div>
+<div class="card"><strong>Jehová valora la obediencia</strong><p>La fidelidad de Jesús en Getsemaní demuestra obediencia completa y amor profundo.</p></div>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>14. Explicación de los textos bíblicos</h4>
+        <div class="final-texts">
+          <div class="final-block"><div><span class="ref">Mateo 26:36-57</span><p>Relata la oración en Getsemaní, la llegada de Judas, la reacción de Pedro y el arresto.</p></div></div>
+<div class="final-block"><div><span class="ref">Marcos 14:32-50</span><p>Destaca la tristeza de Jesús, el sueño de los discípulos y la huida de los apóstoles.</p></div></div>
+<div class="final-block"><div><span class="ref">Lucas 22:39-54</span><p>Muestra la oración de Jesús, el fortalecimiento que recibió y la curación de Malco.</p></div></div>
+<div class="final-block"><div><span class="ref">Juan 18:1-14, 19-24</span><p>Presenta a Jesús enfrentando el arresto con calma y siendo llevado ante las autoridades religiosas.</p></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lesson-block" id="leccion-89">
+      <div class="lesson-kicker">Lección 89</div>
+      <h3>Pedro niega a Jesús</h3>
+      <div class="lesson-meta-row"><span>Mateo 26:31-35, 57-27:2</span>
+<span>Lucas 22:55-71; Juan 18:15-18, 25-28</span>
+<span>PDF págs. 208-209</span></div>
+      <div class="study-part">
+        <h4>1. Para situarte</h4>
+        <h5>Cuándo</h5>
+        <p>Casa de Caifás, durante la noche y la madrugada después del arresto de Jesús.</p>
+        <p>La lección pone dos escenas una junto a la otra: afuera, Pedro tiene miedo y niega conocer a Jesús; adentro, Jesús enfrenta un juicio injusto con dignidad.</p>
+<p>Sirve para dirigir una conversación equilibrada: no para aplastar a Pedro, sino para aprender del peligro del miedo y del valor de arrepentirse.</p>
+        <h5>Personajes principales</h5>
+        <div class="grid cards">
+          
+  <div class="card">
+    <strong>Pedro</strong>
+    <em>Apóstol que falla y llora</em>
+    <p>Ama a Jesús, pero el miedo lo vence. Después recuerda las palabras de Jesús y llora amargamente.</p>
+  </div>
+
+  <div class="card">
+    <strong>Jesús</strong>
+    <em>Fiel bajo juicio injusto</em>
+    <p>No niega quién es y mantiene su dignidad aunque lo insultan y golpean.</p>
+  </div>
+
+  <div class="card">
+    <strong>Caifás</strong>
+    <em>Sumo sacerdote</em>
+    <p>Busca una razón para condenar a Jesús y usa el juicio para justificar una decisión ya tomada.</p>
+  </div>
+
+  <div class="card">
+    <strong>El Sanedrín</strong>
+    <em>Tribunal religioso</em>
+    <p>Ya quiere matar a Jesús y busca acusaciones contra él.</p>
+  </div>
+
+  <div class="card">
+    <strong>Sirvientas y presentes</strong>
+    <em>Personas del patio</em>
+    <p>Reconocen a Pedro como alguien relacionado con Jesús y aumentan la presión sobre él.</p>
+  </div>
+
+  <div class="card">
+    <strong>Jehová</strong>
+    <em>Padre que no abandona</em>
+    <p>Jesús puede decir que no está solo porque su Padre está con él.</p>
+  </div>
+        </div>
+        <h5>El escenario</h5>
+        <ul class="study-list"><li>Jesús ya fue arrestado y llevado a la casa de Caifás.</li>
+<li>Pedro entra al patio y se acerca al fuego para calentarse.</li>
+<li>Varias personas lo identifican como discípulo de Jesús, y Pedro lo niega tres veces.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>2. La secuencia de los hechos</h4>
+        <div class="timeline">
+          <div class="moment"><div><div class="label">Jesús advierte a Pedro</div><p>Antes del arresto, Jesús le dice que lo negará tres veces antes de que cante un gallo.</p></div></div>
+<div class="moment"><div><div class="label">Pedro entra al patio</div><p>Sigue de lejos y se calienta junto al fuego en la casa de Caifás.</p></div></div>
+<div class="moment"><div><div class="label">Primera negación</div><p>Una sirvienta lo reconoce, pero Pedro niega conocer a Jesús.</p></div></div>
+<div class="moment"><div><div class="label">Más presión</div><p>Otras personas vuelven a relacionarlo con Jesús.</p></div></div>
+<div class="moment"><div><div class="label">Tercera negación</div><p>Pedro insiste en que no conoce a Jesús. Entonces canta el gallo.</p></div></div>
+<div class="moment"><div><div class="label">Pedro llora</div><p>Recuerda la advertencia de Jesús y sale profundamente dolido.</p></div></div>
+<div class="moment"><div><div class="label">Juicio contra Jesús</div><p>El Sanedrín acusa a Jesús de blasfemia porque él afirma ser el Hijo de Dios.</p></div></div>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>3. La historia relatada</h4>
+        <p>Antes de aquella noche, Pedro estaba seguro de que nunca abandonaría a Jesús. Pero Jesús conocía mejor la situación y le dijo que lo negaría tres veces. Después del arresto, Pedro sigue a Jesús de lejos y entra al patio de la casa de Caifás.</p>
+<p>Allí, cerca del fuego, varias personas reconocen a Pedro. La presión aumenta poco a poco. En vez de identificarse como discípulo, Pedro niega conocer a Jesús. Cuando lo hace por tercera vez, canta el gallo y Pedro recuerda las palabras de su Maestro. Sale y llora amargamente.</p>
+<p>Dentro de la casa, la escena es muy diferente. Jesús está frente al tribunal religioso. Los líderes ya quieren matarlo y buscan una acusación. Caifás le pregunta si es el Hijo de Dios. Jesús no niega la verdad. Por eso lo acusan de blasfemia y deciden que debe morir.</p>
+<p>La lección ayuda a ver dos cosas: Pedro cayó por miedo, pero no se quedó endurecido; Jesús, en cambio, se mantuvo firme aunque sabía que eso lo llevaría a sufrir más.</p>
+        <div class="quote">No es cierto.</div>
+      </div>
+      <div class="study-part">
+        <h4>4. Preguntas del libro</h4>
+        <div class="lesson-qa">
+          <article><strong>¿Qué pasó en el patio de la casa de Caifás?</strong><p>Pedro estaba calentándose cerca del fuego cuando varias personas lo reconocieron como discípulo de Jesús. Por miedo, negó tres veces conocerlo. Entonces cantó el gallo, Pedro recordó lo que Jesús le había dicho y salió llorando amargamente.</p></article>
+<article><strong>El tribunal condenó a muerte a Jesús, ¿por qué razón?</strong><p>Porque Jesús reconoció que era el Hijo de Dios. Los líderes religiosos lo acusaron de blasfemia, aunque en realidad ya estaban decididos a matarlo y solo buscaban una razón para condenarlo.</p></article>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>5. Preguntas para meditar</h4>
+        
+  <details>
+    <summary>✦ ¿Por qué es peligroso confiar demasiado en mí mismo?</summary>
+    <div class="detail-body"><p>Pedro estaba seguro de que no fallaría, pero la presión lo venció. Eso me recuerda que necesito orar, ser humilde y no pensar que soy fuerte por mí mismo.</p></div>
+  </details>
+
+  <details>
+    <summary>✦ ¿Qué diferencia hubo entre Pedro y los líderes religiosos?</summary>
+    <div class="detail-body"><p>Pedro falló, pero se quebró por dentro y lloró. Los líderes, en cambio, se endurecieron y condenaron a Jesús a pesar de las pruebas.</p></div>
+  </details>
+
+  <details>
+    <summary>✦ ¿Qué me enseña Jesús cuando no niega quién es?</summary>
+    <div class="detail-body"><p>Me enseña a defender la verdad con dignidad. No necesito ser agresivo, pero sí debo ser fiel y claro cuando mi lealtad a Jehová esté en juego.</p></div>
+  </details>
+      </div>
+      <div class="study-part">
+        <h4>6. Texto clave</h4>
+        <div class="scripture"><blockquote>Aunque no estoy solo, porque el Padre está conmigo.</blockquote><cite>Juan 16:32</cite></div>
+        <p>Este texto ayuda a ver qué sostenía a Jesús cuando todos lo abandonaron. No dependía de la aprobación humana para permanecer fiel.</p>
+<p>También consuela: aun si nos sentimos solos por hacer lo correcto, Jehová puede estar con nosotros.</p>
+        <h5>Texto de apoyo</h5>
+        <div class="scripture"><blockquote>Antes de que un gallo cante, me negarás tres veces.</blockquote><cite>Mateo 26:34</cite></div>
+        <p>Este texto muestra que Jesús conocía la debilidad de Pedro. La caída no sorprendió a Jesús, y después Pedro pudo recuperarse.</p>
+      </div>
+      <div class="study-part">
+        <h4>7. El principio que ilumina la escena</h4>
+        <div class="note"><p><b>Principio central:</b> La confianza en uno mismo puede fallar; la confianza humilde en Jehová nos ayuda a mantenernos fieles y a levantarnos si caemos.</p></div>
+      </div>
+      <div class="study-part">
+        <h4>8. Entonces y ahora</h4>
+        <div class="grid compare">
+          
+  <div class="card">
+    <strong>En el patio</strong>
+    
+    <p>Pedro sintió miedo y negó a Jesús, aunque lo amaba.</p>
+<p>Cuando entendió lo que había hecho, no se justificó; lloró y mostró dolor sincero.</p>
+  </div>
+
+  <div class="card">
+    <strong>Hoy</strong>
+    
+    <p>Podemos sentir presión para esconder que somos siervos de Jehová.</p>
+<p>La humildad nos ayuda a pedir fuerzas antes de fallar y a volver a Jehová si cometemos un error.</p>
+  </div>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>9. Lecciones que se desprenden del texto</h4>
+        <ol class="lesson-list">
+          <li><p>El exceso de confianza puede ponernos en peligro.</p></li>
+<li><p>El miedo puede hacer que una persona fiel actúe mal si no busca ayuda de Jehová.</p></li>
+<li><p>El arrepentimiento sincero empieza cuando dejamos de justificarnos.</p></li>
+<li><p>Jesús fue fiel aunque lo acusaron injustamente.</p></li>
+<li><p>Jehová no abandona a sus siervos fieles cuando enfrentan presión.</p></li>
+        </ol>
+      </div>
+      <div class="study-part">
+        <h4>10. Textos clave</h4>
+        <ul class="study-list"><li>Mateo 26:31-35 muestra la advertencia de Jesús y la seguridad excesiva de Pedro.</li>
+<li>Lucas 22:61, 62 muestra el momento en que Pedro recuerda las palabras de Jesús y llora.</li>
+<li>Mateo 26:63-66 ayuda a explicar por qué el tribunal condenó a muerte a Jesús.</li>
+<li>Juan 16:32 destaca que Jesús podía sentirse abandonado por otros, pero no por Jehová.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>11. Cómo dirigirla</h4>
+        <ul class="study-list"><li>No presentes a Pedro como alguien malo. Presenta a un discípulo que amaba a Jesús, pero subestimó la presión.</li>
+<li>Marca el contraste entre el miedo de Pedro y la firmeza tranquila de Jesús.</li>
+<li>Cierra con esperanza: un error grave no tiene que ser el final si hay arrepentimiento sincero.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>12. Aplicación personal</h4>
+        <ul class="study-list"><li>Puedo evitar confiar demasiado en mis propias fuerzas.</li>
+<li>Puedo pedirle a Jehová valor para identificarme como su siervo.</li>
+<li>Puedo arrepentirme rápido si fallo y no endurecerme.</li>
+<li>Puedo recordar que Jehová no me deja solo cuando hago lo correcto.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>13. Lo que aprendemos de Jehová</h4>
+        <div class="quality">
+          <div class="card"><strong>Jehová no abandona</strong><p>Jesús podía decir que el Padre estaba con él aun cuando otros lo dejaron solo.</p></div>
+<div class="card"><strong>Jehová ve el corazón</strong><p>Pedro falló, pero su dolor mostró que no quería abandonar a Jesús de verdad.</p></div>
+<div class="card"><strong>Jehová permite recuperación</strong><p>La historia de Pedro prepara el camino para ver cómo Jesús restaura y usa a sus discípulos imperfectos.</p></div>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>14. Explicación de los textos bíblicos</h4>
+        <div class="final-texts">
+          <div class="final-block"><div><span class="ref">Mateo 26:31-35, 57-27:2</span><p>Incluye la advertencia a Pedro, el juicio religioso y la entrega de Jesús a Pilato.</p></div></div>
+<div class="final-block"><div><span class="ref">Marcos 14:27-31, 53-15:1</span><p>Muestra la seguridad de Pedro, sus negaciones y la condena contra Jesús.</p></div></div>
+<div class="final-block"><div><span class="ref">Lucas 22:55-71</span><p>Relata el patio, el canto del gallo, el llanto de Pedro y el interrogatorio ante el tribunal.</p></div></div>
+<div class="final-block"><div><span class="ref">Juan 13:36-38; 18:15-18, 25-28</span><p>Conecta la advertencia de Jesús con las negaciones de Pedro y el traslado de Jesús.</p></div></div>
+        </div>
+      </div>
+    </div>
+    <p class="closing">Estas dos lecciones ayudan a dirigir el estudio con un hilo claro: Jesús ora y permanece fiel bajo presión, Pedro cae por miedo, y Jehová sigue sosteniendo a los que confían humildemente en él.</p>
+    <div class="ornament">❦</div>
+  </div>
+</section>
+  </main>
+
+  <footer class="wrap">
+    Guía preparada para dirigir el Estudio Bíblico de la Congregación de las lecciones 88 y 89.
+  </footer>
+
+  <script>
+    const progressBar = document.getElementById('progressBar');
+    const topBtn = document.getElementById('topBtn');
+    const sideNav = document.getElementById('sideNav');
+    const overlay = document.getElementById('overlay');
+    const openNav = document.getElementById('openNav');
+    const closeNav = document.getElementById('closeNav');
+
+    function updateProgress(){
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      topBtn.classList.toggle('show', scrollTop > 400);
+    }
+    function openIndex(){ sideNav.classList.add('open'); overlay.classList.add('show'); }
+    function closeIndex(){ sideNav.classList.remove('open'); overlay.classList.remove('show'); }
+    window.addEventListener('scroll', updateProgress, {passive:true});
+    openNav.addEventListener('click', openIndex);
+    closeNav.addEventListener('click', closeIndex);
+    overlay.addEventListener('click', closeIndex);
+    topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeIndex(); });
+    sideNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeIndex));
+    updateProgress();
+  </script>
+</body>
+</html>
