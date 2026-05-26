@@ -196,6 +196,28 @@ const extraStyle = `
     }
 `;
 
+const questionSignStyle = `
+    .question-sign{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin:0 0 8px;
+      border:1px solid rgba(176,132,66,.38);
+      border-radius:999px;
+      padding:5px 11px;
+      background:rgba(255,255,255,.5);
+      color:var(--forest);
+      font-size:.82rem;
+      font-weight:900;
+    }
+    .question-sign em{
+      color:var(--gold);
+      font-style:normal;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+`;
+
 const e = (value = "") =>
   String(value)
     .replaceAll("&", "&amp;")
@@ -509,27 +531,34 @@ const may26LessonStudies = [
       ["Lo llevan a Anás y Caifás", "El interrogatorio empieza, y la presión contra Jesús aumenta."],
     ],
     story: [
-      "Después de la última cena, Jesús sale con sus apóstoles hacia el monte de los Olivos. Cruzan el valle de Cedrón y llegan al jardín de Getsemaní. Jesús sabe que se acerca una hora muy difícil. Por eso pide a sus discípulos que se mantengan despiertos, y se aparta para orar a Jehová.",
-      "La angustia de Jesús es real, pero también lo es su confianza. No intenta cambiar el propósito de Jehová ni escapar de su responsabilidad. Ora con humildad y acepta la voluntad de su Padre. Esa oración muestra que, cuando la presión es enorme, lo primero es acercarse a Jehová.",
-      "Mientras Jesús ora, los discípulos se quedan dormidos. Luego llega Judas con un grupo armado. Pedro reacciona con una espada y hiere a Malco, pero Jesús lo corrige y cura al hombre. Incluso cuando lo tratan injustamente, Jesús sigue mostrando dominio propio, compasión y obediencia.",
-      "Finalmente arrestan a Jesús, le atan las manos y los apóstoles huyen. La lección termina dejando una pregunta abierta: ¿qué pasó con los apóstoles? Eso conecta directamente con la lección 89.",
+      "La noche ya estaba muy avanzada. Jesús y los apóstoles salieron hacia el monte de los Olivos, cruzaron el valle de Cedrón y llegaron al jardín de Getsemaní. La luna llena iluminaba el lugar, pero el ambiente se sentía pesado. Jesús sabía que aquella no era una noche cualquiera. Les pidió a sus discípulos que se quedaran cerca y se mantuvieran despiertos, y luego se apartó un poco para orar.",
+      "Allí, de rodillas, Jesús abrió su corazón a Jehová. Sentía una angustia profunda, pero no se dejó dominar por el miedo. Su oración muestra una lealtad preciosa: si tenía que pasar por aquella prueba, quería hacerlo obedeciendo la voluntad de su Padre. Mientras tanto, Pedro, Santiago y Juan no lograron mantenerse despiertos. Cuando Jesús volvió y los encontró dormidos, les habló con ternura, pero también con urgencia: la hora había llegado.",
+      "De pronto, la calma del jardín se rompió. Judas apareció con un grupo armado que traía antorchas y garrotes. Conocía bien aquel lugar, porque Jesús se reunía allí muchas veces con sus apóstoles. Judas se acercó como si fuera un amigo y lo saludó con un beso, pero aquel gesto no era cariño; era una señal para entregarlo.",
+      "Jesús no retrocedió. Dio un paso al frente y preguntó a quién buscaban. Cuando ellos dijeron que buscaban a Jesús el Nazareno, él se identificó con firmeza. El grupo retrocedió y cayó al suelo. Aun en ese momento, Jesús pensó en sus discípulos y dejó claro que a ellos debían dejarlos ir.",
+      "Entonces Pedro, al ver lo que estaba pasando, sacó una espada y atacó al esclavo del sumo sacerdote, Malco, cortándole la oreja. Jesús lo detuvo de inmediato. No iba a permitir que sus discípulos defendieran la verdad con violencia. Tocó al hombre herido y lo curó. Hasta en la noche de su arresto, Jesús mostró calma, poder y compasión.",
+      "Después, los soldados ataron a Jesús. Los apóstoles, llenos de miedo, huyeron. Primero llevaron a Jesús ante Anás, y luego a la casa del sumo sacerdote Caifás. La presión contra Jesús aumentaba, pero él seguía firme. Y ahora queda una pregunta que nos lleva a la siguiente escena: ¿qué pasó con los apóstoles después de aquella noche?",
     ],
     quote: "Que se haga tu voluntad.",
     questions: [
       {
         question: "¿Qué pasó en el jardín de Getsemaní?",
+        senas: "Allí, área, parque, ¿qué pasó?",
         answer: "Jesús oró a Jehová en medio de una gran angustia. Sus discípulos se quedaron dormidos. Luego Judas llegó con un grupo armado para entregar a Jesús. Pedro trató de defenderlo con una espada, pero Jesús lo detuvo, curó a Malco y permitió que lo arrestaran.",
       },
       {
         question: "¿Qué aprendemos de lo que Jesús hizo esa noche?",
+        senas: "¿Tú aprender qué?",
         answer: "Aprendemos a orar cuando sentimos presión, a aceptar la voluntad de Jehová, a mantener la calma cuando nos tratan mal y a no usar métodos violentos. Jesús fue valiente porque siguió obedeciendo aunque sabía que iba a sufrir.",
       },
     ],
     meditate: [
-      ["¿Qué hago primero cuando me siento bajo presión?", "Jesús no empezó peleando ni quejándose; empezó orando. Eso me enseña a buscar a Jehová antes de reaccionar."],
-      ["¿Qué revela Jesús al curar a Malco?", "Revela dominio propio y compasión. Aunque Malco venía con el grupo que iba a arrestarlo, Jesús no dejó que la injusticia le quitara la bondad."],
-      ["¿Cómo puedo copiar la valentía de Jesús?", "Puedo obedecer a Jehová aunque tenga miedo, hablar con calma, evitar respuestas impulsivas y confiar en que Jehová ve toda la situación."],
+      ["¿Por qué creen que Jesús buscó a Jehová en oración antes de que llegaran sus enemigos?", "Porque la presión era real, y Jesús sabía que necesitaba mantenerse cerca de su Padre. Esto ayuda al auditorio a ver que orar no es lo último que hacemos cuando ya no podemos más; es lo primero que nos mantiene firmes."],
+      ["¿Qué nos enseña que Jesús se preocupara por sus discípulos aun cuando él era quien iba a ser arrestado?", "Nos enseña que el amor de Jesús no se apagó bajo presión. Aunque él iba a sufrir, pensó en proteger a sus discípulos y pidió que los dejaran ir."],
+      ["¿Qué contraste vemos entre la reacción de Pedro y la reacción de Jesús?", "Pedro reaccionó por impulso y usó la espada. Jesús actuó con calma, corrigió a Pedro y mostró que sus discípulos no defienden la verdad con violencia."],
+      ["¿Qué aprendemos de que Jesús curara a Malco justo después de que venían a arrestarlo?", "Aprendemos que Jesús no permitió que la injusticia le quitara la compasión. Hasta en una noche tan difícil, siguió haciendo el bien."],
+      ["¿Cómo puede ayudarnos esta escena cuando sentimos presión o nos tratan injustamente?", "Nos enseña a orar, conservar la calma, evitar respuestas impulsivas y confiar en que Jehová ve la situación completa."],
     ],
+    meditateTitle: "Preguntas para el auditorio",
     keyText: {
       quote: "En el mundo van a tener sufrimientos. Pero sean valientes.",
       cite: "Juan 16:33",
@@ -730,11 +759,11 @@ const lessonStudyBlock = (lesson) => `
       <div class="study-part">
         <h4>4. Preguntas del libro</h4>
         <div class="lesson-qa">
-          ${lesson.questions.map((item) => `<article><strong>${e(item.question)}</strong><p>${e(item.answer)}</p></article>`).join("\n")}
+          ${lesson.questions.map((item) => `<article><strong>${e(item.question)}</strong>${item.senas ? `<div class="question-sign"><em>Señas</em><span>${e(item.senas)}</span></div>` : ""}<p>${e(item.answer)}</p></article>`).join("\n")}
         </div>
       </div>
       <div class="study-part">
-        <h4>5. Preguntas para meditar</h4>
+        <h4>5. ${e(lesson.meditateTitle || "Preguntas para meditar")}</h4>
         ${lesson.meditate.map(([title, body]) => details({ title, body })).join("\n")}
       </div>
       <div class="study-part">
@@ -859,6 +888,7 @@ const combinedLessonsContent = (lessons) => `
 const renderShell = ({ style, script, page = study, content = renderSections(), footerText }) => {
   const pageNav = page.nav || study.nav;
   const footer = footerText || "Jehová no solo puede vencer la muerte; también nos enseña a vivir con amor, humildad y unidad.<br />\n    Guía preparada para dirigir el Estudio Bíblico de la Congregación.";
+  const pageStyle = content.includes("question-sign") ? `${style}\n${questionSignStyle}` : style;
 
   return `<!doctype html>
 <html lang="es">
@@ -870,7 +900,7 @@ const renderShell = ({ style, script, page = study, content = renderSections(), 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..800,70,1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>${style}</style>
+  <style>${pageStyle}</style>
 </head>
 <body>
   <div id="progressBar"></div>
