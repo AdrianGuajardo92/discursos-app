@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Listos para presentar una defensa</title>
+  <style>
+    :root{
+      --bg:#101112;
+      --panel:#181b1e;
+      --panel-2:#20252a;
+      --ink:#f1eee7;
+      --muted:#b7afa1;
+      --dim:#766e61;
+      --line:#34302a;
+      --gold:#c8a24e;
+      --gold-2:#ead49a;
+      --gold-soft:rgba(200,162,78,.12);
+      --blue:#7fb2d6;
+      --blue-soft:rgba(127,178,214,.12);
+      --green:#8fc8a0;
+      --green-soft:rgba(143,200,160,.12);
+      --red:#d17c72;
+      --shadow:0 24px 60px rgba(0,0,0,.34);
+      --radius:10px;
+      color-scheme:dark;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(200,162,78,.18), transparent 30rem),
+        radial-gradient(circle at 92% 10%, rgba(127,178,214,.14), transparent 28rem),
+        linear-gradient(180deg, #101112 0%, #121416 44%, #0f1011 100%);
+      line-height:1.65;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+      background-size:36px 36px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.8), transparent 78%);
+    }
+    #progress{
+      position:fixed;
+      top:0;
+      left:0;
+      width:0%;
+      height:4px;
+      background:linear-gradient(90deg, var(--gold), var(--blue), var(--green));
+      z-index:20;
+      box-shadow:0 0 18px rgba(200,162,78,.55);
+    }
+    .wrap{width:min(1120px, calc(100% - 30px)); margin:0 auto}
+    header{
+      padding:34px 0 18px;
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:linear-gradient(180deg, rgba(16,17,18,.96), rgba(16,17,18,.82));
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(200,162,78,.14);
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content:space-between;
+    }
+    .back{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:38px;
+      padding:8px 12px;
+      border-radius:8px;
+      border:1px solid rgba(200,162,78,.24);
+      color:var(--gold-2);
+      text-decoration:none;
+      font-weight:800;
+      font-size:.88rem;
+      background:rgba(255,255,255,.03);
+    }
+    nav{
+      display:flex;
+      gap:8px;
+      overflow:auto;
+      padding-bottom:2px;
+      scrollbar-width:none;
+    }
+    nav::-webkit-scrollbar{display:none}
+    nav a{
+      white-space:nowrap;
+      color:var(--muted);
+      text-decoration:none;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:8px;
+      padding:7px 11px;
+      font-size:.82rem;
+      font-weight:800;
+      background:rgba(255,255,255,.025);
+    }
+    nav a:hover{color:var(--ink); border-color:rgba(200,162,78,.45)}
+    .hero{
+      padding:42px 0 22px;
+      display:grid;
+      grid-template-columns:minmax(0, 1.25fr) minmax(280px, .75fr);
+      gap:24px;
+      align-items:stretch;
+    }
+    .hero-main, .side-panel, section{
+      background:linear-gradient(145deg, rgba(32,37,42,.86), rgba(24,27,30,.9));
+      border:1px solid rgba(200,162,78,.18);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero-main{padding:48px}
+    .label{
+      margin:0 0 14px;
+      color:var(--gold);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-weight:900;
+      font-size:.76rem;
+    }
+    h1{
+      margin:0;
+      max-width:880px;
+      color:var(--ink);
+      font-size:4.35rem;
+      line-height:.98;
+      letter-spacing:0;
+    }
+    .subtitle{
+      margin:20px 0 0;
+      max-width:760px;
+      color:var(--muted);
+      font-size:1.12rem;
+    }
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+      margin-top:26px;
+    }
+    .pill{
+      border:1px solid rgba(200,162,78,.22);
+      background:var(--gold-soft);
+      color:var(--gold-2);
+      border-radius:8px;
+      padding:7px 11px;
+      font-size:.84rem;
+      font-weight:800;
+    }
+    .side-panel{
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .timer{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    .time-box{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      border-radius:8px;
+      padding:13px;
+    }
+    .time-box strong{display:block; color:var(--gold-2); font-size:1.45rem; line-height:1}
+    .time-box span{display:block; color:var(--muted); font-size:.82rem; margin-top:5px}
+    .side-note{
+      border-left:3px solid var(--gold);
+      background:var(--gold-soft);
+      border-radius:8px;
+      padding:13px 14px;
+      color:#e8dfcf;
+      font-size:.95rem;
+    }
+    main{padding:16px 0 80px}
+    section{
+      margin:22px 0;
+      padding:32px;
+      scroll-margin-top:110px;
+    }
+    h2{
+      margin:0 0 16px;
+      color:var(--gold-2);
+      font-size:2.15rem;
+      line-height:1.08;
+      letter-spacing:0;
+    }
+    h3{
+      margin:24px 0 10px;
+      color:var(--blue);
+      font-size:1.13rem;
+    }
+    p{margin:0 0 1rem}
+    .lead{font-size:1.05rem; color:#ded8ce}
+    .grid{display:grid; gap:14px}
+    .two{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    .cards{grid-template-columns:repeat(auto-fit, minmax(220px, 1fr))}
+    .card{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:8px;
+      background:rgba(255,255,255,.035);
+      padding:16px;
+    }
+    .card strong{display:block; color:var(--ink); margin-bottom:5px}
+    .card p{color:var(--muted); font-size:.95rem; margin:0}
+    .scripture{
+      border:1px solid rgba(127,178,214,.24);
+      background:var(--blue-soft);
+      border-radius:8px;
+      padding:18px;
+      margin:16px 0;
+    }
+    .scripture strong{color:var(--blue); display:block; margin-bottom:6px}
+    .scripture p{margin:0; color:#dce9f2}
+    details{
+      border:1px solid rgba(200,162,78,.2);
+      background:rgba(255,255,255,.03);
+      border-radius:8px;
+      margin:12px 0;
+      overflow:hidden;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      padding:16px 18px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      color:var(--ink);
+      font-weight:900;
+      line-height:1.38;
+    }
+    summary::-webkit-details-marker{display:none}
+    summary:before{
+      content:"+";
+      width:24px;
+      height:24px;
+      border-radius:8px;
+      background:var(--gold);
+      color:#101112;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      font-weight:900;
+      line-height:1;
+    }
+    details[open] summary:before{content:"-"}
+    .answer{
+      border-top:1px solid rgba(200,162,78,.16);
+      padding:0 18px 18px 54px;
+      color:var(--muted);
+    }
+    .answer .copy-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      justify-content:space-between;
+      margin:0 0 8px;
+    }
+    .tag{
+      display:inline-flex;
+      color:var(--green);
+      background:var(--green-soft);
+      border:1px solid rgba(143,200,160,.22);
+      border-radius:8px;
+      padding:4px 9px;
+      font-size:.75rem;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .lsm-line{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      margin:0 0 14px;
+      padding:10px 12px;
+      border:1px solid rgba(127,178,214,.22);
+      border-left:3px solid var(--blue);
+      border-radius:8px;
+      background:var(--blue-soft);
+      color:#dce9f2;
+      font-weight:800;
+      line-height:1.45;
+    }
+    .lsm-line .tag{
+      color:var(--blue);
+      background:rgba(127,178,214,.12);
+      border-color:rgba(127,178,214,.26);
+      flex:0 0 auto;
+    }
+    button.copy{
+      appearance:none;
+      border:1px solid rgba(200,162,78,.28);
+      background:rgba(200,162,78,.12);
+      color:var(--gold-2);
+      border-radius:8px;
+      padding:6px 9px;
+      font-weight:850;
+      font-size:.8rem;
+      cursor:pointer;
+    }
+    .answer p{margin:0 0 .8rem}
+    .quote{
+      border-left:4px solid var(--green);
+      background:var(--green-soft);
+      border-radius:0 8px 8px 0;
+      padding:14px 16px;
+      color:#dfeee4;
+      font-weight:750;
+    }
+    .danger{
+      border-color:rgba(209,124,114,.28);
+      background:rgba(209,124,114,.11);
+    }
+    .danger h2{color:#efb0a9}
+    footer{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:24px 0 44px;
+      color:var(--dim);
+      font-size:.86rem;
+    }
+    footer a{color:var(--gold-2)}
+    @media (max-width:860px){
+      header{position:static}
+      .topbar{align-items:flex-start; flex-direction:column}
+      nav{width:100%}
+      .hero{grid-template-columns:1fr}
+      .two{grid-template-columns:1fr}
+      .hero-main{padding:30px}
+      h1{font-size:3.05rem}
+      h2{font-size:1.75rem}
+      section{padding:23px}
+    }
+    @media (max-width:520px){
+      .wrap{width:min(100% - 24px, 1120px)}
+      .hero-main{padding:24px}
+      h1{font-size:2.35rem}
+      .subtitle{font-size:1rem}
+      section{padding:20px}
+    }
+    @media print{
+      body{background:#fff; color:#111}
+      body:before, #progress, header, button.copy{display:none}
+      .hero-main, .side-panel, section{box-shadow:none; border-color:#bbb; background:#fff}
+      .hero{display:block; padding:0}
+      a{color:#111}
+    }
+  </style>
+</head>
+<body>
+  <div id="progress"></div>
+
+  <header>
+    <div class="wrap topbar">
+      <a class="back" href="/">Volver a la reunión</a>
+      <nav aria-label="Secciones">
+        <a href="#inicio">Inicio</a>
+        <a href="#texto">Texto base</a>
+        <a href="#preguntas">Preguntas</a>
+        <a href="#video">Video</a>
+        <a href="#cierre">Cierre</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap hero" id="inicio">
+    <div class="hero-main">
+      <p class="label">Nuestra vida cristiana · 9 minutos</p>
+      <h1>Listos para presentar una defensa con apacibilidad y profundo respeto</h1>
+      <p class="subtitle">Guía práctica para dirigir la asignación con preguntas y respuestas. La idea central es mantener el equilibrio: valor para defender lo que Jehová enseña, y tacto para hacerlo sin atacar a nadie.</p>
+      <div class="meta">
+        <span class="pill">Martes 2 de junio de 2026</span>
+        <span class="pill">Jeremías 1-3</span>
+        <span class="pill">1 Pedro 3:15</span>
+        <span class="pill">Juan 18:36</span>
+      </div>
+    </div>
+
+    <aside class="side-panel" aria-label="Resumen de tiempos">
+      <div class="timer">
+        <div class="time-box">
+          <strong>1 min</strong>
+          <span>Introducción y lectura</span>
+        </div>
+        <div class="time-box">
+          <strong>3 min</strong>
+          <span>Dos preguntas iniciales</span>
+        </div>
+        <div class="time-box">
+          <strong>4 min</strong>
+          <span>Video y pregunta</span>
+        </div>
+        <div class="time-box">
+          <strong>1 min</strong>
+          <span>Recordatorio y cierre</span>
+        </div>
+      </div>
+      <div class="side-note">
+        Frase para mantener el enfoque: no defendemos nuestras ideas personales; defendemos la esperanza que Jehová nos dio, con calma y respeto.
+      </div>
+    </aside>
+  </div>
+
+  <main class="wrap">
+    <section id="texto">
+      <p class="label">Texto base</p>
+      <h2>Leer 1 Pedro 3:15</h2>
+      <p class="lead">Antes de las preguntas, conviene preparar al auditorio para notar cuatro ideas del texto: Cristo debe estar como Señor en el corazón, debemos estar listos, damos razón de nuestra esperanza y lo hacemos con apacibilidad y profundo respeto.</p>
+      <div class="scripture">
+        <strong>Idea que debe quedar clara</strong>
+        <p>1 Pedro 3:15 no solo nos dice que presentemos una defensa; también nos dice de dónde nace esa defensa, qué defendemos y con qué actitud debemos hacerlo.</p>
+      </div>
+      <div class="quote" data-copy="Hermanos, 1 Pedro 3:15 nos ayuda a ver que defender nuestra fe empieza en el corazón. Si Cristo es nuestro Señor y nuestra esperanza está clara, podemos responder con valor, pero también con apacibilidad y profundo respeto.">
+        Hermanos, 1 Pedro 3:15 nos ayuda a ver que defender nuestra fe empieza en el corazón. Si Cristo es nuestro Señor y nuestra esperanza está clara, podemos responder con valor, pero también con apacibilidad y profundo respeto.
+      </div>
+    </section>
+
+    <section id="preguntas">
+      <p class="label">Preguntas oficiales</p>
+      <h2>Preguntas y respuestas para dirigir</h2>
+
+      <details open>
+        <summary>¿Qué otras cualidades necesitamos cuando explicamos nuestras creencias?</summary>
+        <div class="answer">
+          <div class="copy-row">
+            <span class="tag">Respuesta guía</span>
+            <button class="copy" data-target="respuesta-1">Copiar</button>
+          </div>
+          <div class="lsm-line">
+            <span class="tag">LSM</span>
+            <span>Tú Testigo de Jehová explicar, necesario cualidades agregar, ¿qué significa?</span>
+          </div>
+          <p id="respuesta-1">Según 1 Pedro 3:15, necesitamos apacibilidad y profundo respeto. Además, como el texto dice que Cristo debe estar como Señor en nuestro corazón, también necesitamos lealtad, humildad y dominio propio. No respondemos para ganar una discusión; respondemos para dar razón de nuestra esperanza.</p>
+          <p><strong>Si quieres ampliar:</strong> del texto salen estas ideas: corazón correcto, preparación, esperanza clara, tono apacible y respeto profundo.</p>
+        </div>
+      </details>
+
+      <details>
+        <summary>¿Por qué son importantes estas cualidades?</summary>
+        <div class="answer">
+          <div class="copy-row">
+            <span class="tag">Respuesta guía</span>
+            <button class="copy" data-target="respuesta-2">Copiar</button>
+          </div>
+          <div class="lsm-line">
+            <span class="tag">LSM</span>
+            <span>Cualidad tranquilo amable importante, ¿por qué?</span>
+          </div>
+          <p id="respuesta-2">Son importantes porque 1 Pedro 3:15 une la defensa de nuestra esperanza con la manera de hablar. Si respondemos con apacibilidad y profundo respeto, la persona puede notar que nuestra seguridad viene de Cristo y de la esperanza bíblica, no del orgullo ni del deseo de imponer nuestra opinión.</p>
+          <p><strong>Puente al video:</strong> ahora veremos dos situaciones donde se aplica esa instrucción del texto: estar listos para explicar nuestra esperanza, pero hacerlo con apacibilidad y profundo respeto.</p>
+        </div>
+      </details>
+    </section>
+
+    <section id="video">
+      <p class="label">Video</p>
+      <h2>El resultado de la verdadera rectitud será paz</h2>
+      <div class="grid two">
+        <div class="card">
+          <strong>Antes de ponerlo</strong>
+          <p>Pida al auditorio que observe cómo se puede responder sin esconder lo que creemos, pero sin sonar agresivos.</p>
+        </div>
+        <div class="card">
+          <strong>Después de verlo</strong>
+          <p>Use la pregunta para sacar aplicaciones prácticas, no para abrir debate sobre política o ideologías.</p>
+        </div>
+      </div>
+
+      <details open>
+        <summary>Según lo que vimos en el video, ¿qué puede ayudarnos a explicar con tacto lo que creemos sobre la homosexualidad?</summary>
+        <div class="answer">
+          <div class="copy-row">
+            <span class="tag">Respuesta guía</span>
+            <button class="copy" data-target="respuesta-3">Copiar</button>
+          </div>
+          <div class="lsm-line">
+            <span class="tag">LSM</span>
+            <span>Por ejemplo, persona te dice: ey homosexual, tú Testigo de Jehová, opinión ¿qué?</span>
+          </div>
+          <p id="respuesta-3">Prepararnos antes, escuchar con respeto, hablar de las normas de Jehová sin atacar a nadie y evitar convertir la conversación en un debate político.</p>
+          <p><strong>Aplicación breve:</strong> podemos decir lo que enseña la Biblia con seguridad, pero nuestra manera de decirlo debe dejar claro que no odiamos ni menospreciamos a las personas.</p>
+        </div>
+      </details>
+    </section>
+
+    <section id="cierre" class="danger">
+      <p class="label">Recordatorio</p>
+      <h2>Evitar debates políticos</h2>
+      <p class="lead">Cuando defendamos las normas morales de Jehová, no necesitamos entrar en debates políticos. Juan 18:36 nos ayuda a recordar que el Reino de Jesús no es parte de este mundo.</p>
+      <div class="quote" data-copy="Defendemos lo que Jehová enseña, pero lo hacemos como discípulos de Cristo: con valor, apacibilidad y profundo respeto.">
+        Defendemos lo que Jehová enseña, pero lo hacemos como discípulos de Cristo: con valor, apacibilidad y profundo respeto.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      Basado en la Guía de actividades para la reunión Vida y Ministerio Cristianos, semana del 1 al 7 de junio de 2026. Fuente: <a href="https://www.jw.org/es/biblioteca/guia-actividades-reunion-testigos-jehova/mayo-junio-2026-mwb/Vida-y-Ministerio-Cristianos-1-a-7-de-junio-de-2026/">JW.org</a>.
+    </div>
+  </footer>
+
+  <script>
+    const progress = document.getElementById("progress");
+    const setProgress = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const value = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progress.style.width = `${value}%`;
+    };
+    window.addEventListener("scroll", setProgress, { passive: true });
+    setProgress();
+
+    document.querySelectorAll("button.copy").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const target = document.getElementById(button.dataset.target);
+        if (!target) return;
+        try {
+          await navigator.clipboard.writeText(target.textContent.trim());
+          const original = button.textContent;
+          button.textContent = "Copiado";
+          setTimeout(() => {
+            button.textContent = original;
+          }, 1200);
+        } catch {
+          button.textContent = "No copiado";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

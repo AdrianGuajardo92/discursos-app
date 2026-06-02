@@ -176,7 +176,10 @@ export const REUNIONES_MAYO_2026 = [
     ],
     vida: [
       asignacion(7, "¡Sé valiente como Jeremías!", "6 mins", "Martín Martínez"),
-      asignacion(8, "“Listos para presentar una defensa [...] con apacibilidad y profundo respeto”", "9 mins", "Adrián Guajardo"),
+      asignacion(8, "“Listos para presentar una defensa [...] con apacibilidad y profundo respeto”", "9 mins", "Adrián Guajardo", null, {
+        estudioHtml: "/asignaciones/2026-06-02-defensa-apacibilidad-respeto.html?v=20260602-5",
+        estudioHtmlLabel: "Abrir guía HTML",
+      }),
       asignacion(9, "Estudio Bíblico de la Congregación", "30 mins", "Mauricio Chávez", null, {
         contexto: "lfb lecciones 90, 91.",
       }),
