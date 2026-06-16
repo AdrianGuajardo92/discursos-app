@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Lección 95: Nada los detiene</title>
+  <style>
+    :root{
+      --bg:#f4ede3;
+      --bg-warm:#ebe2d4;
+      --paper:#faf6ef;
+      --paper-2:#f7f1e8;
+      --ink:#2c2418;
+      --ink-soft:#4a3f32;
+      --muted:#6b5f50;
+      --dim:#8a7d6c;
+      --line:#d4c4ad;
+      --line-soft:#e4d9c8;
+      --accent:#8b6914;
+      --accent-2:#a67c1a;
+      --accent-soft:rgba(139,105,20,.1);
+      --accent-glow:rgba(166,124,26,.18);
+      --teal:#3d6b5e;
+      --teal-soft:rgba(61,107,94,.08);
+      --burgundy:#6b3d3a;
+      --burgundy-soft:rgba(107,61,58,.07);
+      --shadow:0 18px 48px rgba(44,36,24,.08);
+      --shadow-soft:0 4px 16px rgba(44,36,24,.05);
+      --radius:12px;
+      color-scheme:light;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Libre Baskerville", "Georgia", "Times New Roman", serif;
+      color:var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 0%, var(--accent-glow), transparent 42%),
+        radial-gradient(ellipse at 88% 8%, rgba(61,107,94,.06), transparent 38%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 55%, #e8dfd2 100%);
+      line-height:1.7;
+      -webkit-font-smoothing:antialiased;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.35;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+    .wrap{
+      width:min(860px, calc(100% - 32px));
+      margin:0 auto;
+      position:relative;
+    }
+    header{
+      padding:28px 0 20px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:8px;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:28px;
+      flex-wrap:wrap;
+    }
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      min-height:36px;
+      padding:7px 14px;
+      border-radius:6px;
+      border:1px solid var(--line);
+      color:var(--accent);
+      text-decoration:none;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.82rem;
+      font-weight:600;
+      background:var(--paper);
+      transition:border-color .2s, background .2s;
+    }
+    .back:hover{
+      border-color:var(--accent-2);
+      background:var(--paper-2);
+    }
+    .meta{
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.75rem;
+      font-weight:600;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--dim);
+    }
+    .hero{
+      text-align:center;
+      padding:12px 0 32px;
+    }
+    .hero-badge{
+      display:inline-block;
+      padding:5px 14px;
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.72rem;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:18px;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(1.65rem, 4vw, 2.15rem);
+      font-weight:700;
+      color:var(--ink);
+      letter-spacing:-.01em;
+      line-height:1.25;
+    }
+    .subtitle{
+      margin:0 0 6px;
+      font-size:1.05rem;
+      color:var(--ink-soft);
+      font-style:italic;
+    }
+    .reading{
+      margin:16px 0 0;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.88rem;
+      color:var(--muted);
+    }
+    .reading strong{color:var(--accent);font-weight:700}
+    .section{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px 26px;
+      margin:0 0 22px;
+      box-shadow:var(--shadow-soft);
+      position:relative;
+    }
+    .section:before{
+      content:"";
+      position:absolute;
+      top:0; left:24px; right:24px;
+      height:2px;
+      background:linear-gradient(90deg, transparent, var(--accent-2), transparent);
+      border-radius:2px;
+    }
+    .section-label{
+      display:block;
+      margin:0 0 14px;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.68rem;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--accent);
+    }
+    .section h2{
+      margin:0 0 16px;
+      font-size:1.2rem;
+      font-weight:700;
+      color:var(--ink);
+      line-height:1.3;
+    }
+    .section p{
+      margin:0 0 1rem;
+      color:var(--ink-soft);
+      font-size:.98rem;
+    }
+    .section p:last-child{margin-bottom:0}
+    .key-scripture{
+      border-left:3px solid var(--accent-2);
+      padding:14px 18px;
+      margin:0;
+      background:var(--accent-soft);
+      border-radius:0 var(--radius) var(--radius) 0;
+      font-style:italic;
+      color:var(--ink);
+      font-size:1.02rem;
+    }
+    .key-ref{
+      display:block;
+      margin-top:10px;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.8rem;
+      font-weight:700;
+      color:var(--accent);
+      font-style:normal;
+      letter-spacing:.04em;
+    }
+    .qa-list{display:grid;gap:12px}
+    details.qa{
+      border:1px solid var(--line-soft);
+      border-radius:var(--radius);
+      background:var(--paper-2);
+      overflow:hidden;
+    }
+    details.qa summary{
+      cursor:pointer;
+      list-style:none;
+      padding:16px 18px;
+      font-weight:700;
+      color:var(--ink);
+      font-size:.98rem;
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      font-family:"Segoe UI", system-ui, sans-serif;
+    }
+    details.qa summary::-webkit-details-marker{display:none}
+    details.qa summary:before{
+      content:"?";
+      flex:0 0 28px;
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      background:var(--teal-soft);
+      color:var(--teal);
+      font-size:.82rem;
+      font-weight:800;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-top:1px;
+    }
+    details.qa[open] summary{
+      border-bottom:1px solid var(--line-soft);
+      color:var(--teal);
+    }
+    .answer{
+      padding:14px 18px 18px 58px;
+      color:var(--ink-soft);
+      font-size:.95rem;
+    }
+    .answer p{margin:0 0 .7rem}
+    .answer p:last-child{margin-bottom:0}
+    .refs{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:4px;
+    }
+    .ref-tag{
+      display:inline-flex;
+      align-items:center;
+      padding:5px 11px;
+      border-radius:5px;
+      border:1px solid var(--line-soft);
+      background:var(--teal-soft);
+      color:var(--teal);
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.76rem;
+      font-weight:600;
+      letter-spacing:.03em;
+    }
+    .nav-lessons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+      margin:8px 0 28px;
+    }
+    .nav-lessons a{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:8px 14px;
+      border-radius:6px;
+      border:1px solid var(--line);
+      background:var(--paper);
+      color:var(--accent);
+      text-decoration:none;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.82rem;
+      font-weight:600;
+    }
+    .nav-lessons a:hover{
+      border-color:var(--accent-2);
+      background:var(--paper-2);
+    }
+    footer{
+      padding:20px 0 36px;
+      border-top:1px solid var(--line);
+      text-align:center;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.78rem;
+      color:var(--dim);
+    }
+    @media print{
+      body{background:#fff;font-size:11pt}
+      body:before{display:none}
+      .back, .no-print{display:none}
+      .wrap{width:100%}
+      details.qa{border:1px solid #ccc}
+      details.qa .answer{display:block!important}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="leccion-95">
+    <header>
+      <div class="topbar">
+        <a class="back no-print" href="/">← Volver</a>
+        <span class="meta">Estudio Bíblico · 16 jun 2026</span>
+      </div>
+      <div class="hero">
+        <span class="hero-badge">Lección 95 · LFB</span>
+        <h1>Nada los detiene</h1>
+        <p class="subtitle">Los apóstoles obedecen a Dios aunque los persigan</p>
+        <p class="reading">
+          Reunión del <strong>16 de junio de 2026</strong> ·
+          Asignación #9 · Diego Serrano · 30 min
+        </p>
+      </div>
+    </header>
+
+    <div class="nav-lessons no-print">
+      <a href="/estudios-lfb/lfb-leccion-94.html?v=20260616-1#leccion-94">← Anterior: Lección 94</a>
+    </div>
+
+    <section class="section">
+      <span class="section-label">La historia relatada</span>
+      <h2>Lo que cuenta el libro</h2>
+      <p>Pedro y Juan estaban en el templo cuando vieron a un hombre que no podía caminar. Lo sanaron en el nombre de Jesús. Mucha gente vio el milagro y creyó en Jesús.</p>
+      <p>Los sacerdotes y los saduceos se enojaron mucho y llevaron a los apóstoles ante el Sanedrín. Les preguntaron: "¿Con qué poder hicieron esto?". Pedro les dijo que fue por medio de Jesucristo. Entonces los líderes religiosos les ordenaron que dejaran de hablar de Jesús, pero los apóstoles no dejaron de predicar.</p>
+      <p>Después de ser liberados, los discípulos oraron para que Jehová les diera valor. Él les dio espíritu santo y siguieron predicando. Los saduceos, que estaban celosos, los metieron en la cárcel. Pero un ángel de Jehová los sacó de noche y les dijo que volvieran al templo a predicar.</p>
+      <p>A la mañana siguiente, el Sanedrín los buscó en la cárcel, pero estaba cerrada y vacía. Los encontraron en el templo predicando y los arrestaron otra vez. Cuando les dijeron otra vez que dejaran de hablar de Jesús, Pedro respondió: "Tenemos que obedecer a Dios como gobernante más bien que a los hombres".</p>
+      <p>Los líderes querían matarlos, pero un fariseo llamado Gamaliel les aconsejó tener cuidado, porque tal vez estaban luchando contra Dios. Los apóstoles fueron golpeados y liberados con la orden de no predicar, pero siguieron enseñando con valor en el templo y de casa en casa.</p>
+    </section>
+
+    <section class="section">
+      <span class="section-label">El texto clave</span>
+      <blockquote class="key-scripture">
+        "Tenemos que obedecer a Dios como gobernante más bien que a los hombres"
+        <span class="key-ref">Hechos 5:29</span>
+      </blockquote>
+    </section>
+
+    <section class="section">
+      <span class="section-label">Preguntas del libro</span>
+      <h2>Preguntas y respuestas sugeridas</h2>
+      <div class="qa-list">
+        <details class="qa" open>
+          <summary>¿Por qué no dejaron de predicar los discípulos?</summary>
+          <div class="answer">
+            <p>Jesús les había mandado predicar el evangelio. Cuando los líderes religiosos les prohibieron hablar de él, los apóstoles obedecieron a Dios antes que a los hombres.</p>
+            <p>Pedro lo dijo con claridad ante el Sanedrín: su lealtad primaria era a Jehová. Aunque los amenazaran, golpearan o encarcelaran, consideraban que predicar sobre Jesús era más importante que complacer a las autoridades humanas.</p>
+          </div>
+        </details>
+        <details class="qa" open>
+          <summary>¿Cómo los ayudó Jehová?</summary>
+          <div class="answer">
+            <p>Cuando oraron pidiendo valor después de la primera detención, Jehová les dio espíritu santo y siguieron predicando con firmeza.</p>
+            <p>También envió un ángel para sacarlos de la cárcel de noche y mandarlos de vuelta al templo. Y usó a Gamaliel para disuadir al Sanedrín de matarlos. Con todo eso, los apóstoles pudieron seguir enseñando con valor en el templo y de casa en casa.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="section">
+      <span class="section-label">Referencias bíblicas</span>
+      <h2>Textos para leer en la reunión</h2>
+      <div class="refs">
+        <span class="ref-tag">Hechos 3:1-4:31</span>
+        <span class="ref-tag">Hechos 5:12-42</span>
+      </div>
+    </section>
+
+    <footer>
+      <p>Reunión del 16 de junio de 2026 · Lección 95 · LFB</p>
+    </footer>
+  </div>
+</body>
+</html>

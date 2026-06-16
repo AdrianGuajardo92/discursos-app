@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Estudio — No respetaron el templo de Jehová</title>
+  <style>
+    :root{
+      --bg:#f4ede3;
+      --bg-warm:#ebe2d4;
+      --paper:#faf6ef;
+      --paper-2:#f7f1e8;
+      --ink:#2c2418;
+      --ink-soft:#4a3f32;
+      --muted:#6b5f50;
+      --dim:#8a7d6c;
+      --line:#d4c4ad;
+      --line-soft:#e4d9c8;
+      --accent:#8b6914;
+      --accent-2:#a67c1a;
+      --accent-soft:rgba(139,105,20,.1);
+      --accent-glow:rgba(166,124,26,.18);
+      --teal:#3d6b5e;
+      --teal-soft:rgba(61,107,94,.08);
+      --burgundy:#6b3d3a;
+      --burgundy-soft:rgba(107,61,58,.07);
+      --warn-soft:rgba(139,105,20,.06);
+      --shadow:0 18px 48px rgba(44,36,24,.08);
+      --shadow-soft:0 4px 16px rgba(44,36,24,.05);
+      --radius:12px;
+      color-scheme:light;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Libre Baskerville", "Georgia", "Times New Roman", serif;
+      color:var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 0%, var(--accent-glow), transparent 42%),
+        radial-gradient(ellipse at 88% 8%, rgba(61,107,94,.06), transparent 38%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 55%, #e8dfd2 100%);
+      line-height:1.7;
+      -webkit-font-smoothing:antialiased;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.35;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+    .wrap{
+      width:min(860px, calc(100% - 32px));
+      margin:0 auto;
+      position:relative;
+    }
+    header{
+      padding:28px 0 20px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:8px;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:28px;
+    }
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      min-height:36px;
+      padding:7px 14px;
+      border-radius:6px;
+      border:1px solid var(--line);
+      color:var(--accent);
+      text-decoration:none;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.82rem;
+      font-weight:600;
+      background:var(--paper);
+      transition:border-color .2s, background .2s;
+    }
+    .back:hover{
+      border-color:var(--accent-2);
+      background:var(--paper-2);
+    }
+    .meta{
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.75rem;
+      font-weight:600;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--dim);
+    }
+    .hero{
+      text-align:center;
+      padding:12px 0 28px;
+    }
+    .hero-badge{
+      display:inline-block;
+      padding:5px 14px;
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:var(--teal-soft);
+      color:var(--teal);
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.72rem;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:18px;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(1.65rem, 4vw, 2.15rem);
+      font-weight:700;
+      color:var(--ink);
+      letter-spacing:-.01em;
+      line-height:1.25;
+    }
+    .subtitle{
+      margin:0;
+      font-size:1.02rem;
+      color:var(--ink-soft);
+      font-style:italic;
+    }
+    .reading{
+      margin:16px 0 0;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.88rem;
+      color:var(--muted);
+    }
+    .reading strong{
+      color:var(--accent);
+      font-weight:700;
+    }
+    .section{
+      margin-bottom:28px;
+      scroll-margin-top:24px;
+    }
+    .section-head{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin:0 0 14px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--line-soft);
+    }
+    .section-head h2{
+      margin:0;
+      font-size:1.05rem;
+      font-weight:700;
+      color:var(--accent);
+      letter-spacing:.02em;
+    }
+    .section-head .icon{
+      flex:0 0 auto;
+      width:28px;
+      height:28px;
+      border-radius:50%;
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.72rem;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .panel{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px 26px;
+      box-shadow:var(--shadow-soft);
+      position:relative;
+    }
+    .panel:before{
+      content:"";
+      position:absolute;
+      top:0; left:24px; right:24px;
+      height:2px;
+      background:linear-gradient(90deg, transparent, var(--accent-2), transparent);
+      border-radius:2px;
+    }
+    .panel p{
+      margin:0;
+      color:var(--ink-soft);
+      font-size:.98rem;
+    }
+    .key-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:14px;
+    }
+    .key-card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:18px 20px;
+      box-shadow:var(--shadow-soft);
+    }
+    .key-card strong{
+      display:block;
+      font-size:.92rem;
+      color:var(--ink);
+      margin-bottom:8px;
+      line-height:1.35;
+    }
+    .key-card span{
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.78rem;
+      font-weight:600;
+      color:var(--teal);
+      letter-spacing:.03em;
+    }
+    .study-block{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      margin-bottom:16px;
+      overflow:hidden;
+      box-shadow:var(--shadow-soft);
+    }
+    .study-block-header{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:16px 22px;
+      background:var(--paper-2);
+      border-bottom:1px solid var(--line-soft);
+    }
+    .study-num{
+      flex:0 0 auto;
+      width:32px;
+      height:32px;
+      border-radius:50%;
+      border:1.5px solid var(--line);
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.82rem;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .study-block-header h3{
+      margin:0;
+      font-size:1.02rem;
+      font-weight:700;
+      color:var(--ink);
+      line-height:1.35;
+    }
+    .study-table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:.93rem;
+    }
+    .study-table th,
+    .study-table td{
+      padding:14px 18px;
+      text-align:left;
+      vertical-align:top;
+      border-bottom:1px solid var(--line-soft);
+    }
+    .study-table tr:last-child th,
+    .study-table tr:last-child td{
+      border-bottom:none;
+    }
+    .study-table th{
+      width:28%;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.72rem;
+      font-weight:700;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--dim);
+      background:var(--warn-soft);
+    }
+    .study-table td{
+      color:var(--ink-soft);
+    }
+    .study-table .refs{
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.84rem;
+      font-weight:600;
+      color:var(--teal);
+    }
+    .compare{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .compare-col{
+      border-radius:var(--radius);
+      padding:20px 22px;
+      border:1px solid var(--line);
+    }
+    .compare-col.false{
+      background:var(--burgundy-soft);
+      border-color:rgba(107,61,58,.2);
+    }
+    .compare-col.true{
+      background:var(--teal-soft);
+      border-color:rgba(61,107,94,.2);
+    }
+    .compare-label{
+      margin:0 0 12px;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.7rem;
+      font-weight:700;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+    .compare-col.false .compare-label{color:var(--burgundy)}
+    .compare-col.true .compare-label{color:var(--teal)}
+    .compare-col ul{
+      margin:0;
+      padding-left:1.15rem;
+      color:var(--ink-soft);
+      font-size:.92rem;
+    }
+    .compare-col li{margin-bottom:.45rem}
+    .compare-col li:last-child{margin-bottom:0}
+    .qa-list{
+      display:grid;
+      gap:12px;
+    }
+    details.qa{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      overflow:hidden;
+      box-shadow:var(--shadow-soft);
+    }
+    details.qa summary{
+      cursor:pointer;
+      list-style:none;
+      padding:16px 20px;
+      font-size:.95rem;
+      font-weight:700;
+      color:var(--ink);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    details.qa summary::-webkit-details-marker{display:none}
+    details.qa summary:after{
+      content:"+";
+      flex:0 0 auto;
+      color:var(--accent);
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-weight:700;
+      font-size:1.1rem;
+      line-height:1.2;
+    }
+    details.qa[open] summary:after{content:"−"}
+    details.qa .answer{
+      padding:0 20px 16px;
+      color:var(--ink-soft);
+      font-size:.92rem;
+      border-top:1px solid var(--line-soft);
+      padding-top:14px;
+      margin:0 20px 16px;
+    }
+    .apply-list{
+      margin:0;
+      padding-left:1.25rem;
+      color:var(--ink-soft);
+      font-size:.95rem;
+    }
+    .apply-list li{margin-bottom:.6rem}
+    .apply-list li:last-child{margin-bottom:0}
+    .apply-list strong{color:var(--ink)}
+    .ref-grid{
+      display:grid;
+      gap:8px;
+    }
+    .ref-row{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:baseline;
+      gap:8px 14px;
+      padding:10px 14px;
+      background:var(--paper-2);
+      border:1px solid var(--line-soft);
+      border-radius:8px;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.84rem;
+    }
+    .ref-row .cite{
+      font-weight:700;
+      color:var(--teal);
+      min-width:9rem;
+    }
+    .ref-row .topic{color:var(--muted)}
+    footer{
+      padding:20px 0 36px;
+      border-top:1px solid var(--line);
+      text-align:center;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.78rem;
+      color:var(--dim);
+    }
+    footer a{color:var(--accent); text-decoration:none}
+    footer a:hover{text-decoration:underline}
+    @media (max-width:640px){
+      .compare{grid-template-columns:1fr}
+      .study-table th,
+      .study-table td{display:block; width:100%}
+      .study-table th{
+        border-bottom:none;
+        padding-bottom:6px;
+      }
+      .study-table td{padding-top:0}
+    }
+    @media print{
+      body{background:#fff; font-size:11pt}
+      body:before{display:none}
+      .back{display:none}
+      .wrap{width:100%; padding:0 12px}
+      header{position:static; padding-top:0}
+      .panel, .study-block, .key-card, .compare-col, details.qa{
+        box-shadow:none;
+        break-inside:avoid;
+        page-break-inside:avoid;
+      }
+      details.qa[open] summary:after{display:none}
+      details.qa .answer{display:block !important}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="topbar">
+        <a class="back" href="/">← Volver</a>
+        <span class="meta">Estudio · Jeremías 7, 8</span>
+      </div>
+      <div class="hero">
+        <span class="hero-badge">Estudio para comprender</span>
+        <h1>No respetaron el templo de Jehová</h1>
+        <p class="subtitle">Jeremías 7 — confianza falsa, conducta y la lección de Siló</p>
+        <p class="reading">
+          Lectura de la semana: <strong>Jeremías 7, 8</strong>
+        </p>
+      </div>
+    </header>
+
+    <section class="section" id="contexto">
+      <div class="section-head">
+        <span class="icon">1</span>
+        <h2>Contexto · De qué trata</h2>
+      </div>
+      <div class="panel">
+        <p>
+          En el tiempo de Jeremías, muchos en Judá seguían yendo al templo y repetían frases piadosas, pero su vida diaria
+          contradecía lo que profesaban. Jehová envía a su profeta a explicarles que un edificio sagrado no sustituye
+          obediencia sincera. El capítulo 7 confronta esa confianza engañosa, muestra cómo su conducta afectaba el nombre
+          de Dios y recuerda lo ocurrido en Siló como advertencia clara.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" id="ideas-clave">
+      <div class="section-head">
+        <span class="icon">2</span>
+        <h2>Ideas clave</h2>
+      </div>
+      <div class="key-grid">
+        <div class="key-card">
+          <strong>El templo no protege por sí solo</strong>
+          <span>Jer 7:4, 8-10</span>
+        </div>
+        <div class="key-card">
+          <strong>La conducta mancha el nombre de Jehová</strong>
+          <span>Jer 7:11 · it «Jehová»</span>
+        </div>
+        <div class="key-card">
+          <strong>Siló prueba que la desobediencia tiene consecuencias</strong>
+          <span>Jer 7:12-14 · it «Siló»</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="puntos">
+      <div class="section-head">
+        <span class="icon">3</span>
+        <h2>Los tres puntos del texto</h2>
+      </div>
+
+      <article class="study-block" id="punto1">
+        <div class="study-block-header">
+          <span class="study-num">1</span>
+          <h3>Confianza falsa en el templo</h3>
+        </div>
+        <table class="study-table">
+          <tr>
+            <th>Hecho</th>
+            <td>
+              Muchos habitantes de Judá creían que el templo, por sí solo, los protegería aunque siguieran actuando mal.
+              Pensaban que la presencia del santuario les garantizaba seguridad, sin importar su conducta.
+            </td>
+          </tr>
+          <tr>
+            <th>Referencia</th>
+            <td class="refs">Jeremías 7:4, 8-10 · jr 21 párr. 12</td>
+          </tr>
+          <tr>
+            <th>Qué aprendemos</th>
+            <td>
+              Repetir palabras religiosas o estar cerca de un lugar sagrado no compensa una vida desobediente.
+              Jehová valora la rectitud, no una fachada de devoción.
+            </td>
+          </tr>
+        </table>
+      </article>
+
+      <article class="study-block" id="punto2">
+        <div class="study-block-header">
+          <span class="study-num">2</span>
+          <h3>Conducta que deshonraba a Jehová</h3>
+        </div>
+        <table class="study-table">
+          <tr>
+            <th>Hecho</th>
+            <td>
+              Su comportamiento manchaba el nombre de Jehová. Lo que hacían en privado contradecía la adoración que profesaban
+              en el templo, y eso dañaba la reputación del Dios verdadero ante las naciones.
+            </td>
+          </tr>
+          <tr>
+            <th>Referencia</th>
+            <td class="refs">Jeremías 7:11 · it «Jehová» párr. 78</td>
+          </tr>
+          <tr>
+            <th>Qué aprendemos</th>
+            <td>
+              Cuando quienes dicen adorar a Jehová actúan mal, las personas de afuera pueden llegar a pensar mal de Él.
+              Nuestra conducta refleja — o deshonra — el nombre de Dios.
+            </td>
+          </tr>
+        </table>
+      </article>
+
+      <article class="study-block" id="punto3">
+        <div class="study-block-header">
+          <span class="study-num">3</span>
+          <h3>La lección de Siló</h3>
+        </div>
+        <table class="study-table">
+          <tr>
+            <th>Hecho</th>
+            <td>
+              Jehová usó el ejemplo de Siló para mostrarles lo que les pasaría al templo de Jerusalén. Si el lugar donde antes
+              residía su nombre fue destruido por la desobediencia de Israel, el templo de Judá no estaría a salvo por ser un edificio sagrado.
+            </td>
+          </tr>
+          <tr>
+            <th>Referencia</th>
+            <td class="refs">Jeremías 7:12-14 · it «Siló» núm. 2 párr. 4</td>
+          </tr>
+          <tr>
+            <th>Qué aprendemos</th>
+            <td>
+              Ni el tabernáculo de Siló ni el templo de Jerusalén protegieron a un pueblo rebelde.
+              Lo que importa es la relación leal con Jehová, no la mera posesión de un lugar santo.
+            </td>
+          </tr>
+        </table>
+      </article>
+    </section>
+
+    <section class="section" id="comparacion">
+      <div class="section-head">
+        <span class="icon">4</span>
+        <h2>Comparación · Confianza falsa vs verdadero respeto</h2>
+      </div>
+      <div class="compare">
+        <div class="compare-col false">
+          <p class="compare-label">Confianza falsa</p>
+          <ul>
+            <li>Decir «el templo de Jehová» como fórmula mágica</li>
+            <li>Ir al santuario pero seguir robando, mintiendo o adorando a otros dioses</li>
+            <li>Creer que el edificio sagrado garantiza protección sin cambiar la conducta</li>
+            <li>Adoración externa con corazón lejos de Jehová</li>
+          </ul>
+        </div>
+        <div class="compare-col true">
+          <p class="compare-label">Verdadero respeto</p>
+          <ul>
+            <li>Escuchar la voz de Jehová y corregir el rumbo (Jer 7:3, 5-7)</li>
+            <li>Practicar justicia, amor leal y rectitud en la vida diaria</li>
+            <li>Adorar con sinceridad, no solo con apariencia religiosa</li>
+            <li>Honrar el nombre de Jehová con conducta coherente en todo momento</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="repaso">
+      <div class="section-head">
+        <span class="icon">5</span>
+        <h2>Preguntas para repasar</h2>
+      </div>
+      <div class="qa-list">
+        <details class="qa">
+          <summary>¿En qué confiaban muchos de Judá respecto al templo?</summary>
+          <p class="answer">
+            Creían que el templo por sí solo los protegería, aunque siguieran actuando mal. Repetían «el templo de Jehová»
+            como si esas palabras bastaran (Jer 7:4, 8-10).
+          </p>
+        </details>
+        <details class="qa">
+          <summary>¿Cómo afectaba su conducta al nombre de Jehová?</summary>
+          <p class="answer">
+            Lo manchaba. Su comportamiento contradecía la adoración que profesaban y dañaba la reputación del Dios verdadero
+            ante las naciones (Jer 7:11; it «Jehová» párr. 78).
+          </p>
+        </details>
+        <details class="qa">
+          <summary>¿Por qué Jehová mencionó Siló?</summary>
+          <p class="answer">
+            Para demostrar que un lugar donde antes residía su nombre fue destruido cuando Israel fue desobediente.
+            El templo de Jerusalén no estaría a salvo por ser un edificio sagrado si el pueblo seguía rebelde (Jer 7:12-14).
+          </p>
+        </details>
+        <details class="qa">
+          <summary>¿Qué diferencia hay entre ir al templo y adorar de verdad?</summary>
+          <p class="answer">
+            Ir al templo puede ser solo una rutina externa. Adorar de verdad implica obediencia, justicia y un corazón
+            sincero que coincide con lo que se profesa públicamente.
+          </p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section" id="aplicacion">
+      <div class="section-head">
+        <span class="icon">6</span>
+        <h2>Aplicación personal</h2>
+      </div>
+      <div class="panel">
+        <ul class="apply-list">
+          <li>
+            <strong>¿Honra a Jehová mi conducta en todo momento?</strong>
+            Examine si lo que hace en privado coincide con lo que profesa en la congregación.
+          </li>
+          <li>No confíe en la rutina de reuniones o en estar cerca de un lugar de adoración si la vida diaria no refleja obediencia.</li>
+          <li>Recuerde que su conducta puede influir en cómo otros ven el nombre y la reputación de Jehová.</li>
+          <li>Aprenda de Siló: la fidelidad a Jehová importa más que cualquier privilegio o posición aparentemente segura.</li>
+          <li>Busque corregir de inmediato cualquier área donde haya una doble vida entre lo público y lo privado.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="referencias">
+      <div class="section-head">
+        <span class="icon">7</span>
+        <h2>Referencias rápidas</h2>
+      </div>
+      <div class="ref-grid">
+        <div class="ref-row">
+          <span class="cite">Jeremías 7:4, 8-10</span>
+          <span class="topic">Confianza falsa en el templo</span>
+        </div>
+        <div class="ref-row">
+          <span class="cite">jr 21 párr. 12</span>
+          <span class="topic">Comentario sobre Jer 7:4, 8-10</span>
+        </div>
+        <div class="ref-row">
+          <span class="cite">Jeremías 7:11</span>
+          <span class="topic">Conducta que mancha el nombre de Jehová</span>
+        </div>
+        <div class="ref-row">
+          <span class="cite">it «Jehová» párr. 78</span>
+          <span class="topic">Cómo se deshonra el nombre de Dios</span>
+        </div>
+        <div class="ref-row">
+          <span class="cite">Jeremías 7:12-14</span>
+          <span class="topic">Advertencia usando el ejemplo de Siló</span>
+        </div>
+        <div class="ref-row">
+          <span class="cite">it «Siló» núm. 2 párr. 4</span>
+          <span class="topic">Qué ocurrió en Siló y por qué importa</span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>Reunión del 16 de junio de 2026 · Lectura: Jeremías 7, 8 · <a href="/">Volver a discursos-app</a></p>
+    </footer>
+  </div>
+</body>
+</html>

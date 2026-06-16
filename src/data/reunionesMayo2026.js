@@ -229,8 +229,14 @@ export const REUNIONES_MAYO_2026 = [
     cancionFinal: "71",
     oracion: "Gabriel Segura",
     tesoros: [
-      asignacion(1, "No respetaron el templo de Jehová", "10 mins", "Mauricio Chávez"),
-      asignacion(2, "Busquemos Perlas Escondidas", "10 mins", "Joshua García"),
+      asignacion(1, "No respetaron el templo de Jehová", "10 mins", "Mauricio Chávez", null, {
+        estudioHtml: "/asignaciones/2026-06-16-no-respetaron-templo.html?v=20260616-2",
+        estudioHtmlLabel: "Abrir guía HTML",
+      }),
+      asignacion(2, "Busquemos Perlas Escondidas", "10 mins", "Joshua García", null, {
+        estudioHtml: "/asignaciones/2026-06-16-perlas-jeremias-7-8.html?v=20260616-8",
+        estudioHtmlLabel: "Abrir perlas HTML",
+      }),
       asignacion(3, "Lectura de la Biblia", "4 mins", "Jorge Perea", null, {
         contexto: "Jeremías 8:4-13.",
       }),
@@ -247,7 +253,19 @@ export const REUNIONES_MAYO_2026 = [
       }),
       asignacion(8, "Cómo usamos las donaciones: Mantenemos nuestros Salones del Reino en buen estado", "10 mins", "Luis Hernández"),
       asignacion(9, "Estudio Bíblico de la Congregación", "30 mins", "Diego Serrano", null, {
-        contexto: "lfb introducción a la sección 14 y lecciones 94, 95.",
+        materiales: [
+          {
+            titulo: "Lección 94",
+            descripcion: "Los discípulos reciben espíritu santo",
+            href: "/estudios-lfb/lfb-leccion-94.html?v=20260616-1#leccion-94",
+          },
+          {
+            titulo: "Lección 95",
+            descripcion: "Nada los detiene",
+            href: "/estudios-lfb/lfb-leccion-95.html?v=20260616-1#leccion-95",
+          },
+        ],
+        ocultarChecklist: true,
       }),
     ],
   }),

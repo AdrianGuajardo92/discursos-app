@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Perlas Escondidas — Jeremías 7, 8</title>
+  <style>
+    :root{
+      --bg:#f4ede3;
+      --bg-warm:#ebe2d4;
+      --paper:#faf6ef;
+      --paper-2:#f7f1e8;
+      --ink:#2c2418;
+      --ink-soft:#4a3f32;
+      --muted:#6b5f50;
+      --dim:#8a7d6c;
+      --line:#d4c4ad;
+      --line-soft:#e4d9c8;
+      --accent:#8b6914;
+      --accent-2:#a67c1a;
+      --accent-soft:rgba(139,105,20,.1);
+      --accent-glow:rgba(166,124,26,.18);
+      --teal:#3d6b5e;
+      --teal-soft:rgba(61,107,94,.08);
+      --burgundy:#6b3d3a;
+      --burgundy-soft:rgba(107,61,58,.07);
+      --shadow:0 18px 48px rgba(44,36,24,.08);
+      --shadow-soft:0 4px 16px rgba(44,36,24,.05);
+      --radius:12px;
+      color-scheme:light;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Libre Baskerville", "Georgia", "Times New Roman", serif;
+      color:var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 0%, var(--accent-glow), transparent 42%),
+        radial-gradient(ellipse at 88% 8%, rgba(61,107,94,.06), transparent 38%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 55%, #e8dfd2 100%);
+      line-height:1.7;
+      -webkit-font-smoothing:antialiased;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.35;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+    .wrap{
+      width:min(860px, calc(100% - 32px));
+      margin:0 auto;
+      position:relative;
+    }
+    header{
+      padding:28px 0 20px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:8px;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:28px;
+    }
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      min-height:36px;
+      padding:7px 14px;
+      border-radius:6px;
+      border:1px solid var(--line);
+      color:var(--accent);
+      text-decoration:none;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.82rem;
+      font-weight:600;
+      background:var(--paper);
+      transition:border-color .2s, background .2s;
+    }
+    .back:hover{
+      border-color:var(--accent-2);
+      background:var(--paper-2);
+    }
+    .meta{
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.75rem;
+      font-weight:600;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--dim);
+    }
+    .hero{
+      text-align:center;
+      padding:12px 0 32px;
+    }
+    .hero-badge{
+      display:inline-block;
+      padding:5px 14px;
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.72rem;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:18px;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(1.65rem, 4vw, 2.15rem);
+      font-weight:700;
+      color:var(--ink);
+      letter-spacing:-.01em;
+      line-height:1.25;
+    }
+    .subtitle{
+      margin:0 0 6px;
+      font-size:1.05rem;
+      color:var(--ink-soft);
+      font-style:italic;
+    }
+    .reading{
+      margin:16px 0 0;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.88rem;
+      color:var(--muted);
+    }
+    .reading strong{
+      color:var(--accent);
+      font-weight:700;
+    }
+    .intro{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px 26px;
+      margin:0 0 28px;
+      box-shadow:var(--shadow-soft);
+      position:relative;
+    }
+    .intro:before{
+      content:"";
+      position:absolute;
+      top:0; left:24px; right:24px;
+      height:2px;
+      background:linear-gradient(90deg, transparent, var(--accent-2), transparent);
+      border-radius:2px;
+    }
+    .intro p{
+      margin:0;
+      color:var(--ink-soft);
+      font-size:.98rem;
+    }
+    .pearls{
+      display:grid;
+      gap:18px;
+      margin-bottom:36px;
+    }
+    .pearl{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px 24px 20px 24px;
+      box-shadow:var(--shadow-soft);
+      position:relative;
+      overflow:hidden;
+    }
+    .pearl:before{
+      content:"";
+      position:absolute;
+      left:0; top:0; bottom:0;
+      width:3px;
+      background:linear-gradient(180deg, var(--accent-2), var(--line));
+    }
+    .pearl-header{
+      display:flex;
+      align-items:flex-start;
+      gap:16px;
+      margin-bottom:12px;
+    }
+    .pearl-num{
+      flex:0 0 auto;
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      border:1.5px solid var(--line);
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.88rem;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      line-height:1;
+    }
+    .pearl-title{
+      margin:4px 0 0;
+      font-size:1.08rem;
+      font-weight:700;
+      color:var(--ink);
+      line-height:1.35;
+    }
+    .pearl-body{
+      margin:0 0 0 52px;
+      color:var(--ink-soft);
+      font-size:.95rem;
+    }
+    .pearl-body p{margin:0 0 .75rem}
+    .pearl-body p:last-child{margin-bottom:0}
+    .pearl-ref{
+      display:inline-flex;
+      align-items:center;
+      margin:10px 0 0 52px;
+      padding:4px 10px;
+      border-radius:5px;
+      border:1px solid var(--line-soft);
+      background:var(--teal-soft);
+      color:var(--teal);
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.76rem;
+      font-weight:600;
+      letter-spacing:.04em;
+    }
+    .pearl.tag-qualidad:before{background:linear-gradient(180deg, var(--accent-2), var(--accent))}
+    .pearl.tag-leccion:before{background:linear-gradient(180deg, var(--teal), #5a8a7a)}
+    .pearl.tag-aplicacion:before{background:linear-gradient(180deg, var(--burgundy), #8a5550)}
+    .pearl-label{
+      display:inline-block;
+      margin:0 0 4px 52px;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.68rem;
+      font-weight:700;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--dim);
+    }
+    .pearl.tag-qualidad .pearl-label{color:var(--accent)}
+    .pearl.tag-leccion .pearl-label{color:var(--teal)}
+    .pearl.tag-aplicacion .pearl-label{color:var(--burgundy)}
+    .closing{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px 26px;
+      margin-bottom:40px;
+      text-align:center;
+      box-shadow:var(--shadow-soft);
+    }
+    .closing h2{
+      margin:0 0 10px;
+      font-size:1rem;
+      color:var(--accent);
+      font-weight:700;
+    }
+    .closing p{
+      margin:0;
+      color:var(--muted);
+      font-size:.92rem;
+      font-style:italic;
+    }
+    footer{
+      padding:20px 0 36px;
+      border-top:1px solid var(--line);
+      text-align:center;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.78rem;
+      color:var(--dim);
+    }
+    @media (max-width:600px){
+      .pearl-body, .pearl-ref, .pearl-label{margin-left:0}
+      .pearl-header{gap:12px}
+    }
+    @media print{
+      body{
+        background:#fff;
+        font-size:11pt;
+      }
+      body:before{display:none}
+      .back, footer .no-print{display:none}
+      .wrap{width:100%; padding:0 12px}
+      header{position:static; padding-top:0}
+      .pearl, .intro, .closing{
+        box-shadow:none;
+        break-inside:avoid;
+        page-break-inside:avoid;
+      }
+      .hero{padding-bottom:16px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="topbar">
+        <a class="back no-print" href="/">← Volver</a>
+        <span class="meta">Tesoros de la Biblia · 16 jun 2026</span>
+      </div>
+      <div class="hero">
+        <span class="hero-badge">Busquemos Perlas Escondidas</span>
+        <h1>Perlas en Jeremías 7 y 8</h1>
+        <p class="subtitle">Cualidades de Jehová, lecciones prácticas y predicación a uno mismo</p>
+        <p class="reading">
+          Lectura de la semana: <strong>Jeremías 7, 8</strong> ·
+          Asignación #2 · Joshua García · 10 min
+        </p>
+      </div>
+    </header>
+
+    <div class="intro">
+      <p>
+        En estos capítulos Jehová confronta a un pueblo que confiaba en rituales externos mientras el corazón estaba lejos de Él.
+        Al buscar perlas escondidas descubrimos no solo cómo es nuestro Dios, sino también cómo debemos adorarlo con sinceridad
+        y cómo predicarnos a nosotros mismos antes de predicar a otros.
+      </p>
+    </div>
+
+    <div class="pearls">
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">1</span>
+          <h2 class="pearl-title">Jehová ve el corazón, no solo la apariencia religiosa</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p>
+            El pueblo decía «el templo de Jehová» como si esas palabras bastaran, pero seguía robando, matando y adorando a otros dioses.
+            Jehová no se deja engañar por una fachada piadosa: observa la conducta real y lo que hay en el interior.
+          </p>
+        </div>
+        <span class="pearl-ref">Jeremías 7:3-11</span>
+      </article>
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">2</span>
+          <h2 class="pearl-title">Él valora el amor leal, la justicia y la rectitud</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p>
+            Jehová no rechaza el culto en sí, sino el culto vacío. Lo que verdaderamente le importa es que practiquemos
+            el amor leal, la justicia y la rectitud. Su norma moral es clara y no se negocia con formalismos.
+          </p>
+        </div>
+        <span class="pearl-ref">Jeremías 7:5-7</span>
+      </article>
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">3</span>
+          <h2 class="pearl-title">Es paciente, pero no tolerará la hipocresía para siempre</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p>
+            Día tras día Jehová envió a sus profetas, pero el pueblo no escuchó. Su paciencia tiene un límite justo:
+            la rebelión persistente y la doble vida eventualmente provocan consecuencias. Su tolerancia no es indiferencia.
+          </p>
+        </div>
+        <span class="pearl-ref">Jeremías 7:13, 25-26</span>
+      </article>
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">4</span>
+          <h2 class="pearl-title">Advierte porque le importamos</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p>
+            Las repetidas advertencias no son castigo prematuro, sino expresión de amor. Jehová habla una y otra vez
+            porque desea que cambiemos de rumbo y vivamos. Detrás de cada reprensión hay interés genuino por nuestro bienestar espiritual.
+          </p>
+        </div>
+        <span class="pearl-ref">Jeremías 7:13, 25-28</span>
+      </article>
+
+      <article class="pearl tag-leccion">
+        <div class="pearl-header">
+          <span class="pearl-num">5</span>
+          <h2 class="pearl-title">La verdadera adoración exige obediencia, no solo palabras</h2>
+        </div>
+        <span class="pearl-label">Lección para nosotros</span>
+        <div class="pearl-body">
+          <p>
+            Confiar en el edificio del templo o en la rutina de reuniones no sustituye una vida conforme a la voluntad de Dios.
+            Podemos asistir regularmente y aun así traicionar en secreto los principios que profesamos públicamente.
+          </p>
+        </div>
+        <span class="pearl-ref">Jeremías 7:4, 8-10</span>
+      </article>
+
+      <article class="pearl tag-leccion">
+        <div class="pearl-header">
+          <span class="pearl-num">6</span>
+          <h2 class="pearl-title">Jehová recuerda su pacto y espera fidelidad recíproca</h2>
+        </div>
+        <span class="pearl-label">Lección para nosotros</span>
+        <div class="pearl-body">
+          <p>
+            Él sacó a su pueblo de Egipto y le dio instrucciones claras: «Escuchen mi voz». El pacto no es unilateral;
+            implica responder con obediencia amorosa. Dios cumple su parte; nosotros debemos cumplir la nuestra.
+          </p>
+        </div>
+        <span class="pearl-ref">Jeremías 7:22-23</span>
+      </article>
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">7</span>
+          <h2 class="pearl-title">Siente profundo dolor por quienes se obstinan</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p>
+            «Mi corazón está débil dentro de mí» — Jehová no es frío ni distante ante la rebelión de su pueblo.
+            La herida incurable de Judá le causa angustia. Él no se regocija en el castigo; su corazón se quebranta cuando ve la obstinación.
+          </p>
+        </div>
+        <span class="pearl-ref">Jeremías 8:18-22</span>
+      </article>
+
+      <article class="pearl tag-leccion">
+        <div class="pearl-header">
+          <span class="pearl-num">8</span>
+          <h2 class="pearl-title">Su palabra es verdad; confiar en la sabiduría humana falla</h2>
+        </div>
+        <span class="pearl-label">Lección para nosotros</span>
+        <div class="pearl-body">
+          <p>
+            Los escribas habían falseado la ley con mentiras y se habían apartado de Jehová.
+            Cuando rechazamos o distorsionamos la Palabra de Dios, perdemos la sabiduría verdadera.
+            Solo la guía de Jehová nos mantiene firmes.
+          </p>
+        </div>
+        <span class="pearl-ref">Jeremías 8:8-9</span>
+      </article>
+
+      <article class="pearl tag-leccion">
+        <div class="pearl-header">
+          <span class="pearl-num">9</span>
+          <h2 class="pearl-title">Los sabios que rechazaron la palabra quedaron avergonzados</h2>
+        </div>
+        <span class="pearl-label">Lección para nosotros</span>
+        <div class="pearl-body">
+          <p>
+            «Los sabios han quedado avergonzados; están aterrados y capturados». Quien confía en su propio criterio
+            por encima de las Escrituras termina desorientado. Permanecer cerca de la Biblia no es opcional; es protección.
+          </p>
+        </div>
+        <span class="pearl-ref">Jeremías 8:9</span>
+      </article>
+
+      <article class="pearl tag-aplicacion">
+        <div class="pearl-header">
+          <span class="pearl-num">10</span>
+          <h2 class="pearl-title">Predicación a uno mismo: culto con sinceridad</h2>
+        </div>
+        <span class="pearl-label">Aplicación práctica</span>
+        <div class="pearl-body">
+          <p>
+            Antes de enseñar a otros, examinemos si nuestra adoración es congruente con nuestra vida privada.
+            ¿Hay áreas donde decimos una cosa en la reunión y hacemos otra en casa o en el trabajo?
+            La sinceridad fortalece nuestra predicación.
+          </p>
+        </div>
+        <span class="pearl-ref">Jeremías 7:9-10</span>
+      </article>
+
+      <article class="pearl tag-aplicacion">
+        <div class="pearl-header">
+          <span class="pearl-num">11</span>
+          <h2 class="pearl-title">Valentía para advertir, como hizo Jehová</h2>
+        </div>
+        <span class="pearl-label">Aplicación práctica</span>
+        <div class="pearl-body">
+          <p>
+            Jeremías debía hablar aunque nadie escuchara. En la predicación y en la congregación a veces debemos
+            decir verdades difíciles con amor. No por ser populares, sino por ser leales a Jehová y útiles para quienes nos escuchan.
+          </p>
+        </div>
+        <span class="pearl-ref">Jeremías 7:27-28</span>
+      </article>
+
+      <article class="pearl tag-aplicacion">
+        <div class="pearl-header">
+          <span class="pearl-num">12</span>
+          <h2 class="pearl-title">Confiar en Jehová, no en nosotros mismos</h2>
+        </div>
+        <span class="pearl-label">Aplicación práctica</span>
+        <div class="pearl-body">
+          <p>
+            El pueblo confiaba en su posición privilegiada y en sus líderes religiosos; todo se derrumbó.
+            En el ministerio y en la vida personal, predicémonos diariamente: nuestra fuerza viene de Jehová,
+            no de nuestra experiencia, nuestro título o nuestra rutina.
+          </p>
+        </div>
+        <span class="pearl-ref">Jeremías 8:8-9; 17:5</span>
+      </article>
+
+    </div>
+
+    <div class="closing">
+      <h2>Para repasar en 10 minutos</h2>
+      <p>
+        Seleccione 4 o 5 perlas según el tiempo. Combine cualidades de Jehová, una lección personal
+        y una aplicación en la predicación para cerrar con un pensamiento práctico.
+      </p>
+    </div>
+
+    <footer>
+      <p>Reunión del 16 de junio de 2026 · Lectura: Jeremías 7, 8</p>
+    </footer>
+  </div>
+</body>
+</html>
