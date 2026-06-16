@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Respeto al Salón del Reino</title>
+  <style>
+    :root{
+      --bg:#101112;
+      --panel:#181b1e;
+      --panel-2:#20252a;
+      --ink:#f1eee7;
+      --muted:#b7afa1;
+      --dim:#766e61;
+      --line:#34302a;
+      --gold:#c8a24e;
+      --gold-2:#ead49a;
+      --gold-soft:rgba(200,162,78,.12);
+      --blue:#7fb2d6;
+      --blue-soft:rgba(127,178,214,.12);
+      --green:#8fc8a0;
+      --green-soft:rgba(143,200,160,.12);
+      --amber:#e0b86a;
+      --amber-soft:rgba(224,184,106,.1);
+      --shadow:0 24px 60px rgba(0,0,0,.34);
+      --radius:10px;
+      color-scheme:dark;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(200,162,78,.18), transparent 30rem),
+        radial-gradient(circle at 92% 10%, rgba(143,200,160,.12), transparent 28rem),
+        linear-gradient(180deg, #101112 0%, #121416 44%, #0f1011 100%);
+      line-height:1.65;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+      background-size:36px 36px;
+      mask-image:linear-gradient(180deg, rgba(0,0,0,.8), transparent 78%);
+    }
+    #progress{
+      position:fixed;
+      top:0;
+      left:0;
+      width:0%;
+      height:4px;
+      background:linear-gradient(90deg, var(--gold), var(--green), var(--blue));
+      z-index:20;
+      box-shadow:0 0 18px rgba(200,162,78,.55);
+    }
+    .wrap{width:min(1120px, calc(100% - 30px)); margin:0 auto}
+    header{
+      padding:34px 0 18px;
+      position:sticky;
+      top:0;
+      z-index:10;
+      background:linear-gradient(180deg, rgba(16,17,18,.96), rgba(16,17,18,.82));
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid rgba(200,162,78,.14);
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content:space-between;
+    }
+    .back{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:38px;
+      padding:8px 12px;
+      border-radius:8px;
+      border:1px solid rgba(200,162,78,.24);
+      color:var(--gold-2);
+      text-decoration:none;
+      font-weight:800;
+      font-size:.88rem;
+      background:rgba(255,255,255,.03);
+    }
+    nav{
+      display:flex;
+      gap:8px;
+      overflow:auto;
+      padding-bottom:2px;
+      scrollbar-width:none;
+    }
+    nav::-webkit-scrollbar{display:none}
+    nav a{
+      white-space:nowrap;
+      color:var(--muted);
+      text-decoration:none;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:8px;
+      padding:7px 11px;
+      font-size:.82rem;
+      font-weight:800;
+      background:rgba(255,255,255,.025);
+    }
+    nav a:hover{color:var(--ink); border-color:rgba(200,162,78,.45)}
+    .hero{
+      padding:42px 0 22px;
+      display:grid;
+      grid-template-columns:minmax(0, 1.25fr) minmax(280px, .75fr);
+      gap:24px;
+      align-items:stretch;
+    }
+    .hero-main, .side-panel, section{
+      background:linear-gradient(145deg, rgba(32,37,42,.86), rgba(24,27,30,.9));
+      border:1px solid rgba(200,162,78,.18);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+    }
+    .hero-main{padding:48px}
+    .label{
+      margin:0 0 14px;
+      color:var(--gold);
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-weight:900;
+      font-size:.76rem;
+    }
+    h1{
+      margin:0;
+      max-width:880px;
+      color:var(--ink);
+      font-size:3.6rem;
+      line-height:1.02;
+      letter-spacing:0;
+    }
+    .subtitle{
+      margin:20px 0 0;
+      max-width:760px;
+      color:var(--muted);
+      font-size:1.12rem;
+    }
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+      margin-top:26px;
+    }
+    .pill{
+      border:1px solid rgba(200,162,78,.22);
+      background:var(--gold-soft);
+      color:var(--gold-2);
+      border-radius:8px;
+      padding:7px 11px;
+      font-size:.84rem;
+      font-weight:800;
+    }
+    .side-panel{
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .timer{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    .time-box{
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.03);
+      border-radius:8px;
+      padding:13px;
+    }
+    .time-box strong{display:block; color:var(--gold-2); font-size:1.45rem; line-height:1}
+    .time-box span{display:block; color:var(--muted); font-size:.82rem; margin-top:5px}
+    .side-note{
+      border-left:3px solid var(--gold);
+      background:var(--gold-soft);
+      border-radius:8px;
+      padding:13px 14px;
+      color:#e8dfcf;
+      font-size:.95rem;
+    }
+    main{padding:16px 0 80px}
+    section{
+      margin:22px 0;
+      padding:32px;
+      scroll-margin-top:110px;
+    }
+    h2{
+      margin:0 0 16px;
+      color:var(--gold-2);
+      font-size:2.15rem;
+      line-height:1.08;
+    }
+    h3{
+      margin:24px 0 10px;
+      color:var(--blue);
+      font-size:1.13rem;
+    }
+    p{margin:0 0 1rem}
+    .lead{font-size:1.05rem; color:#ded8ce}
+    .grid{display:grid; gap:14px}
+    .two{grid-template-columns:repeat(2, minmax(0, 1fr))}
+    .card{
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:8px;
+      background:rgba(255,255,255,.035);
+      padding:16px;
+    }
+    .card strong{display:block; color:var(--ink); margin-bottom:5px}
+    .card p{color:var(--muted); font-size:.95rem; margin:0}
+    .scripture{
+      border:1px solid rgba(127,178,214,.24);
+      background:var(--blue-soft);
+      border-radius:8px;
+      padding:18px;
+      margin:16px 0;
+    }
+    .scripture strong{color:var(--blue); display:block; margin-bottom:6px}
+    .scripture p{margin:0; color:#dce9f2}
+    .dialogue{
+      border:1px solid rgba(200,162,78,.2);
+      background:var(--amber-soft);
+      border-radius:8px;
+      padding:20px;
+      margin:18px 0;
+    }
+    .dialogue-line{
+      display:flex;
+      gap:12px;
+      margin:0 0 14px;
+      align-items:flex-start;
+    }
+    .dialogue-line:last-child{margin-bottom:0}
+    .speaker{
+      flex:0 0 auto;
+      min-width:88px;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--gold);
+      padding-top:3px;
+    }
+    .dialogue-line p{
+      margin:0;
+      color:#e8dfcf;
+      font-size:1rem;
+      line-height:1.5;
+    }
+    .dialogue-line.highlight p{
+      color:var(--gold-2);
+      font-weight:750;
+    }
+    details{
+      border:1px solid rgba(200,162,78,.2);
+      background:rgba(255,255,255,.03);
+      border-radius:8px;
+      margin:12px 0;
+      overflow:hidden;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      padding:16px 18px;
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      color:var(--ink);
+      font-weight:900;
+      line-height:1.38;
+    }
+    summary::-webkit-details-marker{display:none}
+    summary:before{
+      content:"+";
+      width:24px;
+      height:24px;
+      border-radius:8px;
+      background:var(--gold);
+      color:#101112;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex:0 0 auto;
+      font-weight:900;
+      line-height:1;
+    }
+    details[open] summary:before{content:"-"}
+    .answer{
+      border-top:1px solid rgba(200,162,78,.16);
+      padding:0 18px 18px 54px;
+      color:var(--muted);
+    }
+    .answer .copy-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      justify-content:space-between;
+      margin:0 0 8px;
+    }
+    .tag{
+      display:inline-flex;
+      color:var(--green);
+      background:var(--green-soft);
+      border:1px solid rgba(143,200,160,.22);
+      border-radius:8px;
+      padding:4px 9px;
+      font-size:.75rem;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    .tag.video{
+      color:var(--amber);
+      background:var(--amber-soft);
+      border-color:rgba(224,184,106,.28);
+    }
+    .lsm-line{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      margin:0 0 16px;
+      padding:10px 12px;
+      border:1px solid rgba(127,178,214,.22);
+      border-left:3px solid var(--blue);
+      border-radius:8px;
+      background:var(--blue-soft);
+      color:#dce9f2;
+      font-weight:800;
+      line-height:1.45;
+    }
+    .lsm-line .tag{
+      color:var(--blue);
+      background:rgba(127,178,214,.12);
+      border-color:rgba(127,178,214,.26);
+      flex:0 0 auto;
+    }
+    button.copy{
+      appearance:none;
+      border:1px solid rgba(200,162,78,.28);
+      background:rgba(200,162,78,.12);
+      color:var(--gold-2);
+      border-radius:8px;
+      padding:6px 9px;
+      font-weight:850;
+      font-size:.8rem;
+      cursor:pointer;
+    }
+    .answer p{margin:0 0 .8rem}
+    .answer-group{margin:0 0 1rem}
+    .answer-group:last-child{margin-bottom:0}
+    .answer-group strong{
+      display:block;
+      color:var(--gold-2);
+      font-size:.82rem;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      margin:0 0 8px;
+    }
+    .answer-list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:8px;
+    }
+    .answer-list li{
+      position:relative;
+      padding:10px 12px 10px 34px;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:8px;
+      background:rgba(255,255,255,.03);
+      color:#ded8ce;
+      line-height:1.45;
+    }
+    .answer-list li:before{
+      content:"";
+      position:absolute;
+      left:14px;
+      top:1.05em;
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--gold);
+      box-shadow:0 0 10px rgba(200,162,78,.45);
+      transform:translateY(-50%);
+    }
+    .answer-list.audience li:before{background:var(--green); box-shadow:0 0 10px rgba(143,200,160,.35)}
+    .quote{
+      border-left:4px solid var(--green);
+      background:var(--green-soft);
+      border-radius:0 8px 8px 0;
+      padding:14px 16px;
+      color:#dfeee4;
+      font-weight:750;
+    }
+    .quote strong{color:var(--gold-2)}
+    .scripture-hero{
+      position:relative;
+      margin:22px 0 20px;
+      padding:28px 28px 24px;
+      border:1px solid rgba(200,162,78,.32);
+      border-radius:12px;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(200,162,78,.16), transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(127,178,214,.08), transparent 50%),
+        linear-gradient(155deg, rgba(32,37,42,.95), rgba(20,22,25,.98));
+      box-shadow:0 18px 48px rgba(0,0,0,.28), inset 0 1px 0 rgba(200,162,78,.12);
+      overflow:hidden;
+    }
+    .scripture-hero:before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:3px;
+      background:linear-gradient(90deg, var(--gold), var(--gold-2), var(--gold));
+    }
+    .scripture-hero-top{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:16px 24px;
+      margin-bottom:22px;
+    }
+    .scripture-book-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:8px 14px 8px 12px;
+      border:1px solid rgba(200,162,78,.38);
+      border-radius:8px;
+      background:var(--gold-soft);
+      color:var(--gold-2);
+      font-size:.78rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .scripture-book-badge:before{
+      content:"";
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--gold);
+      box-shadow:0 0 12px rgba(200,162,78,.6);
+      flex:0 0 auto;
+    }
+    .scripture-ref-block{
+      text-align:right;
+      line-height:1;
+    }
+    .scripture-ref-book{
+      display:block;
+      color:var(--gold-2);
+      font-size:2.35rem;
+      font-weight:900;
+      letter-spacing:-.02em;
+      line-height:1.05;
+    }
+    .scripture-ref-verses{
+      display:block;
+      margin-top:6px;
+      color:var(--gold);
+      font-size:3.4rem;
+      font-weight:900;
+      letter-spacing:-.03em;
+      line-height:1;
+      text-shadow:0 0 40px rgba(200,162,78,.25);
+    }
+    .scripture-read-label{
+      margin:0 0 14px;
+      color:var(--muted);
+      font-size:.88rem;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+    .scripture-paraphrase{
+      border:1px solid rgba(200,162,78,.2);
+      border-radius:8px;
+      background:rgba(255,255,255,.03);
+      padding:18px 20px;
+      margin:0;
+    }
+    .scripture-paraphrase p{
+      margin:0;
+      color:#e8dfcf;
+      font-size:1.06rem;
+      line-height:1.62;
+    }
+    .scripture-phrases{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:10px;
+      margin-top:16px;
+    }
+    .scripture-phrase{
+      border:1px solid rgba(200,162,78,.18);
+      border-radius:8px;
+      background:var(--gold-soft);
+      padding:12px 14px;
+      color:var(--gold-2);
+      font-size:.9rem;
+      font-weight:800;
+      line-height:1.35;
+      text-align:center;
+    }
+    .scripture-idea{
+      border:1px solid rgba(127,178,214,.24);
+      background:var(--blue-soft);
+      border-radius:8px;
+      padding:18px 20px;
+      margin:18px 0;
+    }
+    .scripture-idea strong{
+      display:block;
+      color:var(--blue);
+      font-size:.78rem;
+      font-weight:900;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+    .scripture-idea p{
+      margin:0;
+      color:#dce9f2;
+      font-size:.98rem;
+      line-height:1.55;
+    }
+    .intro-quote{
+      border-left:4px solid var(--gold);
+      background:var(--gold-soft);
+      border-radius:0 8px 8px 0;
+      padding:18px 20px;
+      color:#e8dfcf;
+      font-size:1.08rem;
+      line-height:1.55;
+    }
+    .step{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      margin:14px 0;
+      padding:14px 16px;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:8px;
+      background:rgba(255,255,255,.025);
+    }
+    .step-num{
+      flex:0 0 auto;
+      width:32px;
+      height:32px;
+      border-radius:8px;
+      background:var(--gold);
+      color:#101112;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      font-size:.9rem;
+    }
+    .step p{margin:0; color:var(--muted)}
+    .step strong{color:var(--ink)}
+    footer{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:24px 0 44px;
+      color:var(--dim);
+      font-size:.86rem;
+    }
+    footer a{color:var(--gold-2)}
+    @media (max-width:860px){
+      header{position:static}
+      .topbar{align-items:flex-start; flex-direction:column}
+      nav{width:100%}
+      .hero{grid-template-columns:1fr}
+      .two{grid-template-columns:1fr}
+      .hero-main{padding:30px}
+      h1{font-size:2.6rem}
+      h2{font-size:1.75rem}
+      section{padding:23px}
+      .scripture-phrases{grid-template-columns:1fr}
+      .scripture-ref-book{font-size:1.9rem}
+      .scripture-ref-verses{font-size:2.6rem}
+      .scripture-hero-top{align-items:flex-start}
+      .scripture-ref-block{text-align:left}
+    }
+    @media (max-width:520px){
+      .wrap{width:min(100% - 24px, 1120px)}
+      .hero-main{padding:24px}
+      h1{font-size:2.1rem}
+      .subtitle{font-size:1rem}
+      section{padding:20px}
+      .speaker{min-width:72px}
+    }
+    @media print{
+      body{background:#fff; color:#111}
+      body:before, #progress, header, button.copy{display:none}
+      .hero-main, .side-panel, section{box-shadow:none; border-color:#bbb; background:#fff}
+      .hero{display:block; padding:0}
+      a{color:#111}
+    }
+  </style>
+</head>
+<body>
+  <div id="progress"></div>
+
+  <header>
+    <div class="wrap topbar">
+      <a class="back" href="/">Volver a la reunión</a>
+      <nav aria-label="Secciones">
+        <a href="#inicio">Inicio</a>
+        <a href="#intro">Introducción</a>
+        <a href="#video">Video</a>
+        <a href="#pregunta1">Pregunta 1</a>
+        <a href="#texto">1 Timoteo 2:9, 10</a>
+        <a href="#pregunta2">Pregunta 2</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap hero" id="inicio">
+    <div class="hero-main">
+      <p class="label">Nuestra vida cristiana · 5 minutos</p>
+      <h1>¿Cómo podemos demostrar que respetamos el Salón del Reino?</h1>
+      <p class="subtitle">Guía para dirigir la asignación con introducción, video, diálogo de referencia y las dos preguntas oficiales del programa.</p>
+      <div class="meta">
+        <span class="pill">Martes 16 de junio de 2026</span>
+        <span class="pill">Jeremías 7, 8</span>
+        <span class="pill">1 Timoteo 2:9, 10</span>
+        <span class="pill">Video: Hazte amigo de Jehová</span>
+      </div>
+    </div>
+
+    <aside class="side-panel" aria-label="Secuencia sugerida">
+      <div class="timer">
+        <div class="time-box">
+          <strong>1 min</strong>
+          <span>Introducción (casa de Jehová)</span>
+        </div>
+        <div class="time-box">
+          <strong>2 min</strong>
+          <span>Video + pregunta 1</span>
+        </div>
+        <div class="time-box">
+          <strong>1 min</strong>
+          <span>Leer 1 Timoteo 2:9, 10</span>
+        </div>
+        <div class="time-box">
+          <strong>1 min</strong>
+          <span>Pregunta 2 y cierre</span>
+        </div>
+      </div>
+      <div class="side-note">
+        Idea central: el Salón del Reino es la casa de Jehová. Lo cuidamos y lo tratamos con respeto porque amamos a Jehová.
+      </div>
+    </aside>
+  </div>
+
+  <main class="wrap">
+    <section id="intro">
+      <p class="label">Para abrir</p>
+      <h2>Introducción — como en nuestra propia casa</h2>
+      <p class="lead">Antes del video, ayuda al auditorio a conectar con la idea de que el Salón del Reino no es un edificio cualquiera.</p>
+
+      <div class="intro-quote" data-copy="Hermanos, piensen en su propia casa. Si invitan a alguien, ¿les gustaría que entrara y dejara basura, que rayara los muebles o que no respetara las reglas de la familia? Claro que no. Nos importa cómo se trata nuestro hogar. Pues el Salón del Reino es la casa de Jehová. ¿Cómo debemos tratarlo nosotros?">
+        Hermanos, piensen en su propia casa. Si invitan a alguien, ¿les gustaría que entrara y dejara basura, que rayara los muebles o que no respetara las reglas de la familia? Claro que no. Nos importa cómo se trata nuestro hogar.
+        <br><br>
+        Pues el Salón del Reino es la casa de Jehová. ¿Cómo debemos tratarlo nosotros?
+      </div>
+
+      <div class="grid two">
+        <div class="card">
+          <strong>Puente al video</strong>
+          <p>En el video veremos cómo Samuel trataba el tabernáculo, que era como su casa, pero también la casa de Jehová.</p>
+        </div>
+        <div class="card">
+          <strong>Después del video</strong>
+          <p>Usa el diálogo del video para reforzar la idea antes de hacer la primera pregunta oficial.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="video">
+      <p class="label">Video</p>
+      <h2>Hazte amigo de Jehová: Tienes que amar la casa de Jehová</h2>
+
+      <div class="step">
+        <span class="step-num">1</span>
+        <p><strong>Ponga el video.</strong> Pida al auditorio que observe cómo Samuel cuidaba el tabernáculo.</p>
+      </div>
+
+      <h3>Diálogo del video (referencia)</h3>
+      <div class="dialogue" aria-label="Transcripción del diálogo del video">
+        <div class="dialogue-line">
+          <span class="speaker">Adulto</span>
+          <p>Óyeme, ¿recuerdas dónde servía Samuel?</p>
+        </div>
+        <div class="dialogue-line">
+          <span class="speaker">Caleb</span>
+          <p>¿El tabernáculo?</p>
+        </div>
+        <div class="dialogue-line">
+          <span class="speaker">Adulto</span>
+          <p>Sí, esa era como su casa, pero también era la casa de Jehová. ¿Cómo crees que la trataba?</p>
+        </div>
+        <div class="dialogue-line highlight">
+          <span class="speaker">Caleb</span>
+          <p>¡La limpiaba!</p>
+        </div>
+        <div class="dialogue-line">
+          <span class="speaker">Adulto</span>
+          <p>¡Exacto! El Salón del Reino también es como la casa de Jehová. ¿Cómo debemos tratarlo?</p>
+        </div>
+        <div class="dialogue-line highlight">
+          <span class="speaker">Adulto</span>
+          <p>Muy bien, Caleb. Cuando limpiamos el Salón del Reino, le demostramos a Jehová que lo amamos.</p>
+        </div>
+        <div class="dialogue-line">
+          <span class="speaker">Caleb</span>
+          <p>Sí.</p>
+        </div>
+      </div>
+
+      <div class="quote">
+        Cuando limpiamos el Salón del Reino, le demostramos a Jehová que lo amamos.
+      </div>
+    </section>
+
+    <section id="pregunta1">
+      <p class="label">Pregunta oficial 1</p>
+      <h2>Después del video</h2>
+
+      <details open>
+        <summary>¿Qué debemos hacer para cuidar el Salón del Reino, y por qué?</summary>
+        <div class="answer">
+          <div class="lsm-line">
+            <span class="tag">LSM</span>
+            <span>Salón del reino tú cuidar qué hacer?</span>
+          </div>
+          <div class="lsm-line">
+            <span class="tag">LSM</span>
+            <span>Cuidar, importante ¿porque?</span>
+          </div>
+          <div class="copy-row">
+            <span class="tag video">Respuesta guía</span>
+            <button class="copy" data-target="respuesta-1">Copiar</button>
+          </div>
+          <div id="respuesta-1">
+            <div class="answer-group">
+              <strong>Qué debemos hacer</strong>
+              <ul class="answer-list">
+                <li>Mantener el Salón del Reino limpio y en buen estado.</li>
+                <li>Recoger lo que dejamos después de usarlo.</li>
+                <li>No dañar el mobiliario ni las instalaciones.</li>
+                <li>Colaborar cuando hay trabajo de limpieza o mantenimiento.</li>
+              </ul>
+            </div>
+            <div class="answer-group">
+              <strong>Por qué</strong>
+              <ul class="answer-list">
+                <li>El Salón del Reino es la casa de Jehová.</li>
+                <li>Al cuidarlo, le demostramos que lo amamos.</li>
+                <li>Valoramos el lugar donde nos reunimos para adorarlo.</li>
+              </ul>
+            </div>
+            <div class="answer-group">
+              <strong>Comentarios del auditorio</strong>
+              <ul class="answer-list audience">
+                <li>No dejar basura.</li>
+                <li>Cuidar los baños.</li>
+                <li>Apagar las luces cuando corresponda.</li>
+                <li>Reportar algo que esté dañado.</li>
+                <li>Ayudar en las labores de limpieza.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+    </section>
+
+    <section id="texto">
+      <p class="label">Texto bíblico</p>
+      <h2>Lea el texto antes de la pregunta 2</h2>
+      <p class="lead">Este texto nos ayuda a ver otra forma de mostrar respeto cuando asistimos a las reuniones: no solo cuidamos el edificio, sino también nuestra conducta y presentación personal.</p>
+
+      <div class="scripture-hero" aria-label="1 Timoteo 2:9, 10">
+        <div class="scripture-hero-top">
+          <span class="scripture-book-badge">Primera carta a Timoteo</span>
+          <div class="scripture-ref-block">
+            <span class="scripture-ref-book">1 Timoteo</span>
+            <span class="scripture-ref-verses">2:9, 10</span>
+          </div>
+        </div>
+
+        <p class="scripture-read-label">Lea en voz alta</p>
+
+        <blockquote class="scripture-paraphrase">
+          <p>Las mujeres deben vestirse con modestia y buen juicio — no con ropa ostentosa ni adornos que llamen la atención — sino con buenas obras, como corresponde a quienes adoran a Dios con reverencia.</p>
+        </blockquote>
+
+        <div class="scripture-phrases" aria-label="Ideas clave del texto">
+          <span class="scripture-phrase">Modestia</span>
+          <span class="scripture-phrase">Buen juicio</span>
+          <span class="scripture-phrase">Buenas obras</span>
+        </div>
+      </div>
+
+      <div class="scripture-idea">
+        <strong>Idea que debe quedar clara</strong>
+        <p>Las hermanas deben vestirse con modestia y buen juicio, no para llamar la atención por ropa costosa o adornos llamativos, sino con buenas obras, como corresponde a quienes adoran a Dios. El punto no es la moda: es mostrar respeto por Jehová y por la congregación.</p>
+      </div>
+
+      <div class="quote" data-copy="Hermanos, 1 Timoteo 2:9, 10 nos recuerda que al venir a las reuniones también mostramos si respetamos a Jehová por la manera en que nos vestimos y nos comportamos. No venimos para llamar la atención, sino para adorar a Dios con modestia y buenas obras.">
+        Hermanos, <strong>1 Timoteo 2:9, 10</strong> nos recuerda que al venir a las reuniones también mostramos si respetamos a Jehová por la manera en que nos vestimos y nos comportamos. No venimos para llamar la atención, sino para adorar a Dios con modestia y buenas obras.
+      </div>
+    </section>
+
+    <section id="pregunta2">
+      <p class="label">Pregunta oficial 2</p>
+      <h2>Después de leer el texto</h2>
+
+      <details open>
+        <summary>¿De qué otra manera podemos todos demostrar respeto por Jehová cuando asistimos a nuestras reuniones?</summary>
+        <div class="answer">
+          <div class="lsm-line">
+            <span class="tag">LSM</span>
+            <span>Reunión tú ir, Jah respeto ¿cómo?</span>
+          </div>
+          <div class="copy-row">
+            <span class="tag">Respuesta guía</span>
+            <button class="copy" data-target="respuesta-2">Copiar</button>
+          </div>
+          <div id="respuesta-2">
+            <div class="answer-group">
+              <strong>Cómo demostrar respeto en las reuniones</strong>
+              <ul class="answer-list">
+                <li>Vestirnos con modestia y buen juicio.</li>
+                <li>Llegar a tiempo.</li>
+                <li>Participar con buena actitud.</li>
+                <li>Guardar silencio cuando corresponde.</li>
+                <li>Apagar o silenciar el celular.</li>
+                <li>Mostrar buenas obras.</li>
+                <li>Comentar de manera que edifique a los demás y honre a Jehová.</li>
+              </ul>
+            </div>
+            <div class="answer-group">
+              <strong>Para recordar</strong>
+              <ul class="answer-list audience">
+                <li>El respeto no es solo limpiar el salón.</li>
+                <li>También se ve en cómo nos presentamos.</li>
+                <li>Y en cómo escuchamos y tratamos a los hermanos en el lugar de adoración.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <div class="quote" data-copy="Cuidar el Salón del Reino y comportarnos con modestia y respeto en las reuniones son dos maneras de decirle a Jehová: amamos tu casa y valoramos adorarte aquí.">
+        Cuidar el Salón del Reino y comportarnos con modestia y respeto en las reuniones son dos maneras de decirle a Jehová: amamos tu casa y valoramos adorarte aquí.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      Basado en la Guía de actividades para la reunión Vida y Ministerio Cristianos, semana del 15 al 21 de junio de 2026.
+    </div>
+  </footer>
+
+  <script>
+    const progress = document.getElementById("progress");
+    const setProgress = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const value = max > 0 ? (window.scrollY / max) * 100 : 0;
+      progress.style.width = `${value}%`;
+    };
+    window.addEventListener("scroll", setProgress, { passive: true });
+    setProgress();
+
+    document.querySelectorAll("button.copy").forEach((button) => {
+      button.addEventListener("click", async () => {
+        const target = document.getElementById(button.dataset.target);
+        if (!target) return;
+        const text = [...target.querySelectorAll(".answer-group")].map((group) => {
+          const title = group.querySelector("strong")?.textContent.trim() || "";
+          const items = [...group.querySelectorAll(".answer-list li")].map((li) => `• ${li.textContent.trim()}`);
+          return [title, ...items].join("\n");
+        }).join("\n\n");
+        try {
+          await navigator.clipboard.writeText(text.trim());
+          const original = button.textContent;
+          button.textContent = "Copiado";
+          setTimeout(() => {
+            button.textContent = original;
+          }, 1200);
+        } catch {
+          button.textContent = "No copiado";
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -241,7 +241,10 @@ export const REUNIONES_MAYO_2026 = [
       asignacion(6, "Haga discípulos", "5 mins", "Rosaura Chávez", "Montse Ruiz"),
     ],
     vida: [
-      asignacion(7, "¿Cómo podemos demostrar que respetamos el Salón del Reino?", "5 mins", "Adrián Guajardo"),
+      asignacion(7, "¿Cómo podemos demostrar que respetamos el Salón del Reino?", "5 mins", "Adrián Guajardo", null, {
+        estudioHtml: "/asignaciones/2026-06-16-respeto-salon-reino.html?v=20260616-7",
+        estudioHtmlLabel: "Abrir guía HTML",
+      }),
       asignacion(8, "Cómo usamos las donaciones: Mantenemos nuestros Salones del Reino en buen estado", "10 mins", "Luis Hernández"),
       asignacion(9, "Estudio Bíblico de la Congregación", "30 mins", "Diego Serrano", null, {
         contexto: "lfb introducción a la sección 14 y lecciones 94, 95.",
