@@ -1,4 +1,4 @@
-import { PERLAS_ISAIAS_65_66 } from "./tesorosDiscursos";
+import { PERLAS_ISAIAS_65_66, TESOROS_PRESUMIR_JEREMIAS } from "./tesorosDiscursos";
 
 const asignacion = (numero, titulo, tiempo, encargado, ayudante = null, opciones = {}) => ({
   tipo: "asignacion",
@@ -281,19 +281,102 @@ export const REUNIONES_MAYO_2026 = [
     cancionFinal: "135",
     oracion: "Natanael Valenzuela",
     tesoros: [
-      asignacion(1, "¿De qué presumirá usted?", "10 mins", "Jehonatán Chávez"),
-      asignacion(2, "Busquemos Perlas Escondidas", "10 mins", "Antonio Isas"),
+      asignacion(1, "¿De qué presumirá usted?", "10 mins", "Jehonatán Chávez", null, {
+        senas: "tu orgulloso, ¿qué significa?",
+        bosquejo: TESOROS_PRESUMIR_JEREMIAS,
+        bosquejoLabel: "Abrir guía del discurso",
+      }),
+      asignacion(2, "Busquemos Perlas Escondidas", "10 mins", "Antonio Isas", null, {
+        senas: "Biblia, Extraer, Perla, dos preguntas",
+        estudioHtml: "/asignaciones/2026-06-23-perlas-jeremias-9-10.html?v=20260623-1",
+        estudioHtmlLabel: "Abrir perlas HTML",
+      }),
       asignacion(3, "Lectura de la Biblia", "4 mins", "Omar Gallardo", null, {
+        senas: "Biblia copiar",
         contexto: "Jeremías 9:13-24.",
+        estudioHtml: "/asignaciones/2026-06-23-lectura-amabilidad-empatia.html?v=20260623-1",
+        estudioHtmlLabel: "Abrir guía LMD 12",
+        preparacion: {
+          referencia: "lmd lección 12 · 1 Tesalonicenses 2:7, 8",
+          punto: "Al leer un relato, refleje los sentimientos expresados sin llamar la atención sobre usted.",
+        },
+        feedbackPresidente: {
+          titulo: "Cómo explicárselo a Omar",
+          frases: [
+            "Omar, gracias por la lectura. Se notó que preparaste el pasaje.",
+            "En 9:17-21 el lamento pide un tono compasivo — la lección 12 nos recuerda reflejar el sentimiento sin sonar forzado.",
+            "Si la voz suena fría o entrecortada, suele ayudar alargar un poco las vocales y no marcar demasiado las consonantes.",
+            "Sigue practicando eso; ayuda a que la congregación siente el peso de lo que Jeremías describe.",
+          ],
+        },
       }),
     ],
     maestros: [
-      asignacion(4, "Empiece conversaciones", "4 mins", "Fabiola Guajardo", "Valeria Alcázar"),
-      asignacion(5, "Empiece conversaciones", "4 mins", "Aimé González", "Margarita Alcázar"),
-      asignacion(6, "Haga revisitas", "4 mins", "Greta Hernández", "Martha Martínez"),
+      asignacion(4, "Empiece conversaciones", "4 mins", "Fabiola Guajardo", "Valeria Alcázar", {
+        senas: "trabajar, estudiar, pasear, lugares diferentes, aprovechar, empezar a platicar",
+        contexto: "Predicación informal · lmd lección 3 punto 5.",
+        estudioHtml: "/asignaciones/2026-06-23-empiece-conversaciones-lmd3.html?v=20260623-2",
+        estudioHtmlLabel: "Abrir guía LMD 3",
+        preparacion: {
+          referencia: "lmd lección 3 punto 5",
+          punto: "Ofrezca su ayuda.",
+          descripcion: "Siempre que sea oportuno, ayude a la persona. Una muestra de bondad puede ser la llave que abra la puerta a una buena conversación.",
+        },
+        feedbackPresidente: {
+          titulo: "Cómo explicárselo a Fabiola y Valeria",
+          frases: [
+            "Fabiola y Valeria, gracias. Se notó que prepararon el escenario informal.",
+            "La lección 3, punto 5, nos recuerda que ofrecer ayuda con bondad puede abrir una buena conversación — y eso fue lo que mostraron.",
+            "Lo importante es notar la oportunidad, ayudar con sinceridad y dejar que la plática siga con naturalidad, sin apresurar un sermón.",
+            "Sigan practicando en los lugares donde ya están; ahí surgen muchas oportunidades reales.",
+          ],
+        },
+      }),
+      asignacion(5, "Empiece conversaciones", "4 mins", "Aimé González", "Margarita Alcázar", {
+        senas: "casa en casa, tu ir, predicar, empezar a platicar",
+        contexto: "De casa en casa · lmd lección 3 punto 4.",
+        estudioHtml: "/asignaciones/2026-06-23-casa-en-casa-amabilidad-respeto.html?v=20260623-3",
+        estudioHtmlLabel: "Abrir guía LMD 3",
+        preparacion: {
+          referencia: "lmd lección 3 punto 4",
+          punto: "Hable con amabilidad y respeto.",
+          descripcion: "Cuando sentimos compasión por alguien y de verdad queremos ayudarlo, eso se nota en la forma de hablar. Elija con cuidado lo que dirá y cómo lo dirá. No diga nada que pueda ofender a la persona.",
+        },
+        feedbackPresidente: {
+          titulo: "Cómo explicárselo a Aimé y Margarita",
+          frases: [
+            "Aimé y Margarita, gracias. Se notó que prepararon la visita casa en casa.",
+            "La lección 3, punto 4, recuerda hablar con amabilidad y respeto — cuando de verdad queremos ayudar, eso se nota en cómo hablamos.",
+            "Lo clave es elegir bien las palabras: tono compasivo, sin decir nada que pueda ofender.",
+            "Sigan practicando eso en casa en casa; ayuda a que la persona quiera seguir platicando.",
+          ],
+        },
+      }),
+      asignacion(6, "Haga revisitas", "4 mins", "Greta Hernández", "Martha Martínez", {
+        senas: "trabajar, estudiar, esparcimiento, lugares diferentes, revisitas",
+        contexto: "Predicación informal · lmd lección 7 punto 3.",
+        estudioHtml: "/asignaciones/2026-06-23-haga-revisitas-lmd7.html?v=20260623-1",
+        estudioHtmlLabel: "Abrir guía LMD 7",
+        preparacion: {
+          referencia: "lmd lección 7 punto 3",
+          punto: "Adapte su horario al de la otra persona.",
+          descripcion: "Pregúntese: «¿Cuándo está disponible para hablar conmigo? ¿Dónde le gustaría que nos encontráramos?». Esté dispuesto a volver a visitar a la persona aunque ese no sea el mejor momento para usted.",
+        },
+        feedbackPresidente: {
+          titulo: "Cómo explicárselo a Greta y Martha",
+          frases: [
+            "Greta y Martha, gracias. Se notó que prepararon bien la revisita informal.",
+            "La lección 7, punto 3, nos recuerda adaptar nuestro horario al de la otra persona — y eso fue lo que mostraron al preguntar cuándo y dónde conviene hablar.",
+            "Lo importante es volver con constancia, aunque el momento o el lugar no sean los más cómodos para nosotros; eso demuestra interés sincero.",
+            "Sigan practicando en los lugares donde ya están; ahí las revisitas informales surgen con naturalidad.",
+          ],
+        },
+      }),
     ],
     vida: [
-      asignacion(7, "No nos dejemos engañar, apoyemos el Reino de Dios", "15 mins", "Miguel Silva"),
+      asignacion(7, "No nos dejemos engañar, apoyemos el Reino de Dios", "15 mins", "Miguel Silva", null, {
+        senas: "discurso, preguntas, tema. Explicar, engañar. Oponerse. Dios, Reino, enfocarse. Perdón. Dios, Reino, enfocarse.",
+      }),
       asignacion(8, "Discurso de servicio: ¿Qué estás dispuesto a hacer por las buenas noticias?", "30 mins", "Sup. Cto. Natanael Valenzuela", null, {
         contexto: "Semana de la visita del superintendente de circuito.",
       }),

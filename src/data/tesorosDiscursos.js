@@ -298,6 +298,171 @@ export const PERLAS_ISAIAS_60_61 = {
   ],
 };
 
+export const TESOROS_PRESUMIR_JEREMIAS = {
+  numero: 2026062301,
+  tipo: "tesoros",
+  titulo: "¿De qué presumirá usted?",
+  tema: "Discurso, tema, orgulloso, ¿qué significa?, presumir, Jehová, humildad.",
+  duracion: "10 mins",
+  fuentes: [
+    "Jeremías 9:23, 24",
+    "La Atalaya, julio de 2020, págs. 6-7, párrs. 13-15",
+    "La Atalaya, mayo de 2025, pág. 30, párr. 14",
+    "1 Corintios 2:1-5",
+    "it “Sabiduría” párrs. 25, 26",
+  ],
+  secciones: [
+    {
+      titulo: "Introducción",
+      tiempo: "1 min",
+      sinNumero: true,
+      lsm: "tu orgulloso, ¿qué significa?",
+      contenido: [
+        {
+          tipo: "definicion",
+          termino: "LSM",
+          lsm: "tu orgulloso, ¿qué significa?",
+          texto: "Antes de empezar, repasemos la idea de la guía: ¿de qué cosas está orgulloso usted? ¿De sus logros, de lo que tiene, o de conocer a Jehová?",
+        },
+        {
+          tipo: "pregunta",
+          texto: "¿Alguna vez ha visto a alguien presumir de su auto, de su trabajo o de lo inteligente que es? ¿Qué impresión le causó?",
+        },
+        {
+          tipo: "punto",
+          texto: "Esta semana leemos Jeremías 9. Allí Jehová nos enseña qué no debemos presumir y qué sí debemos presumir. Hoy veremos tres ideas sencillas.",
+        },
+        {
+          tipo: "destacado",
+          texto: "Idea central: las cosas de las que usted presuma pueden influir en otros para bien o para mal.",
+        },
+      ],
+    },
+    {
+      titulo: "No tratemos de impresionar con logros y habilidades",
+      tiempo: "3 mins",
+      lsm: "Sabio, valiente, rico, no presumir. Redes sociales, envidia.",
+      contenido: [
+        {
+          tipo: "lectura",
+          cita: "Jeremías 9:23",
+          texto: "“Así ha dicho Jehová: ‘No se alabe el sabio en su sabiduría, ni se alabe el valiente en su valentía, ni se alabe el rico en sus riquezas’”.",
+          seg: "0:25",
+        },
+        {
+          tipo: "punto",
+          texto: "Jehová no dice que esté mal ser sabio, valiente o tener lo necesario. Lo que condena es presumir de eso para impresionar a los demás.",
+        },
+        {
+          tipo: "referencia",
+          cita: "w20.07 págs. 6-7 párrs. 13-15",
+          texto: "La Atalaya explica que mucha gente sube a las redes sociales solo lo mejor de su vida: fotos bonitas, viajes, logros. Quien ve eso puede sentirse inferior o envidioso. Por eso debemos preguntarnos: ¿Lo que publico da la impresión de que estoy presumiendo?",
+        },
+        {
+          tipo: "imagen",
+          img: "/images/presumir-auto-deportivo-20260623.png",
+          alt: "Hombre tomándose una selfie junto a un auto deportivo",
+          tamano: "grande",
+        },
+        {
+          tipo: "destacado",
+          texto: "Recuerde que las cosas de las que usted presuma pueden influir en otros para bien o para mal.",
+        },
+        {
+          tipo: "pregunta",
+          texto: "¿De qué manera podemos usar nuestras habilidades sin dar la impresión de sentirnos superiores?",
+        },
+      ],
+    },
+    {
+      titulo: "Busquemos oportunidades de presumir de Jehová",
+      tiempo: "3 mins",
+      lsm: "Presumir de Jehová. Nombre, bondad amorosa, justicia.",
+      contenido: [
+        {
+          tipo: "lectura",
+          cita: "Jeremías 9:24",
+          texto: "“Más bien, alábese en esto el que se alabe: en entenderme y conocerme que yo soy Jehová, que hago misericordia, juicio y justicia en la tierra. Porque estas cosas me agradan”, dice Jehová.",
+          seg: "0:25",
+        },
+        {
+          tipo: "referencia",
+          cita: "w25.05 pág. 30 párr. 14",
+          texto: "Presumir de Jehová significa sentirse orgulloso de tenerlo como Dios. Es un privilegio honrar su nombre y no avergonzarnos de identificarnos como testigos de Jehová, ya sea en el trabajo, en la escuela o en la comunidad.",
+        },
+        {
+          tipo: "lista_enseñanza",
+          titulo: "Oportunidades sencillas",
+          items: [
+            {
+              punto: "En una conversación",
+              detalle: "Mencionar con naturalidad algo que aprendimos de Jehová, sin sonar arrogantes.",
+            },
+            {
+              punto: "En la predicación",
+              detalle: "Hablar con orgullo del nombre de Jehová y de lo que él hará por la humanidad.",
+            },
+            {
+              punto: "Con nuestra conducta",
+              detalle: "Mostrar que conocer a Jehová nos ayuda a ser bondadosos, justos y rectos.",
+            },
+          ],
+        },
+        {
+          tipo: "ejemplo",
+          texto: "Es como cuando un hijo está orgulloso de su padre, no porque él sea perfecto, sino porque sabe que su padre lo ama y lo guía bien. Nosotros podemos sentir lo mismo respecto a Jehová.",
+        },
+      ],
+    },
+    {
+      titulo: "Sigamos el ejemplo de humildad de Pablo",
+      tiempo: "2 mins",
+      lsm: "Pablo, débil, temor. No sabiduría humana. Poder de Dios.",
+      contenido: [
+        {
+          tipo: "lectura",
+          cita: "1 Corintios 2:1-5",
+          texto: "Leer directamente en la Biblia. Idea clave: Pablo no fue a Corinto con palabras elevadas ni para impresionar con sabiduría humana. Fue sintiéndose débil, con temor y mucho temblor, para que la fe de los hermanos descansara en el poder de Dios, no en la sabiduría de los hombres.",
+          seg: "0:45",
+        },
+        {
+          tipo: "referencia",
+          cita: "it “Sabiduría” párrs. 25, 26",
+          texto: "Perspicacia explica que Pablo evitó el habla extravagante y hacer gala de sabiduría persuasiva. A quienes se jactaban de sus aptitudes, la presencia de Pablo les parecía débil; pero él quería que la fe se edificara con el espíritu de Dios, no con el encanto personal del predicador.",
+        },
+        {
+          tipo: "punto",
+          texto: "Pablo tenía mucha instrucción, pero no usó eso para lucirse. Nosotros tampoco debemos dar un discurso, una asignación o una respuesta en la reunión para que todos digan qué inteligentes somos.",
+        },
+        {
+          tipo: "destacado",
+          texto: "La regla es clara: si alguien va a presumir, que presuma de Jehová y de lo que Dios ha hecho por nosotros.",
+        },
+      ],
+    },
+    {
+      titulo: "Conclusión",
+      tiempo: "1 min",
+      sinNumero: true,
+      lsm: "Yo, qué presumo. Jehová, influir bien.",
+      contenido: [
+        {
+          tipo: "destacado",
+          texto: "Tres ideas para recordar: no presumamos de logros personales; busquemos oportunidades de presumir de Jehová; e imitemos la humildad de Pablo.",
+        },
+        {
+          tipo: "pregunta",
+          texto: "Esta semana, ¿de qué va a presumir usted: de lo que tiene, o de conocer a Jehová?",
+        },
+        {
+          tipo: "cierre",
+          texto: "Sigamos presumiendo de Jehová, porque eso sí influye en otros para bien.",
+        },
+      ],
+    },
+  ],
+};
+
 export const PERLAS_ISAIAS_65_66 = {
   numero: 2026052602,
   tipo: "perlas",

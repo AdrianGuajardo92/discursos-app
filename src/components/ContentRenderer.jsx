@@ -322,14 +322,30 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors, o
                       <p style={{ margin: 0, color: C.white, fontSize: 14, lineHeight: 1.45, fontWeight: 800, fontFamily: font }}>
                         {item.preparacion.punto}
                       </p>
+                      {item.preparacion.descripcion && (
+                        <p style={{ margin: "8px 0 0", color: C.gray, fontSize: 13.5, lineHeight: 1.5, fontWeight: 500, fontFamily: font }}>
+                          {item.preparacion.descripcion}
+                        </p>
+                      )}
                       <p style={{ margin: "3px 0 0", color: C.accent, fontSize: 12, fontWeight: 700, fontFamily: font }}>{item.preparacion.referencia}</p>
-                    </div>
-                    <div>
-                      <p style={{ margin: "0 0 4px", color: C.dim, fontSize: 10, fontWeight: 900, letterSpacing: 1.3, fontFamily: font }}>IDEA</p>
-                      <p style={{ margin: 0, color: C.gray, fontSize: 13.5, lineHeight: 1.5, fontFamily: font }}>{item.preparacion.idea}</p>
                     </div>
                   </div>
                 )}
+              </div>
+            )}
+            {item.feedbackPresidente && (
+              <div style={{ marginTop: 12, background: C.accentDim, border: `1px solid ${C.accentBorder}`, borderRadius: 8, padding: "12px 13px" }}>
+                <p style={{ margin: "0 0 10px", color: C.accent, fontSize: 11, fontWeight: 900, letterSpacing: 1.2, fontFamily: font }}>
+                  {(item.feedbackPresidente.titulo || "Cómo explicárselo al encargado").toUpperCase()}
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  {item.feedbackPresidente.frases.map((frase) => (
+                    <div key={frase} style={{ display: "flex", gap: 8, alignItems: "baseline" }}>
+                      <span style={{ color: C.accent, fontSize: 12, flexShrink: 0 }}>▸</span>
+                      <p style={{ margin: 0, color: C.white, fontSize: 13.5, lineHeight: 1.45, fontFamily: font }}>{frase}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>

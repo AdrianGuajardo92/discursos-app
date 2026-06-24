@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Perlas Escondidas — Jeremías 9, 10</title>
+  <style>
+    :root{
+      --bg:#f4ede3;
+      --bg-warm:#ebe2d4;
+      --paper:#faf6ef;
+      --paper-2:#f7f1e8;
+      --ink:#2c2418;
+      --ink-soft:#4a3f32;
+      --muted:#6b5f50;
+      --dim:#8a7d6c;
+      --line:#d4c4ad;
+      --line-soft:#e4d9c8;
+      --accent:#8b6914;
+      --accent-2:#a67c1a;
+      --accent-soft:rgba(139,105,20,.1);
+      --accent-glow:rgba(166,124,26,.18);
+      --teal:#3d6b5e;
+      --teal-soft:rgba(61,107,94,.08);
+      --burgundy:#6b3d3a;
+      --burgundy-soft:rgba(107,61,58,.07);
+      --shadow:0 18px 48px rgba(44,36,24,.08);
+      --shadow-soft:0 4px 16px rgba(44,36,24,.05);
+      --radius:12px;
+      color-scheme:light;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Libre Baskerville", "Georgia", "Times New Roman", serif;
+      color:var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 0%, var(--accent-glow), transparent 42%),
+        radial-gradient(ellipse at 88% 8%, rgba(61,107,94,.06), transparent 38%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 55%, #e8dfd2 100%);
+      line-height:1.7;
+      -webkit-font-smoothing:antialiased;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.35;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    }
+    .wrap{
+      width:min(860px, calc(100% - 32px));
+      margin:0 auto;
+      position:relative;
+    }
+    header{
+      padding:28px 0 20px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:8px;
+    }
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:28px;
+    }
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      min-height:36px;
+      padding:7px 14px;
+      border-radius:6px;
+      border:1px solid var(--line);
+      color:var(--accent);
+      text-decoration:none;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.82rem;
+      font-weight:600;
+      background:var(--paper);
+      transition:border-color .2s, background .2s;
+    }
+    .back:hover{
+      border-color:var(--accent-2);
+      background:var(--paper-2);
+    }
+    .meta{
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.75rem;
+      font-weight:600;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--dim);
+    }
+    .hero{
+      text-align:center;
+      padding:12px 0 32px;
+    }
+    .hero-badge{
+      display:inline-block;
+      padding:5px 14px;
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.72rem;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:18px;
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:clamp(1.65rem, 4vw, 2.15rem);
+      font-weight:700;
+      color:var(--ink);
+      letter-spacing:-.01em;
+      line-height:1.25;
+    }
+    .subtitle{
+      margin:0 0 6px;
+      font-size:1.05rem;
+      color:var(--ink-soft);
+      font-style:italic;
+    }
+    .reading{
+      margin:16px 0 0;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.88rem;
+      color:var(--muted);
+    }
+    .reading strong{
+      color:var(--accent);
+      font-weight:700;
+    }
+    .intro{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px 26px;
+      margin:0 0 28px;
+      box-shadow:var(--shadow-soft);
+      position:relative;
+    }
+    .intro:before{
+      content:"";
+      position:absolute;
+      top:0; left:24px; right:24px;
+      height:2px;
+      background:linear-gradient(90deg, transparent, var(--accent-2), transparent);
+      border-radius:2px;
+    }
+    .intro p{
+      margin:0 0 .75rem;
+      color:var(--ink-soft);
+      font-size:.98rem;
+    }
+    .intro p:last-child{margin-bottom:0}
+    .section-title{
+      margin:32px 0 16px;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.78rem;
+      font-weight:700;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--accent);
+    }
+    .pearls{
+      display:grid;
+      gap:18px;
+      margin-bottom:28px;
+    }
+    .pearl{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px 24px 20px 24px;
+      box-shadow:var(--shadow-soft);
+      position:relative;
+      overflow:hidden;
+    }
+    .pearl:before{
+      content:"";
+      position:absolute;
+      left:0; top:0; bottom:0;
+      width:3px;
+      background:linear-gradient(180deg, var(--accent-2), var(--line));
+    }
+    .pearl-header{
+      display:flex;
+      align-items:flex-start;
+      gap:16px;
+      margin-bottom:12px;
+    }
+    .pearl-num{
+      flex:0 0 auto;
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      border:1.5px solid var(--line);
+      background:var(--accent-soft);
+      color:var(--accent);
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.88rem;
+      font-weight:700;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      line-height:1;
+    }
+    .pearl-title{
+      margin:4px 0 0;
+      font-size:1.05rem;
+      font-weight:700;
+      color:var(--ink);
+      line-height:1.35;
+    }
+    .pearl-body{
+      margin:0 0 0 52px;
+      color:var(--ink-soft);
+      font-size:.95rem;
+    }
+    .pearl-q{
+      margin:0 0 .5rem;
+      font-weight:700;
+      color:var(--ink);
+    }
+    .pearl-a{
+      margin:0 0 .5rem;
+    }
+    .pearl-ref{
+      display:inline-flex;
+      align-items:center;
+      margin:10px 0 0 52px;
+      padding:4px 10px;
+      border-radius:5px;
+      border:1px solid var(--line-soft);
+      background:var(--teal-soft);
+      color:var(--teal);
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.76rem;
+      font-weight:600;
+      letter-spacing:.04em;
+    }
+    .pearl.tag-qualidad:before{background:linear-gradient(180deg, var(--accent-2), var(--accent))}
+    .pearl.tag-leccion:before{background:linear-gradient(180deg, var(--teal), #5a8a7a)}
+    .pearl.tag-aplicacion:before{background:linear-gradient(180deg, var(--burgundy), #8a5550)}
+    .pearl-label{
+      display:inline-block;
+      margin:0 0 4px 52px;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.68rem;
+      font-weight:700;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--dim);
+    }
+    .pearl.tag-qualidad .pearl-label{color:var(--accent)}
+    .pearl.tag-leccion .pearl-label{color:var(--teal)}
+    .pearl.tag-aplicacion .pearl-label{color:var(--burgundy)}
+    .closing{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px 26px;
+      margin-bottom:40px;
+      text-align:center;
+      box-shadow:var(--shadow-soft);
+    }
+    .closing h2{
+      margin:0 0 10px;
+      font-size:1rem;
+      color:var(--accent);
+      font-weight:700;
+    }
+    .closing p{
+      margin:0;
+      color:var(--muted);
+      font-size:.92rem;
+      font-style:italic;
+    }
+    footer{
+      padding:20px 0 36px;
+      border-top:1px solid var(--line);
+      text-align:center;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      font-size:.78rem;
+      color:var(--dim);
+    }
+    @media (max-width:600px){
+      .pearl-body, .pearl-ref, .pearl-label{margin-left:0}
+      .pearl-header{gap:12px}
+    }
+    @media print{
+      body{
+        background:#fff;
+        font-size:11pt;
+      }
+      body:before{display:none}
+      .back, footer .no-print{display:none}
+      .wrap{width:100%; padding:0 12px}
+      header{position:static; padding-top:0}
+      .pearl, .intro, .closing{
+        box-shadow:none;
+        break-inside:avoid;
+        page-break-inside:avoid;
+      }
+      .hero{padding-bottom:16px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="topbar">
+        <a class="back no-print" href="/">← Volver</a>
+        <span class="meta">Tesoros de la Biblia · 23 jun 2026</span>
+      </div>
+      <div class="hero">
+        <span class="hero-badge">Busquemos Perlas Escondidas</span>
+        <h1>Perlas en Jeremías 9 y 10</h1>
+        <p class="subtitle">Cualidades de Jehová, lecciones prácticas y confianza en Él</p>
+        <p class="reading">
+          Lectura de la semana: <strong>Jeremías 9, 10</strong> ·
+          Asignación #2 · Antonio Isas · 10 min
+        </p>
+      </div>
+    </header>
+
+    <div class="intro">
+      <p>
+        En estos capítulos el pueblo de Judá está lleno de traición y falsedad, y muchos confían en ídolos
+        o en su propia sabiduría. Jeremías llora por ellos, pero también destaca lo que de verdad importa:
+        conocer a Jehová y depender de Él.
+      </p>
+      <p>
+        Cada perla incluye <strong>una pregunta y una respuesta corta</strong> basada en la lectura.
+        En la reunión puede usar dos preguntas por perla o repartir las preguntas con la audiencia.
+      </p>
+    </div>
+
+    <h2 class="section-title">Capítulo 9 — Traición, juicio y de qué presumir</h2>
+    <div class="pearls">
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">1</span>
+          <h2 class="pearl-title">El profeta siente el dolor del pueblo</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Qué desea Jeremías cuando ve tanta maldad?</p>
+          <p class="pearl-a">Desea llorar sin parar —como si sus ojos fueran un manantial de lágrimas— por los muertos de su pueblo. Muestra que quien sirve a Jehová siente compasión por quienes se destruyen.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 9:1</span>
+      </article>
+
+      <article class="pearl tag-leccion">
+        <div class="pearl-header">
+          <span class="pearl-num">2</span>
+          <h2 class="pearl-title">Una sociedad llena de traición</h2>
+        </div>
+        <span class="pearl-label">Lección para nosotros</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Por qué Jeremías querría irse al desierto?</p>
+          <p class="pearl-a">Porque el pueblo era adúltero y traicionero en todos sus tratos. La deshonestidad era tan general que ni siquiera un hermano era digno de confianza.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 9:2-4</span>
+      </article>
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">3</span>
+          <h2 class="pearl-title">Jehová nota cuando lo ignoran</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Qué expresión usa Jehová cuando el pueblo empeora cada vez más?</p>
+          <p class="pearl-a">Dice: «De maldad en maldad procedieron, y aun a mí me pasaron por alto». Jehová ve la progresión del mal y sabe cuando lo dejamos de lado.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 9:3</span>
+      </article>
+
+      <article class="pearl tag-leccion">
+        <div class="pearl-header">
+          <span class="pearl-num">4</span>
+          <h2 class="pearl-title">La lengua como arma mortal</h2>
+        </div>
+        <span class="pearl-label">Lección para nosotros</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Qué imagen usa la Biblia para describir la lengua del pueblo?</p>
+          <p class="pearl-a">La compara con un arco doblado para la falsedad y con una flecha degolladora. Hablan paz con la boca, pero por dentro preparan una emboscada.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 9:3, 8</span>
+      </article>
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">5</span>
+          <h2 class="pearl-title">Jehová examina como quien refina metal</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Qué dice Jehová que hará con su pueblo rebelde?</p>
+          <p class="pearl-a">Que los fundirá y los examinará —como un refinador prueba el metal— porque no puede seguir tolerando tanta maldad sin actuar.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 9:7-9</span>
+      </article>
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">6</span>
+          <h2 class="pearl-title">Rechazan conocer a Jehová</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Por qué dice Jehová que el pueblo no lo conoce?</p>
+          <p class="pearl-a">Porque viven rodeados de engaño y, por engaño, han rehusado conocerlo. No es ignorancia accidental; es una decisión.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 9:6</span>
+      </article>
+
+      <article class="pearl tag-leccion">
+        <div class="pearl-header">
+          <span class="pearl-num">7</span>
+          <h2 class="pearl-title">La causa real del desastre</h2>
+        </div>
+        <span class="pearl-label">Lección para nosotros</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Por qué iba a quedar desolada la tierra de Judá?</p>
+          <p class="pearl-a">Porque dejaron la ley de Jehová, no obedecieron su voz y siguieron a Baal como les enseñaron sus padres. El problema no era falta de rituales, sino desobediencia.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 9:12-16</span>
+      </article>
+
+      <article class="pearl tag-leccion">
+        <div class="pearl-header">
+          <span class="pearl-num">8</span>
+          <h2 class="pearl-title">«La muerte subió por las ventanas»</h2>
+        </div>
+        <span class="pearl-label">Lección para nosotros</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Qué imagen tan fuerte usa Jehová para describir la destrucción que viene?</p>
+          <p class="pearl-a">Que la muerte entraría por las ventanas y las torres, cortando la vida hasta en las calles y plazas. Los cuerpos caerían como estiércol en el campo, sin nadie que los recoja.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 9:21-22</span>
+      </article>
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">9</span>
+          <h2 class="pearl-title">De qué NO presumir</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿En qué tres cosas dice Jehová que no debemos gloriarnos?</p>
+          <p class="pearl-a">En la sabiduría humana, en el poderío militar o en las riquezas. Nada de eso nos acerca realmente a Dios ni nos salva.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 9:23</span>
+      </article>
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">10</span>
+          <h2 class="pearl-title">De qué SÍ presumir — perla central</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿En qué debemos gloriarnos, según Jehová?</p>
+          <p class="pearl-a">En tener perspicacia y conocimiento de Él —que es Jehová, quien ejerce bondad amorosa, derecho y justicia en la tierra. En esas cosas se deleita.</p>
+          <p class="pearl-q">¿Qué tres cualidades de Jehová aparecen aquí?</p>
+          <p class="pearl-a">Bondad amorosa, derecho (juicio justo) y justicia. Conocerlo implica entender cómo actúa y tratar de imitarlo.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 9:24</span>
+      </article>
+
+      <article class="pearl tag-leccion">
+        <div class="pearl-header">
+          <span class="pearl-num">11</span>
+          <h2 class="pearl-title">Circuncisión externa vs. corazón</h2>
+        </div>
+        <span class="pearl-label">Lección para nosotros</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Qué significa «incircuncisos de corazón»?</p>
+          <p class="pearl-a">Que aunque Israel tenía la señal externa del pacto, por dentro seguían rebeldes —igual que las naciones paganas. Lo que importa es la obediencia sincera, no la apariencia religiosa.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 9:25-26</span>
+      </article>
+
+    </div>
+
+    <h2 class="section-title">Capítulo 10 — Ídolos vanos y el Dios vivo</h2>
+    <div class="pearls">
+
+      <article class="pearl tag-leccion">
+        <div class="pearl-header">
+          <span class="pearl-num">12</span>
+          <h2 class="pearl-title">No imitar a las naciones</h2>
+        </div>
+        <span class="pearl-label">Lección para nosotros</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Qué dos advertencias da Jehová al inicio del capítulo 10?</p>
+          <p class="pearl-a">No aprender el camino de las naciones y no sobrecogerse de terror ante las señales del cielo, como hacen los paganos. Debemos ser diferentes en creencias y en confianza.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 10:1-2</span>
+      </article>
+
+      <article class="pearl tag-leccion">
+        <div class="pearl-header">
+          <span class="pearl-num">13</span>
+          <h2 class="pearl-title">Los ídolos son como un espantapájaros</h2>
+        </div>
+        <span class="pearl-label">Lección para nosotros</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Cómo describe la Biblia un ídolo de madera decorado?</p>
+          <p class="pearl-a">Cortan un árbol, lo adornan con plata y oro, lo sujetan con clavos —y queda como un espantapájaros en un pepinar. No habla, no camina y hay que cargarlo. «Hacer bien no está con ellos».</p>
+        </div>
+        <span class="pearl-ref">Jeremías 10:3-5</span>
+      </article>
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">14</span>
+          <h2 class="pearl-title">Nadie semejante a Jehová</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Qué contraste hace Jeremías entre Jehová y los «sabios» de las naciones?</p>
+          <p class="pearl-a">Jehová es grande y su nombre es grande en poderío; es Rey de las naciones y debe temerse. Entre todos los sabios y reyes de la tierra no hay nadie semejante a Él.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 10:6-7</span>
+      </article>
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">15</span>
+          <h2 class="pearl-title">Jehová es el Dios vivo</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Qué diferencia hay entre Jehová y los ídolos?</p>
+          <p class="pearl-a">Jehová es en verdad Dios, el Dios vivo y Rey eterno; la tierra tiembla ante su indignación. Los ídolos son vanidad, no tienen espíritu y perecerán.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 10:10-11, 14-15</span>
+      </article>
+
+      <article class="pearl tag-qualidad">
+        <div class="pearl-header">
+          <span class="pearl-num">16</span>
+          <h2 class="pearl-title">El Creador de todo</h2>
+        </div>
+        <span class="pearl-label">Cualidad de Jehová</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Qué hace Jehová con su poder, sabiduría y entendimiento?</p>
+          <p class="pearl-a">Hizo la tierra con su poder, la estableció con su sabiduría y extendió los cielos. Con su voz agita las aguas, hace subir vapores y saca el viento de sus almacenes.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 10:12-13</span>
+      </article>
+
+      <article class="pearl tag-aplicacion">
+        <div class="pearl-header">
+          <span class="pearl-num">17</span>
+          <h2 class="pearl-title">«La Parte de Jacob»</h2>
+        </div>
+        <span class="pearl-label">Aplicación práctica</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Por qué «la Parte de Jacob» no es como los ídolos?</p>
+          <p class="pearl-a">Porque Jehová es el Formador de todo e Israel es el bastón de su herencia. Nuestro Dios no es una estatua hecha por manos humanas; es el dueño y Creador de todo.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 10:16</span>
+      </article>
+
+      <article class="pearl tag-leccion">
+        <div class="pearl-header">
+          <span class="pearl-num">18</span>
+          <h2 class="pearl-title">Pastores que no buscaron a Jehová</h2>
+        </div>
+        <span class="pearl-label">Lección para nosotros</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Qué culpa tienen los pastores según Jeremías 10:21?</p>
+          <p class="pearl-a">Se portaron irrazonablemente y no buscaron a Jehová; por eso no actuaron con perspicacia y el rebaño fue esparcido. Los líderes espirituales deben buscar primero a Dios.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 10:21</span>
+      </article>
+
+      <article class="pearl tag-aplicacion">
+        <div class="pearl-header">
+          <span class="pearl-num">19</span>
+          <h2 class="pearl-title">El hombre no dirige su camino</h2>
+        </div>
+        <span class="pearl-label">Aplicación práctica</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Qué reconoce Jeremías en 10:23?</p>
+          <p class="pearl-a">Que al hombre no le pertenece su camino ni puede dirigir sus propios pasos con éxito. Solo Jehová puede guiarnos bien —especialmente cuando confiamos en ídolos modernos (dinero, fama, nuestra propia opinión).</p>
+          <p class="pearl-q">¿Qué pide entonces Jeremías?</p>
+          <p class="pearl-a">«Corrígeme, oh Jehová, con juicio; no en tu cólera». Quiere disciplina justa, no destrucción. Reconoce humildemente su necesidad de guía divina.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 10:23-24</span>
+      </article>
+
+      <article class="pearl tag-aplicacion">
+        <div class="pearl-header">
+          <span class="pearl-num">20</span>
+          <h2 class="pearl-title">Conexión con la asignación #1</h2>
+        </div>
+        <span class="pearl-label">Aplicación práctica</span>
+        <div class="pearl-body">
+          <p class="pearl-q">¿Cómo se conecta 9:23-24 con el tema «¿De qué presumirá usted?»?</p>
+          <p class="pearl-a">La respuesta bíblica es clara: no en sabiduría, poder ni riquezas, sino en conocer a Jehová y sus cualidades. Presumir de lo correcto fortalece nuestra fe y nuestra predicación.</p>
+        </div>
+        <span class="pearl-ref">Jeremías 9:23-24; asignación #1</span>
+      </article>
+
+    </div>
+
+    <div class="closing">
+      <h2>Para repasar en 10 minutos</h2>
+      <p>
+        Hay 20 perlas con 22 preguntas. Elija 5 o 6 según el tiempo: combine una del cap. 9
+        (por ejemplo la #10 sobre de qué presumir), una sobre ídolos (#13-15), y cierre con la #19
+        sobre depender de Jehová. Invite respuestas breves de la audiencia antes de dar la respuesta.
+      </p>
+    </div>
+
+    <footer>
+      <p>Reunión del 23 de junio de 2026 · Lectura: Jeremías 9, 10 · Antonio Isas</p>
+    </footer>
+  </div>
+</body>
+</html>
