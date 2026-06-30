@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Lección 98: Los cristianos llegan a muchas naciones</title>
+  <style>
+    :root{
+      --bg:#f4ede3;
+      --paper:#fbf6ee;
+      --paper-2:#f1e8da;
+      --ink:#2d261c;
+      --soft:#5d5142;
+      --muted:#837765;
+      --line:#d6c6ae;
+      --accent:#8b6914;
+      --accent-2:#b68926;
+      --accent-soft:rgba(139,105,20,.1);
+      --teal:#2f6f73;
+      --teal-soft:rgba(47,111,115,.1);
+      --red:#793c35;
+      --shadow:0 18px 42px rgba(45,38,28,.09);
+      --radius:14px;
+      color-scheme:light;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(182,137,38,.2), transparent 40%),
+        radial-gradient(ellipse at 86% 9%, rgba(47,111,115,.14), transparent 34%),
+        linear-gradient(180deg, #f8efe4 0%, var(--bg) 55%, #e8ddce 100%);
+      line-height:1.68;
+    }
+    .wrap{width:min(980px, calc(100% - 32px)); margin:0 auto}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:22px 0;
+      color:var(--muted);
+      font-size:.78rem;
+      font-weight:850;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .back{
+      color:var(--accent);
+      text-decoration:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.58);
+      border-radius:999px;
+      padding:8px 13px;
+      letter-spacing:0;
+      text-transform:none;
+      font-weight:850;
+    }
+    header{
+      display:grid;
+      grid-template-columns:1fr .72fr;
+      gap:24px;
+      align-items:center;
+      padding:18px 0 28px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:24px;
+    }
+    .badge{
+      display:inline-flex;
+      border:1px solid rgba(47,111,115,.24);
+      background:var(--teal-soft);
+      color:var(--teal);
+      border-radius:999px;
+      padding:5px 13px;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:clamp(2rem, 5vw, 3.25rem);
+      line-height:1.08;
+      letter-spacing:-.025em;
+    }
+    .subtitle{
+      margin:14px 0 0;
+      color:var(--soft);
+      font-size:1.05rem;
+    }
+    .hero img{
+      width:100%;
+      display:block;
+      border-radius:20px;
+      border:1px solid rgba(47,111,115,.24);
+      box-shadow:var(--shadow);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:250px minmax(0, 1fr);
+      gap:24px;
+      align-items:start;
+    }
+    nav{
+      position:sticky;
+      top:16px;
+      background:rgba(251,246,238,.92);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:0 12px 28px rgba(45,38,28,.06);
+    }
+    nav p{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:.74rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    nav a{
+      display:block;
+      color:var(--soft);
+      text-decoration:none;
+      border-top:1px solid rgba(214,198,174,.62);
+      padding:9px 0;
+      font-weight:750;
+      font-size:.92rem;
+    }
+    .section{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:23px 25px;
+      margin-bottom:18px;
+      box-shadow:0 8px 20px rgba(45,38,28,.05);
+      scroll-margin-top:24px;
+    }
+    .section h2{
+      margin:0 0 12px;
+      font-family:Georgia, "Times New Roman", serif;
+      color:var(--accent);
+      font-size:1.42rem;
+      line-height:1.22;
+    }
+    .section h3{
+      margin:20px 0 8px;
+      color:var(--teal);
+      font-size:.96rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    p{margin:0 0 12px}
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .card{
+      background:var(--paper-2);
+      border:1px solid rgba(214,198,174,.8);
+      border-radius:12px;
+      padding:14px;
+    }
+    .card strong{
+      display:block;
+      color:var(--teal);
+      margin-bottom:5px;
+    }
+    .timeline{
+      display:grid;
+      gap:10px;
+      padding-left:0;
+      list-style:none;
+      counter-reset:item;
+    }
+    .timeline li{
+      counter-increment:item;
+      position:relative;
+      padding:13px 14px 13px 52px;
+      background:#fffaf2;
+      border:1px solid var(--line);
+      border-radius:12px;
+    }
+    .timeline li:before{
+      content:counter(item);
+      position:absolute;
+      left:14px;
+      top:14px;
+      width:25px;
+      height:25px;
+      border-radius:8px;
+      background:var(--accent);
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      font-size:.82rem;
+    }
+    .qa{
+      display:grid;
+      gap:12px;
+    }
+    .qa article{
+      border-left:5px solid var(--accent-2);
+      background:var(--accent-soft);
+      border-radius:0 12px 12px 0;
+      padding:14px 16px;
+    }
+    .qa strong{display:block;color:var(--red);margin-bottom:5px}
+    .source a{color:var(--accent);font-weight:850}
+    @media (max-width:840px){
+      header{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      nav{position:static}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="leccion-98">
+    <div class="topbar">
+      <a class="back" href="/">Volver a la app</a>
+      <span>Estudio bíblico de la congregación</span>
+    </div>
+
+    <header>
+      <div>
+        <span class="badge">Lección 98</span>
+        <h1>Los cristianos llegan a muchas naciones</h1>
+        <p class="subtitle">Una guía para dirigir la lección con historia relatada, respuestas y aplicación práctica para la congregación.</p>
+      </div>
+      <figure class="hero">
+        <img src="https://cms-imgp.jw-cdn.org/img/p/1102016108/univ/art/1102016108_univ_lsr_xl.jpg" alt="Pablo y Bernabé le predican a Sergio Paulo, el gobernador de Chipre" />
+      </figure>
+    </header>
+
+    <div class="grid">
+      <nav aria-label="Índice">
+        <p>Índice</p>
+        <a href="#situarte">Para situarte</a>
+        <a href="#personajes">Personajes</a>
+        <a href="#secuencia">Secuencia</a>
+        <a href="#historia">Historia relatada</a>
+        <a href="#preguntas">Preguntas</a>
+        <a href="#aplicacion">Aplicación</a>
+        <a href="#textos">Textos bíblicos</a>
+      </nav>
+
+      <main>
+        <section class="section" id="situarte">
+          <h2>Para situarte</h2>
+          <p>Después de la muerte y resurrección de Jesús, la predicación no se quedó en Jerusalén. Los discípulos obedecieron la comisión de llevar las buenas noticias a más lugares. Esta lección ayuda a ver que Jehová puede usar a personas dispuestas para abrir camino en territorios nuevos.</p>
+          <div class="cards">
+            <div class="card"><strong>Tiempo aproximado</strong>Años 47 en adelante, durante los viajes misionales de Pablo.</div>
+            <div class="card"><strong>Lugares</strong>Antioquía, Chipre, Asia Menor, Filipos, Atenas, Corinto, Éfeso y otros.</div>
+            <div class="card"><strong>Idea clave</strong>La predicación avanza cuando hay obediencia, valor, humildad y trabajo en equipo.</div>
+          </div>
+        </section>
+
+        <section class="section" id="personajes">
+          <h2>Personajes principales</h2>
+          <div class="cards">
+            <div class="card"><strong>Pablo</strong>Misionero incansable; predicó, enseñó, fortaleció congregaciones y aguantó oposición.</div>
+            <div class="card"><strong>Bernabé</strong>Compañero de Pablo; colaboró con ánimo y valentía en el primer viaje.</div>
+            <div class="card"><strong>Sergio Paulo</strong>Gobernador de Chipre que escuchó el mensaje y se hizo creyente.</div>
+            <div class="card"><strong>Silas, Lucas y Timoteo</strong>Compañeros que apoyaron la expansión de la predicación y el cuidado de las congregaciones.</div>
+          </div>
+        </section>
+
+        <section class="section" id="secuencia">
+          <h2>La secuencia de los hechos</h2>
+          <ol class="timeline">
+            <li>Los hermanos de Antioquía envían a Pablo y Bernabé a predicar en otros lugares.</li>
+            <li>En Chipre, Sergio Paulo escucha el mensaje a pesar de la oposición de un hechicero.</li>
+            <li>En Asia Menor, Pablo y Bernabé predican a todo tipo de personas.</li>
+            <li>En Listra, curan a un hombre, pero rechazan cualquier adoración humana y dirigen la atención a Dios.</li>
+            <li>Pablo sufre oposición violenta, pero sigue sirviendo y vuelve a fortalecer a los hermanos.</li>
+            <li>En viajes posteriores, Pablo predica en Europa, forma congregaciones y las ayuda a hacerse fuertes.</li>
+          </ol>
+        </section>
+
+        <section class="section" id="historia">
+          <h2>La historia relatada</h2>
+          <p>Imaginemos a la congregación de Antioquía. Los hermanos no estaban pensando solo en ellos mismos. Querían que más personas conocieran a Jehová y a Jesús. Por eso enviaron a Pablo y Bernabé a predicar lejos. Ellos viajaron con entusiasmo y hablaron con personas muy distintas: ricos, pobres, jóvenes, mayores, gente religiosa y personas que nunca habían oído la verdad.</p>
+          <p>En Chipre, el gobernador Sergio Paulo quiso escuchar. Pero un hechicero trató de detener el mensaje. Pablo no se intimidó. Jehová dejó claro que nadie podía frenar las buenas noticias si él quería que avanzaran. Al ver lo ocurrido, Sergio Paulo creyó.</p>
+          <p>Más tarde, en Listra, Pablo y Bernabé curaron a un hombre que no podía caminar. La gente se emocionó tanto que quiso tratarlos como dioses. Pero ellos no aceptaron esa honra. Les enseñaron que solo Jehová merece adoración. Después vino la oposición. A Pablo lo apedrearon y lo dejaron por muerto. Aun así, cuando los hermanos lo rodearon, él se levantó y siguió adelante.</p>
+          <p>En otros viajes, Pablo siguió predicando y formando congregaciones. No trabajó solo: Silas, Lucas, Timoteo y otros colaboraron con él. A veces Pablo predicaba en mercados, en sinagogas, en casas o en lugares públicos. También trabajaba haciendo tiendas para mantenerse. Su vida muestra que la predicación requiere esfuerzo, pero Jehová bendice a quienes se entregan de corazón.</p>
+        </section>
+
+        <section class="section" id="preguntas">
+          <h2>Preguntas del libro y respuestas sugeridas</h2>
+          <div class="qa">
+            <article>
+              <strong>Pregunta del libro: ¿Puedes ver en un mapa de tu Biblia los lugares que visitó Pablo en sus viajes?</strong>
+              <p>Respuesta sugerida: Sí. Podemos buscar Antioquía, Chipre, Listra, Iconio, Derbe, Filipos, Atenas, Corinto y Éfeso. Verlos en el mapa nos ayuda a entender cuánto esfuerzo hizo Pablo y cuánto avanzó la predicación.</p>
+            </article>
+          </div>
+          <h3>Preguntas para el auditorio</h3>
+          <div class="qa">
+            <article><strong>¿Qué nos enseña Antioquía sobre apoyar la predicación?</strong><p>Que una congregación no piensa solo en sus propias necesidades. También apoya que las buenas noticias lleguen a más personas.</p></article>
+            <article><strong>¿Qué aprendemos de Pablo y Bernabé cuando la gente quiso adorarlos?</strong><p>Que los siervos de Jehová no buscan protagonismo. Dirigen la atención a Dios.</p></article>
+            <article><strong>¿Qué nos enseña Pablo cuando lo apedrearon y siguió adelante?</strong><p>Que el valor cristiano no es ausencia de dolor, sino seguir confiando en Jehová a pesar del dolor.</p></article>
+          </div>
+        </section>
+
+        <section class="section" id="aplicacion">
+          <h2>Aplicación personal</h2>
+          <div class="cards">
+            <div class="card"><strong>Predicar a todos</strong>Pablo no escogía solo personas fáciles. Nosotros también podemos hablar con respeto a todo tipo de gente.</div>
+            <div class="card"><strong>Trabajar en equipo</strong>La obra avanzó porque varios colaboraron. En la congregación, cada apoyo cuenta.</div>
+            <div class="card"><strong>Dar honra a Jehová</strong>Si alguien nos felicita, podemos aceptar con gratitud, pero recordar que todo viene de Jehová.</div>
+            <div class="card"><strong>No rendirse</strong>La oposición no detuvo a Pablo. Las dificultades tampoco tienen que apagar nuestro deseo de servir.</div>
+          </div>
+        </section>
+
+        <section class="section" id="textos">
+          <h2>Textos bíblicos finales</h2>
+          <p><strong>Hechos 13:1-23:35.</strong> Este bloque bíblico muestra los viajes, la predicación, la oposición y el cuidado que Pablo dio a las congregaciones.</p>
+          <p><strong>Hechos 14:14, 15.</strong> Pablo y Bernabé rechazaron la honra humana y enseñaron que se debe adorar al Dios vivo.</p>
+          <p><strong>Hechos 18:3, 4.</strong> Pablo trabajaba y seguía predicando. Su ejemplo enseña equilibrio, esfuerzo y amor por el ministerio.</p>
+          <p class="source">Fuente principal: <a href="https://www.jw.org/es/biblioteca/libros/lecciones-historias-biblia/14/cristianos-llegan-muchas-naciones/">Lección 98 en JW.org</a>.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

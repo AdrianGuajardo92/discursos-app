@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Lección 99: Un carcelero aprende la verdad</title>
+  <style>
+    :root{
+      --bg:#f4ede3;
+      --paper:#fbf6ee;
+      --paper-2:#f1e8da;
+      --ink:#2d261c;
+      --soft:#5d5142;
+      --muted:#837765;
+      --line:#d6c6ae;
+      --accent:#8b6914;
+      --accent-2:#b68926;
+      --accent-soft:rgba(139,105,20,.1);
+      --teal:#2f6f73;
+      --teal-soft:rgba(47,111,115,.1);
+      --red:#793c35;
+      --shadow:0 18px 42px rgba(45,38,28,.09);
+      --radius:14px;
+      color-scheme:light;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(182,137,38,.2), transparent 40%),
+        radial-gradient(ellipse at 86% 9%, rgba(47,111,115,.14), transparent 34%),
+        linear-gradient(180deg, #f8efe4 0%, var(--bg) 55%, #e8ddce 100%);
+      line-height:1.68;
+    }
+    .wrap{width:min(980px, calc(100% - 32px)); margin:0 auto}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:22px 0;
+      color:var(--muted);
+      font-size:.78rem;
+      font-weight:850;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .back{
+      color:var(--accent);
+      text-decoration:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.58);
+      border-radius:999px;
+      padding:8px 13px;
+      letter-spacing:0;
+      text-transform:none;
+      font-weight:850;
+    }
+    header{
+      display:grid;
+      grid-template-columns:1fr .72fr;
+      gap:24px;
+      align-items:center;
+      padding:18px 0 28px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:24px;
+    }
+    .badge{
+      display:inline-flex;
+      border:1px solid rgba(47,111,115,.24);
+      background:var(--teal-soft);
+      color:var(--teal);
+      border-radius:999px;
+      padding:5px 13px;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:clamp(2rem, 5vw, 3.25rem);
+      line-height:1.08;
+      letter-spacing:-.025em;
+    }
+    .subtitle{
+      margin:14px 0 0;
+      color:var(--soft);
+      font-size:1.05rem;
+    }
+    .hero img{
+      width:100%;
+      display:block;
+      border-radius:20px;
+      border:1px solid rgba(47,111,115,.24);
+      box-shadow:var(--shadow);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:250px minmax(0, 1fr);
+      gap:24px;
+      align-items:start;
+    }
+    nav{
+      position:sticky;
+      top:16px;
+      background:rgba(251,246,238,.92);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:0 12px 28px rgba(45,38,28,.06);
+    }
+    nav p{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:.74rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    nav a{
+      display:block;
+      color:var(--soft);
+      text-decoration:none;
+      border-top:1px solid rgba(214,198,174,.62);
+      padding:9px 0;
+      font-weight:750;
+      font-size:.92rem;
+    }
+    .section{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:23px 25px;
+      margin-bottom:18px;
+      box-shadow:0 8px 20px rgba(45,38,28,.05);
+      scroll-margin-top:24px;
+    }
+    .section h2{
+      margin:0 0 12px;
+      font-family:Georgia, "Times New Roman", serif;
+      color:var(--accent);
+      font-size:1.42rem;
+      line-height:1.22;
+    }
+    .section h3{
+      margin:20px 0 8px;
+      color:var(--teal);
+      font-size:.96rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    p{margin:0 0 12px}
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));
+      gap:12px;
+      margin-top:12px;
+    }
+    .card{
+      background:var(--paper-2);
+      border:1px solid rgba(214,198,174,.8);
+      border-radius:12px;
+      padding:14px;
+    }
+    .card strong{
+      display:block;
+      color:var(--teal);
+      margin-bottom:5px;
+    }
+    .timeline{
+      display:grid;
+      gap:10px;
+      padding-left:0;
+      list-style:none;
+      counter-reset:item;
+    }
+    .timeline li{
+      counter-increment:item;
+      position:relative;
+      padding:13px 14px 13px 52px;
+      background:#fffaf2;
+      border:1px solid var(--line);
+      border-radius:12px;
+    }
+    .timeline li:before{
+      content:counter(item);
+      position:absolute;
+      left:14px;
+      top:14px;
+      width:25px;
+      height:25px;
+      border-radius:8px;
+      background:var(--accent);
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      font-size:.82rem;
+    }
+    .qa{
+      display:grid;
+      gap:12px;
+    }
+    .qa article{
+      border-left:5px solid var(--accent-2);
+      background:var(--accent-soft);
+      border-radius:0 12px 12px 0;
+      padding:14px 16px;
+    }
+    .qa strong{display:block;color:var(--red);margin-bottom:5px}
+    .source a{color:var(--accent);font-weight:850}
+    @media (max-width:840px){
+      header{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      nav{position:static}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="leccion-99">
+    <div class="topbar">
+      <a class="back" href="/">Volver a la app</a>
+      <span>Estudio bíblico de la congregación</span>
+    </div>
+
+    <header>
+      <div>
+        <span class="badge">Lección 99</span>
+        <h1>Un carcelero aprende la verdad</h1>
+        <p class="subtitle">Guía para dirigir la historia de Pablo, Silas y el carcelero de Filipos con respuestas claras y aplicación espiritual.</p>
+      </div>
+      <figure class="hero">
+        <img src="https://cms-imgp.jw-cdn.org/img/p/1102016109/univ/art/1102016109_univ_lsr_xl.jpg" alt="El carcelero de Filipos encuentra las puertas de la cárcel abiertas, pero los presos no han escapado" />
+      </figure>
+    </header>
+
+    <div class="grid">
+      <nav aria-label="Índice">
+        <p>Índice</p>
+        <a href="#situarte">Para situarte</a>
+        <a href="#personajes">Personajes</a>
+        <a href="#secuencia">Secuencia</a>
+        <a href="#historia">Historia relatada</a>
+        <a href="#preguntas">Preguntas</a>
+        <a href="#aplicacion">Aplicación</a>
+        <a href="#textos">Textos bíblicos</a>
+      </nav>
+
+      <main>
+        <section class="section" id="situarte">
+          <h2>Para situarte</h2>
+          <p>Pablo y Silas estaban predicando en Filipos. La verdad estaba llegando a personas diferentes, pero también estaba chocando con intereses económicos y religiosos. Esta historia muestra que Jehová puede abrir una puerta espiritual incluso dentro de una cárcel.</p>
+          <div class="cards">
+            <div class="card"><strong>Lugar</strong>Filipos, una ciudad importante de Macedonia.</div>
+            <div class="card"><strong>Texto base</strong>Hechos 16:16-34.</div>
+            <div class="card"><strong>Idea clave</strong>La fe puede nacer en una crisis cuando alguien ve amor, valor y verdad.</div>
+          </div>
+        </section>
+
+        <section class="section" id="personajes">
+          <h2>Personajes principales</h2>
+          <div class="cards">
+            <div class="card"><strong>Pablo</strong>Predicador valiente que liberó a una joven de la influencia de un demonio.</div>
+            <div class="card"><strong>Silas</strong>Compañero fiel que aguantó golpes y prisión junto con Pablo.</div>
+            <div class="card"><strong>La joven sirvienta</strong>Era explotada por sus amos debido a un demonio que la controlaba.</div>
+            <div class="card"><strong>El carcelero</strong>Al principio solo cuidaba presos; al final escuchó la verdad y actuó con fe.</div>
+          </div>
+        </section>
+
+        <section class="section" id="secuencia">
+          <h2>La secuencia de los hechos</h2>
+          <ol class="timeline">
+            <li>Una joven con un demonio sigue a Pablo y Silas durante varios días.</li>
+            <li>Pablo ordena en el nombre de Jesús que el demonio salga de ella.</li>
+            <li>Los amos de la joven se enojan porque pierden una fuente de dinero.</li>
+            <li>Pablo y Silas son golpeados y encerrados en la parte más segura de la prisión.</li>
+            <li>De noche, ellos cantan alabanzas a Jehová mientras otros presos escuchan.</li>
+            <li>Un terremoto abre las puertas, pero nadie huye.</li>
+            <li>El carcelero pregunta qué debe hacer para salvarse, aprende la verdad y se bautiza con su casa.</li>
+          </ol>
+        </section>
+
+        <section class="section" id="historia">
+          <h2>La historia relatada</h2>
+          <p>En Filipos, Pablo y Silas se encontraron con una joven que estaba esclavizada en más de un sentido. Tenía un demonio y sus amos usaban esa situación para ganar dinero. Durante días, ella siguió a Pablo y Silas gritando. Pablo no buscó discusión ni espectáculo. En el momento adecuado, actuó con autoridad en el nombre de Jesús, y la joven quedó libre de aquella influencia.</p>
+          <p>Pero sus amos no pensaron en la libertad de ella. Pensaron en el dinero que habían perdido. Por eso arrastraron a Pablo y Silas ante las autoridades. Los golpearon y los metieron en la cárcel, en la parte más profunda, con los pies sujetos. Humanamente, aquella noche parecía una derrota.</p>
+          <p>Sin embargo, Pablo y Silas no llenaron la prisión de quejas. La llenaron de alabanzas. Los demás presos escuchaban. Entonces ocurrió un terremoto. Las puertas se abrieron y las cadenas quedaron sueltas. El carcelero pensó que todos habían escapado y que su vida estaba arruinada. Pero Pablo gritó que no se hiciera daño, porque todos seguían allí.</p>
+          <p>Ese acto de amor tocó al carcelero. Él vio algo diferente: hombres maltratados que no buscaban venganza, sino salvar una vida. Por eso preguntó qué debía hacer para salvarse. Pablo y Silas le enseñaron la palabra de Jehová, y esa misma noche el carcelero y su casa aceptaron la verdad y se bautizaron.</p>
+        </section>
+
+        <section class="section" id="preguntas">
+          <h2>Preguntas del libro y respuestas sugeridas</h2>
+          <div class="qa">
+            <article>
+              <strong>Pregunta del libro: ¿Por qué echaron a Pablo y a Silas en la cárcel?</strong>
+              <p>Respuesta sugerida: Porque Pablo liberó a una joven de la influencia de un demonio, y sus amos se enojaron al perder el dinero que ganaban explotándola. Entonces acusaron a Pablo y Silas ante las autoridades.</p>
+            </article>
+            <article>
+              <strong>Pregunta del libro: ¿Cómo aprendió la verdad el carcelero?</strong>
+              <p>Respuesta sugerida: Primero vio que Pablo y Silas no huyeron ni dejaron que él se hiciera daño. Después les preguntó qué debía hacer para salvarse, y ellos le enseñaron la palabra de Jehová. Él escuchó, creyó y se bautizó con su casa.</p>
+            </article>
+          </div>
+          <h3>Preguntas para el auditorio</h3>
+          <div class="qa">
+            <article><strong>¿Qué nos enseña Pablo sobre ayudar a personas oprimidas?</strong><p>Que el amor cristiano no se queda indiferente cuando alguien sufre. Pablo actuó para liberar a la joven y honrar a Jesús.</p></article>
+            <article><strong>¿Por qué impresiona que Pablo y Silas cantaran en la cárcel?</strong><p>Porque demuestra que la alegría cristiana no depende de circunstancias cómodas, sino de la confianza en Jehová.</p></article>
+            <article><strong>¿Qué tocó el corazón del carcelero?</strong><p>Vio amor en acción. Pablo evitó que se hiciera daño, aunque el carcelero era parte del sistema que los tenía presos.</p></article>
+          </div>
+        </section>
+
+        <section class="section" id="aplicacion">
+          <h2>Aplicación personal</h2>
+          <div class="cards">
+            <div class="card"><strong>Cuando sufrimos injusticias</strong>Podemos seguir alabando a Jehová y actuar con dignidad.</div>
+            <div class="card"><strong>Cuando alguien está en crisis</strong>Una palabra rápida y compasiva puede abrir el camino para hablar de la verdad.</div>
+            <div class="card"><strong>Cuando predicamos</strong>No sabemos quién está observando nuestra conducta. Los presos escuchaban; el carcelero también aprendió.</div>
+            <div class="card"><strong>En familia</strong>El carcelero no guardó lo aprendido para sí mismo. La verdad llegó a toda su casa.</div>
+          </div>
+        </section>
+
+        <section class="section" id="textos">
+          <h2>Textos bíblicos finales</h2>
+          <p><strong>Hechos 16:16-18.</strong> Pablo actúa en el nombre de Jesús para liberar a una joven que estaba bajo influencia demoníaca.</p>
+          <p><strong>Hechos 16:25.</strong> Pablo y Silas alaban a Jehová en medio de la prisión. Su actitud también fue un testimonio.</p>
+          <p><strong>Hechos 16:30-34.</strong> El carcelero pregunta, escucha, cree y actúa. Su casa también recibe la enseñanza.</p>
+          <p class="source">Fuente principal: <a href="https://www.jw.org/es/biblioteca/libros/lecciones-historias-biblia/14/carcelero-aprende-verdad/">Lección 99 en JW.org</a>.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

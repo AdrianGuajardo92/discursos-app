@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { C as fallbackC, font } from "../theme";
-import { esAsignacionDePersona } from "../utils/misAsignaciones";
+import { esAsignacionDePersona, personaCoincide } from "../utils/misAsignaciones";
 
 export default function ContentRenderer({ item, reunion, seccion, themeColors, onAbrirDiscurso }) {
   const C = themeColors || fallbackC;
@@ -8,7 +8,9 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors, o
   const txt = { fontSize: 17, lineHeight: 1.8, color: C.white, marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0, fontFamily: font };
   const sub = { ...txt, color: C.gray, fontSize: 15.5 };
   const chip = { border: `1px solid ${C.accentBorder}`, background: C.accentDim, color: C.accent, borderRadius: 999, padding: "3px 9px", fontSize: 11, fontWeight: 800, fontFamily: font };
-  const esPropia = item?.tipo === "asignacion" && esAsignacionDePersona(item);
+  const esPropia =
+    (item?.tipo === "asignacion" && esAsignacionDePersona(item)) ||
+    (item?.tipo === "oracion" && personaCoincide(item.encargado));
 
   switch (item.tipo) {
     case "punto":
@@ -362,8 +364,14 @@ export default function ContentRenderer({ item, reunion, seccion, themeColors, o
 
     case "oracion":
       return (
-        <div style={{ background: C.card2, borderRadius: 8, padding: "14px 16px", margin: "12px 0", borderLeft: `2px solid ${C.accent}` }}>
-          <p style={{ margin: 0, color: C.gray, fontSize: 14, fontWeight: 700, fontFamily: font }}>Oración: <strong style={{ color: C.white }}>{item.encargado}</strong></p>
+        <div style={{ background: esPropia ? `linear-gradient(135deg, ${C.accentDim} 0%, ${C.card2} 42%, ${C.card2} 100%)` : C.card2, borderRadius: 8, padding: esPropia ? "14px 16px 14px 20px" : "14px 16px", margin: "12px 0", border: `${esPropia ? 2 : 1}px solid ${esPropia ? C.accent : C.border}`, boxShadow: esPropia ? `0 0 0 1px ${C.accentBorder}, 0 14px 28px rgba(0,0,0,0.22)` : "none", position: "relative", overflow: "hidden" }}>
+          {esPropia && (
+            <div style={{ position: "absolute", left: 0, top: 0, bottom: 0, width: 5, background: C.accent }} />
+          )}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, flexWrap: "wrap" }}>
+            <p style={{ margin: 0, color: C.gray, fontSize: 14, fontWeight: 700, fontFamily: font }}>Oración: <strong style={{ color: C.white }}>{item.encargado}</strong></p>
+            {esPropia && <span style={{ ...chip, flexShrink: 0 }}>ASIGNADO</span>}
+          </div>
         </div>
       );
 

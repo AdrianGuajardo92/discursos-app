@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Cómo competir en una carrera contra caballos</title>
+  <style>
+    :root{
+      --bg:#f4ede3;
+      --paper:#fbf6ee;
+      --paper-2:#f1e8da;
+      --ink:#2d261c;
+      --soft:#5d5142;
+      --muted:#837765;
+      --line:#d6c6ae;
+      --accent:#8b6914;
+      --accent-2:#b68926;
+      --accent-soft:rgba(139,105,20,.1);
+      --teal:#2f6f73;
+      --teal-soft:rgba(47,111,115,.1);
+      --red:#793c35;
+      --shadow:0 20px 50px rgba(45,38,28,.1);
+      --radius:14px;
+      color-scheme:light;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(182,137,38,.22), transparent 40%),
+        radial-gradient(ellipse at 85% 12%, rgba(47,111,115,.14), transparent 36%),
+        linear-gradient(180deg, #f7efe4 0%, var(--bg) 52%, #e8ddce 100%);
+      line-height:1.68;
+    }
+    .wrap{width:min(980px, calc(100% - 32px)); margin:0 auto}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:22px 0;
+      color:var(--muted);
+      font-size:.78rem;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .back{
+      color:var(--accent);
+      text-decoration:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+      border-radius:999px;
+      padding:8px 13px;
+      letter-spacing:0;
+      text-transform:none;
+      font-weight:800;
+    }
+    header{
+      padding:18px 0 32px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:28px;
+    }
+    .badge{
+      display:inline-flex;
+      border:1px solid rgba(47,111,115,.25);
+      background:var(--teal-soft);
+      color:var(--teal);
+      border-radius:999px;
+      padding:5px 13px;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      max-width:780px;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:clamp(2rem, 5vw, 3.45rem);
+      line-height:1.08;
+      letter-spacing:-.025em;
+    }
+    .subtitle{
+      max-width:760px;
+      margin:14px 0 0;
+      color:var(--soft);
+      font-size:1.08rem;
+    }
+    .meta-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+      gap:10px;
+      margin-top:22px;
+    }
+    .meta-card{
+      background:rgba(255,255,255,.55);
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:12px 14px;
+    }
+    .meta-card span{
+      display:block;
+      color:var(--muted);
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      margin-bottom:3px;
+    }
+    .meta-card strong{color:var(--ink)}
+    .hero-image{
+      margin:0 0 30px;
+      border-radius:20px;
+      overflow:hidden;
+      border:1px solid rgba(47,111,115,.22);
+      background:#1e1e1d;
+      box-shadow:var(--shadow);
+    }
+    .hero-image img{
+      display:block;
+      width:100%;
+      height:auto;
+    }
+    .caption{
+      margin:0;
+      padding:12px 16px;
+      color:#f8efe1;
+      background:linear-gradient(90deg, #2f6f73, #263f42);
+      font-size:.9rem;
+    }
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) 270px;
+      gap:24px;
+      align-items:start;
+    }
+    nav{
+      position:sticky;
+      top:16px;
+      background:rgba(251,246,238,.9);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:0 12px 28px rgba(45,38,28,.06);
+    }
+    nav p{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:.74rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    nav a{
+      display:block;
+      color:var(--soft);
+      text-decoration:none;
+      border-top:1px solid rgba(214,198,174,.62);
+      padding:9px 0;
+      font-weight:750;
+      font-size:.92rem;
+    }
+    .section{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:24px;
+      margin-bottom:18px;
+      box-shadow:0 8px 20px rgba(45,38,28,.05);
+    }
+    .section h2{
+      margin:0 0 12px;
+      font-family:Georgia, "Times New Roman", serif;
+      color:var(--accent);
+      font-size:1.45rem;
+      line-height:1.2;
+    }
+    .section h3{
+      margin:22px 0 8px;
+      color:var(--teal);
+      font-size:1rem;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    p{margin:0 0 12px}
+    .callout{
+      border-left:5px solid var(--accent-2);
+      background:var(--accent-soft);
+      padding:15px 17px;
+      border-radius:0 12px 12px 0;
+      margin:16px 0;
+    }
+    .quote{
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:1.15rem;
+      color:var(--red);
+      font-weight:700;
+    }
+    .talk{
+      display:grid;
+      gap:12px;
+    }
+    .talk-step{
+      display:grid;
+      grid-template-columns:68px 1fr;
+      gap:14px;
+      padding:16px;
+      border:1px solid rgba(214,198,174,.8);
+      border-radius:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(241,232,218,.55));
+    }
+    .time{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      border-radius:10px;
+      background:var(--teal);
+      color:white;
+      font-weight:900;
+    }
+    .talk-step h3{
+      margin:0 0 6px;
+      text-transform:none;
+      letter-spacing:0;
+      color:var(--ink);
+      font-size:1.05rem;
+    }
+    .phrase{
+      background:#fffaf2;
+      border:1px dashed rgba(139,105,20,.42);
+      border-radius:12px;
+      padding:14px 16px;
+      color:var(--ink);
+      font-weight:650;
+    }
+    .source-list{
+      padding-left:18px;
+      color:var(--soft);
+    }
+    .source-list a{color:var(--accent); font-weight:800}
+    footer{
+      padding:24px 0 42px;
+      color:var(--muted);
+      font-size:.9rem;
+    }
+    @media (max-width:820px){
+      .layout{grid-template-columns:1fr}
+      nav{position:static}
+      .talk-step{grid-template-columns:1fr}
+      .time{justify-content:flex-start; padding-left:14px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="back" href="/">Volver a la app</a>
+      <span>Reunión entre semana - 29 de junio a 5 de julio</span>
+    </div>
+
+    <header>
+      <span class="badge">Tesoros de la Biblia - 10 minutos</span>
+      <h1>Cómo “competir en una carrera contra caballos”</h1>
+      <p class="subtitle">Guía sencilla para explicar cómo el amor por los hermanos nos prepara para pruebas más difíciles.</p>
+      <div class="meta-grid">
+        <div class="meta-card"><span>Lectura</span><strong>Jeremías 11, 12</strong></div>
+        <div class="meta-card"><span>Textos base</span><strong>Jeremías 11:21; 12:5; Isaías 26:20</strong></div>
+        <div class="meta-card"><span>Idea central</span><strong>Entrenar ahora el amor fraternal</strong></div>
+      </div>
+    </header>
+
+    <figure class="hero-image">
+      <img src="https://cms-imgp.jw-cdn.org/img/p/202026169/univ/art/202026169_univ_cnt_1_xl.jpg" alt="Grupo de hermanos disfrutando juntos y luego estudiando la Biblia en un sótano durante la gran tribulación" />
+      <figcaption class="caption">La imagen contrasta el cariño que se cultiva ahora con la unidad que necesitaremos en momentos de presión.</figcaption>
+    </figure>
+
+    <div class="layout">
+      <main>
+        <section class="section" id="idea">
+          <h2>Idea en una frase</h2>
+          <p class="quote">Si queremos resistir pruebas grandes mañana, hoy tenemos que fortalecer el amor por Jehová y por nuestros hermanos.</p>
+          <p>Jeremías ya enfrentaba oposición. Pero Jehová le ayudó a ver que vendrían pruebas todavía más intensas. La pregunta de Jeremías 12:5 no era para hundirlo, sino para prepararlo: si correr con hombres de a pie lo cansaba, ¿qué haría cuando la carrera fuera contra caballos?</p>
+        </section>
+
+        <section class="section" id="bosquejo">
+          <h2>Bosquejo de 10 minutos</h2>
+          <div class="talk">
+            <article class="talk-step">
+              <div class="time">1 min</div>
+              <div>
+                <h3>Introducción: todos tenemos una “carrera”</h3>
+                <p>Podemos empezar preguntando: “¿Qué pasa si alguien quiere correr un maratón, pero nunca entrena?”. La respuesta es obvia: el día de la carrera se va a cansar. En sentido espiritual, Jehová no quiere que nos pase eso.</p>
+                <p class="phrase">Para decirlo: “La pregunta no es si vendrán pruebas; la pregunta es si estamos entrenando el corazón para enfrentarlas con Jehová”.</p>
+              </div>
+            </article>
+
+            <article class="talk-step">
+              <div class="time">2 min</div>
+              <div>
+                <h3>Jeremías ya estaba enfrentando oposición</h3>
+                <p>En Jeremías 11:21, hombres de Anatot querían callarlo. No era oposición lejana; venía de su propio ambiente. Aun así, Jeremías no dejó de hablar en nombre de Jehová.</p>
+                <p>Eso nos enseña que la presión puede venir de personas cercanas o de situaciones que no esperábamos. Cuando eso sucede, la fidelidad no depende solo de fuerza de voluntad, sino de una relación real con Jehová.</p>
+              </div>
+            </article>
+
+            <article class="talk-step">
+              <div class="time">2 min</div>
+              <div>
+                <h3>Jehová lo preparó para pruebas más fuertes</h3>
+                <p>Jeremías 12:5 compara una prueba menor con correr contra hombres de a pie, y una prueba mayor con competir contra caballos. Jehová estaba ayudando a Jeremías a pensar con realismo: si ahora cuesta, aprovecha este momento para fortalecerte.</p>
+                <p>La lección no es tener miedo al futuro. La lección es entrenar ahora. Orar ahora. Obedecer ahora. Amar ahora. Perdonar ahora. Trabajar con los hermanos ahora.</p>
+              </div>
+            </article>
+
+            <article class="talk-step">
+              <div class="time">2 min</div>
+              <div>
+                <h3>La imagen: el amor se practica antes de la crisis</h3>
+                <p>En la primera escena, los hermanos están tranquilos, disfrutando juntos con un hermano mayor. En la segunda, están en un lugar mucho más difícil, estudiando la Biblia unidos. La conexión es clara: los lazos que se forman en tiempos de paz pueden sostenernos en tiempos de presión.</p>
+                <p class="phrase">Para decirlo: “No vamos a empezar a amar a los hermanos el día de la gran tribulación. Ese amor se cultiva en conversaciones, hospitalidad, paciencia y apoyo práctico desde ahora”.</p>
+              </div>
+            </article>
+
+            <article class="talk-step">
+              <div class="time">2 min</div>
+              <div>
+                <h3>Cómo entrenamos hoy</h3>
+                <p>Primero, acercándonos a Jehová con oración franca, como Jeremías. Segundo, obedeciendo aunque no siempre entendamos todo. Tercero, haciendo más fuerte el amor por la congregación: interesarnos por los mayores, escuchar a los jóvenes, perdonar rápido, trabajar en paz y no aislarnos.</p>
+                <p>Isaías 26:20 nos ayuda a imaginar un tiempo en el que el pueblo de Jehová necesitará refugio y unidad. Esa unidad no aparece de la nada; se construye cada semana.</p>
+              </div>
+            </article>
+
+            <article class="talk-step">
+              <div class="time">1 min</div>
+              <div>
+                <h3>Conclusión: entrenar antes de correr</h3>
+                <p>Jeremías no recibió una respuesta fría. Recibió una preparación amorosa. Jehová también nos prepara. Si hoy fortalecemos nuestra fe y nuestro amor por los hermanos, mañana podremos correr con más aguante.</p>
+                <p class="phrase">Cierre sugerido: “Cada acto de amor en la congregación es parte del entrenamiento. Y con Jehová, podremos correr incluso cuando la carrera sea contra caballos”.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="aplicacion">
+          <h2>Aplicaciones fáciles de recordar</h2>
+          <div class="callout">
+            <p><strong>Para la relación con Jehová:</strong> hablarle con confianza, incluso cuando una situación parezca injusta o cansada.</p>
+            <p><strong>Para la congregación:</strong> no esperar una crisis para acercarnos a los hermanos; crear cariño y confianza ahora.</p>
+            <p><strong>Para la predicación:</strong> la oposición no significa que Jehová nos abandonó; puede ser una oportunidad para demostrar aguante.</p>
+          </div>
+        </section>
+
+        <section class="section" id="frases">
+          <h2>Frases cortas para ensayar</h2>
+          <p class="phrase">“Jehová no asustó a Jeremías; lo entrenó”.</p>
+          <p class="phrase">“La gran tribulación no será el momento de aprender a amar; será el momento de usar el amor que ya cultivamos”.</p>
+          <p class="phrase">“Cada reunión, cada conversación y cada acto de apoyo nos prepara para correr mejor”.</p>
+        </section>
+
+        <section class="section" id="fuentes">
+          <h2>Fuentes consultadas</h2>
+          <ul class="source-list">
+            <li><a href="https://www.jw.org/es/biblioteca/guia-actividades-reunion-testigos-jehova/mayo-junio-2026-mwb/Vida-y-Ministerio-Cristianos-29-de-junio-a-5-de-julio-de-2026/">Guía de actividades, 29 de junio a 5 de julio de 2026</a></li>
+            <li><a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwtsty/24/11">Jeremías 11, Biblia de estudio</a></li>
+            <li><a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwtsty/24/12">Jeremías 12, Biblia de estudio</a></li>
+            <li><a href="https://www.jw.org/es/biblioteca/revistas/atalaya-estudio-julio-2023/Est%C3%A1-preparado-para-la-gran-tribulaci%C3%B3n/">La Atalaya, julio de 2023: “Está preparado para la gran tribulación”</a></li>
+          </ul>
+        </section>
+      </main>
+
+      <nav aria-label="Índice">
+        <p>Guía rápida</p>
+        <a href="#idea">Idea central</a>
+        <a href="#bosquejo">Bosquejo de 10 minutos</a>
+        <a href="#aplicacion">Aplicaciones</a>
+        <a href="#frases">Frases para ensayar</a>
+        <a href="#fuentes">Fuentes</a>
+      </nav>
+    </div>
+
+    <footer>
+      Preparado para explicar Jeremías 11:21 y 12:5 con lenguaje sencillo, enfoque congregacional y aplicación práctica.
+    </footer>
+  </div>
+</body>
+</html>

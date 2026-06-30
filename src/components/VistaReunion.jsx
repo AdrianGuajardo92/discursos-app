@@ -3,12 +3,16 @@ import { C as fallbackC, font } from "../theme";
 import ContentRenderer from "./ContentRenderer";
 import ThemeToggle from "./ThemeToggle";
 import VistaBosquejo from "./VistaBosquejo";
+import { personaCoincide } from "../utils/misAsignaciones";
 
-function InfoCard({ label, value, detail, themeColors }) {
+function InfoCard({ label, value, detail, themeColors, asignado = false }) {
   const C = themeColors || fallbackC;
   return (
-    <div style={{ background: C.card2, border: `1px solid ${C.border}`, borderRadius: 8, padding: "14px 15px" }}>
-      <p style={{ margin: "0 0 5px", color: C.dim, fontSize: 10, fontWeight: 900, letterSpacing: 1.4, fontFamily: font }}>{label}</p>
+    <div style={{ background: asignado ? `linear-gradient(135deg, ${C.accentDim} 0%, ${C.card2} 58%, ${C.card2} 100%)` : C.card2, border: `${asignado ? 2 : 1}px solid ${asignado ? C.accent : C.border}`, borderRadius: 8, padding: asignado ? "13px 14px" : "14px 15px", boxShadow: asignado ? `0 0 0 1px ${C.accentBorder}` : "none" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 5 }}>
+        <p style={{ margin: 0, color: asignado ? C.accent : C.dim, fontSize: 10, fontWeight: 900, letterSpacing: 1.4, fontFamily: font }}>{label}</p>
+        {asignado && <span style={{ background: C.accentDim, color: C.accent, border: `1px solid ${C.accentBorder}`, borderRadius: 999, padding: "2px 7px", fontSize: 9, fontWeight: 900, fontFamily: font, flexShrink: 0 }}>ASIGNADO</span>}
+      </div>
       <p style={{ margin: 0, color: C.white, fontSize: 16, lineHeight: 1.35, fontWeight: 800, fontFamily: font }}>{value}</p>
       {detail && <p style={{ margin: "5px 0 0", color: C.gray, fontSize: 12, lineHeight: 1.4, fontFamily: font }}>{detail}</p>}
     </div>
@@ -57,8 +61,8 @@ export default function VistaReunion({ reunion, onVolver, onModoDiscurso, theme,
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: 10, marginBottom: 26 }}>
-          <InfoCard label="PRESIDENTE" value={reunion.presidente} detail="Introducción, transiciones y conclusión" themeColors={C} />
-          <InfoCard label="ORACIÓN FINAL" value={reunion.oracion} themeColors={C} />
+          <InfoCard label="PRESIDENTE" value={reunion.presidente} detail="Introducción, transiciones y conclusión" themeColors={C} asignado={personaCoincide(reunion.presidente)} />
+          <InfoCard label="ORACIÓN FINAL" value={reunion.oracion} themeColors={C} asignado={personaCoincide(reunion.oracion)} />
           <InfoCard label="CANCIONES" value={canciones} themeColors={C} />
         </div>
 
