@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Perlas Escondidas - Jeremías 13-15</title>
+  <style>
+    :root{
+      --bg:#f4ede3;
+      --paper:#fbf6ee;
+      --paper-2:#f3eadc;
+      --ink:#2d261c;
+      --soft:#5c5142;
+      --muted:#807361;
+      --line:#d7c8b1;
+      --accent:#8b6914;
+      --accent-2:#b68926;
+      --accent-soft:rgba(139,105,20,.1);
+      --teal:#2f6f73;
+      --teal-soft:rgba(47,111,115,.1);
+      --red:#783d38;
+      --shadow:0 16px 34px rgba(45,38,28,.08);
+      --radius:14px;
+      color-scheme:light;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(ellipse at 10% 0%, rgba(182,137,38,.2), transparent 38%),
+        radial-gradient(ellipse at 92% 6%, rgba(47,111,115,.14), transparent 34%),
+        linear-gradient(180deg, #f8efe4 0%, var(--bg) 55%, #e8ddce 100%);
+      line-height:1.65;
+    }
+    .wrap{width:min(1050px, calc(100% - 32px)); margin:0 auto}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:22px 0;
+      color:var(--muted);
+      font-size:.78rem;
+      font-weight:850;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .back{
+      color:var(--accent);
+      text-decoration:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.58);
+      border-radius:999px;
+      padding:8px 13px;
+      letter-spacing:0;
+      text-transform:none;
+      font-weight:850;
+    }
+    header{
+      padding:20px 0 30px;
+      margin-bottom:20px;
+      border-bottom:1px solid var(--line);
+    }
+    .badge{
+      display:inline-flex;
+      border:1px solid rgba(47,111,115,.24);
+      background:var(--teal-soft);
+      color:var(--teal);
+      border-radius:999px;
+      padding:5px 13px;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:clamp(2rem, 5vw, 3.35rem);
+      line-height:1.08;
+      letter-spacing:-.025em;
+    }
+    .subtitle{
+      max-width:780px;
+      margin:14px 0 0;
+      color:var(--soft);
+      font-size:1.06rem;
+    }
+    .intro{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:18px;
+      margin-bottom:22px;
+    }
+    .panel{
+      background:rgba(251,246,238,.92);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:20px 22px;
+      box-shadow:var(--shadow);
+    }
+    .panel h2{
+      margin:0 0 9px;
+      color:var(--accent);
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:1.35rem;
+    }
+    .panel p{margin:0 0 10px}
+    .quick-list{
+      margin:0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:8px;
+    }
+    .quick-list li{
+      padding:9px 11px;
+      border-radius:10px;
+      background:var(--accent-soft);
+      color:var(--soft);
+      font-weight:700;
+    }
+    .pearls{display:grid;gap:18px;margin:24px 0 34px}
+    .pearl{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .pearl-head{
+      display:grid;
+      grid-template-columns:52px 1fr;
+      gap:14px;
+      padding:18px 20px;
+      background:linear-gradient(90deg, rgba(47,111,115,.11), rgba(139,105,20,.07));
+      border-bottom:1px solid var(--line);
+    }
+    .num{
+      width:46px;
+      height:46px;
+      border-radius:13px;
+      background:var(--teal);
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      font-size:1.05rem;
+    }
+    .pearl h2{
+      margin:0 0 3px;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:1.35rem;
+      line-height:1.25;
+    }
+    .text-ref{
+      color:var(--accent);
+      font-weight:900;
+      font-size:.94rem;
+    }
+    .pearl-body{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:1px;
+      background:var(--line);
+    }
+    .box{
+      background:var(--paper);
+      padding:17px 18px;
+      min-height:132px;
+    }
+    .box strong{
+      display:block;
+      color:var(--teal);
+      font-size:.76rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:7px;
+    }
+    .say{
+      background:#fffaf2;
+      border-top:1px solid var(--line);
+      padding:17px 20px;
+    }
+    .say strong{
+      color:var(--red);
+      font-size:.78rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      display:block;
+      margin-bottom:7px;
+    }
+    .sources{
+      margin:0 0 42px;
+      padding:20px 22px;
+      border-radius:var(--radius);
+      border:1px solid var(--line);
+      background:rgba(251,246,238,.9);
+      color:var(--soft);
+    }
+    .sources h2{margin:0 0 10px;color:var(--accent);font-family:Georgia, "Times New Roman", serif}
+    .sources a{color:var(--accent);font-weight:850}
+    @media (max-width:820px){
+      .intro{grid-template-columns:1fr}
+      .pearl-body{grid-template-columns:1fr}
+      .pearl-head{grid-template-columns:1fr}
+      .num{width:42px;height:42px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="back" href="/">Volver a la app</a>
+      <span>Jeremías 13-15</span>
+    </div>
+
+    <header>
+      <span class="badge">Busquemos perlas escondidas - 10 minutos</span>
+      <h1>10 perlas de Jeremías 13-15</h1>
+      <p class="subtitle">Ideas breves para comentar qué aprendemos de Jehová, cómo nos ayuda a obedecer y cómo luchar contra el desánimo como Jeremías.</p>
+    </header>
+
+    <section class="intro">
+      <div class="panel">
+        <h2>Cómo usar esta página</h2>
+        <p>Cada perla está pensada para preparar un comentario natural. No hace falta leerla completa; basta con escoger la idea, hacerla propia y expresarla con sencillez.</p>
+        <p>La estructura es: texto, qué dice, qué aprendemos y cómo decirlo.</p>
+      </div>
+      <div class="panel">
+        <h2>Ideas que se repiten</h2>
+        <ul class="quick-list">
+          <li>Jehová quiere que estemos unidos a él, no solo cerca de apariencia.</li>
+          <li>El orgullo arruina la obediencia.</li>
+          <li>Las palabras de Jehová alimentan y fortalecen.</li>
+          <li>Podemos luchar contra el desánimo sin alejarnos de Jehová.</li>
+        </ul>
+      </div>
+    </section>
+
+    <main class="pearls">
+      <article class="pearl">
+        <div class="pearl-head">
+          <div class="num">1</div>
+          <div>
+            <h2>La obediencia puede venir antes de la explicación</h2>
+            <div class="text-ref">Texto bíblico: Jeremías 13:1-7</div>
+          </div>
+        </div>
+        <div class="pearl-body">
+          <div class="box"><strong>Qué dice</strong>Jeremías siguió instrucciones específicas sobre el cinturón de lino, aunque la lección se entendió después.</div>
+          <div class="box"><strong>Qué aprendemos</strong>Jehová merece confianza incluso cuando todavía no vemos todo el propósito de una instrucción.</div>
+          <div class="box"><strong>Para mejorar</strong>Cuando algo nos cueste obedecer, podemos recordar quién nos lo está pidiendo.</div>
+        </div>
+        <div class="say"><strong>Cómo decirlo</strong>“Jeremías no esperó a entenderlo todo para obedecer. Eso me enseña que confiar en Jehová también se demuestra paso a paso”.</div>
+      </article>
+
+      <article class="pearl">
+        <div class="pearl-head">
+          <div class="num">2</div>
+          <div>
+            <h2>Jehová quiere que estemos cerca de él</h2>
+            <div class="text-ref">Texto bíblico: Jeremías 13:11</div>
+          </div>
+        </div>
+        <div class="pearl-body">
+          <div class="box"><strong>Qué dice</strong>El cinturón representaba lo cerca que Jehová quería que su pueblo estuviera de él.</div>
+          <div class="box"><strong>Qué aprendemos</strong>La obediencia no es solo cumplir; es permanecer unidos a Jehová y ser útiles para su propósito.</div>
+          <div class="box"><strong>Para predicar</strong>Podemos enseñar que Jehová no busca una relación fría, sino una amistad cercana.</div>
+        </div>
+        <div class="say"><strong>Cómo decirlo</strong>“Me conmueve pensar que Jehová no quería tener a su pueblo lejos, sino pegado a él como un cinturón al cuerpo”.</div>
+      </article>
+
+      <article class="pearl">
+        <div class="pearl-head">
+          <div class="num">3</div>
+          <div>
+            <h2>El orgullo puede arruinar lo valioso</h2>
+            <div class="text-ref">Texto bíblico: Jeremías 13:9, 10</div>
+          </div>
+        </div>
+        <div class="pearl-body">
+          <div class="box"><strong>Qué dice</strong>Jehová dijo que arruinaría el orgullo de Judá porque el pueblo no quería escuchar.</div>
+          <div class="box"><strong>Qué aprendemos</strong>El orgullo vuelve inútil algo que Jehová quería usar para bien.</div>
+          <div class="box"><strong>Para mejorar</strong>Conviene revisar cómo reaccionamos cuando recibimos consejo bíblico.</div>
+        </div>
+        <div class="say"><strong>Cómo decirlo</strong>“El cinturón no se arruinó por ser débil, sino por estar separado. A mí el orgullo también podría separarme de Jehová”.</div>
+      </article>
+
+      <article class="pearl">
+        <div class="pearl-head">
+          <div class="num">4</div>
+          <div>
+            <h2>Dar gloria a Jehová antes de que sea tarde</h2>
+            <div class="text-ref">Texto bíblico: Jeremías 13:16</div>
+          </div>
+        </div>
+        <div class="pearl-body">
+          <div class="box"><strong>Qué dice</strong>Jeremías llamó al pueblo a dar gloria a Jehová antes de que llegara oscuridad espiritual.</div>
+          <div class="box"><strong>Qué aprendemos</strong>Jehová advierte a tiempo. Sus recordatorios son una muestra de misericordia.</div>
+          <div class="box"><strong>Para predicar</strong>Podemos invitar a la gente a acercarse a Dios ahora, no cuando la vida se complique más.</div>
+        </div>
+        <div class="say"><strong>Cómo decirlo</strong>“Este texto me ayuda a no posponer los cambios espirituales. Si Jehová me advierte ahora, es porque todavía puedo actuar”.</div>
+      </article>
+
+      <article class="pearl">
+        <div class="pearl-head">
+          <div class="num">5</div>
+          <div>
+            <h2>Jehová ve el dolor de sus siervos fieles</h2>
+            <div class="text-ref">Texto bíblico: Jeremías 13:17</div>
+          </div>
+        </div>
+        <div class="pearl-body">
+          <div class="box"><strong>Qué dice</strong>Jeremías lloraría por el orgullo del pueblo y por las consecuencias de no escuchar.</div>
+          <div class="box"><strong>Qué aprendemos</strong>Servir a Jehová no nos vuelve insensibles; nos hace sufrir cuando otros se alejan de él.</div>
+          <div class="box"><strong>Para mejorar</strong>Podemos mantener un corazón tierno sin rendirnos ni volvernos duros.</div>
+        </div>
+        <div class="say"><strong>Cómo decirlo</strong>“Jeremías obedecía, pero también sentía. Eso me enseña a servir con firmeza y con compasión”.</div>
+      </article>
+
+      <article class="pearl">
+        <div class="pearl-head">
+          <div class="num">6</div>
+          <div>
+            <h2>La sequía espiritual empieza cuando se deja de escuchar</h2>
+            <div class="text-ref">Texto bíblico: Jeremías 14:1-6</div>
+          </div>
+        </div>
+        <div class="pearl-body">
+          <div class="box"><strong>Qué dice</strong>La sequía trajo angustia, vergüenza y desesperación al pueblo y hasta a los animales.</div>
+          <div class="box"><strong>Qué aprendemos</strong>Lejos de Jehová, la vida puede parecer activa por fuera, pero seca por dentro.</div>
+          <div class="box"><strong>Para predicar</strong>Podemos mostrar que la Biblia ofrece agua espiritual para personas agotadas.</div>
+        </div>
+        <div class="say"><strong>Cómo decirlo</strong>“La sequía me recuerda que no basta con sobrevivir; necesitamos que Jehová alimente nuestro interior”.</div>
+      </article>
+
+      <article class="pearl">
+        <div class="pearl-head">
+          <div class="num">7</div>
+          <div>
+            <h2>Jehová no se deja engañar por promesas superficiales</h2>
+            <div class="text-ref">Texto bíblico: Jeremías 14:10</div>
+          </div>
+        </div>
+        <div class="pearl-body">
+          <div class="box"><strong>Qué dice</strong>El pueblo decía buscar ayuda, pero seguía amando andar por caminos que Jehová no aprobaba.</div>
+          <div class="box"><strong>Qué aprendemos</strong>Jehová nota si nuestra adoración va acompañada de cambios reales.</div>
+          <div class="box"><strong>Para mejorar</strong>La oración sincera debe ir de la mano con pasos concretos de obediencia.</div>
+        </div>
+        <div class="say"><strong>Cómo decirlo</strong>“Jehová escucha palabras, pero también mira el rumbo de nuestros pies”.</div>
+      </article>
+
+      <article class="pearl">
+        <div class="pearl-head">
+          <div class="num">8</div>
+          <div>
+            <h2>Las palabras de Jehová pueden ser nuestro gozo</h2>
+            <div class="text-ref">Texto bíblico: Jeremías 15:16</div>
+          </div>
+        </div>
+        <div class="pearl-body">
+          <div class="box"><strong>Qué dice</strong>Jeremías asimiló las palabras de Jehová y encontró en ellas alegría para el corazón.</div>
+          <div class="box"><strong>Qué aprendemos</strong>La Biblia no solo informa; puede levantar el ánimo cuando la hacemos parte de nosotros.</div>
+          <div class="box"><strong>Para mejorar</strong>Estudiar con calma puede cambiar nuestro estado de ánimo, no solo nuestro conocimiento.</div>
+        </div>
+        <div class="say"><strong>Cómo decirlo</strong>“Jeremías no trató las palabras de Jehová como datos; las hizo alimento para el corazón”.</div>
+      </article>
+
+      <article class="pearl">
+        <div class="pearl-head">
+          <div class="num">9</div>
+          <div>
+            <h2>No toda soledad significa abandono</h2>
+            <div class="text-ref">Texto bíblico: Jeremías 15:17</div>
+          </div>
+        </div>
+        <div class="pearl-body">
+          <div class="box"><strong>Qué dice</strong>Jeremías no se sentaba con los burlones; su obediencia lo separaba de ciertas compañías.</div>
+          <div class="box"><strong>Qué aprendemos</strong>A veces ser fiel implica no encajar, pero Jehová no abandona a quien se mantiene limpio.</div>
+          <div class="box"><strong>Para jóvenes</strong>Elegir buenas compañías puede parecer solitario al principio, pero protege el corazón.</div>
+        </div>
+        <div class="say"><strong>Cómo decirlo</strong>“Jeremías no estaba solo porque Jehová lo hubiera dejado; estaba aparte porque quería seguir siendo leal”.</div>
+      </article>
+
+      <article class="pearl">
+        <div class="pearl-head">
+          <div class="num">10</div>
+          <div>
+            <h2>Jehová ayuda a recuperar el equilibrio</h2>
+            <div class="text-ref">Texto bíblico: Jeremías 15:19-21</div>
+          </div>
+        </div>
+        <div class="pearl-body">
+          <div class="box"><strong>Qué dice</strong>Jehová corrigió y fortaleció a Jeremías, y prometió estar con él para salvarlo.</div>
+          <div class="box"><strong>Qué aprendemos</strong>Jehová no desecha a sus siervos cuando están cansados; los ayuda a volver a pensar con claridad.</div>
+          <div class="box"><strong>Para mejorar</strong>Cuando estemos desanimados, podemos aceptar corrección y consuelo a la vez.</div>
+        </div>
+        <div class="say"><strong>Cómo decirlo</strong>“Me anima ver que Jehová no le dijo a Jeremías simplemente ‘no te sientas así’; lo corrigió con amor y le prometió apoyo”.</div>
+      </article>
+    </main>
+
+    <section class="sources">
+      <h2>Fuentes consultadas</h2>
+      <p><a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwtsty/24/13">Jeremías 13, Biblia de estudio</a></p>
+      <p><a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwtsty/24/14">Jeremías 14, Biblia de estudio</a></p>
+      <p><a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwtsty/24/15">Jeremías 15, Biblia de estudio</a></p>
+    </section>
+  </div>
+</body>
+</html>

@@ -217,9 +217,13 @@ export const REUNIONES_MAYO_2026 = [
     tesoros: [
       asignacion(1, "Jehová merece que le obedezcamos", "10 mins", "Omar Gallardo", null, {
         contexto: "Jeremías 13:1-11. Aunque no entendamos por qué recibimos ciertas instrucciones, nos esforzamos por obedecer.",
+        estudioHtml: "/asignaciones/2026-07-07-jehova-merece-obediencia.html?v=20260707-1",
+        estudioHtmlLabel: "Abrir guía del discurso",
       }),
       asignacion(2, "Busquemos perlas escondidas", "10 mins", "Jorge Perea", null, {
         contexto: "Jeremías 15:16, 17. Cómo imitar a Jeremías y luchar contra el desánimo.",
+        estudioHtml: "/asignaciones/2026-07-07-perlas-jeremias-13-15.html?v=20260707-1",
+        estudioHtmlLabel: "Abrir perlas HTML",
       }),
       asignacion(3, "Lectura de la Biblia", "4 mins", "Beker Alvizo", null, {
         contexto: "Jeremías 13:1-14. th lección 2.",
@@ -241,6 +245,18 @@ export const REUNIONES_MAYO_2026 = [
       asignacion(8, "Campaña y recordatorios para la asamblea regional", "10 mins", "Mauricio Chávez"),
       asignacion(9, "Estudio bíblico de la congregación", "30 mins", "Adrián Merino", null, {
         contexto: "lfb lecciones 100, 101.",
+        materiales: [
+          {
+            titulo: "Lección 100: Pablo y Timoteo",
+            descripcion: "Amistad espiritual, servicio fiel e interés sincero por los hermanos.",
+            href: "/estudios-lfb/lfb-leccion-100.html?v=20260707-1#leccion-100",
+          },
+          {
+            titulo: "Lección 101: Se llevan a Pablo a Roma",
+            descripcion: "Pablo llega a Roma pese a prisión, tormenta y naufragio.",
+            href: "/estudios-lfb/lfb-leccion-101.html?v=20260707-1#leccion-101",
+          },
+        ],
       }),
     ],
   }),

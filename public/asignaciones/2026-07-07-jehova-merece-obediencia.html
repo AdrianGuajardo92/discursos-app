@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Jehová merece que le obedezcamos</title>
+  <style>
+    :root{
+      --bg:#f4ede3;
+      --paper:#fbf6ee;
+      --paper-2:#f1e8da;
+      --ink:#2d261c;
+      --soft:#5d5142;
+      --muted:#837765;
+      --line:#d6c6ae;
+      --accent:#8b6914;
+      --accent-2:#b68926;
+      --accent-soft:rgba(139,105,20,.1);
+      --teal:#2f6f73;
+      --teal-soft:rgba(47,111,115,.1);
+      --red:#793c35;
+      --shadow:0 20px 50px rgba(45,38,28,.1);
+      --radius:14px;
+      color-scheme:light;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(182,137,38,.22), transparent 40%),
+        radial-gradient(ellipse at 85% 12%, rgba(47,111,115,.14), transparent 36%),
+        linear-gradient(180deg, #f7efe4 0%, var(--bg) 52%, #e8ddce 100%);
+      line-height:1.68;
+    }
+    .wrap{width:min(980px, calc(100% - 32px)); margin:0 auto}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:22px 0;
+      color:var(--muted);
+      font-size:.78rem;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .back{
+      color:var(--accent);
+      text-decoration:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.55);
+      border-radius:999px;
+      padding:8px 13px;
+      letter-spacing:0;
+      text-transform:none;
+      font-weight:800;
+    }
+    header{
+      padding:18px 0 32px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:28px;
+    }
+    .badge{
+      display:inline-flex;
+      border:1px solid rgba(47,111,115,.25);
+      background:var(--teal-soft);
+      color:var(--teal);
+      border-radius:999px;
+      padding:5px 13px;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      max-width:780px;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:clamp(2rem, 5vw, 3.45rem);
+      line-height:1.08;
+      letter-spacing:-.025em;
+    }
+    .subtitle{
+      max-width:760px;
+      margin:14px 0 0;
+      color:var(--soft);
+      font-size:1.08rem;
+    }
+    .meta-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+      gap:10px;
+      margin-top:22px;
+    }
+    .meta-card{
+      background:rgba(255,255,255,.55);
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:12px 14px;
+    }
+    .meta-card span{
+      display:block;
+      color:var(--muted);
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      margin-bottom:3px;
+    }
+    .hero-image{
+      margin:0 0 30px;
+      border-radius:20px;
+      overflow:hidden;
+      border:1px solid rgba(47,111,115,.22);
+      background:#1e1e1d;
+      box-shadow:var(--shadow);
+    }
+    .hero-image img{display:block;width:100%;height:auto}
+    .caption{
+      margin:0;
+      padding:12px 16px;
+      color:#f8efe1;
+      background:linear-gradient(90deg, #2f6f73, #263f42);
+      font-size:.9rem;
+    }
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) 270px;
+      gap:24px;
+      align-items:start;
+    }
+    nav{
+      position:sticky;
+      top:16px;
+      background:rgba(251,246,238,.9);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:0 12px 28px rgba(45,38,28,.06);
+    }
+    nav p{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:.74rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    nav a{
+      display:block;
+      color:var(--soft);
+      text-decoration:none;
+      border-top:1px solid rgba(214,198,174,.62);
+      padding:9px 0;
+      font-weight:750;
+      font-size:.92rem;
+    }
+    .section{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:24px;
+      margin-bottom:18px;
+      box-shadow:0 8px 20px rgba(45,38,28,.05);
+    }
+    .section h2{
+      margin:0 0 12px;
+      font-family:Georgia, "Times New Roman", serif;
+      color:var(--accent);
+      font-size:1.45rem;
+      line-height:1.2;
+    }
+    .section h3{
+      margin:22px 0 8px;
+      color:var(--teal);
+      font-size:1rem;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+    }
+    p{margin:0 0 12px}
+    .quote{
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:1.16rem;
+      color:var(--red);
+      font-weight:700;
+    }
+    .talk{display:grid;gap:12px}
+    .talk-step{
+      display:grid;
+      grid-template-columns:68px 1fr;
+      gap:14px;
+      padding:16px;
+      border:1px solid rgba(214,198,174,.8);
+      border-radius:12px;
+      background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(241,232,218,.55));
+    }
+    .time{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      border-radius:10px;
+      background:var(--teal);
+      color:white;
+      font-weight:900;
+    }
+    .talk-step h3{
+      margin:0 0 6px;
+      text-transform:none;
+      letter-spacing:0;
+      color:var(--ink);
+      font-size:1.05rem;
+    }
+    .phrase{
+      background:#fffaf2;
+      border:1px dashed rgba(139,105,20,.42);
+      border-radius:12px;
+      padding:14px 16px;
+      color:var(--ink);
+      font-weight:650;
+    }
+    .callout{
+      border-left:5px solid var(--accent-2);
+      background:var(--accent-soft);
+      padding:15px 17px;
+      border-radius:0 12px 12px 0;
+      margin:16px 0;
+    }
+    .source-list{padding-left:18px;color:var(--soft)}
+    .source-list a{color:var(--accent);font-weight:800}
+    footer{padding:24px 0 42px;color:var(--muted);font-size:.9rem}
+    @media (max-width:820px){
+      .layout{grid-template-columns:1fr}
+      nav{position:static}
+      .talk-step{grid-template-columns:1fr}
+      .time{justify-content:flex-start;padding-left:14px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="back" href="/">Volver a la app</a>
+      <span>Reunión entre semana - 7 de julio de 2026</span>
+    </div>
+
+    <header>
+      <span class="badge">Tesoros de la Biblia - 10 minutos</span>
+      <h1>Jehová merece que le obedezcamos</h1>
+      <p class="subtitle">Guía sencilla para explicar Jeremías 13:1-11: aunque no entendamos de inmediato una instrucción de Jehová, obedecer demuestra confianza y mantiene viva nuestra relación con él.</p>
+      <div class="meta-grid">
+        <div class="meta-card"><span>Lectura</span><strong>Jeremías 13-15</strong></div>
+        <div class="meta-card"><span>Texto base</span><strong>Jeremías 13:1-11</strong></div>
+        <div class="meta-card"><span>Idea central</span><strong>Obedecer porque Jehová lo merece</strong></div>
+      </div>
+    </header>
+
+    <figure class="hero-image">
+      <img src="/images/jeremias-cinturon-lino-20260707.jpg" alt="Jeremías junto a un cinturón de lino escondido entre rocas, recordando una instrucción de Jehová" />
+      <figcaption class="caption">El cinturón de lino ayuda a visualizar una obediencia que quizá no se entiende al principio, pero que Jehová usa para enseñar una lección profunda.</figcaption>
+    </figure>
+
+    <div class="layout">
+      <main>
+        <section class="section" id="idea">
+          <h2>Idea en una frase</h2>
+          <p class="quote">Obedecemos a Jehová no solo cuando entendemos todo, sino porque sabemos quién es él y cuánto merece nuestra confianza.</p>
+          <p>En Jeremías 13 Jehová pidió a Jeremías que comprara un cinturón de lino, lo usara, lo escondiera y luego regresara por él. La instrucción pudo parecer extraña, pero Jeremías obedeció paso a paso. Después Jehová usó el cinturón arruinado para enseñar lo que le pasó a Judá cuando dejó de estar unida a él.</p>
+        </section>
+
+        <section class="section" id="bosquejo">
+          <h2>Bosquejo de 10 minutos</h2>
+          <div class="talk">
+            <article class="talk-step">
+              <div class="time">1 min</div>
+              <div>
+                <h3>Introducción: obedecer cuando no vemos todo el cuadro</h3>
+                <p>Podemos empezar preguntando: “¿Nos cuesta obedecer más cuando entendemos la razón, o cuando todavía no la vemos?”. Jeremías recibió instrucciones muy específicas, pero no se le explicó todo desde el principio.</p>
+                <p class="phrase">Para decirlo: “La obediencia de Jeremías no dependía de tener todas las respuestas; dependía de conocer bien a Jehová”.</p>
+              </div>
+            </article>
+
+            <article class="talk-step">
+              <div class="time">2 min</div>
+              <div>
+                <h3>Jehová dio instrucciones concretas</h3>
+                <p>Jeremías tuvo que comprar un cinturón, ponérselo, no mojarlo, esconderlo en una grieta y volver después por él. Cada paso exigía atención. Jehová no estaba probando caprichosamente a Jeremías; estaba preparando una ilustración que el pueblo no olvidaría fácilmente.</p>
+                <p>Esto nos recuerda que las instrucciones de Jehová a veces se entienden mejor cuando ya las hemos obedecido.</p>
+              </div>
+            </article>
+
+            <article class="talk-step">
+              <div class="time">2 min</div>
+              <div>
+                <h3>El cinturón representaba cercanía</h3>
+                <p>Un cinturón iba pegado al cuerpo. Jehová quería que su pueblo estuviera así de cerca de él: unido, útil y limpio. Pero cuando el pueblo se volvió orgulloso y dejó de escuchar, perdió el valor que Jehová quería darle.</p>
+                <p class="phrase">Frase breve: “La obediencia nos mantiene cerca de Jehová; el orgullo nos va separando sin que siempre nos demos cuenta”.</p>
+              </div>
+            </article>
+
+            <article class="talk-step">
+              <div class="time">2 min</div>
+              <div>
+                <h3>El orgullo hace que las instrucciones parezcan pesadas</h3>
+                <p>Jeremías 13 conecta el problema del pueblo con no escuchar y seguir la terquedad del corazón. Cuando alguien confía demasiado en su propio criterio, cualquier consejo puede parecer exagerado. Pero cuando confía en Jehová, pregunta: “¿Qué quiere enseñarme mi Padre?”.</p>
+                <p>Ahí está una de las grandes diferencias entre obediencia externa y obediencia de corazón.</p>
+              </div>
+            </article>
+
+            <article class="talk-step">
+              <div class="time">2 min</div>
+              <div>
+                <h3>Cómo obedecemos hoy aunque no entendamos todo</h3>
+                <p>Hoy puede pasar algo parecido con consejos sobre entretenimiento, trato con los hermanos, predicación, reuniones o decisiones personales. Quizá no vemos de inmediato todo el beneficio, pero Jehová sí ve más lejos que nosotros.</p>
+                <p>Obedecer no nos hace débiles. Nos hace humildes, protegidos y útiles para Jehová.</p>
+              </div>
+            </article>
+
+            <article class="talk-step">
+              <div class="time">1 min</div>
+              <div>
+                <h3>Conclusión: seguir unidos a Jehová</h3>
+                <p>El cinturón arruinado fue una advertencia triste, pero también una invitación: mantengámonos cerca de Jehová. Cuando obedecemos sus instrucciones con humildad, demostramos que confiamos en él y que queremos seguir siendo útiles para su propósito.</p>
+                <p class="phrase">Cierre sugerido: “Jehová merece nuestra obediencia aun antes de que entendamos todos los detalles, porque siempre nos guía con amor y sabiduría”.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="aplicacion">
+          <h2>Aplicaciones fáciles de recordar</h2>
+          <div class="callout">
+            <p><strong>Para mí:</strong> cuando una instrucción me cuesta, puedo preguntarme si el problema es falta de información o falta de confianza.</p>
+            <p><strong>Para la familia:</strong> obedecer a Jehová protege el ambiente espiritual de la casa, aun cuando el mundo piense diferente.</p>
+            <p><strong>Para la congregación:</strong> la humildad hace que los consejos nos unan más a Jehová y a los hermanos.</p>
+          </div>
+        </section>
+
+        <section class="section" id="frases">
+          <h2>Frases cortas para ensayar</h2>
+          <p class="phrase">“Jeremías obedeció primero; la explicación vino después”.</p>
+          <p class="phrase">“La obediencia no es ciega cuando conocemos bien el corazón de Jehová”.</p>
+          <p class="phrase">“Jehová no nos da instrucciones para limitarnos, sino para mantenernos cerca de él”.</p>
+        </section>
+
+        <section class="section" id="fuentes">
+          <h2>Fuentes consultadas</h2>
+          <ul class="source-list">
+            <li><a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwtsty/24/13">Jeremías 13, Biblia de estudio</a></li>
+            <li><a href="https://www.jw.org/es/biblioteca/guia-actividades-reunion-testigos-jehova/julio-agosto-2026-mwb/Vida-y-Ministerio-Cristianos-6-12-de-julio-de-2026/">Guía de actividades, 6 a 12 de julio de 2026</a></li>
+          </ul>
+        </section>
+      </main>
+
+      <nav aria-label="Índice">
+        <p>Guía rápida</p>
+        <a href="#idea">Idea central</a>
+        <a href="#bosquejo">Bosquejo de 10 minutos</a>
+        <a href="#aplicacion">Aplicaciones</a>
+        <a href="#frases">Frases para ensayar</a>
+        <a href="#fuentes">Fuentes</a>
+      </nav>
+    </div>
+
+    <footer>
+      Preparado para explicar Jeremías 13:1-11 con lenguaje sencillo, enfoque práctico y aplicación directa.
+    </footer>
+  </div>
+</body>
+</html>

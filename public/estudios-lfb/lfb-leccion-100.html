@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Lección 100: Pablo y Timoteo</title>
+  <style>
+    :root{
+      --bg:#f4ede3;
+      --paper:#fbf6ee;
+      --paper-2:#f1e8da;
+      --ink:#2d261c;
+      --soft:#5d5142;
+      --muted:#837765;
+      --line:#d6c6ae;
+      --accent:#8b6914;
+      --accent-2:#b68926;
+      --accent-soft:rgba(139,105,20,.1);
+      --teal:#2f6f73;
+      --teal-soft:rgba(47,111,115,.1);
+      --red:#793c35;
+      --shadow:0 18px 42px rgba(45,38,28,.09);
+      --radius:14px;
+      color-scheme:light;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(182,137,38,.2), transparent 40%),
+        radial-gradient(ellipse at 86% 9%, rgba(47,111,115,.14), transparent 34%),
+        linear-gradient(180deg, #f8efe4 0%, var(--bg) 55%, #e8ddce 100%);
+      line-height:1.68;
+    }
+    .wrap{width:min(980px, calc(100% - 32px)); margin:0 auto}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:22px 0;
+      color:var(--muted);
+      font-size:.78rem;
+      font-weight:850;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .back{
+      color:var(--accent);
+      text-decoration:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.58);
+      border-radius:999px;
+      padding:8px 13px;
+      letter-spacing:0;
+      text-transform:none;
+      font-weight:850;
+    }
+    header{
+      display:grid;
+      grid-template-columns:1fr .72fr;
+      gap:24px;
+      align-items:center;
+      padding:18px 0 28px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:24px;
+    }
+    .badge{
+      display:inline-flex;
+      border:1px solid rgba(47,111,115,.24);
+      background:var(--teal-soft);
+      color:var(--teal);
+      border-radius:999px;
+      padding:5px 13px;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:clamp(2rem, 5vw, 3.25rem);
+      line-height:1.08;
+      letter-spacing:-.025em;
+    }
+    .subtitle{margin:14px 0 0;color:var(--soft);font-size:1.05rem}
+    .hero img{
+      width:100%;
+      display:block;
+      border-radius:20px;
+      border:1px solid rgba(47,111,115,.24);
+      box-shadow:var(--shadow);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:250px minmax(0, 1fr);
+      gap:24px;
+      align-items:start;
+    }
+    nav{
+      position:sticky;
+      top:16px;
+      background:rgba(251,246,238,.92);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:0 12px 28px rgba(45,38,28,.06);
+    }
+    nav p{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:.74rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    nav a{
+      display:block;
+      color:var(--soft);
+      text-decoration:none;
+      border-top:1px solid rgba(214,198,174,.62);
+      padding:9px 0;
+      font-weight:750;
+      font-size:.92rem;
+    }
+    .section{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:23px 25px;
+      margin-bottom:18px;
+      box-shadow:0 8px 20px rgba(45,38,28,.05);
+      scroll-margin-top:24px;
+    }
+    .section h2{
+      margin:0 0 12px;
+      font-family:Georgia, "Times New Roman", serif;
+      color:var(--accent);
+      font-size:1.42rem;
+      line-height:1.22;
+    }
+    .section h3{
+      margin:20px 0 8px;
+      color:var(--teal);
+      font-size:.96rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    p{margin:0 0 12px}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));gap:12px;margin-top:12px}
+    .card{background:var(--paper-2);border:1px solid rgba(214,198,174,.8);border-radius:12px;padding:14px}
+    .card strong{display:block;color:var(--teal);margin-bottom:5px}
+    .timeline{display:grid;gap:10px;padding-left:0;list-style:none;counter-reset:item}
+    .timeline li{
+      counter-increment:item;
+      position:relative;
+      padding:13px 14px 13px 52px;
+      background:#fffaf2;
+      border:1px solid var(--line);
+      border-radius:12px;
+    }
+    .timeline li:before{
+      content:counter(item);
+      position:absolute;
+      left:14px;
+      top:14px;
+      width:25px;
+      height:25px;
+      border-radius:8px;
+      background:var(--accent);
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      font-size:.82rem;
+    }
+    .qa{display:grid;gap:12px}
+    .qa article{
+      border-left:5px solid var(--accent-2);
+      background:var(--accent-soft);
+      border-radius:0 12px 12px 0;
+      padding:14px 16px;
+    }
+    .qa strong{display:block;color:var(--red);margin-bottom:5px}
+    .source a{color:var(--accent);font-weight:850}
+    @media (max-width:840px){
+      header{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      nav{position:static}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="leccion-100">
+    <div class="topbar">
+      <a class="back" href="/">Volver a la app</a>
+      <span>Estudio bíblico de la congregación</span>
+    </div>
+
+    <header>
+      <div>
+        <span class="badge">Lección 100</span>
+        <h1>Pablo y Timoteo</h1>
+        <p class="subtitle">Guía para dirigir una conversación cálida sobre amistad espiritual, servicio fiel y el valor de preocuparse sinceramente por los hermanos.</p>
+      </div>
+      <figure class="hero">
+        <img src="https://cms-imgp.jw-cdn.org/img/p/1102016110/univ/art/1102016110_univ_sqr_xl.jpg" alt="Pablo, preso en su casa, dicta una carta a Timoteo mientras está encadenado a un guardia" />
+      </figure>
+    </header>
+
+    <div class="grid">
+      <nav aria-label="Índice">
+        <p>Índice</p>
+        <a href="#situarte">Para situarte</a>
+        <a href="#personajes">Personajes</a>
+        <a href="#escenario">El escenario</a>
+        <a href="#secuencia">Secuencia</a>
+        <a href="#historia">Historia relatada</a>
+        <a href="#preguntas">Preguntas</a>
+        <a href="#auditorio">Preguntas auditorio</a>
+        <a href="#texto">Texto clave</a>
+        <a href="#principio">Principio</a>
+        <a href="#aplicacion">Aplicación</a>
+        <a href="#jehova">Jehová</a>
+        <a href="#textos">Textos bíblicos</a>
+      </nav>
+
+      <main>
+        <section class="section" id="situarte">
+          <h2>Para situarte</h2>
+          <p>Esta lección sucede durante los viajes de predicación de Pablo. Las buenas noticias avanzan, pero también aumenta la oposición. En ese ambiente aparece Timoteo: un joven de buena reputación, dispuesto a aprender, servir y fortalecer a otros.</p>
+          <p>El hilo conductor para la reunión puede ser este: Jehová valora a los jóvenes y a los hermanos que se preocupan sinceramente por los demás.</p>
+        </section>
+
+        <section class="section" id="personajes">
+          <h2>Personajes principales</h2>
+          <div class="cards">
+            <div class="card"><strong>Pablo</strong>Apóstol y misionero. Necesita colaboradores confiables para cuidar congregaciones bajo presión.</div>
+            <div class="card"><strong>Timoteo</strong>Joven cristiano con buena base espiritual, dispuesto a acompañar a Pablo y ayudar a los hermanos.</div>
+            <div class="card"><strong>Los hermanos</strong>Congregaciones que necesitan ánimo, enseñanza y visitas que los fortalezcan.</div>
+          </div>
+        </section>
+
+        <section class="section" id="escenario">
+          <h2>El escenario</h2>
+          <p>Pablo visitaba ciudades donde algunos aceptaban la verdad y otros se oponían con fuerza. Tesalónica, Berea y otras congregaciones vivían momentos de entusiasmo y peligro. Timoteo no sirvió en un ambiente cómodo; aprendió a ayudar cuando la fe de los hermanos estaba siendo probada.</p>
+        </section>
+
+        <section class="section" id="secuencia">
+          <h2>La secuencia de los hechos</h2>
+          <ol class="timeline">
+            <li>Pablo conoce a Timoteo y ve que tiene una buena reputación entre los hermanos.</li>
+            <li>Timoteo empieza a acompañar a Pablo en viajes de predicación y aprende de cerca cómo cuidar a las congregaciones.</li>
+            <li>La oposición obliga a los hermanos a moverse de una ciudad a otra, pero la predicación no se detiene.</li>
+            <li>Pablo envía a Timoteo para fortalecer a congregaciones que enfrentan persecución y cansancio.</li>
+            <li>Con los años, Pablo y Timoteo desarrollan una amistad profunda basada en el servicio a Jehová.</li>
+          </ol>
+        </section>
+
+        <section class="section" id="historia">
+          <h2>La historia relatada</h2>
+          <p>Timoteo no aparece como alguien que busca protagonismo. Aparece como un joven disponible. Pablo vio en él algo muy valioso: un corazón que quería servir y una actitud que podía ayudar a otros. Por eso lo llevó consigo en sus viajes.</p>
+          <p>Mientras predicaban, no todo era fácil. En varias ciudades hubo oposición, alborotos y peligro. Pero Timoteo fue aprendiendo que servir a Jehová incluye aguantar, adaptarse y pensar en los hermanos. No era solo acompañar a Pablo; era convertirse en alguien útil para fortalecer congregaciones.</p>
+          <p>Con el tiempo, Pablo llegó a confiar mucho en Timoteo. Lo mandó a visitar hermanos, animarlos y ayudarles a seguir firmes. Esa confianza no se ganó de un día para otro. Se formó con años de servicio fiel, interés sincero y disposición humilde.</p>
+          <p>La lección deja una idea muy bonita para la congregación: la amistad espiritual se construye cuando dos personas aman a Jehová, trabajan juntas y se preocupan por los demás.</p>
+        </section>
+
+        <section class="section" id="preguntas">
+          <h2>Preguntas del libro</h2>
+          <div class="qa">
+            <article>
+              <strong>¿Quién era Timoteo?</strong>
+              <p>Era un joven cristiano que llegó a ser colaborador de Pablo. Tenía buena base espiritual, buena reputación y un corazón dispuesto a servir a Jehová.</p>
+            </article>
+            <article>
+              <strong>¿Por qué eran Pablo y Timoteo buenos amigos?</strong>
+              <p>Porque compartían amor por Jehová, trabajaban juntos en la predicación y se preocupaban sinceramente por fortalecer a los hermanos.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="auditorio">
+          <h2>Preguntas para el auditorio</h2>
+          <div class="qa">
+            <article>
+              <strong>¿Qué cualidad de Timoteo podemos imitar aunque no tengamos una asignación grande?</strong>
+              <p>Su disponibilidad. Podemos ayudar, aprender, acompañar, animar y hacer bien lo que se nos confía.</p>
+            </article>
+            <article>
+              <strong>¿Cómo puede un hermano mayor ayudar a uno más joven, como Pablo ayudó a Timoteo?</strong>
+              <p>Dándole confianza, enseñándole con paciencia, llevándolo en actividades espirituales y ayudándolo a ver sus puntos fuertes.</p>
+            </article>
+            <article>
+              <strong>¿Qué hace que una amistad en la congregación sea espiritual y no solo social?</strong>
+              <p>Que acerque a Jehová, fortalezca la fe y produzca interés sincero por servir y cuidar a otros.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="texto">
+          <h2>El texto clave</h2>
+          <p><strong>Filipenses 2:20, 21.</strong> Pablo destaca la actitud de Timoteo: no buscaba solo sus propios intereses, sino que se preocupaba por los hermanos.</p>
+          <p>Para dirigirlo: este texto permite preguntar qué tipo de persona queremos ser en la congregación. No alguien que solo recibe, sino alguien que se interesa de verdad por los demás.</p>
+        </section>
+
+        <section class="section" id="principio">
+          <h2>El principio que ilumina la escena</h2>
+          <p>Jehová usa a personas humildes y dispuestas. No hace falta ser el más experimentado para ser útil; hace falta tener un corazón enseñable y amor sincero por los hermanos.</p>
+        </section>
+
+        <section class="section" id="entonces">
+          <h2>Entonces y ahora</h2>
+          <p>Entonces, Timoteo fortalecía congregaciones visitándolas y transmitiendo ánimo de parte de Pablo. Hoy, nosotros fortalecemos a otros con visitas, comentarios, mensajes, acompañamiento en la predicación y buen ejemplo.</p>
+        </section>
+
+        <section class="section" id="lecciones">
+          <h2>Lecciones que se desprenden del texto</h2>
+          <div class="cards">
+            <div class="card"><strong>Los jóvenes son valiosos</strong>Jehová puede usarlos para animar y servir.</div>
+            <div class="card"><strong>La amistad espiritual se cultiva</strong>Crece al trabajar juntos por Jehová.</div>
+            <div class="card"><strong>El interés sincero se nota</strong>Los hermanos sienten cuando alguien se preocupa de verdad.</div>
+          </div>
+        </section>
+
+        <section class="section" id="aplicacion">
+          <h2>Aplicación personal</h2>
+          <p>Podemos preguntarnos: ¿a quién puedo fortalecer esta semana? ¿Con quién puedo predicar, estudiar o conversar para animarlo? ¿Estoy buscando solo mis intereses o también los de Cristo?</p>
+        </section>
+
+        <section class="section" id="jehova">
+          <h2>Lo que aprendemos de Jehová</h2>
+          <p>Jehová ve potencial en sus siervos. También valora el servicio silencioso, la lealtad y el cariño práctico. Él puede convertir una amistad espiritual en una fuente de ánimo para muchas personas.</p>
+        </section>
+
+        <section class="section" id="conexion">
+          <h2>Conexión con lecciones cercanas</h2>
+          <p>La lección 99 mostró cómo Jehová abrió un corazón en Filipos. La lección 100 muestra cómo Jehová también fortalece a quienes ya están dentro de la congregación mediante amigos espirituales. La lección 101 mostrará a Pablo avanzando hacia Roma pese a los obstáculos.</p>
+        </section>
+
+        <section class="section" id="textos">
+          <h2>Explicación de los textos bíblicos</h2>
+          <p><strong>Hechos 16:1-12:</strong> presenta a Timoteo como un joven útil para la obra misional.</p>
+          <p><strong>Hechos 17:1-15:</strong> muestra que la predicación produjo fruto, pero también oposición.</p>
+          <p><strong>Filipenses 2:19-22:</strong> revela la confianza que Pablo tenía en Timoteo por su interés sincero.</p>
+          <p><strong>2 Timoteo 3:12, 14, 15:</strong> recuerda que la fidelidad implica aguantar y seguir aferrados a lo aprendido.</p>
+          <p class="source">Fuente principal: <a href="https://www.jw.org/es/biblioteca/libros/lecciones-historias-biblia/14/pablo-timoteo/">Lección 100 en JW.org</a>.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

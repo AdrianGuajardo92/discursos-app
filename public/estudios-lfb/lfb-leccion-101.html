@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Lección 101: Se llevan a Pablo a Roma</title>
+  <style>
+    :root{
+      --bg:#f4ede3;
+      --paper:#fbf6ee;
+      --paper-2:#f1e8da;
+      --ink:#2d261c;
+      --soft:#5d5142;
+      --muted:#837765;
+      --line:#d6c6ae;
+      --accent:#8b6914;
+      --accent-2:#b68926;
+      --accent-soft:rgba(139,105,20,.1);
+      --teal:#2f6f73;
+      --teal-soft:rgba(47,111,115,.1);
+      --red:#793c35;
+      --shadow:0 18px 42px rgba(45,38,28,.09);
+      --radius:14px;
+      color-scheme:light;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Segoe UI", system-ui, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(182,137,38,.2), transparent 40%),
+        radial-gradient(ellipse at 86% 9%, rgba(47,111,115,.14), transparent 34%),
+        linear-gradient(180deg, #f8efe4 0%, var(--bg) 55%, #e8ddce 100%);
+      line-height:1.68;
+    }
+    .wrap{width:min(980px, calc(100% - 32px)); margin:0 auto}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding:22px 0;
+      color:var(--muted);
+      font-size:.78rem;
+      font-weight:850;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .back{
+      color:var(--accent);
+      text-decoration:none;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.58);
+      border-radius:999px;
+      padding:8px 13px;
+      letter-spacing:0;
+      text-transform:none;
+      font-weight:850;
+    }
+    header{
+      display:grid;
+      grid-template-columns:1fr .72fr;
+      gap:24px;
+      align-items:center;
+      padding:18px 0 28px;
+      border-bottom:1px solid var(--line);
+      margin-bottom:24px;
+    }
+    .badge{
+      display:inline-flex;
+      border:1px solid rgba(47,111,115,.24);
+      background:var(--teal-soft);
+      color:var(--teal);
+      border-radius:999px;
+      padding:5px 13px;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+    h1{
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:clamp(2rem, 5vw, 3.25rem);
+      line-height:1.08;
+      letter-spacing:-.025em;
+    }
+    .subtitle{margin:14px 0 0;color:var(--soft);font-size:1.05rem}
+    .hero img{
+      width:100%;
+      display:block;
+      border-radius:20px;
+      border:1px solid rgba(47,111,115,.24);
+      box-shadow:var(--shadow);
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:250px minmax(0, 1fr);
+      gap:24px;
+      align-items:start;
+    }
+    nav{
+      position:sticky;
+      top:16px;
+      background:rgba(251,246,238,.92);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:0 12px 28px rgba(45,38,28,.06);
+    }
+    nav p{
+      margin:0 0 10px;
+      color:var(--muted);
+      font-size:.74rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    nav a{
+      display:block;
+      color:var(--soft);
+      text-decoration:none;
+      border-top:1px solid rgba(214,198,174,.62);
+      padding:9px 0;
+      font-weight:750;
+      font-size:.92rem;
+    }
+    .section{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:23px 25px;
+      margin-bottom:18px;
+      box-shadow:0 8px 20px rgba(45,38,28,.05);
+      scroll-margin-top:24px;
+    }
+    .section h2{
+      margin:0 0 12px;
+      font-family:Georgia, "Times New Roman", serif;
+      color:var(--accent);
+      font-size:1.42rem;
+      line-height:1.22;
+    }
+    .section h3{
+      margin:20px 0 8px;
+      color:var(--teal);
+      font-size:.96rem;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    p{margin:0 0 12px}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));gap:12px;margin-top:12px}
+    .card{background:var(--paper-2);border:1px solid rgba(214,198,174,.8);border-radius:12px;padding:14px}
+    .card strong{display:block;color:var(--teal);margin-bottom:5px}
+    .timeline{display:grid;gap:10px;padding-left:0;list-style:none;counter-reset:item}
+    .timeline li{
+      counter-increment:item;
+      position:relative;
+      padding:13px 14px 13px 52px;
+      background:#fffaf2;
+      border:1px solid var(--line);
+      border-radius:12px;
+    }
+    .timeline li:before{
+      content:counter(item);
+      position:absolute;
+      left:14px;
+      top:14px;
+      width:25px;
+      height:25px;
+      border-radius:8px;
+      background:var(--accent);
+      color:white;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      font-size:.82rem;
+    }
+    .qa{display:grid;gap:12px}
+    .qa article{
+      border-left:5px solid var(--accent-2);
+      background:var(--accent-soft);
+      border-radius:0 12px 12px 0;
+      padding:14px 16px;
+    }
+    .qa strong{display:block;color:var(--red);margin-bottom:5px}
+    .source a{color:var(--accent);font-weight:850}
+    @media (max-width:840px){
+      header{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      nav{position:static}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap" id="leccion-101">
+    <div class="topbar">
+      <a class="back" href="/">Volver a la app</a>
+      <span>Estudio bíblico de la congregación</span>
+    </div>
+
+    <header>
+      <div>
+        <span class="badge">Lección 101</span>
+        <h1>Se llevan a Pablo a Roma</h1>
+        <p class="subtitle">Guía para dirigir la historia del arresto, el viaje difícil y la llegada de Pablo a Roma con fe, valor y confianza en Jehová.</p>
+      </div>
+      <figure class="hero">
+        <img src="https://cms-imgp.jw-cdn.org/img/p/1102016111/univ/art/1102016111_univ_sqr_xl.jpg" alt="Pablo y otros pasajeros llegan a la costa después del naufragio camino a Roma" />
+      </figure>
+    </header>
+
+    <div class="grid">
+      <nav aria-label="Índice">
+        <p>Índice</p>
+        <a href="#situarte">Para situarte</a>
+        <a href="#personajes">Personajes</a>
+        <a href="#escenario">El escenario</a>
+        <a href="#secuencia">Secuencia</a>
+        <a href="#historia">Historia relatada</a>
+        <a href="#preguntas">Preguntas</a>
+        <a href="#auditorio">Preguntas auditorio</a>
+        <a href="#texto">Texto clave</a>
+        <a href="#principio">Principio</a>
+        <a href="#aplicacion">Aplicación</a>
+        <a href="#jehova">Jehová</a>
+        <a href="#textos">Textos bíblicos</a>
+      </nav>
+
+      <main>
+        <section class="section" id="situarte">
+          <h2>Para situarte</h2>
+          <p>Pablo termina su tercer viaje de predicación en Jerusalén y allí lo arrestan. Humanamente, parece que su libertad se reduce. Pero Jehová sigue dirigiendo los asuntos: Pablo aún debe dar testimonio en Roma.</p>
+          <p>El hilo conductor puede ser este: ningún obstáculo detiene el propósito de Jehová cuando él decide usar a un siervo fiel.</p>
+        </section>
+
+        <section class="section" id="personajes">
+          <h2>Personajes principales</h2>
+          <div class="cards">
+            <div class="card"><strong>Pablo</strong>Apóstol preso, pero espiritualmente activo y valiente.</div>
+            <div class="card"><strong>Lucas y Aristarco</strong>Hermanos que acompañan a Pablo durante el viaje y muestran lealtad.</div>
+            <div class="card"><strong>Los pasajeros</strong>Personas que sobreviven gracias a la protección de Jehová y al ánimo que Pablo transmite.</div>
+          </div>
+        </section>
+
+        <section class="section" id="escenario">
+          <h2>El escenario</h2>
+          <p>El viaje a Roma no fue cómodo ni rápido. Hubo prisión, decisiones legales, una travesía peligrosa, una tormenta larga, miedo, naufragio y espera. Aun así, Pablo siguió hablando con fe y dando ánimo a quienes lo rodeaban.</p>
+        </section>
+
+        <section class="section" id="secuencia">
+          <h2>La secuencia de los hechos</h2>
+          <ol class="timeline">
+            <li>Pablo es arrestado en Jerusalén y más tarde llevado a Cesarea.</li>
+            <li>Después de dos años, pide ser juzgado por César, así que lo envían a Roma.</li>
+            <li>Pablo viaja en barco con Lucas y Aristarco, pero una tormenta pone en peligro a todos.</li>
+            <li>Pablo transmite el mensaje de que llegarán vivos, porque Jehová ha decidido que él llegue a Roma.</li>
+            <li>El barco naufraga cerca de Malta, pero todos sobreviven.</li>
+            <li>Finalmente Pablo llega a Roma, recibe ánimo de los hermanos y sigue predicando.</li>
+          </ol>
+        </section>
+
+        <section class="section" id="historia">
+          <h2>La historia relatada</h2>
+          <p>Cuando Pablo fue arrestado, podría haber parecido que la obra se detenía para él. Pero Jesús le aseguró que llegaría a Roma y predicaría allí. Esa promesa le dio dirección en medio de años de espera y problemas legales.</p>
+          <p>Después, al subir al barco rumbo a Roma, el viaje se volvió peligroso. La tormenta duró muchos días y la gente perdió esperanza. Pablo, aunque también estaba en peligro, no se dejó dominar por el miedo. Animó a todos y les dijo que Jehová había garantizado que sobrevivirían.</p>
+          <p>Cuando por fin vieron tierra, el barco se rompió. Algunos nadaron y otros llegaron a la orilla usando piezas del barco. Nadie murió. En Malta los cuidaron, y más tarde Pablo siguió su camino.</p>
+          <p>Al llegar a Roma, los hermanos salieron a recibirlo. Ese gesto animó mucho a Pablo. Aunque estaba vigilado, siguió predicando y enseñando sobre Jesús. La prisión no apagó su ministerio; Jehová siguió usándolo.</p>
+        </section>
+
+        <section class="section" id="preguntas">
+          <h2>Preguntas del libro</h2>
+          <div class="qa">
+            <article>
+              <strong>¿Por qué Festo envió a Pablo a Roma?</strong>
+              <p>Porque Pablo pidió que lo juzgara César. Como ciudadano romano, podía apelar a ese tribunal, y Festo decidió enviarlo a Roma.</p>
+            </article>
+            <article>
+              <strong>¿Qué le pasó a Pablo en el viaje a Roma?</strong>
+              <p>Viajó en barco, enfrentó una tormenta muy fuerte, el barco naufragó cerca de Malta, pero todos sobrevivieron y Pablo finalmente llegó a Roma.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="auditorio">
+          <h2>Preguntas para el auditorio</h2>
+          <div class="qa">
+            <article>
+              <strong>¿Qué nos enseña Pablo sobre mantener la calma cuando otros tienen miedo?</strong>
+              <p>Que la confianza en Jehová puede ayudarnos a hablar con serenidad y fortalecer a otros, aunque también estemos pasando por la prueba.</p>
+            </article>
+            <article>
+              <strong>¿Por qué fue tan animador que los hermanos salieran a recibir a Pablo?</strong>
+              <p>Porque le recordaron que no estaba solo. A veces un gesto sencillo de cariño ayuda mucho a quien está cansado.</p>
+            </article>
+            <article>
+              <strong>¿Qué obstáculo de esta historia parece más difícil: la prisión, la tormenta o la espera? ¿Por qué?</strong>
+              <p>Las tres cosas prueban la fe de maneras distintas. La respuesta puede ayudar al auditorio a conectar el relato con sus propias pruebas.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="texto">
+          <h2>El texto clave</h2>
+          <p><strong>2 Corintios 6:4.</strong> Pablo se recomendaba como ministro de Dios aguantando pruebas, sufrimientos, necesidades y dificultades.</p>
+          <p>Para dirigirlo: Pablo no demostró que era ministro solo cuando predicaba en condiciones cómodas, sino también cuando aguantaba con fe.</p>
+        </section>
+
+        <section class="section" id="principio">
+          <h2>El principio que ilumina la escena</h2>
+          <p>Jehová puede cumplir su propósito aun cuando las circunstancias parecen ir en contra. A veces no quita de inmediato el problema, pero sí da dirección, ánimo y protección para seguir adelante.</p>
+        </section>
+
+        <section class="section" id="entonces">
+          <h2>Entonces y ahora</h2>
+          <p>Entonces, Pablo predicó aunque estuviera preso y viajara bajo vigilancia. Hoy, nosotros también podemos seguir sirviendo aunque tengamos límites físicos, legales, familiares o emocionales. Jehová puede abrir maneras de dar testimonio.</p>
+        </section>
+
+        <section class="section" id="lecciones">
+          <h2>Lecciones que se desprenden del texto</h2>
+          <div class="cards">
+            <div class="card"><strong>El propósito de Jehová avanza</strong>Ni prisión, ni tormenta, ni naufragio lo detuvieron.</div>
+            <div class="card"><strong>La fe anima a otros</strong>Pablo fortaleció a quienes estaban aterrados.</div>
+            <div class="card"><strong>La hermandad sostiene</strong>La visita de los hermanos dio nuevas fuerzas a Pablo.</div>
+          </div>
+        </section>
+
+        <section class="section" id="aplicacion">
+          <h2>Aplicación personal</h2>
+          <p>Podemos preguntarnos: ¿cómo reacciono cuando mi servicio a Jehová se complica? ¿Uso mis pruebas para animar a otros? ¿Puedo visitar, llamar o escribir a alguien que necesita sentirse acompañado?</p>
+        </section>
+
+        <section class="section" id="jehova">
+          <h2>Lo que aprendemos de Jehová</h2>
+          <p>Jehová no abandona a sus siervos en medio del camino. Puede sostenerlos en una prisión, en una tormenta o después de un naufragio. También usa a la congregación para dar ánimo justo cuando más se necesita.</p>
+        </section>
+
+        <section class="section" id="conexion">
+          <h2>Conexión con lecciones cercanas</h2>
+          <p>La lección 100 mostró a Timoteo como amigo y colaborador fiel. La lección 101 muestra otra forma de apoyo: Lucas, Aristarco y los hermanos acompañan a Pablo mientras Jehová lo conduce hasta Roma.</p>
+        </section>
+
+        <section class="section" id="textos">
+          <h2>Explicación de los textos bíblicos</h2>
+          <p><strong>Hechos 23:11:</strong> Jesús asegura a Pablo que dará testimonio en Roma.</p>
+          <p><strong>Hechos 25:8-12:</strong> Pablo apela a César, y eso abre el camino legal hacia Roma.</p>
+          <p><strong>Hechos 27:1-28:31:</strong> narra el viaje, la tormenta, el naufragio, Malta y la llegada a Roma.</p>
+          <p><strong>Romanos 15:25, 26:</strong> ayuda a ubicar el viaje después del servicio de Pablo relacionado con los hermanos de Judea.</p>
+          <p class="source">Fuente principal: <a href="https://www.jw.org/es/biblioteca/libros/lecciones-historias-biblia/14/apostol-pablo-naufragio-roma/">Lección 101 en JW.org</a>.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
