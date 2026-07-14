@@ -274,6 +274,8 @@ export const REUNIONES_MAYO_2026 = [
     tesoros: [
       asignacion(1, "¿Estamos confiando en la persona correcta?", "10 mins", "Adrián Guajardo", null, {
         contexto: "Jeremías 17:5-8. Quienes confían en Jehová florecerán.",
+        estudioHtml: "/asignaciones/2026-07-14-confiando-persona-correcta.html?v=20260714-1",
+        estudioHtmlLabel: "Abrir guía del discurso",
       }),
       asignacion(2, "Busquemos perlas escondidas", "10 mins", "José Armando", null, {
         contexto: "Jeremías 17:7. Confiar en Jehová implica confiar en sus representantes en la Tierra.",

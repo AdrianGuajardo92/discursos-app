@@ -1,0 +1,1161 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#173f43" />
+  <title>¿Estamos confiando en la persona correcta? · Lluvia de ideas</title>
+  <style>
+    :root{
+      --paper:#f5f0e7;
+      --surface:#fffdf8;
+      --surface-2:#fbf6ee;
+      --ink:#213236;
+      --soft:#536568;
+      --muted:#7b8787;
+      --line:#ded3c2;
+      --teal:#2f6f73;
+      --teal-dark:#173f43;
+      --teal-soft:#e4f0ee;
+      --gold:#bd8737;
+      --gold-soft:#f6ead5;
+      --clay:#9b5949;
+      --clay-soft:#f5e6e0;
+      --green:#52724e;
+      --green-soft:#e8f0e4;
+      --blue:#506d87;
+      --blue-soft:#e8eef4;
+      --shadow:0 18px 45px rgba(39,48,45,.10);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      padding-bottom:68px;
+      background:
+        radial-gradient(circle at 8% 3%, rgba(189,135,55,.12), transparent 25rem),
+        radial-gradient(circle at 96% 18%, rgba(47,111,115,.10), transparent 30rem),
+        var(--paper);
+      color:var(--ink);
+      font-family:Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height:1.6;
+    }
+    a{color:inherit}
+    .wrap{width:min(1360px, calc(100% - 36px));margin:0 auto 50px}
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:18px;
+      padding:18px 0;
+      color:var(--soft);
+      font-size:.88rem;
+    }
+    .back{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:9px 14px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,253,248,.75);
+      color:var(--teal-dark);
+      font-weight:850;
+      text-decoration:none;
+    }
+    .back::before{content:"←"}
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:46px clamp(24px, 5vw, 72px);
+      border-radius:26px;
+      background:linear-gradient(135deg, #173f43, #2f6f73 70%, #477b71);
+      box-shadow:var(--shadow);
+      color:white;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;
+      right:-90px;
+      top:-120px;
+      width:380px;
+      height:380px;
+      border-radius:50%;
+      border:70px solid rgba(255,255,255,.05);
+    }
+    .badge{
+      display:inline-block;
+      position:relative;
+      z-index:1;
+      padding:6px 11px;
+      border:1px solid rgba(255,255,255,.28);
+      border-radius:999px;
+      background:rgba(255,255,255,.09);
+      color:#f5dcae;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+    h1{
+      position:relative;
+      z-index:1;
+      max-width:850px;
+      margin:16px 0 10px;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:clamp(2.25rem, 5vw, 4.4rem);
+      line-height:1.03;
+      letter-spacing:-.035em;
+    }
+    .subtitle{
+      position:relative;
+      z-index:1;
+      max-width:790px;
+      margin:0;
+      color:rgba(255,255,255,.83);
+      font-size:clamp(1rem, 2vw, 1.2rem);
+    }
+    .meta-row{
+      position:relative;
+      z-index:1;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:25px;
+    }
+    .meta-row span{
+      padding:8px 11px;
+      border-radius:10px;
+      background:rgba(0,0,0,.13);
+      color:rgba(255,255,255,.9);
+      font-size:.82rem;
+      font-weight:750;
+    }
+    .hero-image{
+      margin:22px 0 26px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.65);
+      border-radius:22px;
+      background:var(--surface);
+      box-shadow:var(--shadow);
+    }
+    .hero-image img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+    .hero-image figcaption{
+      padding:12px 18px;
+      border-top:1px solid var(--line);
+      color:var(--soft);
+      font-size:.88rem;
+      text-align:center;
+    }
+    .layout{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr);
+      align-items:start;
+    }
+    main{min-width:0}
+    .library-note{
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:14px;
+      align-items:center;
+      margin-bottom:20px;
+      padding:16px 18px;
+      border:1px solid rgba(189,135,55,.27);
+      border-radius:16px;
+      background:var(--gold-soft);
+      color:#654d2d;
+    }
+    .library-note strong{
+      display:grid;
+      place-items:center;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:var(--gold);
+      color:white;
+      font-size:1rem;
+    }
+    .library-note p{margin:0;font-size:.92rem}
+    .idea-section{
+      --section-color:var(--teal);
+      --section-soft:var(--teal-soft);
+      margin-bottom:24px;
+      padding:clamp(20px, 4vw, 34px);
+      border:1px solid var(--line);
+      border-top:7px solid var(--section-color);
+      border-radius:20px;
+      background:rgba(255,253,248,.93);
+      box-shadow:0 10px 30px rgba(39,48,45,.07);
+      scroll-margin-top:18px;
+    }
+    .idea-section.intro{--section-color:var(--gold);--section-soft:var(--gold-soft)}
+    .idea-section.point-1{--section-color:var(--clay);--section-soft:var(--clay-soft)}
+    .idea-section.point-2{--section-color:var(--blue);--section-soft:var(--blue-soft)}
+    .idea-section.point-3{--section-color:var(--green);--section-soft:var(--green-soft)}
+    .idea-section.conclusion{--section-color:var(--teal);--section-soft:var(--teal-soft)}
+    .idea-section.intro > .idea-grid,
+    .idea-section.point-1 > .idea-grid,
+    .idea-section.point-2 > .idea-grid,
+    .idea-section.point-3 > .idea-grid,
+    .idea-section.conclusion > .idea-grid{grid-template-columns:1fr}
+    .section-head{
+      display:grid;
+      grid-template-columns:auto 1fr;
+      gap:15px;
+      align-items:start;
+      padding-bottom:20px;
+      border-bottom:1px solid var(--line);
+    }
+    .section-number{
+      display:grid;
+      place-items:center;
+      width:48px;
+      height:48px;
+      border-radius:14px;
+      background:var(--section-color);
+      color:white;
+      font-weight:950;
+    }
+    .section-kicker{
+      margin:0 0 3px;
+      color:var(--section-color);
+      font-size:.69rem;
+      font-weight:950;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+    .section-head h2{
+      margin:0;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:clamp(1.45rem, 3vw, 2rem);
+      line-height:1.22;
+    }
+    .section-summary{margin:7px 0 0;color:var(--soft);font-size:.93rem}
+    .scripture-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:13px}
+    .scripture-row a,
+    .scripture-row span{
+      padding:5px 9px;
+      border-radius:999px;
+      background:var(--section-soft);
+      color:var(--section-color);
+      font-size:.72rem;
+      font-weight:850;
+      text-decoration:none;
+    }
+    .scripture-modal-trigger{
+      cursor:pointer;
+      transition:transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    }
+    .scripture-modal-trigger:hover{
+      filter:saturate(1.08);
+      transform:translateY(-1px);
+      box-shadow:0 5px 12px rgba(39,48,45,.1);
+    }
+    .scripture-modal-trigger:focus-visible{
+      outline:3px solid color-mix(in srgb, var(--section-color) 45%, white);
+      outline-offset:2px;
+    }
+    .scripture-modal{
+      position:fixed;
+      inset:0;
+      z-index:200;
+      display:grid;
+      place-items:center;
+      padding:20px;
+      background:rgba(24,35,34,.66);
+      backdrop-filter:blur(7px);
+      opacity:0;
+      visibility:hidden;
+      transition:opacity .2s ease, visibility .2s ease;
+    }
+    .scripture-modal.is-open{
+      opacity:1;
+      visibility:visible;
+    }
+    .scripture-modal-panel{
+      position:relative;
+      width:min(100%, 650px);
+      max-height:min(82vh, 720px);
+      overflow:auto;
+      padding:28px;
+      border:1px solid rgba(189,135,55,.35);
+      border-radius:22px;
+      background:linear-gradient(180deg, #fffdf8, #f8f3e9);
+      box-shadow:0 28px 80px rgba(17,28,27,.3);
+      transform:translateY(16px) scale(.98);
+      transition:transform .22s ease;
+    }
+    .scripture-modal.is-open .scripture-modal-panel{transform:translateY(0) scale(1)}
+    .scripture-modal-close{
+      position:absolute;
+      top:16px;
+      right:16px;
+      display:grid;
+      place-items:center;
+      width:38px;
+      height:38px;
+      border:1px solid var(--line);
+      border-radius:50%;
+      background:white;
+      color:var(--soft);
+      font-size:1.35rem;
+      line-height:1;
+      cursor:pointer;
+    }
+    .scripture-modal-close:hover{background:var(--gold-soft);color:var(--ink)}
+    .scripture-modal-close:focus-visible{outline:3px solid rgba(189,135,55,.32);outline-offset:2px}
+    .scripture-modal-kicker{
+      margin:0 48px 5px 0;
+      color:var(--gold);
+      font-size:.7rem;
+      font-weight:950;
+      letter-spacing:.11em;
+      text-transform:uppercase;
+    }
+    .scripture-modal h2{
+      margin:0 48px 18px 0;
+      font-family:Georgia, "Times New Roman", serif;
+      font-size:clamp(1.7rem, 5vw, 2.35rem);
+      line-height:1.15;
+    }
+    .scripture-modal-verses{display:grid;gap:13px}
+    .scripture-verse{
+      position:relative;
+      margin:0;
+      padding:15px 16px 15px 48px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:rgba(255,255,255,.8);
+      color:#344744;
+      font-size:1.06rem;
+      line-height:1.7;
+    }
+    .scripture-verse-number{
+      position:absolute;
+      top:17px;
+      left:16px;
+      display:grid;
+      place-items:center;
+      width:23px;
+      height:23px;
+      border-radius:8px;
+      background:var(--gold-soft);
+      color:var(--gold);
+      font-size:.72rem;
+      font-weight:950;
+    }
+    .scripture-modal-source{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      align-items:center;
+      margin-top:18px;
+      padding-top:15px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:.76rem;
+    }
+    .scripture-modal-source a{color:var(--teal-dark);font-weight:850;text-decoration:none}
+    .section-visual{
+      margin:18px 0 20px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:var(--surface-2);
+      break-inside:avoid;
+    }
+    .section-visual img{
+      display:block;
+      width:100%;
+      aspect-ratio:1672/941;
+      object-fit:contain;
+    }
+    .idea-section > .idea-grid{margin-top:24px}
+    .idea-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:12px;
+    }
+    .idea-card{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+      padding:16px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      background:linear-gradient(180deg, #fff, var(--surface-2));
+      box-shadow:0 5px 14px rgba(39,48,45,.045);
+      break-inside:avoid;
+      cursor:pointer;
+      transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease, background .18s ease;
+    }
+    .idea-card:hover{
+      border-color:color-mix(in srgb, var(--section-color) 45%, var(--line));
+      box-shadow:0 9px 22px rgba(39,48,45,.09);
+      transform:translateY(-1px);
+    }
+    .idea-card:focus-visible{
+      outline:3px solid color-mix(in srgb, var(--section-color) 55%, white);
+      outline-offset:3px;
+    }
+    .idea-card.is-selected{
+      border-color:var(--section-color);
+      background:linear-gradient(180deg, #fff, var(--section-soft));
+      box-shadow:0 0 0 2px color-mix(in srgb, var(--section-color) 22%, transparent), 0 10px 24px rgba(39,48,45,.10);
+    }
+    .select-button{
+      position:absolute;
+      top:11px;
+      right:11px;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 9px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,255,255,.92);
+      color:var(--soft);
+      font:inherit;
+      font-size:.68rem;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .select-button:hover{border-color:var(--section-color);color:var(--section-color)}
+    .select-button:focus-visible{outline:3px solid color-mix(in srgb, var(--section-color) 45%, white);outline-offset:2px}
+    .select-check{
+      display:grid;
+      place-items:center;
+      width:15px;
+      height:15px;
+      border:1.5px solid currentColor;
+      border-radius:50%;
+      font-size:.62rem;
+      line-height:1;
+    }
+    .idea-card.is-selected .select-button{
+      border-color:var(--section-color);
+      background:var(--section-color);
+      color:white;
+    }
+    .idea-card.is-selected .select-check::before{content:"✓"}
+    .idea-card:not(.is-selected) .select-check::before{content:"+"}
+    .idea-card h3{margin:0 0 10px;padding-right:88px;font-size:1.04rem;line-height:1.35}
+    .idea-card p{margin:0;color:var(--soft);font-size:.9rem;line-height:1.64}
+    .key-outline{
+      display:grid;
+      gap:9px;
+      margin:4px 0 0;
+      padding:0;
+      list-style:none;
+    }
+    .key-outline li{
+      position:relative;
+      padding:10px 12px 10px 42px;
+      border:1px solid color-mix(in srgb, var(--section-color) 18%, var(--line));
+      border-radius:11px;
+      background:rgba(255,255,255,.68);
+      color:var(--soft);
+      font-size:.86rem;
+      line-height:1.48;
+    }
+    .key-outline li::before{
+      content:attr(data-step);
+      position:absolute;
+      top:10px;
+      left:11px;
+      display:grid;
+      place-items:center;
+      width:22px;
+      height:22px;
+      border-radius:7px;
+      background:var(--section-soft);
+      color:var(--section-color);
+      font-size:.66rem;
+      font-weight:950;
+    }
+    .key-outline strong{color:var(--ink)}
+    .study-details{
+      margin-top:15px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(255,255,255,.7);
+      overflow:hidden;
+    }
+    .study-details summary{
+      position:relative;
+      padding:11px 40px 11px 13px;
+      color:var(--section-color);
+      font-size:.77rem;
+      font-weight:900;
+      cursor:pointer;
+      list-style:none;
+    }
+    .study-details summary::-webkit-details-marker{display:none}
+    .study-details summary::after{
+      content:"+";
+      position:absolute;
+      top:50%;
+      right:13px;
+      transform:translateY(-50%);
+      font-size:1.15rem;
+      line-height:1;
+    }
+    .study-details[open] summary::after{content:"−"}
+    .study-details[open] summary{border-bottom:1px solid var(--line);background:var(--section-soft)}
+    .study-details summary:focus-visible{outline:3px solid color-mix(in srgb, var(--section-color) 45%, white);outline-offset:-3px}
+    .study-content{padding:14px}
+    .reference{
+      align-self:flex-start;
+      margin-top:auto;
+      padding-top:12px;
+      color:var(--section-color);
+      font-size:.72rem;
+      font-weight:850;
+      text-decoration:none;
+    }
+    .reference::before{content:"↗ ";font-weight:950}
+    .selection-bar{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:50;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      width:auto;
+      max-width:calc(100% - 24px);
+      padding:7px 8px 7px 12px;
+      border:1px solid rgba(255,255,255,.17);
+      border-radius:999px;
+      background:rgba(23,63,67,.97);
+      box-shadow:0 10px 28px rgba(19,39,40,.24);
+      color:white;
+      backdrop-filter:blur(14px);
+    }
+    .selection-summary{display:flex;align-items:center;min-width:0}
+    .selection-count{display:block;font-size:.78rem;font-weight:900;white-space:nowrap}
+    .selection-status{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+    .selection-bar.is-empty .selection-actions{display:none}
+    .selection-actions{display:flex;align-items:center;gap:5px;flex:0 0 auto}
+    .selection-actions button{
+      border:0;
+      border-radius:999px;
+      padding:7px 10px;
+      font:inherit;
+      font-size:.7rem;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .copy-selection{background:#e5b65e;color:#2f2b21}
+    .copy-selection:hover:not(:disabled){background:#f0c777}
+    .clear-selection{background:rgba(255,255,255,.1);color:white}
+    .clear-selection:hover:not(:disabled){background:rgba(255,255,255,.18)}
+    .selection-actions button:disabled{cursor:not-allowed;opacity:.42}
+    .source-panel{
+      padding:clamp(20px, 4vw, 32px);
+      border:1px solid var(--line);
+      border-radius:20px;
+      background:var(--surface);
+      box-shadow:0 10px 30px rgba(39,48,45,.07);
+      scroll-margin-top:18px;
+    }
+    .source-panel h2{margin:0 0 5px;font-family:Georgia, "Times New Roman", serif;font-size:1.65rem}
+    .source-panel > p{margin:0 0 17px;color:var(--soft);font-size:.9rem}
+    .source-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:0;padding:0;list-style:none}
+    .source-list a{
+      display:block;
+      height:100%;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:var(--surface-2);
+      color:var(--teal-dark);
+      font-size:.8rem;
+      font-weight:750;
+      text-decoration:none;
+    }
+    footer{padding:24px 0 0;color:var(--muted);font-size:.78rem;text-align:center}
+    @media (max-width:650px){
+      .wrap{width:min(100% - 20px, 1360px)}
+      .topbar span{display:none}
+      .hero{padding:30px 21px;border-radius:18px}
+      .hero-image{border-radius:15px}
+      .idea-section{padding:18px 14px;border-radius:16px}
+      .section-head{grid-template-columns:auto 1fr}
+      .section-number{width:42px;height:42px;border-radius:12px}
+      .section-visual{margin:14px 0 16px;border-radius:12px}
+      .idea-grid,.source-list{grid-template-columns:1fr}
+      .library-note{grid-template-columns:1fr}
+      .library-note strong{width:36px;height:36px}
+      .select-label{display:none}
+      .select-button{padding:7px}
+      .idea-card h3{padding-right:38px}
+      .selection-bar{right:10px;bottom:10px;max-width:calc(100% - 20px)}
+      .selection-actions button{padding:7px 9px}
+      .scripture-modal{padding:12px}
+      .scripture-modal-panel{max-height:88vh;padding:23px 18px;border-radius:18px}
+      .scripture-modal-close{top:12px;right:12px}
+      .scripture-modal h2{margin-right:42px}
+      .scripture-verse{padding:13px 13px 13px 43px;font-size:.98rem}
+      .scripture-verse-number{top:15px;left:13px}
+      .scripture-modal-source{align-items:flex-start;flex-direction:column;gap:7px}
+    }
+    @media print{
+      @page{size:A4;margin:12mm}
+      body{padding-bottom:0;background:white;color:#111;font-size:9.5pt}
+      .wrap{width:100%;margin:0}
+      .topbar{display:none}
+      .hero{padding:22px;border-radius:0;box-shadow:none}
+      h1{font-size:28pt}
+      .hero-image{margin:12px 0;box-shadow:none;border-radius:0}
+      .hero-image img{max-height:95mm;object-fit:cover}
+      .idea-section,.source-panel{box-shadow:none;border-radius:0;margin-bottom:12px;padding:16px}
+      .section-visual{margin:8px 0 10px;border:0;border-radius:0;break-inside:avoid}
+      .section-visual img{width:auto;max-width:100%;max-height:60mm;margin:0 auto;aspect-ratio:auto;object-fit:contain}
+      .idea-grid,.source-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+      .idea-card{padding:10px;box-shadow:none}
+      .idea-card.is-selected{border-color:var(--line);background:white;box-shadow:none}
+      .idea-card p{font-size:8.5pt}
+      .key-outline{gap:5px}
+      .key-outline li{padding:6px 8px 6px 34px;font-size:8.5pt}
+      .key-outline li::before{top:6px;left:7px;width:19px;height:19px}
+      .study-details{margin-top:8px}
+      .study-details summary{display:none}
+      .study-details:not([open]) > .study-content{display:block !important}
+      .reference{font-size:7.5pt}
+      .select-button,.selection-bar,.scripture-modal{display:none !important}
+      a{color:inherit;text-decoration:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="back" href="/">Volver a la app</a>
+      <span>Reunión entre semana · 14 de julio de 2026</span>
+    </div>
+
+    <header class="hero">
+      <span class="badge">Tesoros de la Biblia · 10 minutos</span>
+      <h1>¿Estamos confiando en la persona correcta?</h1>
+      <p class="subtitle">Lluvia de ideas para preparar el discurso: contexto histórico, personajes bíblicos, contrastes, ilustraciones, preguntas y conexiones prácticas.</p>
+      <div class="meta-row">
+        <span>Textos base: Isaías 30:1, 2 · Jeremías 17:5-8</span>
+        <span>Lectura semanal: Jeremías 16, 17</span>
+        <span>Bosquejo de preparación · 5 secciones</span>
+      </div>
+    </header>
+
+    <figure class="hero-image">
+      <img src="/images/confianza-arboles-jeremias-17-20260714.png" alt="Un árbol seco en un desierto y un árbol frondoso junto a una corriente de agua" />
+      <figcaption>Dos árboles pueden enfrentarse al mismo calor. La diferencia está en la fuente que los sostiene.</figcaption>
+    </figure>
+
+    <div class="layout">
+      <main>
+        <div class="library-note">
+          <strong>5</strong>
+          <p>Esta página reúne material de preparación, no un discurso escrito. Selecciona las tarjetas que te interesen; la selección se guardará en este dispositivo y podrás copiarla completa para trabajar después con ella.</p>
+        </div>
+
+<section class="idea-section intro" id="introduccion">
+          <div class="section-head">
+            <div class="section-number">01</div>
+            <div>
+              <p class="section-kicker">Apertura</p>
+              <h2>Idea para la introducción</h2>
+              <p class="section-summary">Una apertura breve sobre el lugar y la fuente de agua para presentar el tema de la confianza sin adelantar la historia del primer punto.</p>
+              <div class="scripture-row">
+                <a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/24/17">Jeremías 17:6-8</a>
+              </div>
+            </div>
+          </div>
+
+          <figure class="section-visual">
+            <img src="/images/confianza-arboles-jeremias-17-20260714.png" alt="Un árbol seco en terreno árido y un árbol frondoso junto a una corriente de agua" />
+          </figure>
+
+        <div class="idea-grid">
+          <article class="idea-card" data-selection-key="introduccion:juda-tambien-busco-sentirse-seguro">
+            <h3>El mismo calor, pero una fuente diferente</h3>
+            <ol class="key-outline" aria-label="Ideas clave para presentar la introducción">
+              <li data-step="1"><strong>El mismo calor, diferente ubicación.</strong> Un árbol permanece en terreno árido; el otro está plantado junto a una corriente de agua. La presión es la misma, pero la fuente disponible no.</li>
+              <li data-step="2"><strong>La fuente determina el resultado.</strong> El árbol junto al agua recibe alimento constante; por eso se mantiene verde y fuerte. Nosotros también debemos decidir dónde buscar fortaleza cuando sentimos presión. Esto plantea la pregunta: “¿Estamos confiando en la persona correcta?”. Para comenzar a responderla, veamos qué hizo Acaz cuando Siria e Israel amenazaron a Judá. Jehová le pidió que confiara, pero él buscó apoyo en una potencia humana. Su decisión nos lleva directamente a la advertencia de Jeremías 17:5.</li>
+            </ol>
+            <details class="study-details">
+              <summary>Estudiar una explicación sencilla</summary>
+              <div class="study-content">
+                <p>Observemos los dos árboles. Ambos reciben el mismo sol y calor, pero están plantados en lugares distintos. Uno permanece en terreno árido; el otro está junto a una corriente de agua que lo alimenta constantemente. La diferencia no es que uno tenga presión y el otro no, sino la fuente de la que reciben sustento. Nosotros también afrontamos temor e incertidumbre, y esas circunstancias revelan dónde buscamos fortaleza. Esto plantea la pregunta: ¿estamos confiando en la persona correcta? La historia de Acaz y de su hijo Ezequías permite ver dos respuestas muy diferentes ante la presión: uno hizo de una potencia humana su apoyo principal; el otro aprendió a aferrarse a Jehová.</p>
+              </div>
+            </details>
+            <a class="reference" href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/24/17">Jeremías 17:6-8</a>
+          </article>
+        </div>
+      </section>
+
+<section class="idea-section point-1" id="punto-1">
+          <div class="section-head">
+            <div class="section-number">02</div>
+            <div>
+              <p class="section-kicker">Punto oficial 1</p>
+              <h2>Quienes solo confían en simples humanos desagradan a Jehová</h2>
+              <p class="section-summary">Ideas clave en el orden del discurso. La explicación completa queda disponible dentro de la tarjeta para estudiarla cuando la necesites.</p>
+              <div class="scripture-row">
+                <a class="scripture-modal-trigger" data-passage="jeremias-17-5" href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/24/17" aria-haspopup="dialog">Jeremías 17:5</a>
+              </div>
+            </div>
+          </div>
+
+        <figure class="section-visual">
+          <img src="/images/egipto-juda-asiria-20260714.png" alt="Vista panorámica de Egipto, Judá y Asiria identificados como los tres territorios implicados en el relato" />
+        </figure>
+
+        <div class="idea-grid">
+          <article class="idea-card" data-selection-key="punto-1:egipto-se-convirtio-en-el-brazo-de-juda">
+            <h3>Acaz hizo de Asiria su “brazo”</h3>
+            <ol class="key-outline" aria-label="Ideas clave para presentar este punto">
+              <li data-step="1"><strong>Jehová le pidió que confiara.</strong> Leer Jeremías 17:5. Cuando Siria e Israel amenazaron a Judá, Acaz sintió mucho miedo. Jehová le dijo mediante Isaías: “Mantén la calma. No tengas miedo”. También le aseguró que el plan enemigo no tendría éxito y le ofreció una señal para fortalecer su fe.</li>
+              <li data-step="2"><strong>Acaz hizo de Asiria su “brazo”.</strong> En vez de obedecer, tomó plata y oro del templo, se los envió al rey de Asiria y le dijo: “Soy tu siervo y tu hijo. Sube y sálvame”. Acaz puso el peso de su seguridad sobre una fuerza humana y dejó fuera la dirección de Jehová. Pero ¿qué consecuencias tendría esa decisión? Jeremías 17:6 responde con la imagen de un arbusto en terreno seco.</li>
+            </ol>
+            <details class="study-details">
+              <summary>Estudiar la explicación completa</summary>
+              <div class="study-content">
+                <p><a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/23/30">Isaías 30:1, 2</a> e <a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/23/31">Isaías 31:1-3</a> muestran que, cuando Judá se sentía amenazada, existía la tentación de buscar protección en una gran potencia sin consultar a Jehová. Pero la nación ya tenía un precedente doloroso. Durante el reinado de Acaz, Siria e Israel se aliaron para atacar Jerusalén. El miedo de Acaz era real, pero Jehová no lo dejó sin orientación. Por medio de Isaías le dijo que mantuviera la calma, que no tuviera miedo y que aquel plan no tendría éxito. Incluso le ofreció una señal. Acaz debía demostrar una fe firme, pero rechazó la ayuda que Jehová le estaba dando. En lugar de confiar, envió mensajeros a Tiglat-Piléser, rey de Asiria, tomó plata y oro del templo y del palacio y le dijo: “Soy tu siervo y tu hijo. Sube y sálvame”. Así hizo de Asiria su “brazo”: colocó sobre una potencia humana el peso de su seguridad. <a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/23/7">Isaías 7:3-17</a> contiene el consejo que desobedeció, y <a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/12/16">2 Reyes 16:5-9</a> registra la alianza que escogió. Jeremías 17:5 no condena sentir miedo ni recibir ayuda; condena permitir que la fuerza humana sustituya la guía de Jehová y aparte de él el corazón. ¿Qué resultado produjo la decisión de Acaz? Jeremías 17:6 lo representa con la imagen de un arbusto en terreno seco.</p>
+              </div>
+            </details>
+            <a class="reference" href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/24/17">Jeremías 17:5</a>
+          </article>
+        </div>
+      </section>
+
+<section class="idea-section point-2" id="punto-2">
+          <div class="section-head">
+            <div class="section-number">03</div>
+            <div>
+              <p class="section-kicker">Punto oficial 2</p>
+              <h2>Tendrán una vida espiritualmente difícil</h2>
+              <p class="section-summary">Dos ideas clave en el orden del discurso. La explicación completa queda disponible dentro de la tarjeta para estudiarla cuando la necesites.</p>
+              <div class="scripture-row">
+                <a class="scripture-modal-trigger" data-passage="jeremias-17-6" href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/24/17" aria-haspopup="dialog">Jeremías 17:6</a>
+              </div>
+            </div>
+          </div>
+
+        <figure class="section-visual">
+          <img src="/images/jeremias-17-arbusto-seco-20260714.png" alt="Árbol seco y solitario en un terreno árido, ilustración de Jeremías 17:6" />
+        </figure>
+
+        <div class="idea-grid">
+          <article class="idea-card" data-selection-key="punto-2:un-arbusto-de-apariencia-despojada">
+            <h3>El arbusto muestra el resultado de confiar lejos de Jehová</h3>
+            <ol class="key-outline" aria-label="Ideas clave para presentar este punto">
+              <li data-step="1"><strong>Acaz se pareció a un arbusto que apenas sobrevive.</strong> Leer Jeremías 17:6. La ayuda de Asiria pareció resolver su problema inmediato, pero aquel alivio duró poco. Después, la misma potencia lo atacó y le causó angustia, y el costoso regalo que había enviado no le sirvió de nada. Acaz siguió gobernando, pero su confianza en una fuerza humana lo dejó cada vez más débil espiritualmente.</li>
+              <li data-step="2"><strong>La sequedad espiritual avanzó.</strong> Durante la angustia, Acaz se volvió todavía más infiel: imitó prácticas paganas, destruyó utensilios del templo y cerró sus puertas. Una solución humana puede aliviar una necesidad visible y, al mismo tiempo, alejarnos gradualmente de la fuente que sostiene nuestra fe. ¿Había otra manera de afrontar la presión? Jeremías 17:7, 8 presenta ahora al hombre que confía en Jehová.</li>
+            </ol>
+            <details class="study-details">
+              <summary>Estudiar la explicación completa</summary>
+              <div class="study-content">
+                <p>Jeremías 17:6 muestra el resultado de alejarse de Jehová. Leamos el versículo. <a href="https://wol.jw.org/es/wol/d/r4/lp-s/1200012498"><em>Perspicacia</em></a> ayuda a visualizar un arbusto de aspecto triste que crece solo entre las rocas del desierto. Puede continuar en pie, pero apenas sobrevive porque no tiene una fuente de agua cercana. La historia de Acaz siguió un patrón parecido. Al principio, su alianza pareció funcionar: Asiria conquistó Damasco y eliminó al rey sirio que lo amenazaba. Sin embargo, aquel alivio fue temporal. <a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/14/28">2 Crónicas 28:16-25</a> explica que Asiria terminó atacando a Acaz y causándole angustia; el regalo que había obtenido vaciando el templo, el palacio y las casas de los príncipes no le sirvió de nada. Su deterioro espiritual también fue gradual. Durante la angustia se volvió más infiel, sacrificó a los dioses de Damasco, hizo pedazos los utensilios del templo y cerró sus puertas. Acaz seguía siendo rey y atendiendo asuntos de gobierno, pero espiritualmente se parecía cada vez más a un arbusto aislado. Hoy no está mal buscar soluciones para el trabajo, el dinero o la salud. El peligro aparece si una decisión desplaza la oración, el estudio, las reuniones o los principios bíblicos. Puede resolver una necesidad inmediata mientras crea otra espiritual. La historia de Acaz plantea una pregunta: ¿estamos buscando solo alivio momentáneo o una fuente que pueda sostenernos? Jeremías 17:7, 8 muestra que existe una manera diferente de afrontar el calor.</p>
+              </div>
+            </details>
+            <a class="reference" href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/24/17">Jeremías 17:6</a>
+          </article>
+        </div>
+      </section>
+
+<section class="idea-section point-3" id="punto-3">
+          <div class="section-head">
+            <div class="section-number">04</div>
+            <div>
+              <p class="section-kicker">Punto oficial 3</p>
+              <h2>Quienes confían en Jehová florecerán</h2>
+              <p class="section-summary">Dos ideas clave en el orden del discurso. La explicación completa queda disponible dentro de la tarjeta para estudiarla cuando la necesites.</p>
+              <div class="scripture-row">
+                <a class="scripture-modal-trigger" data-passage="jeremias-17-7-8" href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/24/17" aria-haspopup="dialog">Jeremías 17:7, 8</a>
+              </div>
+            </div>
+          </div>
+
+        <figure class="section-visual">
+          <img src="/images/jeremias-17-arbol-junto-agua-20260714.png" alt="Árbol frondoso junto a una corriente de agua, ilustración de Jeremías 17:7, 8" />
+        </figure>
+
+        <div class="idea-grid">
+          <article class="idea-card" data-selection-key="punto-3:el-agua-representa-una-fuente-constante">
+            <h3>El árbol junto al agua muestra cómo florece quien confía en Jehová</h3>
+            <ol class="key-outline" aria-label="Ideas clave para presentar este punto">
+              <li data-step="1"><strong>Jeremías 17:7, 8: un árbol junto al agua.</strong> Leer los versículos. A diferencia del arbusto seco, este árbol está plantado junto a una corriente que lo alimenta constantemente. Llegan el calor y la sequía, pero sus hojas siguen verdes y continúa dando fruto. Confiar en Jehová no elimina los problemas; nos permite recibir fortaleza constante mediante su Palabra, la oración y la congregación.</li>
+              <li data-step="2"><strong>Ezequías buscó fuerza en Jehová.</strong> Heredó un país sometido y espiritualmente dañado, pero abrió el templo, restauró la adoración y se aferró a Jehová. No se alió con Egipto. Cuando Senaquerib lo amenazó, buscó a Isaías, extendió la carta delante de Jehová y oró. Permitió que Jehová tuviera la última palabra. El contraste entre padre e hijo nos deja una pregunta final: cuando sentimos miedo, ¿de qué fuente recibimos fuerza?</li>
+            </ol>
+            <details class="study-details">
+              <summary>Estudiar la explicación completa</summary>
+              <div class="study-content">
+                <p>Jeremías 17:7, 8 presenta el contraste con el arbusto seco. Leamos los versículos. El árbol que confía está plantado junto al agua y recibe alimento constante de la corriente. El calor y la sequía sí llegan, pero no interrumpen su fuente; por eso el follaje continúa verde y el árbol no deja de producir fruto. <a href="https://wol.jw.org/es/wol/d/r4/lp-s/2009168"><em>La Atalaya</em></a> relaciona esta imagen con permanecer cerca de las provisiones espirituales de Jehová. Ezequías heredó las consecuencias del proceder de Acaz: un país sometido a Asiria y espiritualmente dañado. Sin embargo, tomó una dirección distinta. Abrió el templo, restauró la adoración y “se aferró a Jehová” (<a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/12/18">2 Reyes 18:3-7</a>). No fue perfecto. Cuando Senaquerib invadió Judá, primero intentó detenerlo pagándole un enorme tributo, pero aquello solo lo satisfizo temporalmente. Ezequías tampoco buscó una alianza con Egipto; Isaías lo fortaleció para no cambiar la dependencia de una potencia por la de otra. Cuando la amenaza continuó, buscó la dirección del profeta, llevó la carta a la casa de Jehová, la extendió delante de él y oró. Jehová escuchó y salvó Jerusalén sin que los asirios dispararan una flecha contra la ciudad (<a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/12/19">2 Reyes 19:14-36</a>). Ezequías sintió el calor, pero siguió recibiendo fuerza de Jehová. Nosotros hacemos lo mismo cuando oramos con franqueza, buscamos principios bíblicos y obedecemos su dirección. Permanecer verdes no significa no sentir temor; significa no permitir que el temor seque nuestra amistad con él.</p>
+                <p><strong>Fragmento para repasar:</strong> en el video <a href="https://www.jw.org/es/biblioteca/videos/rey-ezequias-confia-en-dios/">“Oh, Jehová, en ti confío”</a>, revisa la escena de <strong>38:33 a 39:27</strong>. Allí se representa el momento en que Ezequías lleva la carta amenazadora a la casa de Jehová, la extiende delante de él y ora. El fragmento dura aproximadamente 54 segundos.</p>
+              </div>
+            </details>
+            <a class="reference" href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/24/17">Jeremías 17:7, 8</a>
+          </article>
+        </div>
+      </section>
+
+<section class="idea-section conclusion" id="conclusion">
+          <div class="section-head">
+            <div class="section-number">05</div>
+            <div>
+              <p class="section-kicker">Cierre</p>
+              <h2>Conclusión</h2>
+              <p class="section-summary">Dos ideas clave para cerrar el discurso con autoexamen y esperanza basados en Jeremías 17:5-8.</p>
+              <div class="scripture-row">
+                <a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/24/17">Jeremías 17:5-8</a>
+                <span>Imagen de los dos árboles</span>
+              </div>
+            </div>
+          </div>
+
+          <figure class="section-visual">
+            <img src="/images/confianza-arboles-jeremias-17-20260714.png" alt="Un árbol seco en terreno árido y un árbol frondoso junto a una corriente de agua" />
+          </figure>
+
+        <div class="idea-grid">
+          <article class="idea-card" data-selection-key="conclusion:regresar-a-los-dos-arboles">
+            <h3>¿De qué fuente estamos recibiendo fuerza?</h3>
+            <ol class="key-outline" aria-label="Ideas clave para presentar la conclusión">
+              <li data-step="1"><strong>Padre e hijo enfrentaron presión.</strong> Acaz buscó seguridad en una potencia humana y terminó espiritualmente seco. Ezequías heredó aquellas consecuencias, pero buscó fuerza en Jehová y permaneció firme cuando llegó la amenaza.</li>
+              <li data-step="2"><strong>¿Dónde buscamos fuerza cuando sentimos miedo?</strong> Podemos recibir ayuda humana, pero Jehová conserva la última palabra. La oración, el estudio, la meditación y la obediencia nos mantienen cerca de la fuente que él proporciona y nos permiten seguir verdes y dando fruto aunque llegue el calor.</li>
+            </ol>
+            <details class="study-details">
+              <summary>Estudiar la explicación completa</summary>
+              <div class="study-content">
+                <p>Jeremías 17:5-8 nos deja dos imágenes fáciles de recordar. Los dos árboles enfrentan calor, pero uno está aislado en terreno seco y el otro permanece junto al agua. Acaz y Ezequías también pertenecieron a la misma familia y gobernaron la misma nación, pero buscaron seguridad en fuentes diferentes. Cuando sintió miedo, Acaz rechazó el consejo de Jehová y convirtió a Asiria en su “brazo”. Obtuvo alivio temporal, pero aquella potencia terminó causándole angustia y su vida espiritual se fue secando. Ezequías heredó esas consecuencias, pero no estaba obligado a repetir la dirección espiritual de su padre. Restauró la adoración y, cuando Senaquerib amenazó Jerusalén, llevó el problema a Jehová. Esto no significa que esté mal recibir consejo, apoyo familiar o ayuda profesional. Ezequías mismo tomó medidas prácticas para proteger la ciudad. El problema comienza cuando una opinión o solución humana sustituye los principios bíblicos y desplaza a Jehová como nuestro refugio principal. Si descubrimos que estamos buscando fuerza en el lugar equivocado, podemos cambiar de dirección. La oración, el estudio, la meditación y la obediencia nos acercan de nuevo a Jehová y nos permiten conservar verdor y fruto aunque la presión continúe. Por eso la pregunta final no es únicamente “¿quién puede ayudarme?”, sino “¿de qué fuente estoy recibiendo fuerza cuando siento miedo?”.</p>
+              </div>
+            </details>
+            <a class="reference" href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/24/17">Jeremías 17:5-8</a>
+          </article>
+        </div>
+      </section>
+
+      </main>
+
+    </div>
+
+    <footer>Biblioteca de preparación basada en los relatos bíblicos citados.</footer>
+  </div>
+
+  <div class="selection-bar is-empty" role="region" aria-label="Ideas seleccionadas">
+    <div class="selection-summary">
+      <span class="selection-count">0 seleccionadas</span>
+      <span class="selection-status" aria-live="polite">Toca “Elegir” en las tarjetas que te gusten.</span>
+    </div>
+    <div class="selection-actions">
+      <button class="clear-selection" type="button" disabled>Limpiar</button>
+      <button class="copy-selection" type="button" disabled>Copiar</button>
+    </div>
+  </div>
+
+  <div class="scripture-modal" id="scripture-modal" aria-hidden="true">
+    <section class="scripture-modal-panel" role="dialog" aria-modal="true" aria-labelledby="scripture-modal-title" tabindex="-1">
+      <button class="scripture-modal-close" type="button" aria-label="Cerrar texto bíblico">×</button>
+      <p class="scripture-modal-kicker">Traducción del Nuevo Mundo</p>
+      <h2 id="scripture-modal-title"></h2>
+      <div class="scripture-modal-verses" id="scripture-modal-verses"></div>
+      <div class="scripture-modal-source">
+        <span>La Biblia. Traducción del Nuevo Mundo</span>
+        <a href="https://wol.jw.org/es/wol/b/r4/lp-s/nwt/24/17" target="_blank" rel="noopener noreferrer">Abrir el capítulo en WOL ↗</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (() => {
+      const storageKey = "discurso-2026-07-14-ideas-seleccionadas-v1";
+      const cards = [...document.querySelectorAll(".idea-card")];
+      const countLabel = document.querySelector(".selection-count");
+      const statusLabel = document.querySelector(".selection-status");
+      const selectionBar = document.querySelector(".selection-bar");
+      const copyButton = document.querySelector(".copy-selection");
+      const clearButton = document.querySelector(".clear-selection");
+      let selected = new Set();
+      let statusTimer;
+
+      const slugify = (text) => text
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+
+      const setStatus = (message, temporary = false) => {
+        window.clearTimeout(statusTimer);
+        statusLabel.textContent = message;
+        if (temporary) {
+          statusTimer = window.setTimeout(() => {
+            statusLabel.textContent = selected.size
+              ? "La selección se guarda automáticamente en este dispositivo."
+              : "Toca “Elegir” en las tarjetas que te gusten.";
+          }, 2600);
+        }
+      };
+
+      const saveSelection = () => {
+        try {
+          localStorage.setItem(storageKey, JSON.stringify([...selected]));
+        } catch (_) {
+          setStatus("La selección funciona, pero este navegador no permitió guardarla.");
+        }
+      };
+
+      const render = () => {
+        cards.forEach((card) => {
+          const isSelected = selected.has(card.dataset.selectionKey);
+          const button = card.querySelector(".select-button");
+          card.classList.toggle("is-selected", isSelected);
+          button.setAttribute("aria-pressed", String(isSelected));
+          button.setAttribute("aria-label", `${isSelected ? "Quitar" : "Seleccionar"}: ${card.querySelector("h3").textContent.trim()}`);
+          button.querySelector(".select-label").textContent = isSelected ? "Elegida" : "Elegir";
+        });
+
+        const amount = selected.size;
+        countLabel.textContent = `${amount} ${amount === 1 ? "seleccionada" : "seleccionadas"}`;
+        selectionBar.classList.toggle("is-empty", amount === 0);
+        copyButton.disabled = amount === 0;
+        clearButton.disabled = amount === 0;
+      };
+
+      const toggleCard = (card) => {
+        const key = card.dataset.selectionKey;
+        if (selected.has(key)) selected.delete(key);
+        else selected.add(key);
+        saveSelection();
+        render();
+        setStatus(selected.size
+          ? "La selección se guarda automáticamente en este dispositivo."
+          : "Toca “Elegir” en las tarjetas que te gusten.");
+      };
+
+      cards.forEach((card) => {
+        const section = card.closest(".idea-section");
+        const title = card.querySelector("h3").textContent.trim();
+        card.dataset.selectionKey = card.dataset.selectionKey || `${section.id}:${slugify(title)}`;
+        card.tabIndex = 0;
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "select-button";
+        button.innerHTML = '<span class="select-check" aria-hidden="true"></span><span class="select-label">Elegir</span>';
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          toggleCard(card);
+        });
+        card.prepend(button);
+
+        card.addEventListener("click", (event) => {
+          if (event.target.closest("a, button, details")) return;
+          if (window.getSelection && window.getSelection().toString()) return;
+          toggleCard(card);
+        });
+
+        card.addEventListener("keydown", (event) => {
+          if (event.target !== card || (event.key !== "Enter" && event.key !== " ")) return;
+          event.preventDefault();
+          toggleCard(card);
+        });
+      });
+
+      try {
+        const stored = JSON.parse(localStorage.getItem(storageKey) || "[]");
+        const validKeys = new Set(cards.map((card) => card.dataset.selectionKey));
+        selected = new Set(Array.isArray(stored) ? stored.filter((key) => validKeys.has(key)) : []);
+      } catch (_) {
+        selected = new Set();
+      }
+
+      const buildCopyText = () => {
+        const chosenCards = cards.filter((card) => selected.has(card.dataset.selectionKey));
+        const groups = new Map();
+
+        chosenCards.forEach((card) => {
+          const section = card.closest(".idea-section");
+          const sectionTitle = section.querySelector(".section-head h2").textContent.trim();
+          if (!groups.has(sectionTitle)) groups.set(sectionTitle, []);
+          groups.get(sectionTitle).push(card);
+        });
+
+        const lines = [
+          "Ideas seleccionadas para el discurso: ¿Estamos confiando en la persona correcta?",
+          `Total: ${chosenCards.length}`
+        ];
+
+        groups.forEach((groupCards, sectionTitle) => {
+          lines.push("", sectionTitle.toUpperCase());
+          groupCards.forEach((card, index) => {
+            const title = card.querySelector("h3").textContent.trim();
+            const idea = card.querySelector("p").textContent.trim();
+            const reference = card.querySelector(".reference");
+            lines.push(
+              "",
+              `${index + 1}. ${title}`,
+              `Idea: ${idea}`,
+              `Referencia: ${reference.textContent.trim()}`,
+              `Enlace: ${reference.href}`
+            );
+          });
+        });
+
+        return lines.join("\n");
+      };
+
+      const copyText = async (text) => {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+          return;
+        }
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        const copied = document.execCommand("copy");
+        textarea.remove();
+        if (!copied) throw new Error("No se pudo copiar");
+      };
+
+      copyButton.addEventListener("click", async () => {
+        try {
+          await copyText(buildCopyText());
+          copyButton.textContent = "Copiado ✓";
+          window.setTimeout(() => { copyButton.textContent = "Copiar"; }, 2600);
+          setStatus(`Copiadas ${selected.size} ${selected.size === 1 ? "idea" : "ideas"} al portapapeles.`, true);
+        } catch (_) {
+          copyButton.textContent = "No se copió";
+          window.setTimeout(() => { copyButton.textContent = "Copiar"; }, 2600);
+          setStatus("No fue posible copiar automáticamente en este navegador.", true);
+        }
+      });
+
+      clearButton.addEventListener("click", () => {
+        selected.clear();
+        saveSelection();
+        render();
+        setStatus("Selección eliminada.", true);
+      });
+
+      render();
+      if (selected.size) setStatus("Tu selección anterior se restauró automáticamente.", true);
+    })();
+
+    (() => {
+      const passages = {
+        "jeremias-17-5": {
+          title: "Jeremías 17:5",
+          verses: [
+            {
+              number: "5",
+              text: "Esto es lo que Jehová dice: “Maldito el hombre que confía en simples humanos, que se apoya en la fuerza del ser humano y cuyo corazón se aparta de Jehová”."
+            }
+          ]
+        },
+        "jeremias-17-6": {
+          title: "Jeremías 17:6",
+          verses: [
+            {
+              number: "6",
+              text: "Será como un árbol solitario en el desierto. Cuando venga el bien, no lo verá, sino que vivirá en lugares áridos del desierto, en una región salada donde nadie puede vivir."
+            }
+          ]
+        },
+        "jeremias-17-7-8": {
+          title: "Jeremías 17:7, 8",
+          verses: [
+            {
+              number: "7",
+              text: "Bendito el hombre que confía en Jehová, que pone su confianza en Jehová."
+            },
+            {
+              number: "8",
+              text: "Será como un árbol plantado junto a las aguas, que extiende sus raíces hasta la corriente de agua. Cuando llegue el calor, no lo sentirá, sino que siempre estará frondoso. Y en año de sequía no se angustiará ni dejará de dar fruto."
+            }
+          ]
+        }
+      };
+
+      const modal = document.querySelector("#scripture-modal");
+      const panel = modal.querySelector(".scripture-modal-panel");
+      const title = modal.querySelector("#scripture-modal-title");
+      const verses = modal.querySelector("#scripture-modal-verses");
+      const closeButton = modal.querySelector(".scripture-modal-close");
+      const triggers = [...document.querySelectorAll(".scripture-modal-trigger")];
+      let activeTrigger = null;
+      let previousOverflow = "";
+
+      const closeModal = () => {
+        if (!modal.classList.contains("is-open")) return;
+        modal.classList.remove("is-open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.style.overflow = previousOverflow;
+        if (activeTrigger) {
+          activeTrigger.setAttribute("aria-expanded", "false");
+          activeTrigger.focus();
+        }
+        activeTrigger = null;
+      };
+
+      const openModal = (trigger) => {
+        const passage = passages[trigger.dataset.passage];
+        if (!passage) return;
+
+        activeTrigger = trigger;
+        title.textContent = passage.title;
+        verses.replaceChildren(...passage.verses.map((verse) => {
+          const paragraph = document.createElement("p");
+          paragraph.className = "scripture-verse";
+          const number = document.createElement("span");
+          number.className = "scripture-verse-number";
+          number.textContent = verse.number;
+          number.setAttribute("aria-hidden", "true");
+          paragraph.append(number, document.createTextNode(verse.text));
+          return paragraph;
+        }));
+
+        previousOverflow = document.body.style.overflow;
+        document.body.style.overflow = "hidden";
+        trigger.setAttribute("aria-expanded", "true");
+        modal.classList.add("is-open");
+        modal.setAttribute("aria-hidden", "false");
+        window.requestAnimationFrame(() => panel.focus());
+      };
+
+      triggers.forEach((trigger) => {
+        trigger.setAttribute("aria-controls", "scripture-modal");
+        trigger.setAttribute("aria-expanded", "false");
+        trigger.addEventListener("click", (event) => {
+          if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          openModal(trigger);
+        });
+      });
+
+      closeButton.addEventListener("click", closeModal);
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeModal();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+      });
+    })();
+  </script>
+</body>
+</html>
