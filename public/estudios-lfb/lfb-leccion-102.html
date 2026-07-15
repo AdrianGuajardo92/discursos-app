@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Lección 102: Juan tiene una revelación</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..800,70,1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#f4ede0;
+      --paper-2:#fbf6ec;
+      --ink:#2a241c;
+      --muted:#6c6257;
+      --forest:#2f4a3a;
+      --forest-2:#21372b;
+      --gold:#b08442;
+      --gold-2:#dfc28a;
+      --gold-soft:#efe0bd;
+      --burgundy:#6b2f2a;
+      --shadow: 0 22px 55px rgba(42,36,28,.12);
+      --radius: 26px;
+      --line: rgba(176,132,66,.35);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(176,132,66,.15), transparent 28rem),
+        radial-gradient(circle at 90% 12%, rgba(47,74,58,.14), transparent 30rem),
+        linear-gradient(180deg, #efe2cf 0%, var(--paper) 42%, #efe5d4 100%);
+      line-height:1.75;
+      overflow-x:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(42,36,28,.027) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42,36,28,.018) 1px, transparent 1px);
+      background-size:38px 38px;
+      mix-blend-mode:multiply;
+      opacity:.45;
+      z-index:-1;
+    }
+    #progressBar{
+      position:fixed;
+      top:0;
+      left:0;
+      height:4px;
+      width:0%;
+      background:linear-gradient(90deg, var(--gold), #e8d19d, var(--burgundy));
+      z-index:50;
+      box-shadow:0 0 18px rgba(176,132,66,.65);
+    }
+    .wrap{width:min(1120px, calc(100% - 32px)); margin:0 auto;}
+    .hero{
+      min-height:72vh;
+      display:grid;
+      place-items:center;
+      padding:92px 0 64px;
+      position:relative;
+    }
+    .hero-card{
+      width:100%;
+      border:1px solid rgba(176,132,66,.42);
+      background:linear-gradient(135deg, rgba(251,246,236,.91), rgba(244,237,224,.84));
+      border-radius:38px;
+      padding:clamp(28px, 6vw, 72px);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card:before, .hero-card:after{
+      content:"✦";
+      position:absolute;
+      color:rgba(176,132,66,.28);
+      font-family:Fraunces, serif;
+      font-size:11rem;
+      line-height:1;
+    }
+    .hero-card:before{top:-34px; right:24px; transform:rotate(12deg)}
+    .hero-card:after{bottom:-58px; left:28px; transform:rotate(-10deg)}
+    .eyebrow{
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--forest);
+      font-weight:800;
+      font-size:.78rem;
+      margin-bottom:20px;
+      position:relative;
+      z-index:1;
+    }
+    .roman{
+      font-family:Fraunces, serif;
+      font-style:italic;
+      font-size:clamp(4rem, 14vw, 10.5rem);
+      color:var(--burgundy);
+      line-height:.82;
+      margin:0 0 18px;
+      letter-spacing:-.06em;
+      position:relative;
+      z-index:1;
+    }
+    h1{
+      font-family:Fraunces, serif;
+      font-size:clamp(2.5rem, 7vw, 5.7rem);
+      line-height:.95;
+      margin:0;
+      letter-spacing:-.055em;
+      color:var(--ink);
+      position:relative;
+      z-index:1;
+    }
+    .subtitle{
+      margin:24px 0 0;
+      max-width:780px;
+      color:var(--muted);
+      font-size:clamp(1rem, 2.3vw, 1.25rem);
+      position:relative;
+      z-index:1;
+    }
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:32px;
+      position:relative;
+      z-index:1;
+    }
+    .pill{
+      border:1px solid rgba(47,74,58,.2);
+      background:rgba(255,255,255,.34);
+      color:var(--forest-2);
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:.87rem;
+      font-weight:700;
+    }
+    main{padding:14px 0 88px;}
+    section{
+      scroll-margin-top:84px;
+      margin:44px 0;
+      border-radius:var(--radius);
+      background:rgba(251,246,236,.72);
+      border:1px solid rgba(176,132,66,.3);
+      box-shadow:0 14px 38px rgba(42,36,28,.075);
+      padding:clamp(22px, 4vw, 42px);
+      position:relative;
+    }
+    .section-title{margin-bottom:26px;}
+    .section-title .topline{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--burgundy);
+      font-weight:800;
+      letter-spacing:.04em;
+      margin-bottom:8px;
+    }
+    .section-title em{
+      font-family:Fraunces, serif;
+      font-style:italic;
+      font-size:1.58rem;
+      color:var(--burgundy);
+    }
+    h2{
+      margin:0;
+      font-family:Fraunces, serif;
+      color:var(--forest);
+      font-size:clamp(1.75rem, 4vw, 3rem);
+      line-height:1.03;
+      letter-spacing:-.035em;
+    }
+    .gold-line{
+      width:100%;
+      height:2px;
+      margin-top:16px;
+      background:linear-gradient(90deg, var(--gold), rgba(176,132,66,.12));
+      border-radius:999px;
+    }
+    h3{
+      font-family:Fraunces, serif;
+      font-size:1.42rem;
+      color:var(--burgundy);
+      margin:28px 0 10px;
+      letter-spacing:-.02em;
+    }
+    p{margin:0 0 1rem;}
+    .lead{font-size:1.08rem;color:#443a30;}
+    .grid{display:grid; gap:16px;}
+    .cards{grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.52), rgba(244,237,224,.52));
+      border:1px solid rgba(47,74,58,.15);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 8px 22px rgba(42,36,28,.055);
+    }
+    .card strong{display:block;color:var(--forest);font-size:1.03rem;}
+    .card em{display:block;color:var(--muted);font-size:.92rem;margin-top:2px;}
+    details{
+      border-radius:18px;
+      border:1px solid rgba(176,132,66,.42);
+      background:linear-gradient(135deg, rgba(239,224,189,.58), rgba(251,246,236,.7));
+      padding:0;
+      margin:14px 0;
+      overflow:hidden;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      padding:15px 18px;
+      font-weight:800;
+      color:var(--forest-2);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"＋"; color:var(--gold); font-weight:900; font-size:1.1rem;}
+    details[open] summary:after{content:"−";}
+    .detail-body{padding:0 18px 18px;color:#4a4035;}
+    .timeline{position:relative; padding-left:14px; counter-reset:step;}
+    .timeline:before{
+      content:"";
+      position:absolute;
+      left:27px;
+      top:8px;
+      bottom:8px;
+      width:2px;
+      background:linear-gradient(var(--gold), rgba(176,132,66,.08));
+    }
+    .moment{
+      counter-increment:step;
+      display:grid;
+      grid-template-columns:54px 1fr;
+      gap:16px;
+      margin:0 0 20px;
+      position:relative;
+    }
+    .moment:before{
+      content:counter(step);
+      width:34px;height:34px;border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--forest);
+      color:#fff;
+      font-weight:900;
+      box-shadow:0 0 0 6px rgba(47,74,58,.12);
+      margin-left:-3px;
+      z-index:1;
+    }
+    .label{
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:var(--gold);
+      font-size:.76rem;
+      font-weight:900;
+      margin-bottom:4px;
+    }
+    .story{
+      border:1px solid rgba(176,132,66,.5);
+      border-radius:28px;
+      background:
+        linear-gradient(90deg, rgba(176,132,66,.06), transparent 18%, transparent 82%, rgba(176,132,66,.06)),
+        rgba(255,250,241,.78);
+      padding:clamp(22px, 4vw, 42px);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.42);
+    }
+    .ornament{
+      text-align:center;
+      color:var(--gold);
+      font-family:Fraunces, serif;
+      font-size:1.65rem;
+      margin:0 0 20px;
+    }
+    .story p:first-of-type:first-letter{
+      float:left;
+      font-family:Fraunces, serif;
+      font-size:5.2rem;
+      line-height:.75;
+      color:var(--burgundy);
+      padding:10px 12px 2px 0;
+      font-weight:800;
+    }
+    .quote{
+      border-left:5px solid var(--gold);
+      padding:12px 18px;
+      margin:18px 0;
+      background:rgba(239,224,189,.35);
+      border-radius:0 16px 16px 0;
+      font-family:Fraunces, serif;
+      font-size:1.28rem;
+      color:var(--burgundy);
+      line-height:1.45;
+    }
+    .closing{
+      color:var(--burgundy);
+      font-style:italic;
+      font-family:Fraunces, serif;
+      font-size:1.25rem;
+      margin-top:18px;
+    }
+    .qa{display:grid; gap:18px;}
+    .question-card{
+      border:1.5px solid rgba(107,47,42,.55);
+      background:rgba(255,255,255,.36);
+      border-radius:22px;
+      padding:20px;
+    }
+    .tag{
+      display:inline-block;
+      background:rgba(107,47,42,.11);
+      color:var(--burgundy);
+      font-size:.76rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      padding:5px 9px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+    .meditate details{border-left:5px solid var(--forest); background:rgba(255,255,255,.36); border-color:rgba(47,74,58,.20);}
+    .scripture{
+      position:relative;
+      border-radius:28px;
+      padding:30px;
+      background:linear-gradient(135deg, rgba(47,74,58,.08), rgba(239,224,189,.5));
+      border:1px solid rgba(176,132,66,.45);
+      margin:20px 0;
+    }
+    .scripture:before{
+      content:"“";
+      position:absolute;
+      top:-14px;left:18px;
+      font-family:Fraunces, serif;
+      font-size:6rem;
+      color:rgba(176,132,66,.42);
+      line-height:1;
+    }
+    .scripture blockquote{
+      margin:0;
+      font-family:Fraunces, serif;
+      font-size:clamp(1.35rem, 3vw, 2.05rem);
+      line-height:1.35;
+      color:var(--burgundy);
+      position:relative;
+      z-index:1;
+    }
+    .scripture cite{display:block;margin-top:14px;color:var(--forest);font-weight:900;font-style:normal;letter-spacing:.08em;text-transform:uppercase;}
+    .three{display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px;margin-top:18px;}
+    .note{border-left:5px solid var(--forest); background:rgba(255,255,255,.42); border-radius:0 18px 18px 0; padding:16px 18px;}
+    .note b{color:var(--forest);}
+    .compare{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+    .compare .card{border-top:5px solid var(--gold);}
+    .lesson-list{counter-reset:item; list-style:none; padding:0; margin:0; display:grid; gap:16px;}
+    .lesson-list li{
+      counter-increment:item;
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:14px;
+      align-items:start;
+      background:rgba(255,255,255,.35);
+      border:1px solid rgba(47,74,58,.14);
+      border-radius:20px;
+      padding:16px;
+    }
+    .lesson-list li:before{
+      content:counter(item);
+      width:34px;height:34px;border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--forest);color:#fff;font-weight:900;
+    }
+    .lesson-list b{color:var(--forest);}
+    .application{
+      border-radius:28px;
+      padding:26px;
+      background:linear-gradient(135deg, rgba(176,132,66,.34), rgba(239,224,189,.9));
+      border:1px solid rgba(176,132,66,.55);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);
+    }
+    .application h3{margin-top:0;text-transform:uppercase;letter-spacing:.12em;font-size:1rem;font-family:Inter, sans-serif;color:var(--forest)}
+    .heart-list{list-style:none; padding:0; margin:0; display:grid; gap:12px;}
+    .heart-list li{padding-left:28px; position:relative;}
+    .heart-list li:before{content:"❦"; position:absolute; left:0; color:var(--burgundy);}
+    .quality{display:grid; gap:14px;}
+    .quality .card{border-left:5px solid var(--gold);}
+    .quality .card strong{font-family:Fraunces, serif; font-style:italic; font-size:1.32rem;}
+    .connections{grid-template-columns:repeat(auto-fit,minmax(245px,1fr));}
+    .lesson-badge{display:inline-block;color:var(--forest);font-weight:900;text-transform:uppercase;letter-spacing:.13em;font-size:.76rem;margin-bottom:8px;}
+    .final-texts{display:grid; gap:16px;}
+    .final-block{
+      border-radius:20px;
+      padding:18px;
+      background:rgba(255,255,255,.4);
+      border:1px solid rgba(176,132,66,.32);
+      display:grid;
+      grid-template-columns:36px 1fr;
+      gap:12px;
+    }
+    .final-block:before{content:"§"; color:var(--gold); font-family:Fraunces, serif; font-size:2.1rem; line-height:1;}
+    .ref{display:block;color:var(--burgundy);font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-size:.82rem;margin-bottom:4px;}
+    footer{
+      text-align:center;
+      color:var(--burgundy);
+      font-family:Fraunces, serif;
+      font-style:italic;
+      font-size:1.25rem;
+      padding:38px 20px 70px;
+    }
+    .nav-toggle, .top-btn{
+      position:fixed;
+      border:0;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      cursor:pointer;
+      z-index:44;
+      box-shadow:0 12px 28px rgba(42,36,28,.22);
+      color:#fff;
+      transition:transform .2s ease, opacity .2s ease;
+    }
+    .nav-toggle:hover, .top-btn:hover{transform:translateY(-2px)}
+    .nav-toggle{right:18px; top:18px; width:54px; height:54px; background:var(--forest); font-size:1.4rem;}
+    .top-btn{right:18px; bottom:20px; width:52px; height:52px; background:var(--gold); font-size:1.45rem; opacity:0; pointer-events:none;}
+    .top-btn.show{opacity:1; pointer-events:auto;}
+    .overlay{
+      position:fixed; inset:0; background:rgba(42,36,28,.28); backdrop-filter:blur(3px); z-index:41; opacity:0; pointer-events:none; transition:opacity .2s ease;
+    }
+    .overlay.show{opacity:1; pointer-events:auto;}
+    .side-nav{
+      position:fixed; top:0; right:0; width:min(410px, 90vw); height:100vh;
+      background:linear-gradient(180deg, #fbf6ec, #f3e6d3);
+      border-left:1px solid rgba(176,132,66,.45);
+      box-shadow:-18px 0 50px rgba(42,36,28,.22);
+      z-index:42; transform:translateX(110%); transition:transform .25s ease;
+      padding:28px 22px;
+      overflow:auto;
+    }
+    .side-nav.open{transform:translateX(0)}
+    .side-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;}
+    .side-head h3{margin:0;color:var(--forest);}
+    .close{border:0;background:var(--burgundy);color:#fff;border-radius:50%;width:38px;height:38px;font-weight:900;cursor:pointer}
+    .side-nav a{
+      display:block;
+      padding:12px 14px;
+      margin:8px 0;
+      border-radius:16px;
+      color:var(--ink);
+      text-decoration:none;
+      border:1px solid rgba(176,132,66,.24);
+      background:rgba(255,255,255,.38);
+      font-weight:700;
+    }
+    .side-nav a em{font-family:Fraunces, serif;color:var(--burgundy);margin-right:8px;}
+    .source-note{font-size:.86rem;color:var(--muted);margin-top:26px;border-top:1px solid rgba(176,132,66,.3);padding-top:16px;}
+    @media (max-width:650px){
+      .wrap{width:min(100% - 22px, 1120px)}
+      .hero{padding:72px 0 34px; min-height:auto;}
+      .hero-card{border-radius:26px; padding:28px 20px;}
+      section{padding:22px 16px;margin:28px 0;border-radius:22px;}
+      .moment{grid-template-columns:46px 1fr; gap:10px;}
+      .timeline:before{left:23px;}
+      .story{padding:22px 16px;}
+      .scripture{padding:26px 18px;}
+      .final-block{grid-template-columns:30px 1fr;}
+      .nav-toggle{width:48px;height:48px;right:12px;top:12px;}
+      .top-btn{right:12px;bottom:16px;}
+    }
+
+
+    .app-back{
+      position:fixed;
+      top:18px;
+      left:18px;
+      z-index:80;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:44px;
+      padding:9px 14px;
+      border:1px solid rgba(176,132,66,.45);
+      border-radius:999px;
+      background:rgba(251,246,236,.94);
+      color:var(--forest);
+      box-shadow:0 12px 30px rgba(42,36,28,.14);
+      text-decoration:none;
+      font-family:Inter, system-ui, sans-serif;
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.04em;
+      backdrop-filter:blur(10px);
+    }
+    .app-back:hover{transform:translateY(-2px);}
+    .app-back span{font-size:1.15rem; line-height:1;}
+    .lesson-block{
+      margin:30px 0;
+      padding:24px;
+      border-radius:24px;
+      border:1px solid rgba(176,132,66,.55);
+      border-top:8px solid var(--gold);
+      background:linear-gradient(180deg, rgba(255,255,255,.62), rgba(244,237,224,.74));
+      box-shadow:0 18px 38px rgba(42,36,28,.08);
+    }
+    .lesson-block:first-of-type{margin-top:0;}
+    .lesson-block.lesson-section{
+      border-top-color:var(--forest);
+      background:linear-gradient(180deg, rgba(239,224,189,.58), rgba(251,246,236,.82));
+    }
+    .lesson-kicker{
+      display:inline-flex;
+      align-items:center;
+      margin-bottom:12px;
+      border-radius:999px;
+      padding:5px 12px;
+      background:var(--forest);
+      color:#fff;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .lesson-section .lesson-kicker{background:var(--burgundy);}
+    .lesson-block h3{
+      margin-top:0;
+      padding-bottom:10px;
+      border-bottom:1px solid rgba(176,132,66,.42);
+    }
+    .lesson-meta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:0 0 18px;
+    }
+    .lesson-meta-row span{
+      border:1px solid rgba(176,132,66,.38);
+      border-radius:999px;
+      padding:4px 10px;
+      background:rgba(255,255,255,.45);
+      color:var(--muted);
+      font-size:.8rem;
+      font-weight:800;
+    }
+    .study-part{
+      margin:18px 0 0;
+      padding:16px;
+      border:1px solid rgba(47,74,58,.14);
+      border-radius:18px;
+      background:rgba(255,250,241,.58);
+    }
+    .study-part h4{
+      margin:0 0 9px;
+      color:var(--forest);
+      font-family:Inter, sans-serif;
+      font-size:.84rem;
+      font-weight:900;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+    .study-part h5{
+      margin:18px 0 8px;
+      color:var(--burgundy);
+      font-family:Fraunces, serif;
+      font-size:1.16rem;
+    }
+    .study-list{
+      display:grid;
+      gap:8px;
+      padding:0;
+      margin:0;
+      list-style:none;
+    }
+    .study-list li{
+      position:relative;
+      padding-left:18px;
+      color:#4a4035;
+    }
+    .study-list li:before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:.72em;
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--gold);
+    }
+    .lesson-qa{
+      display:grid;
+      gap:10px;
+    }
+    .lesson-qa article{
+      padding:12px;
+      border-left:4px solid var(--gold);
+      border-radius:0 14px 14px 0;
+      background:rgba(239,224,189,.32);
+    }
+    .lesson-qa strong{
+      display:block;
+      color:var(--burgundy);
+      margin-bottom:4px;
+    }
+    .lesson-qa p{
+      margin:0;
+    }
+    .lesson-jump{
+      margin-top:24px;
+      padding:18px;
+      border-color:rgba(176,132,66,.36);
+      background:linear-gradient(135deg, rgba(255,250,241,.82), rgba(239,224,189,.38));
+    }
+    .lesson-jump-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:12px;
+    }
+    .lesson-jump-link{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      min-height:92px;
+      padding:16px 18px;
+      border:1px solid rgba(47,74,58,.18);
+      border-radius:18px;
+      background:rgba(255,255,255,.58);
+      box-shadow:0 12px 26px rgba(42,36,28,.08);
+      color:var(--forest);
+      text-decoration:none;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .lesson-jump-link:hover{
+      transform:translateY(-2px);
+      border-color:rgba(176,132,66,.55);
+      box-shadow:0 16px 32px rgba(42,36,28,.12);
+    }
+    .lesson-jump-copy{
+      min-width:0;
+    }
+    .lesson-jump-copy small{
+      display:block;
+      margin-bottom:5px;
+      color:var(--gold);
+      font-family:Inter, system-ui, sans-serif;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .lesson-jump-copy strong{
+      display:block;
+      overflow-wrap:anywhere;
+      color:var(--forest);
+      font-family:Fraunces, serif;
+      font-size:1.28rem;
+      line-height:1.05;
+    }
+    .lesson-jump-copy span{
+      display:block;
+      margin-top:4px;
+      color:var(--muted);
+      font-size:.9rem;
+      font-weight:800;
+    }
+    .lesson-jump-arrow{
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:var(--forest);
+      color:#fff;
+      font-family:Inter, system-ui, sans-serif;
+      font-size:1.3rem;
+      font-weight:900;
+    }
+    .lesson-block p:first-of-type:first-letter{
+      float:none;
+      font-size:inherit;
+      line-height:inherit;
+      padding:0;
+      color:inherit;
+      font-weight:inherit;
+    }
+    @media (max-width:700px){
+      .app-back{
+        top:12px;
+        left:12px;
+        min-height:40px;
+        padding:8px 11px;
+        font-size:.74rem;
+      }
+      .lesson-block{
+        padding:18px 15px;
+        margin:24px 0;
+        border-radius:18px;
+      }
+      .lesson-jump{
+        padding:14px;
+      }
+      .lesson-jump-link{
+        min-height:84px;
+        padding:14px;
+      }
+    }
+</style>
+</head>
+<body>
+  <div id="progressBar"></div>
+  <a class="app-back" href="/" aria-label="Volver a la aplicación"><span>←</span> App</a>
+  <button class="nav-toggle" id="openNav" aria-label="Abrir índice">☰</button>
+  <div class="overlay" id="overlay"></div>
+  <nav class="side-nav" id="sideNav" aria-label="Índice del estudio">
+    <div class="side-head"><h3>Índice</h3><button class="close" id="closeNav" aria-label="Cerrar índice">×</button></div>
+    <a href="#leccion-102">📖 Lección 102</a>
+    <a href="/estudios-lfb/lfb-leccion-103.html?v=20260714-1#leccion-103">📖 Lección 103</a>
+  </nav>
+  <button class="top-btn" id="topBtn" aria-label="Volver arriba">↑</button>
+
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-card">
+        <div class="eyebrow">Lecciones que aprendo de la Biblia</div>
+        <h1>Lección 102: Juan tiene una revelación</h1>
+        <p class="subtitle">Estudio completo de lección 102, con el mismo formato de preparación para dirigir y repasar.</p>
+        <div class="hero-meta">
+          <span class="pill">Apocalipsis 1:1-3; 4:1-11; 7:4, 9-17</span>
+          <span class="pill">PDF págs. 236-237</span>
+          <span class="pill">16 visiones del futuro</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+<section>
+  <div class="story">
+    <div class="ornament">❦</div>
+
+    <div class="lesson-block" id="leccion-102">
+      <div class="lesson-kicker">Lección 102</div>
+      <h3>Juan tiene una revelación</h3>
+      <div class="lesson-meta-row"><span>Apocalipsis 1:1-3; 4:1-11; 7:4, 9-17</span>
+<span>PDF págs. 236-237</span>
+<span>16 visiones del futuro</span></div>
+      <div class="study-part">
+        <h4>1. Para situarte</h4>
+        <h5>Cuándo</h5>
+        <p>Isla de Patmos, hacia finales del siglo primero.</p>
+        <p>Juan está preso por mantenerse fiel y hablar de Dios. Aunque está aislado, Jesús le permite contemplar el desenlace del propósito de Jehová mediante una serie de visiones.</p>
+<p>La lección no intenta explicar cada símbolo de Apocalipsis. Presenta un recorrido sencillo por las imágenes principales y destaca que Jehová santificará su nombre, su Reino vencerá y su voluntad se hará en toda la creación.</p>
+        <h5>Personajes principales</h5>
+        <div class="grid cards">
+
+  <div class="card">
+    <strong>Jehová</strong>
+    <em>Soberano y centro de la adoración</em>
+    <p>Aparece en su glorioso trono y recibe honra de toda su creación fiel.</p>
+  </div>
+
+  <div class="card">
+    <strong>Jesús</strong>
+    <em>El Cordero y Rey</em>
+    <p>Pastorea a la gran muchedumbre, gobierna y dirige la victoria contra el mundo de Satanás.</p>
+  </div>
+
+  <div class="card">
+    <strong>Juan</strong>
+    <em>Testigo de las visiones</em>
+    <p>Recibe el mensaje mientras está preso en Patmos y lo deja por escrito para fortalecer a los siervos de Dios.</p>
+  </div>
+
+  <div class="card">
+    <strong>Los 24 ancianos</strong>
+    <em>Reyes y sacerdotes en el cielo</em>
+    <p>Adoran a Jehová, gobiernan con Cristo y reconocen que toda autoridad procede de Dios.</p>
+  </div>
+
+  <div class="card">
+    <strong>La gran muchedumbre</strong>
+    <em>Adoradores de todas las naciones</em>
+    <p>Sirven a Jehová y reciben el cuidado del Cordero, que los guía al agua de vida.</p>
+  </div>
+
+  <div class="card">
+    <strong>Satanás, el Dragón</strong>
+    <em>Enemigo derrotado</em>
+    <p>Es expulsado del cielo y finalmente pierde para siempre su dominio y a quienes lo apoyan.</p>
+  </div>
+        </div>
+        <h5>El escenario</h5>
+        <ul class="study-list"><li>Juan está lejos de las congregaciones, pero Jehová no deja de usarlo ni de fortalecerlo.</li>
+<li>Las visiones cambian del trono celestial a la gran muchedumbre, el Reino, la guerra contra Satanás y la paz final.</li>
+<li>El relato comienza con oposición y prisión, pero termina con armonía, adoración pura y el nombre de Jehová santificado.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>2. La secuencia de los hechos</h4>
+        <div class="timeline">
+          <div class="moment"><div><div class="label">Juan recibe la revelación</div><p>Jesús le muestra 16 visiones del futuro mientras está preso en Patmos.</p></div></div>
+<div class="moment"><div><div class="label">El trono de Jehová</div><p>Juan contempla la gloria de Jehová y a los 24 ancianos inclinándose ante él.</p></div></div>
+<div class="moment"><div><div class="label">La gran muchedumbre</div><p>Personas de todas las naciones adoran a Jehová y el Cordero las guía al agua de vida.</p></div></div>
+<div class="moment"><div><div class="label">El Reino empieza a gobernar</div><p>Jesús reina en el cielo con los 24 ancianos.</p></div></div>
+<div class="moment"><div><div class="label">Satanás es expulsado</div><p>Jesús combate al Dragón y sus demonios y los arroja a la Tierra.</p></div></div>
+<div class="moment"><div><div class="label">El Cordero y los 144.000</div><p>Juan los ve juntos en el monte Sion.</p></div></div>
+<div class="moment"><div><div class="label">Una advertencia mundial</div><p>Un ángel proclama que todos deben honrar a Dios y darle gloria.</p></div></div>
+<div class="moment"><div><div class="label">La guerra de Armagedón</div><p>Jesús y su ejército derrotan al mundo malvado de Satanás.</p></div></div>
+<div class="moment"><div><div class="label">Armonía completa</div><p>Satanás desaparece y toda la creación adora únicamente a Jehová en paz y unidad.</p></div></div>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>3. La historia relatada</h4>
+        <p>Juan llevaba muchos años sirviendo a Jehová. Ahora se encontraba preso y apartado en la isla de Patmos. Sus enemigos quizá pensaron que así lo silenciarían, pero Jesús lo puso frente a un panorama mucho mayor que aquella prisión: le mostró 16 visiones sobre el futuro.</p>
+<p>Primero, Juan contempló a Jehová en su glorioso trono. Había relámpagos, sonidos como truenos y 24 ancianos vestidos de blanco y coronados. A pesar de sus coronas, ninguno competía con Jehová. Todos se inclinaban y lo adoraban, dejando claro quién merece la honra y de quién procede toda autoridad.</p>
+<p>Después apareció una gran muchedumbre formada por personas de todas las naciones, pueblos e idiomas. No estaban perdidas ni abandonadas. Jesús, presentado como el Cordero, las cuidaba como un pastor y las llevaba al agua de vida. La visión mostraba que el propósito de Jehová incluye personas de toda procedencia.</p>
+<p>Juan también vio que Jesús empezaba a gobernar como Rey y que estallaba una guerra en el cielo. El Dragón, Satanás, y sus demonios fueron expulsados. Aunque eso traería dificultades temporales a la Tierra, la visión garantizaba que Satanás ya era un enemigo derrotado y con tiempo limitado.</p>
+<p>Más adelante, Juan vio al Cordero con los 144.000 en el monte Sion y oyó un anuncio que recorría la Tierra: había que honrar a Dios y darle gloria. Jehová no ejecutaría su juicio sin advertir; daría a las personas la oportunidad de reconocer su soberanía.</p>
+<p>Finalmente llegó Armagedón. Jesús y su ejército vencieron por completo al mundo de Satanás. La última escena no quedó dominada por la guerra, sino por su resultado: Satanás y quienes lo siguen desaparecen, el cielo y la Tierra viven en armonía y todos tratan el nombre de Jehová como santo.</p>
+        <div class="quote">El final de las visiones no es caos: es adoración pura, paz y unidad.</div>
+      </div>
+      <div class="study-part">
+        <h4>4. Preguntas del libro</h4>
+        <div class="lesson-qa">
+          <article><strong>¿Cuántas visiones ve Juan?</strong><p>Juan ve 16 visiones o imágenes del futuro. En conjunto muestran cómo Jehová santificará su nombre, cómo gobernará su Reino y cómo se hará su voluntad tanto en el cielo como en la Tierra.</p></article>
+<article><strong>¿Qué va a hacer Jesús en la guerra de Armagedón?</strong><p>Jesús y su ejército vencerán al mundo malvado de Satanás. Así eliminarán la oposición al gobierno de Jehová y abrirán el camino para que haya paz y adoración pura en toda la creación.</p></article>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>5. Preguntas para el auditorio</h4>
+
+  <details>
+    <summary>✦ ¿Qué nos enseña que los 24 ancianos se inclinen delante de Jehová aunque llevan coronas?</summary>
+    <div class="detail-body"><p>Que cualquier autoridad que tengan procede de Jehová. No compiten con él ni buscan gloria propia; reconocen con humildad que solo Jehová merece la adoración suprema.</p></div>
+  </details>
+
+  <details>
+    <summary>✦ ¿Por qué es animador que la gran muchedumbre proceda de todas las naciones, pueblos e idiomas?</summary>
+    <div class="detail-body"><p>Porque el Reino no beneficia a una sola cultura o grupo. Jehová reúne a personas muy diferentes y las une en la adoración verdadera.</p></div>
+  </details>
+
+  <details>
+    <summary>✦ ¿Qué aprendemos de que Jesús sea Rey y al mismo tiempo pastor de la gran muchedumbre?</summary>
+    <div class="detail-body"><p>Que su gobierno no será frío ni distante. Jesús tiene poder para gobernar, pero también interés personal, ternura y capacidad para guiar a sus súbditos a la vida.</p></div>
+  </details>
+
+  <details>
+    <summary>✦ ¿Qué revela de Jehová que un ángel anuncie por toda la Tierra que hay que honrarlo antes de Armagedón?</summary>
+    <div class="detail-body"><p>Revela justicia y misericordia. Jehová da advertencia y oportunidad para cambiar; su juicio no llega sin que antes se proclame claramente quién merece la adoración.</p></div>
+  </details>
+
+  <details>
+    <summary>✦ ¿Cómo conecta Génesis 3:15 con el desenlace de las visiones?</summary>
+    <div class="detail-body"><p>La primera profecía prometió que la descendencia aplastaría la cabeza de la serpiente. Apocalipsis muestra a Jesús completando esa victoria al eliminar a Satanás y todo su dominio.</p></div>
+  </details>
+      </div>
+      <div class="study-part">
+        <h4>6. Texto clave</h4>
+        <div class="scripture"><blockquote>Él te aplastará la cabeza, y tú le herirás el talón.</blockquote><cite>Génesis 3:15</cite></div>
+        <p>Esta promesa fue dada al principio de la historia humana. Las visiones de Juan muestran su desenlace: Jesús, la descendencia prometida, derrota por completo a Satanás.</p>
+<p>El talón herido indica un daño temporal; la cabeza aplastada representa una derrota definitiva. Por eso el final de Apocalipsis transmite seguridad, no incertidumbre.</p>
+        <h5>Texto de apoyo</h5>
+        <div class="scripture"><blockquote>¡Mira! Estoy haciendo nuevas todas las cosas.</blockquote><cite>Apocalipsis 21:5</cite></div>
+        <p>Jehová no se limita a poner fin a la maldad. Promete renovar por completo la vida humana y cumplir su propósito original.</p>
+      </div>
+      <div class="study-part">
+        <h4>7. El principio que ilumina la escena</h4>
+        <div class="note"><p><b>Principio central:</b> Jehová nos revela el desenlace para que las pruebas presentes no oculten la certeza de la victoria de su Reino.</p></div>
+      </div>
+      <div class="study-part">
+        <h4>8. Entonces y ahora</h4>
+        <div class="grid compare">
+
+  <div class="card">
+    <strong>Juan en Patmos</strong>
+
+    <p>Parecía aislado y limitado por la prisión.</p>
+<p>Las visiones le permitieron ver que el propósito de Jehová avanzaba hacia una victoria segura.</p>
+  </div>
+
+  <div class="card">
+    <strong>Nosotros hoy</strong>
+
+    <p>Podemos sentir presión o ver un mundo dominado por la maldad.</p>
+<p>Apocalipsis nos ayuda a mirar más allá del presente y apoyar con confianza el Reino de Jehová.</p>
+  </div>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>9. Lecciones que se desprenden del texto</h4>
+        <ol class="lesson-list">
+          <li><p>Jehová merece toda honra, incluso de quienes reciben autoridad celestial.</p></li>
+<li><p>Jesús gobierna con poder y cuida con ternura como pastor.</p></li>
+<li><p>La adoración verdadera une a personas de todas las naciones.</p></li>
+<li><p>Satanás es un enemigo peligroso, pero ya está condenado a una derrota definitiva.</p></li>
+<li><p>Jehová advierte antes de actuar y da oportunidad para responder.</p></li>
+<li><p>Armagedón no es el final del propósito de Dios, sino el paso hacia paz y armonía completas.</p></li>
+        </ol>
+      </div>
+      <div class="study-part">
+        <h4>10. Textos clave</h4>
+        <ul class="study-list"><li>Apocalipsis 4:1-11 centra la atención en el trono de Jehová y en la adoración que él merece.</li>
+<li>Apocalipsis 7:9-17 muestra una gran muchedumbre internacional bajo el cuidado del Cordero.</li>
+<li>Apocalipsis 12:5-12 explica el comienzo del gobierno de Cristo y la expulsión de Satanás del cielo.</li>
+<li>Apocalipsis 14:6, 7 presenta el anuncio mundial de honrar a Dios antes de su juicio.</li>
+<li>Apocalipsis 16:14, 16 identifica Armagedón como la confrontación final contra la oposición a Jehová.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>11. Cómo dirigirla</h4>
+        <ul class="study-list"><li>Sigue el orden de las imágenes y evita perderte en detalles simbólicos que la lección no desarrolla.</li>
+<li>Haz que el auditorio vea el contraste: Juan está preso, pero el Reino que contempla no puede ser detenido.</li>
+<li>Presenta Armagedón dentro del hilo completo: Jehová advierte, Jesús vence y después llega la armonía.</li>
+<li>Cierra conectando la victoria de Jesús con la promesa de Génesis 3:15.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>12. Aplicación personal</h4>
+        <ul class="study-list"><li>Puedo mantener la calma cuando el mundo parece fuera de control.</li>
+<li>Puedo demostrar ahora que el nombre de Jehová es santo mediante mi conducta y adoración.</li>
+<li>Puedo apoyar el anuncio mundial de honrar a Dios.</li>
+<li>Puedo tratar con amor a hermanos de otras culturas porque Jehová ya nos ve como una sola gran familia.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>13. Lo que aprendemos de Jehová</h4>
+        <div class="quality">
+          <div class="card"><strong>Jehová es el Soberano</strong><p>Su trono permanece firme y toda autoridad legítima procede de él.</p></div>
+<div class="card"><strong>Jehová es inclusivo</strong><p>Invita a personas de todas las naciones, pueblos e idiomas a adorarlo.</p></div>
+<div class="card"><strong>Jehová es justo</strong><p>Advierte antes de ejecutar su juicio y elimina para siempre la maldad.</p></div>
+<div class="card"><strong>Jehová cumple sus promesas</strong><p>La profecía de Génesis 3:15 llega a su cumplimiento completo mediante Jesús.</p></div>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>14. Conexión con lecciones cercanas</h4>
+        <p>La lección 101 terminó con Pablo predicando pese a los obstáculos. La lección 102 muestra que la obra que él apoyó conduce a una gran muchedumbre internacional.</p>
+<p>La lección 102 presenta el desenlace en visiones; la lección 103 acerca ese desenlace a la vida diaria y describe cómo será la Tierra bajo el Reino.</p>
+      </div>
+      <div class="study-part">
+        <h4>15. Explicación de los textos bíblicos</h4>
+        <div class="final-texts">
+          <div class="final-block"><div><span class="ref">Apocalipsis 1:1-3</span><p>Presenta la revelación que Dios da por medio de Jesucristo y la bendición de prestar atención a su mensaje.</p></div></div>
+<div class="final-block"><div><span class="ref">Apocalipsis 4:1-11</span><p>Muestra el trono de Jehová y la adoración de los 24 ancianos.</p></div></div>
+<div class="final-block"><div><span class="ref">Apocalipsis 7:4, 9-17</span><p>Distingue a los 144.000 y a la gran muchedumbre cuidada por el Cordero.</p></div></div>
+<div class="final-block"><div><span class="ref">Apocalipsis 11:15-18; 12:5-12</span><p>Describe el gobierno del Reino y la expulsión de Satanás del cielo.</p></div></div>
+<div class="final-block"><div><span class="ref">Apocalipsis 14:6, 7; 16:14, 16</span><p>Conecta la advertencia mundial con la guerra de Armagedón.</p></div></div>
+<div class="final-block"><div><span class="ref">Apocalipsis 21:5</span><p>Garantiza que Jehová renovará todas las cosas después de eliminar la oposición.</p></div></div>
+        </div>
+        <p class="source-note">Fuente principal: <a href="https://www.jw.org/es/biblioteca/libros/lecciones-historias-biblia/14/libro-apocalipsis-juan-revelacion/">Lección 102 en JW.org</a>.</p>
+      </div>
+    </div>
+    <div class="study-part lesson-jump">
+      <h4>Continuar el estudio</h4>
+      <div class="lesson-jump-grid">
+        <a class="lesson-jump-link" href="/estudios-lfb/lfb-leccion-103.html?v=20260714-1#leccion-103">
+          <div class="lesson-jump-copy">
+            <small>Siguiente</small>
+            <strong>Lección 103</strong>
+            <span>Que venga tu Reino</span>
+          </div>
+          <span class="lesson-jump-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+    <div class="ornament">❦</div>
+  </div>
+</section>
+  </main>
+
+  <footer class="wrap">
+    Guía preparada para estudiar y dirigir la Lección 102.
+  </footer>
+
+  <script>
+    const progressBar = document.getElementById('progressBar');
+    const topBtn = document.getElementById('topBtn');
+    const sideNav = document.getElementById('sideNav');
+    const overlay = document.getElementById('overlay');
+    const openNav = document.getElementById('openNav');
+    const closeNav = document.getElementById('closeNav');
+
+    function updateProgress(){
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      topBtn.classList.toggle('show', scrollTop > 400);
+    }
+    function openIndex(){ sideNav.classList.add('open'); overlay.classList.add('show'); }
+    function closeIndex(){ sideNav.classList.remove('open'); overlay.classList.remove('show'); }
+    window.addEventListener('scroll', updateProgress, {passive:true});
+    openNav.addEventListener('click', openIndex);
+    closeNav.addEventListener('click', closeIndex);
+    overlay.addEventListener('click', closeIndex);
+    topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeIndex(); });
+    sideNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeIndex));
+    updateProgress();
+  </script>
+</body>
+</html>

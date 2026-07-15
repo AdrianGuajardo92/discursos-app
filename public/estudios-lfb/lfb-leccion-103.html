@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <title>Lección 103: Que venga tu Reino</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,400..800,70,1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --paper:#f4ede0;
+      --paper-2:#fbf6ec;
+      --ink:#2a241c;
+      --muted:#6c6257;
+      --forest:#2f4a3a;
+      --forest-2:#21372b;
+      --gold:#b08442;
+      --gold-2:#dfc28a;
+      --gold-soft:#efe0bd;
+      --burgundy:#6b2f2a;
+      --shadow: 0 22px 55px rgba(42,36,28,.12);
+      --radius: 26px;
+      --line: rgba(176,132,66,.35);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(176,132,66,.15), transparent 28rem),
+        radial-gradient(circle at 90% 12%, rgba(47,74,58,.14), transparent 30rem),
+        linear-gradient(180deg, #efe2cf 0%, var(--paper) 42%, #efe5d4 100%);
+      line-height:1.75;
+      overflow-x:hidden;
+    }
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(42,36,28,.027) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(42,36,28,.018) 1px, transparent 1px);
+      background-size:38px 38px;
+      mix-blend-mode:multiply;
+      opacity:.45;
+      z-index:-1;
+    }
+    #progressBar{
+      position:fixed;
+      top:0;
+      left:0;
+      height:4px;
+      width:0%;
+      background:linear-gradient(90deg, var(--gold), #e8d19d, var(--burgundy));
+      z-index:50;
+      box-shadow:0 0 18px rgba(176,132,66,.65);
+    }
+    .wrap{width:min(1120px, calc(100% - 32px)); margin:0 auto;}
+    .hero{
+      min-height:72vh;
+      display:grid;
+      place-items:center;
+      padding:92px 0 64px;
+      position:relative;
+    }
+    .hero-card{
+      width:100%;
+      border:1px solid rgba(176,132,66,.42);
+      background:linear-gradient(135deg, rgba(251,246,236,.91), rgba(244,237,224,.84));
+      border-radius:38px;
+      padding:clamp(28px, 6vw, 72px);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero-card:before, .hero-card:after{
+      content:"✦";
+      position:absolute;
+      color:rgba(176,132,66,.28);
+      font-family:Fraunces, serif;
+      font-size:11rem;
+      line-height:1;
+    }
+    .hero-card:before{top:-34px; right:24px; transform:rotate(12deg)}
+    .hero-card:after{bottom:-58px; left:28px; transform:rotate(-10deg)}
+    .eyebrow{
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--forest);
+      font-weight:800;
+      font-size:.78rem;
+      margin-bottom:20px;
+      position:relative;
+      z-index:1;
+    }
+    .roman{
+      font-family:Fraunces, serif;
+      font-style:italic;
+      font-size:clamp(4rem, 14vw, 10.5rem);
+      color:var(--burgundy);
+      line-height:.82;
+      margin:0 0 18px;
+      letter-spacing:-.06em;
+      position:relative;
+      z-index:1;
+    }
+    h1{
+      font-family:Fraunces, serif;
+      font-size:clamp(2.5rem, 7vw, 5.7rem);
+      line-height:.95;
+      margin:0;
+      letter-spacing:-.055em;
+      color:var(--ink);
+      position:relative;
+      z-index:1;
+    }
+    .subtitle{
+      margin:24px 0 0;
+      max-width:780px;
+      color:var(--muted);
+      font-size:clamp(1rem, 2.3vw, 1.25rem);
+      position:relative;
+      z-index:1;
+    }
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:32px;
+      position:relative;
+      z-index:1;
+    }
+    .pill{
+      border:1px solid rgba(47,74,58,.2);
+      background:rgba(255,255,255,.34);
+      color:var(--forest-2);
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:.87rem;
+      font-weight:700;
+    }
+    main{padding:14px 0 88px;}
+    section{
+      scroll-margin-top:84px;
+      margin:44px 0;
+      border-radius:var(--radius);
+      background:rgba(251,246,236,.72);
+      border:1px solid rgba(176,132,66,.3);
+      box-shadow:0 14px 38px rgba(42,36,28,.075);
+      padding:clamp(22px, 4vw, 42px);
+      position:relative;
+    }
+    .section-title{margin-bottom:26px;}
+    .section-title .topline{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:var(--burgundy);
+      font-weight:800;
+      letter-spacing:.04em;
+      margin-bottom:8px;
+    }
+    .section-title em{
+      font-family:Fraunces, serif;
+      font-style:italic;
+      font-size:1.58rem;
+      color:var(--burgundy);
+    }
+    h2{
+      margin:0;
+      font-family:Fraunces, serif;
+      color:var(--forest);
+      font-size:clamp(1.75rem, 4vw, 3rem);
+      line-height:1.03;
+      letter-spacing:-.035em;
+    }
+    .gold-line{
+      width:100%;
+      height:2px;
+      margin-top:16px;
+      background:linear-gradient(90deg, var(--gold), rgba(176,132,66,.12));
+      border-radius:999px;
+    }
+    h3{
+      font-family:Fraunces, serif;
+      font-size:1.42rem;
+      color:var(--burgundy);
+      margin:28px 0 10px;
+      letter-spacing:-.02em;
+    }
+    p{margin:0 0 1rem;}
+    .lead{font-size:1.08rem;color:#443a30;}
+    .grid{display:grid; gap:16px;}
+    .cards{grid-template-columns:repeat(auto-fit, minmax(210px, 1fr));}
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.52), rgba(244,237,224,.52));
+      border:1px solid rgba(47,74,58,.15);
+      border-radius:22px;
+      padding:18px;
+      box-shadow:0 8px 22px rgba(42,36,28,.055);
+    }
+    .card strong{display:block;color:var(--forest);font-size:1.03rem;}
+    .card em{display:block;color:var(--muted);font-size:.92rem;margin-top:2px;}
+    details{
+      border-radius:18px;
+      border:1px solid rgba(176,132,66,.42);
+      background:linear-gradient(135deg, rgba(239,224,189,.58), rgba(251,246,236,.7));
+      padding:0;
+      margin:14px 0;
+      overflow:hidden;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      padding:15px 18px;
+      font-weight:800;
+      color:var(--forest-2);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    summary::-webkit-details-marker{display:none}
+    summary:after{content:"＋"; color:var(--gold); font-weight:900; font-size:1.1rem;}
+    details[open] summary:after{content:"−";}
+    .detail-body{padding:0 18px 18px;color:#4a4035;}
+    .timeline{position:relative; padding-left:14px; counter-reset:step;}
+    .timeline:before{
+      content:"";
+      position:absolute;
+      left:27px;
+      top:8px;
+      bottom:8px;
+      width:2px;
+      background:linear-gradient(var(--gold), rgba(176,132,66,.08));
+    }
+    .moment{
+      counter-increment:step;
+      display:grid;
+      grid-template-columns:54px 1fr;
+      gap:16px;
+      margin:0 0 20px;
+      position:relative;
+    }
+    .moment:before{
+      content:counter(step);
+      width:34px;height:34px;border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--forest);
+      color:#fff;
+      font-weight:900;
+      box-shadow:0 0 0 6px rgba(47,74,58,.12);
+      margin-left:-3px;
+      z-index:1;
+    }
+    .label{
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      color:var(--gold);
+      font-size:.76rem;
+      font-weight:900;
+      margin-bottom:4px;
+    }
+    .story{
+      border:1px solid rgba(176,132,66,.5);
+      border-radius:28px;
+      background:
+        linear-gradient(90deg, rgba(176,132,66,.06), transparent 18%, transparent 82%, rgba(176,132,66,.06)),
+        rgba(255,250,241,.78);
+      padding:clamp(22px, 4vw, 42px);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.42);
+    }
+    .ornament{
+      text-align:center;
+      color:var(--gold);
+      font-family:Fraunces, serif;
+      font-size:1.65rem;
+      margin:0 0 20px;
+    }
+    .story p:first-of-type:first-letter{
+      float:left;
+      font-family:Fraunces, serif;
+      font-size:5.2rem;
+      line-height:.75;
+      color:var(--burgundy);
+      padding:10px 12px 2px 0;
+      font-weight:800;
+    }
+    .quote{
+      border-left:5px solid var(--gold);
+      padding:12px 18px;
+      margin:18px 0;
+      background:rgba(239,224,189,.35);
+      border-radius:0 16px 16px 0;
+      font-family:Fraunces, serif;
+      font-size:1.28rem;
+      color:var(--burgundy);
+      line-height:1.45;
+    }
+    .closing{
+      color:var(--burgundy);
+      font-style:italic;
+      font-family:Fraunces, serif;
+      font-size:1.25rem;
+      margin-top:18px;
+    }
+    .qa{display:grid; gap:18px;}
+    .question-card{
+      border:1.5px solid rgba(107,47,42,.55);
+      background:rgba(255,255,255,.36);
+      border-radius:22px;
+      padding:20px;
+    }
+    .tag{
+      display:inline-block;
+      background:rgba(107,47,42,.11);
+      color:var(--burgundy);
+      font-size:.76rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      padding:5px 9px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+    .meditate details{border-left:5px solid var(--forest); background:rgba(255,255,255,.36); border-color:rgba(47,74,58,.20);}
+    .scripture{
+      position:relative;
+      border-radius:28px;
+      padding:30px;
+      background:linear-gradient(135deg, rgba(47,74,58,.08), rgba(239,224,189,.5));
+      border:1px solid rgba(176,132,66,.45);
+      margin:20px 0;
+    }
+    .scripture:before{
+      content:"“";
+      position:absolute;
+      top:-14px;left:18px;
+      font-family:Fraunces, serif;
+      font-size:6rem;
+      color:rgba(176,132,66,.42);
+      line-height:1;
+    }
+    .scripture blockquote{
+      margin:0;
+      font-family:Fraunces, serif;
+      font-size:clamp(1.35rem, 3vw, 2.05rem);
+      line-height:1.35;
+      color:var(--burgundy);
+      position:relative;
+      z-index:1;
+    }
+    .scripture cite{display:block;margin-top:14px;color:var(--forest);font-weight:900;font-style:normal;letter-spacing:.08em;text-transform:uppercase;}
+    .three{display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px;margin-top:18px;}
+    .note{border-left:5px solid var(--forest); background:rgba(255,255,255,.42); border-radius:0 18px 18px 0; padding:16px 18px;}
+    .note b{color:var(--forest);}
+    .compare{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+    .compare .card{border-top:5px solid var(--gold);}
+    .lesson-list{counter-reset:item; list-style:none; padding:0; margin:0; display:grid; gap:16px;}
+    .lesson-list li{
+      counter-increment:item;
+      display:grid;
+      grid-template-columns:44px 1fr;
+      gap:14px;
+      align-items:start;
+      background:rgba(255,255,255,.35);
+      border:1px solid rgba(47,74,58,.14);
+      border-radius:20px;
+      padding:16px;
+    }
+    .lesson-list li:before{
+      content:counter(item);
+      width:34px;height:34px;border-radius:50%;
+      display:grid;place-items:center;
+      background:var(--forest);color:#fff;font-weight:900;
+    }
+    .lesson-list b{color:var(--forest);}
+    .application{
+      border-radius:28px;
+      padding:26px;
+      background:linear-gradient(135deg, rgba(176,132,66,.34), rgba(239,224,189,.9));
+      border:1px solid rgba(176,132,66,.55);
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);
+    }
+    .application h3{margin-top:0;text-transform:uppercase;letter-spacing:.12em;font-size:1rem;font-family:Inter, sans-serif;color:var(--forest)}
+    .heart-list{list-style:none; padding:0; margin:0; display:grid; gap:12px;}
+    .heart-list li{padding-left:28px; position:relative;}
+    .heart-list li:before{content:"❦"; position:absolute; left:0; color:var(--burgundy);}
+    .quality{display:grid; gap:14px;}
+    .quality .card{border-left:5px solid var(--gold);}
+    .quality .card strong{font-family:Fraunces, serif; font-style:italic; font-size:1.32rem;}
+    .connections{grid-template-columns:repeat(auto-fit,minmax(245px,1fr));}
+    .lesson-badge{display:inline-block;color:var(--forest);font-weight:900;text-transform:uppercase;letter-spacing:.13em;font-size:.76rem;margin-bottom:8px;}
+    .final-texts{display:grid; gap:16px;}
+    .final-block{
+      border-radius:20px;
+      padding:18px;
+      background:rgba(255,255,255,.4);
+      border:1px solid rgba(176,132,66,.32);
+      display:grid;
+      grid-template-columns:36px 1fr;
+      gap:12px;
+    }
+    .final-block:before{content:"§"; color:var(--gold); font-family:Fraunces, serif; font-size:2.1rem; line-height:1;}
+    .ref{display:block;color:var(--burgundy);font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-size:.82rem;margin-bottom:4px;}
+    footer{
+      text-align:center;
+      color:var(--burgundy);
+      font-family:Fraunces, serif;
+      font-style:italic;
+      font-size:1.25rem;
+      padding:38px 20px 70px;
+    }
+    .nav-toggle, .top-btn{
+      position:fixed;
+      border:0;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      cursor:pointer;
+      z-index:44;
+      box-shadow:0 12px 28px rgba(42,36,28,.22);
+      color:#fff;
+      transition:transform .2s ease, opacity .2s ease;
+    }
+    .nav-toggle:hover, .top-btn:hover{transform:translateY(-2px)}
+    .nav-toggle{right:18px; top:18px; width:54px; height:54px; background:var(--forest); font-size:1.4rem;}
+    .top-btn{right:18px; bottom:20px; width:52px; height:52px; background:var(--gold); font-size:1.45rem; opacity:0; pointer-events:none;}
+    .top-btn.show{opacity:1; pointer-events:auto;}
+    .overlay{
+      position:fixed; inset:0; background:rgba(42,36,28,.28); backdrop-filter:blur(3px); z-index:41; opacity:0; pointer-events:none; transition:opacity .2s ease;
+    }
+    .overlay.show{opacity:1; pointer-events:auto;}
+    .side-nav{
+      position:fixed; top:0; right:0; width:min(410px, 90vw); height:100vh;
+      background:linear-gradient(180deg, #fbf6ec, #f3e6d3);
+      border-left:1px solid rgba(176,132,66,.45);
+      box-shadow:-18px 0 50px rgba(42,36,28,.22);
+      z-index:42; transform:translateX(110%); transition:transform .25s ease;
+      padding:28px 22px;
+      overflow:auto;
+    }
+    .side-nav.open{transform:translateX(0)}
+    .side-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;}
+    .side-head h3{margin:0;color:var(--forest);}
+    .close{border:0;background:var(--burgundy);color:#fff;border-radius:50%;width:38px;height:38px;font-weight:900;cursor:pointer}
+    .side-nav a{
+      display:block;
+      padding:12px 14px;
+      margin:8px 0;
+      border-radius:16px;
+      color:var(--ink);
+      text-decoration:none;
+      border:1px solid rgba(176,132,66,.24);
+      background:rgba(255,255,255,.38);
+      font-weight:700;
+    }
+    .side-nav a em{font-family:Fraunces, serif;color:var(--burgundy);margin-right:8px;}
+    .source-note{font-size:.86rem;color:var(--muted);margin-top:26px;border-top:1px solid rgba(176,132,66,.3);padding-top:16px;}
+    @media (max-width:650px){
+      .wrap{width:min(100% - 22px, 1120px)}
+      .hero{padding:72px 0 34px; min-height:auto;}
+      .hero-card{border-radius:26px; padding:28px 20px;}
+      section{padding:22px 16px;margin:28px 0;border-radius:22px;}
+      .moment{grid-template-columns:46px 1fr; gap:10px;}
+      .timeline:before{left:23px;}
+      .story{padding:22px 16px;}
+      .scripture{padding:26px 18px;}
+      .final-block{grid-template-columns:30px 1fr;}
+      .nav-toggle{width:48px;height:48px;right:12px;top:12px;}
+      .top-btn{right:12px;bottom:16px;}
+    }
+
+
+    .app-back{
+      position:fixed;
+      top:18px;
+      left:18px;
+      z-index:80;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:44px;
+      padding:9px 14px;
+      border:1px solid rgba(176,132,66,.45);
+      border-radius:999px;
+      background:rgba(251,246,236,.94);
+      color:var(--forest);
+      box-shadow:0 12px 30px rgba(42,36,28,.14);
+      text-decoration:none;
+      font-family:Inter, system-ui, sans-serif;
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.04em;
+      backdrop-filter:blur(10px);
+    }
+    .app-back:hover{transform:translateY(-2px);}
+    .app-back span{font-size:1.15rem; line-height:1;}
+    .lesson-block{
+      margin:30px 0;
+      padding:24px;
+      border-radius:24px;
+      border:1px solid rgba(176,132,66,.55);
+      border-top:8px solid var(--gold);
+      background:linear-gradient(180deg, rgba(255,255,255,.62), rgba(244,237,224,.74));
+      box-shadow:0 18px 38px rgba(42,36,28,.08);
+    }
+    .lesson-block:first-of-type{margin-top:0;}
+    .lesson-block.lesson-section{
+      border-top-color:var(--forest);
+      background:linear-gradient(180deg, rgba(239,224,189,.58), rgba(251,246,236,.82));
+    }
+    .lesson-kicker{
+      display:inline-flex;
+      align-items:center;
+      margin-bottom:12px;
+      border-radius:999px;
+      padding:5px 12px;
+      background:var(--forest);
+      color:#fff;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .lesson-section .lesson-kicker{background:var(--burgundy);}
+    .lesson-block h3{
+      margin-top:0;
+      padding-bottom:10px;
+      border-bottom:1px solid rgba(176,132,66,.42);
+    }
+    .lesson-meta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:0 0 18px;
+    }
+    .lesson-meta-row span{
+      border:1px solid rgba(176,132,66,.38);
+      border-radius:999px;
+      padding:4px 10px;
+      background:rgba(255,255,255,.45);
+      color:var(--muted);
+      font-size:.8rem;
+      font-weight:800;
+    }
+    .study-part{
+      margin:18px 0 0;
+      padding:16px;
+      border:1px solid rgba(47,74,58,.14);
+      border-radius:18px;
+      background:rgba(255,250,241,.58);
+    }
+    .study-part h4{
+      margin:0 0 9px;
+      color:var(--forest);
+      font-family:Inter, sans-serif;
+      font-size:.84rem;
+      font-weight:900;
+      letter-spacing:.13em;
+      text-transform:uppercase;
+    }
+    .study-part h5{
+      margin:18px 0 8px;
+      color:var(--burgundy);
+      font-family:Fraunces, serif;
+      font-size:1.16rem;
+    }
+    .study-list{
+      display:grid;
+      gap:8px;
+      padding:0;
+      margin:0;
+      list-style:none;
+    }
+    .study-list li{
+      position:relative;
+      padding-left:18px;
+      color:#4a4035;
+    }
+    .study-list li:before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:.72em;
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--gold);
+    }
+    .lesson-qa{
+      display:grid;
+      gap:10px;
+    }
+    .lesson-qa article{
+      padding:12px;
+      border-left:4px solid var(--gold);
+      border-radius:0 14px 14px 0;
+      background:rgba(239,224,189,.32);
+    }
+    .lesson-qa strong{
+      display:block;
+      color:var(--burgundy);
+      margin-bottom:4px;
+    }
+    .lesson-qa p{
+      margin:0;
+    }
+    .lesson-jump{
+      margin-top:24px;
+      padding:18px;
+      border-color:rgba(176,132,66,.36);
+      background:linear-gradient(135deg, rgba(255,250,241,.82), rgba(239,224,189,.38));
+    }
+    .lesson-jump-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:12px;
+    }
+    .lesson-jump-link{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      min-height:92px;
+      padding:16px 18px;
+      border:1px solid rgba(47,74,58,.18);
+      border-radius:18px;
+      background:rgba(255,255,255,.58);
+      box-shadow:0 12px 26px rgba(42,36,28,.08);
+      color:var(--forest);
+      text-decoration:none;
+      transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .lesson-jump-link:hover{
+      transform:translateY(-2px);
+      border-color:rgba(176,132,66,.55);
+      box-shadow:0 16px 32px rgba(42,36,28,.12);
+    }
+    .lesson-jump-copy{
+      min-width:0;
+    }
+    .lesson-jump-copy small{
+      display:block;
+      margin-bottom:5px;
+      color:var(--gold);
+      font-family:Inter, system-ui, sans-serif;
+      font-size:.72rem;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .lesson-jump-copy strong{
+      display:block;
+      overflow-wrap:anywhere;
+      color:var(--forest);
+      font-family:Fraunces, serif;
+      font-size:1.28rem;
+      line-height:1.05;
+    }
+    .lesson-jump-copy span{
+      display:block;
+      margin-top:4px;
+      color:var(--muted);
+      font-size:.9rem;
+      font-weight:800;
+    }
+    .lesson-jump-arrow{
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      background:var(--forest);
+      color:#fff;
+      font-family:Inter, system-ui, sans-serif;
+      font-size:1.3rem;
+      font-weight:900;
+    }
+    .lesson-block p:first-of-type:first-letter{
+      float:none;
+      font-size:inherit;
+      line-height:inherit;
+      padding:0;
+      color:inherit;
+      font-weight:inherit;
+    }
+    @media (max-width:700px){
+      .app-back{
+        top:12px;
+        left:12px;
+        min-height:40px;
+        padding:8px 11px;
+        font-size:.74rem;
+      }
+      .lesson-block{
+        padding:18px 15px;
+        margin:24px 0;
+        border-radius:18px;
+      }
+      .lesson-jump{
+        padding:14px;
+      }
+      .lesson-jump-link{
+        min-height:84px;
+        padding:14px;
+      }
+    }
+</style>
+</head>
+<body>
+  <div id="progressBar"></div>
+  <a class="app-back" href="/" aria-label="Volver a la aplicación"><span>←</span> App</a>
+  <button class="nav-toggle" id="openNav" aria-label="Abrir índice">☰</button>
+  <div class="overlay" id="overlay"></div>
+  <nav class="side-nav" id="sideNav" aria-label="Índice del estudio">
+    <div class="side-head"><h3>Índice</h3><button class="close" id="closeNav" aria-label="Cerrar índice">×</button></div>
+    <a href="/estudios-lfb/lfb-leccion-102.html?v=20260714-1#leccion-102">📖 Lección 102</a>
+    <a href="#leccion-103">📖 Lección 103</a>
+  </nav>
+  <button class="top-btn" id="topBtn" aria-label="Volver arriba">↑</button>
+
+  <header class="hero" id="top">
+    <div class="wrap">
+      <div class="hero-card">
+        <div class="eyebrow">Lecciones que aprendo de la Biblia</div>
+        <h1>Lección 103: Que venga tu Reino</h1>
+        <p class="subtitle">Estudio completo de lección 103, con el mismo formato de preparación para dirigir y repasar.</p>
+        <div class="hero-meta">
+          <span class="pill">Apocalipsis 21:3, 4</span>
+          <span class="pill">PDF págs. 238-239</span>
+          <span class="pill">El propósito de Jehová cumplido</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+<section>
+  <div class="story">
+    <div class="ornament">❦</div>
+
+    <div class="lesson-block" id="leccion-103">
+      <div class="lesson-kicker">Lección 103</div>
+      <h3>Que venga tu Reino</h3>
+      <div class="lesson-meta-row"><span>Apocalipsis 21:3, 4</span>
+<span>PDF págs. 238-239</span>
+<span>El propósito de Jehová cumplido</span></div>
+      <div class="study-part">
+        <h4>1. Para situarte</h4>
+        <h5>Cuándo</h5>
+        <p>El cierre del libro, desde el propósito original de Edén hasta la vida futura bajo el Reino.</p>
+        <p>La última lección reúne el hilo de todo el libro. Empieza con la vida que Jehová quería para Adán y Eva y termina mostrando que la desobediencia humana no ha cambiado ese propósito.</p>
+<p>No es solo una descripción bonita del Paraíso. Es una invitación a acercarnos a Jehová ahora para formar parte del mundo que su Reino hará realidad.</p>
+        <h5>Personajes principales</h5>
+        <div class="grid cards">
+
+  <div class="card">
+    <strong>Jehová</strong>
+    <em>Creador que cumple lo que promete</em>
+    <p>Mantiene intacto su propósito para la Tierra y elimina para siempre el sufrimiento.</p>
+  </div>
+
+  <div class="card">
+    <strong>Jesús</strong>
+    <em>Rey del Reino de Dios</em>
+    <p>Gobierna hasta quitar la oposición y llevar a la humanidad obediente a la vida que Jehová quiso desde el principio.</p>
+  </div>
+
+  <div class="card">
+    <strong>La humanidad obediente</strong>
+    <em>Una familia mundial</em>
+    <p>Adora unida a Jehová, disfruta de paz y participa en convertir toda la Tierra en un paraíso.</p>
+  </div>
+
+  <div class="card">
+    <strong>Los resucitados</strong>
+    <em>Personas que vuelven a vivir</em>
+    <p>Reciben la bienvenida y la oportunidad de conocer a Jehová y vivir en una Tierra restaurada.</p>
+  </div>
+
+  <div class="card">
+    <strong>Satanás y la gente mala</strong>
+    <em>Oposición eliminada</em>
+    <p>Ya no pueden causar dolor, engaño ni violencia.</p>
+  </div>
+        </div>
+        <h5>El escenario</h5>
+        <ul class="study-list"><li>El relato mira hacia atrás al jardín de Edén y recuerda el propósito original de Jehová.</li>
+<li>Después contempla una Tierra sin Satanás, enfermedad, muerte, violencia ni miedo.</li>
+<li>La escena final está llena de hogares, alimento, trabajo significativo, resurrecciones, aprendizaje y amistad eterna con Jehová.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>2. La secuencia de los hechos</h4>
+        <div class="timeline">
+          <div class="moment"><div><div class="label">El propósito original</div><p>Jehová coloca a Adán y Eva en Edén para que formen una familia y extiendan el paraíso.</p></div></div>
+<div class="moment"><div><div class="label">La rebelión no cambia el propósito</div><p>Adán y Eva desobedecen, pero Jehová mantiene lo que se propuso para la Tierra.</p></div></div>
+<div class="moment"><div><div class="label">El Reino elimina la oposición</div><p>Satanás, sus demonios y la gente malvada dejan de existir.</p></div></div>
+<div class="moment"><div><div class="label">Adoración unida</div><p>Todos los habitantes de la Tierra reconocen a Jehová como su Dios.</p></div></div>
+<div class="moment"><div><div class="label">Salud y vida</div><p>Desaparecen la enfermedad, la vejez, el dolor y la muerte.</p></div></div>
+<div class="moment"><div><div class="label">La Tierra se vuelve un paraíso</div><p>Hay alimento, hogares seguros, personas buenas y paz entre humanos y animales.</p></div></div>
+<div class="moment"><div><div class="label">La resurrección</div><p>Personas de todas las épocas vuelven a la vida y reciben una bienvenida afectuosa.</p></div></div>
+<div class="moment"><div><div class="label">Una vida llena de propósito</div><p>Todos aprenden, trabajan juntos y siguen acercándose a Jehová para siempre.</p></div></div>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>3. La historia relatada</h4>
+        <p>La última lección vuelve al principio. Jehová creó la Tierra para que fuera un hogar lleno de vida y puso a Adán y Eva en un jardín hermoso. Quería que lo adoraran, formaran una familia y extendieran aquel paraíso. Ellos desobedecieron, pero su fracaso no obligó a Jehová a abandonar su propósito.</p>
+<p>A lo largo del libro vimos que Jehová siempre encuentra la manera de cumplir lo que promete. El Reino en manos de Jesús es el medio que llevará el propósito de Edén a toda la Tierra. Cuando ese gobierno complete su labor, Satanás, sus demonios y quienes insisten en hacer el mal ya no estarán presentes para causar daño.</p>
+<p>La vida diaria cambiará por completo. Nadie se despertará enfermo, débil o temiendo la muerte. Las personas tendrán energía, seguridad, alimento y hogares agradables. La bondad sustituirá a la crueldad, y ni los humanos ni los animales vivirán dominados por el miedo.</p>
+<p>Uno de los momentos más emocionantes será la resurrección. Las familias recibirán de nuevo a sus seres queridos y conoceremos a siervos de Jehová de otras épocas. Abel, Noé, Abrahán, Sara, Moisés, Rut, Ester, David y muchísimos más podrán contar lo que vivieron y aprender lo que Jehová hizo después de su muerte.</p>
+<p>Convertir toda la Tierra en un paraíso será una labor alegre. Habrá proyectos, descubrimientos, conversaciones y muchas cosas útiles que hacer. La vida eterna no será una existencia vacía o repetitiva; siempre habrá más que aprender sobre la creación y sobre la personalidad de Jehová.</p>
+<p>La lección termina dirigiendo la atención al presente. Jehová quiere que vivamos allí, pero la amistad con él no empieza en el Paraíso. Empieza ahora, cuando aprendemos a confiar en su Reino, obedecemos sus consejos y nos acercamos a él cada día.</p>
+        <div class="quote">El propósito de Jehová no cambió: su Reino hará de toda la Tierra un hogar lleno de vida, paz y adoración verdadera.</div>
+      </div>
+      <div class="study-part">
+        <h4>4. Preguntas del libro</h4>
+        <div class="lesson-qa">
+          <article><strong>¿Cómo será la vida en la Tierra con el Reino de Dios?</strong><p>Será una vida segura, saludable y llena de propósito. No habrá enfermedad, dolor, muerte, violencia ni miedo. Habrá buenos hogares, alimento, paz entre personas y animales, resurrecciones y la alegría de aprender acerca de Jehová para siempre.</p></article>
+<article><strong>De todas las personas de las que hemos leído en este libro, ¿a quién te gustaría conocer en el Paraíso?</strong><p>No hay una sola respuesta correcta. Cada persona puede elegir a alguien y explicar por qué. Por ejemplo, sería emocionante hablar con Noé sobre el arca, con Sara sobre su fe, con Moisés sobre el mar Rojo o con Rut sobre su lealtad.</p></article>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>5. Preguntas para el auditorio</h4>
+
+  <details>
+    <summary>✦ ¿Qué nos enseña sobre Jehová que la rebelión de Adán y Eva no cambiara su propósito?</summary>
+    <div class="detail-body"><p>Que Jehová es constante y todopoderoso. Los errores humanos pueden causar retrasos y sufrimiento, pero nunca pueden obligarlo a renunciar a lo que ha prometido.</p></div>
+  </details>
+
+  <details>
+    <summary>✦ ¿Por qué la esperanza del Paraíso es más que tener una casa bonita y buena salud?</summary>
+    <div class="detail-body"><p>Porque el centro de esa vida será la amistad con Jehová y la adoración unida. Las bendiciones materiales serán preciosas, pero lo mejor será vivir en paz con nuestro Creador y con toda su familia.</p></div>
+  </details>
+
+  <details>
+    <summary>✦ ¿Cómo imaginan que la resurrección fortalecerá la unidad entre personas de épocas y culturas diferentes?</summary>
+    <div class="detail-body"><p>Todos tendrán que aprender unos de otros y recibir enseñanza sobre Jehová. La resurrección convertirá la historia bíblica en relaciones personales y mostrará que somos una sola familia humana.</p></div>
+  </details>
+
+  <details>
+    <summary>✦ ¿Qué clase de trabajo habrá cuando la Tierra se convierta en un paraíso?</summary>
+    <div class="detail-body"><p>Será trabajo útil, seguro y satisfactorio: construir, cultivar, enseñar, recibir a los resucitados, cuidar la creación y aprender. No estará marcado por explotación, frustración o miedo.</p></div>
+  </details>
+
+  <details>
+    <summary>✦ ¿Por qué la lección termina invitándonos a acercarnos a Jehová desde ahora?</summary>
+    <div class="detail-body"><p>Porque no basta con desear las bendiciones futuras. Jehová quiere amigos que lo amen. Las decisiones de hoy demuestran si de verdad queremos que su Reino nos gobierne.</p></div>
+  </details>
+      </div>
+      <div class="study-part">
+        <h4>6. Texto clave</h4>
+        <div class="scripture"><blockquote>Tú mereces recibir la gloria, la honra y el poder, porque tú creaste todas las cosas.</blockquote><cite>Apocalipsis 4:11</cite></div>
+        <p>Jehová merece gobernar porque es el Creador y la fuente de toda vida. El Paraíso no será simplemente un proyecto humano de mejora; será el cumplimiento de la voluntad del Dueño legítimo de la Tierra.</p>
+<p>Dar gloria a Jehová incluye reconocer que sus normas y su gobierno son los que producirán la vida que todos deseamos.</p>
+        <h5>Texto de apoyo</h5>
+        <div class="scripture"><blockquote>Que venga tu Reino. Que se haga tu voluntad [...] en la tierra.</blockquote><cite>Mateo 6:10</cite></div>
+        <p>Cada vez que hacemos esta petición, pedimos que el Reino elimine la oposición y extienda a toda la Tierra las condiciones que Jehová quiso desde Edén.</p>
+      </div>
+      <div class="study-part">
+        <h4>7. El principio que ilumina la escena</h4>
+        <div class="note"><p><b>Principio central:</b> El Reino de Dios cumplirá sin falta el propósito original de Jehová y dará vida eterna a quienes escogen su amistad y su gobierno.</p></div>
+      </div>
+      <div class="study-part">
+        <h4>8. Entonces y ahora</h4>
+        <div class="grid compare">
+
+  <div class="card">
+    <strong>La vida bajo este sistema</strong>
+
+    <p>La enfermedad, el duelo, la inseguridad y la injusticia parecen inevitables.</p>
+<p>La creación sufre las consecuencias de la rebelión y del mal gobierno humano.</p>
+  </div>
+
+  <div class="card">
+    <strong>La vida bajo el Reino</strong>
+
+    <p>La salud, la paz y la seguridad serán normales, no excepciones.</p>
+<p>Toda actividad humana estará en armonía con Jehová, con los demás y con la creación.</p>
+  </div>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>9. Lecciones que se desprenden del texto</h4>
+        <ol class="lesson-list">
+          <li><p>Jehová nunca abandona un propósito porque los humanos fallen.</p></li>
+<li><p>El Reino es un gobierno real que transformará las condiciones de la Tierra.</p></li>
+<li><p>La vida eterna incluirá salud, seguridad, trabajo significativo y aprendizaje continuo.</p></li>
+<li><p>La resurrección reparará pérdidas que ahora parecen irreversibles.</p></li>
+<li><p>La paz abarcará las relaciones humanas y el cuidado de los animales.</p></li>
+<li><p>La mayor bendición del Paraíso será conocer cada vez mejor a Jehová.</p></li>
+<li><p>La preparación para esa vida comienza con las decisiones que tomamos hoy.</p></li>
+        </ol>
+      </div>
+      <div class="study-part">
+        <h4>10. Textos clave</h4>
+        <ul class="study-list"><li>Apocalipsis 21:3, 4 garantiza que Jehová quitará las causas del llanto, el dolor y la muerte.</li>
+<li>Job 33:25 describe la recuperación de la fuerza y la salud de la juventud.</li>
+<li>Proverbios 2:21, 22 muestra que las personas rectas permanecerán en la Tierra.</li>
+<li>Isaías 11:2-10 presenta paz, justicia y seguridad incluso entre humanos y animales.</li>
+<li>Isaías 65:21 explica que las personas construirán casas y disfrutarán de ellas.</li>
+<li>Juan 5:28, 29 confirma que los muertos oirán la voz de Jesús y saldrán de las tumbas.</li>
+<li>Juan 17:3 identifica conocer a Jehová y a Jesús como el camino a la vida eterna.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>11. Cómo dirigirla</h4>
+        <ul class="study-list"><li>Empieza recordando Edén para que el Paraíso se vea como el propósito original de Jehová, no como una idea añadida al final.</li>
+<li>Permite que la segunda pregunta sea personal: pide no solo un nombre, sino también qué le gustaría preguntarle a esa persona.</li>
+<li>No enfoques todo en comodidades. Destaca adoración, amistad con Jehová, resurrección, trabajo y aprendizaje.</li>
+<li>Cierra llevando la esperanza al presente: acercarnos a Jehová ahora es la mejor preparación para vivir bajo su Reino.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>12. Aplicación personal</h4>
+        <ul class="study-list"><li>Puedo hacer más real el Paraíso meditando en detalles respaldados por los textos bíblicos.</li>
+<li>Puedo hablar de la esperanza del Reino con entusiasmo y sencillez.</li>
+<li>Puedo practicar ahora la bondad, la paz y el cuidado de la creación que caracterizarán el nuevo mundo.</li>
+<li>Puedo fortalecer cada día mi amistad con Jehová mediante oración, estudio y obediencia.</li></ul>
+      </div>
+      <div class="study-part">
+        <h4>13. Lo que aprendemos de Jehová</h4>
+        <div class="quality">
+          <div class="card"><strong>Jehová es fiel</strong><p>La desobediencia de Adán y Eva no cambió lo que él quiere para la humanidad y la Tierra.</p></div>
+<div class="card"><strong>Jehová es generoso</strong><p>Promete salud, seguridad, alimento, hogares, paz y una vida llena de cosas interesantes.</p></div>
+<div class="card"><strong>Jehová repara las pérdidas</strong><p>Mediante la resurrección devolverá la vida y reunirá a familias y amigos.</p></div>
+<div class="card"><strong>Jehová quiere nuestra amistad</strong><p>No solo quiere que disfrutemos de sus regalos; nos invita a acercarnos a él para siempre.</p></div>
+        </div>
+      </div>
+      <div class="study-part">
+        <h4>14. Conexión con lecciones cercanas</h4>
+        <p>La lección 102 termina con las visiones de paz y adoración pura. La lección 103 desarrolla cómo se sentirá esa realidad en la vida cotidiana sobre la Tierra.</p>
+<p>Como cierre del libro, la lección 103 vuelve a Edén y une todas las historias anteriores con una sola conclusión: Jehová cumple sus promesas mediante su Reino.</p>
+      </div>
+      <div class="study-part">
+        <h4>15. Explicación de los textos bíblicos</h4>
+        <div class="final-texts">
+          <div class="final-block"><div><span class="ref">Apocalipsis 21:3, 4</span><p>Describe a Dios con la humanidad y la desaparición de la muerte, el duelo, el clamor y el dolor.</p></div></div>
+<div class="final-block"><div><span class="ref">Job 33:25; Isaías 33:24</span><p>Apoyan la promesa de salud completa y fuerzas renovadas.</p></div></div>
+<div class="final-block"><div><span class="ref">Proverbios 2:21, 22; Isaías 65:21</span><p>Relacionan la rectitud con vivir en la Tierra y disfrutar de hogares seguros.</p></div></div>
+<div class="final-block"><div><span class="ref">Isaías 11:2-10</span><p>Presenta el gobierno justo del Mesías y la paz que alcanza incluso al mundo animal.</p></div></div>
+<div class="final-block"><div><span class="ref">Mateo 6:9, 10</span><p>Muestra que la venida del Reino santificará el nombre de Jehová y hará su voluntad en la Tierra.</p></div></div>
+<div class="final-block"><div><span class="ref">Juan 5:28, 29</span><p>Confirma la futura resurrección de quienes están en las tumbas.</p></div></div>
+<div class="final-block"><div><span class="ref">Juan 17:3</span><p>Explica que la vida eterna está ligada a conocer a Jehová y a Jesucristo.</p></div></div>
+        </div>
+        <p class="source-note">Fuente principal: <a href="https://www.jw.org/es/biblioteca/libros/lecciones-historias-biblia/14/venga-reino-paraiso/">Lección 103 en JW.org</a>.</p>
+      </div>
+    </div>
+    <div class="study-part lesson-jump">
+      <h4>Continuar el estudio</h4>
+      <div class="lesson-jump-grid">
+        <a class="lesson-jump-link" href="/estudios-lfb/lfb-leccion-102.html?v=20260714-1#leccion-102">
+          <div class="lesson-jump-copy">
+            <small>Anterior</small>
+            <strong>Lección 102</strong>
+            <span>Juan tiene una revelación</span>
+          </div>
+          <span class="lesson-jump-arrow" aria-hidden="true">←</span>
+        </a>
+      </div>
+    </div>
+    <div class="ornament">❦</div>
+  </div>
+</section>
+  </main>
+
+  <footer class="wrap">
+    Guía preparada para estudiar y dirigir la Lección 103.
+  </footer>
+
+  <script>
+    const progressBar = document.getElementById('progressBar');
+    const topBtn = document.getElementById('topBtn');
+    const sideNav = document.getElementById('sideNav');
+    const overlay = document.getElementById('overlay');
+    const openNav = document.getElementById('openNav');
+    const closeNav = document.getElementById('closeNav');
+
+    function updateProgress(){
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progressBar.style.width = pct + '%';
+      topBtn.classList.toggle('show', scrollTop > 400);
+    }
+    function openIndex(){ sideNav.classList.add('open'); overlay.classList.add('show'); }
+    function closeIndex(){ sideNav.classList.remove('open'); overlay.classList.remove('show'); }
+    window.addEventListener('scroll', updateProgress, {passive:true});
+    openNav.addEventListener('click', openIndex);
+    closeNav.addEventListener('click', closeIndex);
+    overlay.addEventListener('click', closeIndex);
+    topBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeIndex(); });
+    sideNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeIndex));
+    updateProgress();
+  </script>
+</body>
+</html>

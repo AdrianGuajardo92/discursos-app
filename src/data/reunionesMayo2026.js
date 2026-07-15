@@ -279,6 +279,8 @@ export const REUNIONES_MAYO_2026 = [
       }),
       asignacion(2, "Busquemos perlas escondidas", "10 mins", "José Armando", null, {
         contexto: "Jeremías 17:7. Confiar en Jehová implica confiar en sus representantes en la Tierra.",
+        estudioHtml: "/asignaciones/2026-07-14-perlas-jeremias-16-17.html?v=20260714-1",
+        estudioHtmlLabel: "Abrir perlas HTML",
       }),
       asignacion(3, "Lectura de la Biblia", "4 mins", "José Alberto", null, {
         contexto: "Jeremías 17:5-18. th lección 5.",
@@ -299,6 +301,19 @@ export const REUNIONES_MAYO_2026 = [
       asignacion(7, "Joven, confía en los consejos de la Biblia", "15 mins", "Jehonatán Chávez"),
       asignacion(8, "Estudio bíblico de la congregación", "30 mins", "Carlos Ramos", null, {
         contexto: "lfb lecciones 102, 103.",
+        materiales: [
+          {
+            titulo: "Lección 102: Juan tiene una revelación",
+            descripcion: "Las 16 visiones muestran la victoria del Reino y la santificación del nombre de Jehová.",
+            href: "/estudios-lfb/lfb-leccion-102.html?v=20260714-1#leccion-102",
+          },
+          {
+            titulo: "Lección 103: Que venga tu Reino",
+            descripcion: "El propósito de Jehová se cumple en una Tierra convertida en paraíso.",
+            href: "/estudios-lfb/lfb-leccion-103.html?v=20260714-1#leccion-103",
+          },
+        ],
+        ocultarChecklist: true,
       }),
     ],
   }),

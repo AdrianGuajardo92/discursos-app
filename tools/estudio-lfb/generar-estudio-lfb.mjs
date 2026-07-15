@@ -838,6 +838,301 @@ const may26LessonStudies = [
   },
 ];
 
+const july14LessonStudies = [
+  {
+    id: "leccion-102",
+    label: "Lección 102",
+    roman: "",
+    title: "Juan tiene una revelación",
+    meta: ["Apocalipsis 1:1-3; 4:1-11; 7:4, 9-17", "PDF págs. 236-237", "16 visiones del futuro"],
+    indexLinks: [
+      { id: "leccion-102", icon: "📖", title: "Lección 102", href: "#leccion-102" },
+      { id: "leccion-103", icon: "📖", title: "Lección 103", href: "/estudios-lfb/lfb-leccion-103.html?v=20260714-1#leccion-103" },
+    ],
+    jumpLinks: [
+      {
+        label: "Siguiente",
+        title: "Lección 103",
+        body: "Que venga tu Reino",
+        href: "/estudios-lfb/lfb-leccion-103.html?v=20260714-1#leccion-103",
+        arrow: "→",
+      },
+    ],
+    situarte: {
+      when: "Isla de Patmos, hacia finales del siglo primero.",
+      intro: [
+        "Juan está preso por mantenerse fiel y hablar de Dios. Aunque está aislado, Jesús le permite contemplar el desenlace del propósito de Jehová mediante una serie de visiones.",
+        "La lección no intenta explicar cada símbolo de Apocalipsis. Presenta un recorrido sencillo por las imágenes principales y destaca que Jehová santificará su nombre, su Reino vencerá y su voluntad se hará en toda la creación.",
+      ],
+      characters: [
+        { title: "Jehová", subtitle: "Soberano y centro de la adoración", body: "Aparece en su glorioso trono y recibe honra de toda su creación fiel." },
+        { title: "Jesús", subtitle: "El Cordero y Rey", body: "Pastorea a la gran muchedumbre, gobierna y dirige la victoria contra el mundo de Satanás." },
+        { title: "Juan", subtitle: "Testigo de las visiones", body: "Recibe el mensaje mientras está preso en Patmos y lo deja por escrito para fortalecer a los siervos de Dios." },
+        { title: "Los 24 ancianos", subtitle: "Reyes y sacerdotes en el cielo", body: "Adoran a Jehová, gobiernan con Cristo y reconocen que toda autoridad procede de Dios." },
+        { title: "La gran muchedumbre", subtitle: "Adoradores de todas las naciones", body: "Sirven a Jehová y reciben el cuidado del Cordero, que los guía al agua de vida." },
+        { title: "Satanás, el Dragón", subtitle: "Enemigo derrotado", body: "Es expulsado del cielo y finalmente pierde para siempre su dominio y a quienes lo apoyan." },
+      ],
+      scenario: [
+        "Juan está lejos de las congregaciones, pero Jehová no deja de usarlo ni de fortalecerlo.",
+        "Las visiones cambian del trono celestial a la gran muchedumbre, el Reino, la guerra contra Satanás y la paz final.",
+        "El relato comienza con oposición y prisión, pero termina con armonía, adoración pura y el nombre de Jehová santificado.",
+      ],
+    },
+    sequence: [
+      ["Juan recibe la revelación", "Jesús le muestra 16 visiones del futuro mientras está preso en Patmos."],
+      ["El trono de Jehová", "Juan contempla la gloria de Jehová y a los 24 ancianos inclinándose ante él."],
+      ["La gran muchedumbre", "Personas de todas las naciones adoran a Jehová y el Cordero las guía al agua de vida."],
+      ["El Reino empieza a gobernar", "Jesús reina en el cielo con los 24 ancianos."],
+      ["Satanás es expulsado", "Jesús combate al Dragón y sus demonios y los arroja a la Tierra."],
+      ["El Cordero y los 144.000", "Juan los ve juntos en el monte Sion."],
+      ["Una advertencia mundial", "Un ángel proclama que todos deben honrar a Dios y darle gloria."],
+      ["La guerra de Armagedón", "Jesús y su ejército derrotan al mundo malvado de Satanás."],
+      ["Armonía completa", "Satanás desaparece y toda la creación adora únicamente a Jehová en paz y unidad."],
+    ],
+    story: [
+      "Juan llevaba muchos años sirviendo a Jehová. Ahora se encontraba preso y apartado en la isla de Patmos. Sus enemigos quizá pensaron que así lo silenciarían, pero Jesús lo puso frente a un panorama mucho mayor que aquella prisión: le mostró 16 visiones sobre el futuro.",
+      "Primero, Juan contempló a Jehová en su glorioso trono. Había relámpagos, sonidos como truenos y 24 ancianos vestidos de blanco y coronados. A pesar de sus coronas, ninguno competía con Jehová. Todos se inclinaban y lo adoraban, dejando claro quién merece la honra y de quién procede toda autoridad.",
+      "Después apareció una gran muchedumbre formada por personas de todas las naciones, pueblos e idiomas. No estaban perdidas ni abandonadas. Jesús, presentado como el Cordero, las cuidaba como un pastor y las llevaba al agua de vida. La visión mostraba que el propósito de Jehová incluye personas de toda procedencia.",
+      "Juan también vio que Jesús empezaba a gobernar como Rey y que estallaba una guerra en el cielo. El Dragón, Satanás, y sus demonios fueron expulsados. Aunque eso traería dificultades temporales a la Tierra, la visión garantizaba que Satanás ya era un enemigo derrotado y con tiempo limitado.",
+      "Más adelante, Juan vio al Cordero con los 144.000 en el monte Sion y oyó un anuncio que recorría la Tierra: había que honrar a Dios y darle gloria. Jehová no ejecutaría su juicio sin advertir; daría a las personas la oportunidad de reconocer su soberanía.",
+      "Finalmente llegó Armagedón. Jesús y su ejército vencieron por completo al mundo de Satanás. La última escena no quedó dominada por la guerra, sino por su resultado: Satanás y quienes lo siguen desaparecen, el cielo y la Tierra viven en armonía y todos tratan el nombre de Jehová como santo.",
+    ],
+    quote: "El final de las visiones no es caos: es adoración pura, paz y unidad.",
+    questions: [
+      {
+        question: "¿Cuántas visiones ve Juan?",
+        answer: "Juan ve 16 visiones o imágenes del futuro. En conjunto muestran cómo Jehová santificará su nombre, cómo gobernará su Reino y cómo se hará su voluntad tanto en el cielo como en la Tierra.",
+      },
+      {
+        question: "¿Qué va a hacer Jesús en la guerra de Armagedón?",
+        answer: "Jesús y su ejército vencerán al mundo malvado de Satanás. Así eliminarán la oposición al gobierno de Jehová y abrirán el camino para que haya paz y adoración pura en toda la creación.",
+      },
+    ],
+    meditateTitle: "Preguntas para el auditorio",
+    meditate: [
+      ["¿Qué nos enseña que los 24 ancianos se inclinen delante de Jehová aunque llevan coronas?", "Que cualquier autoridad que tengan procede de Jehová. No compiten con él ni buscan gloria propia; reconocen con humildad que solo Jehová merece la adoración suprema."],
+      ["¿Por qué es animador que la gran muchedumbre proceda de todas las naciones, pueblos e idiomas?", "Porque el Reino no beneficia a una sola cultura o grupo. Jehová reúne a personas muy diferentes y las une en la adoración verdadera."],
+      ["¿Qué aprendemos de que Jesús sea Rey y al mismo tiempo pastor de la gran muchedumbre?", "Que su gobierno no será frío ni distante. Jesús tiene poder para gobernar, pero también interés personal, ternura y capacidad para guiar a sus súbditos a la vida."],
+      ["¿Qué revela de Jehová que un ángel anuncie por toda la Tierra que hay que honrarlo antes de Armagedón?", "Revela justicia y misericordia. Jehová da advertencia y oportunidad para cambiar; su juicio no llega sin que antes se proclame claramente quién merece la adoración."],
+      ["¿Cómo conecta Génesis 3:15 con el desenlace de las visiones?", "La primera profecía prometió que la descendencia aplastaría la cabeza de la serpiente. Apocalipsis muestra a Jesús completando esa victoria al eliminar a Satanás y todo su dominio."],
+    ],
+    keyText: {
+      quote: "Él te aplastará la cabeza, y tú le herirás el talón.",
+      cite: "Génesis 3:15",
+      explanation: [
+        "Esta promesa fue dada al principio de la historia humana. Las visiones de Juan muestran su desenlace: Jesús, la descendencia prometida, derrota por completo a Satanás.",
+        "El talón herido indica un daño temporal; la cabeza aplastada representa una derrota definitiva. Por eso el final de Apocalipsis transmite seguridad, no incertidumbre.",
+      ],
+      support: {
+        quote: "¡Mira! Estoy haciendo nuevas todas las cosas.",
+        cite: "Apocalipsis 21:5",
+        explanation: "Jehová no se limita a poner fin a la maldad. Promete renovar por completo la vida humana y cumplir su propósito original.",
+      },
+    },
+    principle: "Jehová nos revela el desenlace para que las pruebas presentes no oculten la certeza de la victoria de su Reino.",
+    thenNow: [
+      { title: "Juan en Patmos", body: ["Parecía aislado y limitado por la prisión.", "Las visiones le permitieron ver que el propósito de Jehová avanzaba hacia una victoria segura."] },
+      { title: "Nosotros hoy", body: ["Podemos sentir presión o ver un mundo dominado por la maldad.", "Apocalipsis nos ayuda a mirar más allá del presente y apoyar con confianza el Reino de Jehová."] },
+    ],
+    lessons: [
+      "Jehová merece toda honra, incluso de quienes reciben autoridad celestial.",
+      "Jesús gobierna con poder y cuida con ternura como pastor.",
+      "La adoración verdadera une a personas de todas las naciones.",
+      "Satanás es un enemigo peligroso, pero ya está condenado a una derrota definitiva.",
+      "Jehová advierte antes de actuar y da oportunidad para responder.",
+      "Armagedón no es el final del propósito de Dios, sino el paso hacia paz y armonía completas.",
+    ],
+    texts: [
+      "Apocalipsis 4:1-11 centra la atención en el trono de Jehová y en la adoración que él merece.",
+      "Apocalipsis 7:9-17 muestra una gran muchedumbre internacional bajo el cuidado del Cordero.",
+      "Apocalipsis 12:5-12 explica el comienzo del gobierno de Cristo y la expulsión de Satanás del cielo.",
+      "Apocalipsis 14:6, 7 presenta el anuncio mundial de honrar a Dios antes de su juicio.",
+      "Apocalipsis 16:14, 16 identifica Armagedón como la confrontación final contra la oposición a Jehová.",
+    ],
+    guide: [
+      "Sigue el orden de las imágenes y evita perderte en detalles simbólicos que la lección no desarrolla.",
+      "Haz que el auditorio vea el contraste: Juan está preso, pero el Reino que contempla no puede ser detenido.",
+      "Presenta Armagedón dentro del hilo completo: Jehová advierte, Jesús vence y después llega la armonía.",
+      "Cierra conectando la victoria de Jesús con la promesa de Génesis 3:15.",
+    ],
+    application: [
+      "Puedo mantener la calma cuando el mundo parece fuera de control.",
+      "Puedo demostrar ahora que el nombre de Jehová es santo mediante mi conducta y adoración.",
+      "Puedo apoyar el anuncio mundial de honrar a Dios.",
+      "Puedo tratar con amor a hermanos de otras culturas porque Jehová ya nos ve como una sola gran familia.",
+    ],
+    jehova: [
+      { title: "Jehová es el Soberano", body: "Su trono permanece firme y toda autoridad legítima procede de él." },
+      { title: "Jehová es inclusivo", body: "Invita a personas de todas las naciones, pueblos e idiomas a adorarlo." },
+      { title: "Jehová es justo", body: "Advierte antes de ejecutar su juicio y elimina para siempre la maldad." },
+      { title: "Jehová cumple sus promesas", body: "La profecía de Génesis 3:15 llega a su cumplimiento completo mediante Jesús." },
+    ],
+    connection: [
+      "La lección 101 terminó con Pablo predicando pese a los obstáculos. La lección 102 muestra que la obra que él apoyó conduce a una gran muchedumbre internacional.",
+      "La lección 102 presenta el desenlace en visiones; la lección 103 acerca ese desenlace a la vida diaria y describe cómo será la Tierra bajo el Reino.",
+    ],
+    source: {
+      href: "https://www.jw.org/es/biblioteca/libros/lecciones-historias-biblia/14/libro-apocalipsis-juan-revelacion/",
+      label: "Lección 102 en JW.org",
+    },
+    finalTexts: [
+      ["Apocalipsis 1:1-3", "Presenta la revelación que Dios da por medio de Jesucristo y la bendición de prestar atención a su mensaje."],
+      ["Apocalipsis 4:1-11", "Muestra el trono de Jehová y la adoración de los 24 ancianos."],
+      ["Apocalipsis 7:4, 9-17", "Distingue a los 144.000 y a la gran muchedumbre cuidada por el Cordero."],
+      ["Apocalipsis 11:15-18; 12:5-12", "Describe el gobierno del Reino y la expulsión de Satanás del cielo."],
+      ["Apocalipsis 14:6, 7; 16:14, 16", "Conecta la advertencia mundial con la guerra de Armagedón."],
+      ["Apocalipsis 21:5", "Garantiza que Jehová renovará todas las cosas después de eliminar la oposición."],
+    ],
+  },
+  {
+    id: "leccion-103",
+    label: "Lección 103",
+    roman: "",
+    title: "Que venga tu Reino",
+    meta: ["Apocalipsis 21:3, 4", "PDF págs. 238-239", "El propósito de Jehová cumplido"],
+    indexLinks: [
+      { id: "leccion-102", icon: "📖", title: "Lección 102", href: "/estudios-lfb/lfb-leccion-102.html?v=20260714-1#leccion-102" },
+      { id: "leccion-103", icon: "📖", title: "Lección 103", href: "#leccion-103" },
+    ],
+    jumpLinks: [
+      {
+        label: "Anterior",
+        title: "Lección 102",
+        body: "Juan tiene una revelación",
+        href: "/estudios-lfb/lfb-leccion-102.html?v=20260714-1#leccion-102",
+        arrow: "←",
+      },
+    ],
+    situarte: {
+      when: "El cierre del libro, desde el propósito original de Edén hasta la vida futura bajo el Reino.",
+      intro: [
+        "La última lección reúne el hilo de todo el libro. Empieza con la vida que Jehová quería para Adán y Eva y termina mostrando que la desobediencia humana no ha cambiado ese propósito.",
+        "No es solo una descripción bonita del Paraíso. Es una invitación a acercarnos a Jehová ahora para formar parte del mundo que su Reino hará realidad.",
+      ],
+      characters: [
+        { title: "Jehová", subtitle: "Creador que cumple lo que promete", body: "Mantiene intacto su propósito para la Tierra y elimina para siempre el sufrimiento." },
+        { title: "Jesús", subtitle: "Rey del Reino de Dios", body: "Gobierna hasta quitar la oposición y llevar a la humanidad obediente a la vida que Jehová quiso desde el principio." },
+        { title: "La humanidad obediente", subtitle: "Una familia mundial", body: "Adora unida a Jehová, disfruta de paz y participa en convertir toda la Tierra en un paraíso." },
+        { title: "Los resucitados", subtitle: "Personas que vuelven a vivir", body: "Reciben la bienvenida y la oportunidad de conocer a Jehová y vivir en una Tierra restaurada." },
+        { title: "Satanás y la gente mala", subtitle: "Oposición eliminada", body: "Ya no pueden causar dolor, engaño ni violencia." },
+      ],
+      scenario: [
+        "El relato mira hacia atrás al jardín de Edén y recuerda el propósito original de Jehová.",
+        "Después contempla una Tierra sin Satanás, enfermedad, muerte, violencia ni miedo.",
+        "La escena final está llena de hogares, alimento, trabajo significativo, resurrecciones, aprendizaje y amistad eterna con Jehová.",
+      ],
+    },
+    sequence: [
+      ["El propósito original", "Jehová coloca a Adán y Eva en Edén para que formen una familia y extiendan el paraíso."],
+      ["La rebelión no cambia el propósito", "Adán y Eva desobedecen, pero Jehová mantiene lo que se propuso para la Tierra."],
+      ["El Reino elimina la oposición", "Satanás, sus demonios y la gente malvada dejan de existir."],
+      ["Adoración unida", "Todos los habitantes de la Tierra reconocen a Jehová como su Dios."],
+      ["Salud y vida", "Desaparecen la enfermedad, la vejez, el dolor y la muerte."],
+      ["La Tierra se vuelve un paraíso", "Hay alimento, hogares seguros, personas buenas y paz entre humanos y animales."],
+      ["La resurrección", "Personas de todas las épocas vuelven a la vida y reciben una bienvenida afectuosa."],
+      ["Una vida llena de propósito", "Todos aprenden, trabajan juntos y siguen acercándose a Jehová para siempre."],
+    ],
+    story: [
+      "La última lección vuelve al principio. Jehová creó la Tierra para que fuera un hogar lleno de vida y puso a Adán y Eva en un jardín hermoso. Quería que lo adoraran, formaran una familia y extendieran aquel paraíso. Ellos desobedecieron, pero su fracaso no obligó a Jehová a abandonar su propósito.",
+      "A lo largo del libro vimos que Jehová siempre encuentra la manera de cumplir lo que promete. El Reino en manos de Jesús es el medio que llevará el propósito de Edén a toda la Tierra. Cuando ese gobierno complete su labor, Satanás, sus demonios y quienes insisten en hacer el mal ya no estarán presentes para causar daño.",
+      "La vida diaria cambiará por completo. Nadie se despertará enfermo, débil o temiendo la muerte. Las personas tendrán energía, seguridad, alimento y hogares agradables. La bondad sustituirá a la crueldad, y ni los humanos ni los animales vivirán dominados por el miedo.",
+      "Uno de los momentos más emocionantes será la resurrección. Las familias recibirán de nuevo a sus seres queridos y conoceremos a siervos de Jehová de otras épocas. Abel, Noé, Abrahán, Sara, Moisés, Rut, Ester, David y muchísimos más podrán contar lo que vivieron y aprender lo que Jehová hizo después de su muerte.",
+      "Convertir toda la Tierra en un paraíso será una labor alegre. Habrá proyectos, descubrimientos, conversaciones y muchas cosas útiles que hacer. La vida eterna no será una existencia vacía o repetitiva; siempre habrá más que aprender sobre la creación y sobre la personalidad de Jehová.",
+      "La lección termina dirigiendo la atención al presente. Jehová quiere que vivamos allí, pero la amistad con él no empieza en el Paraíso. Empieza ahora, cuando aprendemos a confiar en su Reino, obedecemos sus consejos y nos acercamos a él cada día.",
+    ],
+    quote: "El propósito de Jehová no cambió: su Reino hará de toda la Tierra un hogar lleno de vida, paz y adoración verdadera.",
+    questions: [
+      {
+        question: "¿Cómo será la vida en la Tierra con el Reino de Dios?",
+        answer: "Será una vida segura, saludable y llena de propósito. No habrá enfermedad, dolor, muerte, violencia ni miedo. Habrá buenos hogares, alimento, paz entre personas y animales, resurrecciones y la alegría de aprender acerca de Jehová para siempre.",
+      },
+      {
+        question: "De todas las personas de las que hemos leído en este libro, ¿a quién te gustaría conocer en el Paraíso?",
+        answer: "No hay una sola respuesta correcta. Cada persona puede elegir a alguien y explicar por qué. Por ejemplo, sería emocionante hablar con Noé sobre el arca, con Sara sobre su fe, con Moisés sobre el mar Rojo o con Rut sobre su lealtad.",
+      },
+    ],
+    meditateTitle: "Preguntas para el auditorio",
+    meditate: [
+      ["¿Qué nos enseña sobre Jehová que la rebelión de Adán y Eva no cambiara su propósito?", "Que Jehová es constante y todopoderoso. Los errores humanos pueden causar retrasos y sufrimiento, pero nunca pueden obligarlo a renunciar a lo que ha prometido."],
+      ["¿Por qué la esperanza del Paraíso es más que tener una casa bonita y buena salud?", "Porque el centro de esa vida será la amistad con Jehová y la adoración unida. Las bendiciones materiales serán preciosas, pero lo mejor será vivir en paz con nuestro Creador y con toda su familia."],
+      ["¿Cómo imaginan que la resurrección fortalecerá la unidad entre personas de épocas y culturas diferentes?", "Todos tendrán que aprender unos de otros y recibir enseñanza sobre Jehová. La resurrección convertirá la historia bíblica en relaciones personales y mostrará que somos una sola familia humana."],
+      ["¿Qué clase de trabajo habrá cuando la Tierra se convierta en un paraíso?", "Será trabajo útil, seguro y satisfactorio: construir, cultivar, enseñar, recibir a los resucitados, cuidar la creación y aprender. No estará marcado por explotación, frustración o miedo."],
+      ["¿Por qué la lección termina invitándonos a acercarnos a Jehová desde ahora?", "Porque no basta con desear las bendiciones futuras. Jehová quiere amigos que lo amen. Las decisiones de hoy demuestran si de verdad queremos que su Reino nos gobierne."],
+    ],
+    keyText: {
+      quote: "Tú mereces recibir la gloria, la honra y el poder, porque tú creaste todas las cosas.",
+      cite: "Apocalipsis 4:11",
+      explanation: [
+        "Jehová merece gobernar porque es el Creador y la fuente de toda vida. El Paraíso no será simplemente un proyecto humano de mejora; será el cumplimiento de la voluntad del Dueño legítimo de la Tierra.",
+        "Dar gloria a Jehová incluye reconocer que sus normas y su gobierno son los que producirán la vida que todos deseamos.",
+      ],
+      support: {
+        quote: "Que venga tu Reino. Que se haga tu voluntad [...] en la tierra.",
+        cite: "Mateo 6:10",
+        explanation: "Cada vez que hacemos esta petición, pedimos que el Reino elimine la oposición y extienda a toda la Tierra las condiciones que Jehová quiso desde Edén.",
+      },
+    },
+    principle: "El Reino de Dios cumplirá sin falta el propósito original de Jehová y dará vida eterna a quienes escogen su amistad y su gobierno.",
+    thenNow: [
+      { title: "La vida bajo este sistema", body: ["La enfermedad, el duelo, la inseguridad y la injusticia parecen inevitables.", "La creación sufre las consecuencias de la rebelión y del mal gobierno humano."] },
+      { title: "La vida bajo el Reino", body: ["La salud, la paz y la seguridad serán normales, no excepciones.", "Toda actividad humana estará en armonía con Jehová, con los demás y con la creación."] },
+    ],
+    lessons: [
+      "Jehová nunca abandona un propósito porque los humanos fallen.",
+      "El Reino es un gobierno real que transformará las condiciones de la Tierra.",
+      "La vida eterna incluirá salud, seguridad, trabajo significativo y aprendizaje continuo.",
+      "La resurrección reparará pérdidas que ahora parecen irreversibles.",
+      "La paz abarcará las relaciones humanas y el cuidado de los animales.",
+      "La mayor bendición del Paraíso será conocer cada vez mejor a Jehová.",
+      "La preparación para esa vida comienza con las decisiones que tomamos hoy.",
+    ],
+    texts: [
+      "Apocalipsis 21:3, 4 garantiza que Jehová quitará las causas del llanto, el dolor y la muerte.",
+      "Job 33:25 describe la recuperación de la fuerza y la salud de la juventud.",
+      "Proverbios 2:21, 22 muestra que las personas rectas permanecerán en la Tierra.",
+      "Isaías 11:2-10 presenta paz, justicia y seguridad incluso entre humanos y animales.",
+      "Isaías 65:21 explica que las personas construirán casas y disfrutarán de ellas.",
+      "Juan 5:28, 29 confirma que los muertos oirán la voz de Jesús y saldrán de las tumbas.",
+      "Juan 17:3 identifica conocer a Jehová y a Jesús como el camino a la vida eterna.",
+    ],
+    guide: [
+      "Empieza recordando Edén para que el Paraíso se vea como el propósito original de Jehová, no como una idea añadida al final.",
+      "Permite que la segunda pregunta sea personal: pide no solo un nombre, sino también qué le gustaría preguntarle a esa persona.",
+      "No enfoques todo en comodidades. Destaca adoración, amistad con Jehová, resurrección, trabajo y aprendizaje.",
+      "Cierra llevando la esperanza al presente: acercarnos a Jehová ahora es la mejor preparación para vivir bajo su Reino.",
+    ],
+    application: [
+      "Puedo hacer más real el Paraíso meditando en detalles respaldados por los textos bíblicos.",
+      "Puedo hablar de la esperanza del Reino con entusiasmo y sencillez.",
+      "Puedo practicar ahora la bondad, la paz y el cuidado de la creación que caracterizarán el nuevo mundo.",
+      "Puedo fortalecer cada día mi amistad con Jehová mediante oración, estudio y obediencia.",
+    ],
+    jehova: [
+      { title: "Jehová es fiel", body: "La desobediencia de Adán y Eva no cambió lo que él quiere para la humanidad y la Tierra." },
+      { title: "Jehová es generoso", body: "Promete salud, seguridad, alimento, hogares, paz y una vida llena de cosas interesantes." },
+      { title: "Jehová repara las pérdidas", body: "Mediante la resurrección devolverá la vida y reunirá a familias y amigos." },
+      { title: "Jehová quiere nuestra amistad", body: "No solo quiere que disfrutemos de sus regalos; nos invita a acercarnos a él para siempre." },
+    ],
+    connection: [
+      "La lección 102 termina con las visiones de paz y adoración pura. La lección 103 desarrolla cómo se sentirá esa realidad en la vida cotidiana sobre la Tierra.",
+      "Como cierre del libro, la lección 103 vuelve a Edén y une todas las historias anteriores con una sola conclusión: Jehová cumple sus promesas mediante su Reino.",
+    ],
+    source: {
+      href: "https://www.jw.org/es/biblioteca/libros/lecciones-historias-biblia/14/venga-reino-paraiso/",
+      label: "Lección 103 en JW.org",
+    },
+    finalTexts: [
+      ["Apocalipsis 21:3, 4", "Describe a Dios con la humanidad y la desaparición de la muerte, el duelo, el clamor y el dolor."],
+      ["Job 33:25; Isaías 33:24", "Apoyan la promesa de salud completa y fuerzas renovadas."],
+      ["Proverbios 2:21, 22; Isaías 65:21", "Relacionan la rectitud con vivir en la Tierra y disfrutar de hogares seguros."],
+      ["Isaías 11:2-10", "Presenta el gobierno justo del Mesías y la paz que alcanza incluso al mundo animal."],
+      ["Mateo 6:9, 10", "Muestra que la venida del Reino santificará el nombre de Jehová y hará su voluntad en la Tierra."],
+      ["Juan 5:28, 29", "Confirma la futura resurrección de quienes están en las tumbas."],
+      ["Juan 17:3", "Explica que la vida eterna está ligada a conocer a Jehová y a Jesucristo."],
+    ],
+  },
+];
+
 const list = (items) => `<ul class="study-list">${items.map((item) => `<li>${e(item)}</li>`).join("\n")}</ul>`;
 
 const lessonJumpLinks = (lesson) => {
@@ -938,12 +1233,17 @@ const lessonStudyBlock = (lesson) => `
           ${lesson.jehova.map(({ title, body }) => `<div class="card"><strong>${e(title)}</strong><p>${e(body)}</p></div>`).join("\n")}
         </div>
       </div>
-      <div class="study-part">
-        <h4>14. Explicación de los textos bíblicos</h4>
+${lesson.connection ? `      <div class="study-part">
+        <h4>14. Conexión con lecciones cercanas</h4>
+        ${p(lesson.connection)}
+      </div>
+` : ""}      <div class="study-part">
+        <h4>${lesson.connection ? "15" : "14"}. Explicación de los textos bíblicos</h4>
         <div class="final-texts">
           ${lesson.finalTexts.map(([ref, body]) => `<div class="final-block"><div><span class="ref">${e(ref)}</span><p>${e(body)}</p></div></div>`).join("\n")}
         </div>
-      </div>
+${lesson.source ? `        <p class="source-note">Fuente principal: <a href="${e(lesson.source.href)}">${e(lesson.source.label)}</a>.</p>
+` : ""}      </div>
     </div>`;
 
 const sectionStudyBlock = (section) => `
@@ -1363,6 +1663,20 @@ const main = async () => {
       content: standaloneLessonContent(may26LessonStudies[1]),
       footerText: "Guía preparada para estudiar y dirigir la Lección 89.",
     })],
+    ["lfb-leccion-102.html", renderShell({
+      style,
+      script,
+      page: lessonPage(july14LessonStudies[0]),
+      content: standaloneLessonContent(july14LessonStudies[0]),
+      footerText: "Guía preparada para estudiar y dirigir la Lección 102.",
+    }).replace(/[ \t]+$/gm, "")],
+    ["lfb-leccion-103.html", renderShell({
+      style,
+      script,
+      page: lessonPage(july14LessonStudies[1]),
+      content: standaloneLessonContent(july14LessonStudies[1]),
+      footerText: "Guía preparada para estudiar y dirigir la Lección 103.",
+    }).replace(/[ \t]+$/gm, "")],
   ];
 
   await Promise.all(pages.map(([fileName, html]) =>
